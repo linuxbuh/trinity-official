@@ -1,6 +1,6 @@
 This is now the official trinity Gentoo overlay from the TDE team.
 
-Currently it only supports the latest master branch, which means live version, which is R14.1.x as of writing, which some TDE team members are using in private life too, so it should be not perfect, but stable for the most part and also Gentoo users are very invited to test and reports bugs to TGW and so to be some part of TDE. This choice is also made because of realism that otherwise the maintaince burden would be most likely too hard for this overlay. So it is better to support one version, but that good instead of mutiple versions which are more likely to broke here and there.
+Currently it only supports the latest master branch, which means live version, which is R14.1.x as of writing, which some TDE team members are using in private life too, so it should be not perfect, but stable for the most part and also Gentoo users are very invited to test and reports bugs to TGW and so to be some part of TDE. This choice is also made because of realism that otherwise the maintaince burden would be most likely too hard for this overlay. So it is better to support one version, but that good instead of mutiple versions which are more likely to break here and there.
 
 But there are also efforts to support the stable branch of TDE (R14.0.x - R14.0.7 as of writing), if someone is willing to help with that. The support of v3.5.x was removed completely with the clean up progress, because it is too old now.
 
@@ -17,3 +17,36 @@ While the goal is that this overlay works out the box without any problems, ther
 If you are interested in ebuilds for some packages that are not in the overlay or you have any fixes, you can create some PR in TGW and if your work is good, the ebuilds can be added. Also *any* help, from every Gentoo user loving TDE will be highly appreciated. You can also join the TDE IRC channel to get in touch with Chris, if you need any further help or want to help out with this overlay.
 
 Some guideline for this overlay is: Freedom of choice for everything. There should be in no case any forced or hardcoded USE flags, to build in any optional support some Gentoo users don't want to have or want on their systems. All building options TDE is offering, should be reflected in this overlay.
+
+
+How to add this overlay to Gentoo and install TDE?
+
+Just use:
+
+layman -o https://mirror.git.trinitydesktop.org/gitea/TDE/tde-packaging-gentoo/raw/branch/master/Documentation/trinity.overlay -f -a trinity-official
+
+Add all keywords from the "trinity.live.keywords" file to your setup, so the packages can be installed without any problems. If there are still missing ones, just add them too.
+
+After that just run "emerge -av trinity-base/tdebase-meta", which should pull in all you need to end up with a slim TDE desktop, just like in good old Gentoo KDE3 days. If you need more, just look what the overlay offers at the moment and have fun.
+
+If you want to use TDM (KDM replacement of TDE), just don't forget to change "/etc/conf.d/xdm" to use "tdm".
+
+
+Re-building TDE:
+
+From time to time it is an good idea to update your TDE install, because as it is build from master branch, there are changes nearly every day. If you don't know how this changes are related and your last re-build was some time ago, the best is to rebuild tde full. You can simply do that with the following chain of commands. First make sure you have emerged "gentoolkit" and use that command that should re-build nearly all TDE related packages:
+
+"emerge --oneshot tqt && emerge --oneshot tqtinterface && emerge --oneshot arts && emerge --oneshot tdelibs && emerge -a --oneshot `equery depends tdelibs|awk '{print " ="$1}'`"
+
+Updating translations of TDE
+
+The good thing about the live ebuilds is, you can always install the latest translations, if you have some active translator for your language working on TDE, you can instantly profit from that new translations.
+
+Just use: "emerge --oneshot tde-i18n"
+
+With that, you will have the latest translations at least for all the TDE core stuff, like tdebase, tdegraphics, tdenetwork and so on.
+
+
+Working at TDE under Gentoo:
+
+That above is also just some example of how handy it can be to use Gentoo also for TDE development. Maybe you want to contribute to TDE and work on some things? You can profit instantly from your work, if the work was already merged. Just rebuild that package and enjoy! If you want to fix or add some translations, you can join TWTW (https://mirror.git.trinitydesktop.org/weblate) and some days later, you can enjoy your changes on your system already after re-building the tde-i18n package.
