@@ -23,7 +23,7 @@ How to add this overlay to Gentoo and install TDE?
 
 Just use:
 
-layman -o https://mirror.git.trinitydesktop.org/gitea/TDE/tde-packaging-gentoo/raw/branch/master/Documentation/trinity.overlay -f -a trinity-official
+layman -o https://mirror.git.trinitydesktop.org/gitea/TDE/tde-packaging-gentoo/raw/branch/master/Documentation/overlay.xml -f -a trinity-official
 
 Add all keywords from the "trinity.live.keywords" file to your setup, so the packages can be installed without any problems. If there are still missing ones, just add them too.
 
