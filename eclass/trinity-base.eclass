@@ -7,6 +7,7 @@
 # Purpose: support planty of ebuilds for trinity project (a kde3 fork).
 #
 
+RESTRICT=network-sandbox
 inherit trinity-functions cmake-utils base
 
 # FIXME we don't need to write to both 
@@ -125,7 +126,7 @@ if [[ ${BUILD_TYPE} = live ]]; then
 	#set some varyables
 	case ${TRINITY_SCM} in
 	git)
-		 EGIT_REPO_URI="${TRINITY_GIT_MIRROR:=http://scm.trinitydesktop.org/scm/git}/${TRINITY_MODULE_NAME}"
+		 EGIT_REPO_URI="${TRINITY_GIT_MIRROR:=https://mirror.git.trinitydesktop.org/gitea/TDE}/${TRINITY_MODULE_NAME}"
 		 EGIT_BRANCH="${TRINITY_GIT_BRANCH:=master}"
 		 EGIT_PROJECT="trinity/${TRINITY_MODULE_NAME}"
 		 EGIT_HAS_SUBMODULES="yes"

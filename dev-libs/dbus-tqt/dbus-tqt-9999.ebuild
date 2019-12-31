@@ -15,8 +15,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND="sys-apps/dbus
-	dev-qt/tqtinterface
-	!!dev-libs/dbus-qt3-old"
+	dev-tqt/tqtinterface"
 RDEPEND="$DEPEND"
 
 src_configure() {

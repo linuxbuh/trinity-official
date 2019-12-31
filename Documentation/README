@@ -1,17 +1,19 @@
-This is a trinity Gentoo overlay.
-Please don't report bugs to Gentoo bugzilla. 
-If you want to report a bug feel free to email me at fatzer2@gmail.com. I'm able to read and write in Russian and English.
-Overlay will be filled with ebuilds of ported to cmake programs from the Trinity Project. 
-If you are interested in ebuilds for some packages that are not in the overlay, you can email me too.
+This is now the official trinity Gentoo overlay from the TDE team.
 
-Live ebuilds aren't tested at all, but you still can try to build them on your own risk.
+Currently it only supports the latest master branch, which means live version, which is R14.1.x as of writing, which some TDE team members are using in private life too, so it should be not perfect, but stable for the most part and also Gentoo users are very invited to test and reports bugs to TGW and so to be some part of TDE. This choice is also made because of realism that otherwise the maintaince burden would be most likely too hard for this overlay. So it is better to support one version, but that good instead of mutiple versions which are more likely to broke here and there.
 
-In order to properly use this overlay, you have to unmask the qt3 USE flag and packages. 
-To do so, execute the following commands as root:
+But there are also efforts to support the stable branch of TDE (R14.0.x - R14.0.7 as of writing), if someone is willing to help with that. The support of v3.5.x was removed completely with the clean up progress, because it is too old now.
 
-# mkdir -p /etc/portage/profile
-# echo -qt3 >> /etc/portage/profile/use.mask
-# mkdir -p /etc/portage/packages.keywords/
-# cp /var/lib/layman/trinity /etc/portage/packages.keywords/
+This overlay is largely based on the very good and hard work of Fat-Zer (fatzer2@gmail.com) who created and maintained this overlay many years, to a time when Gentoo users had no other choice, because Gentoo devs don't wanted to support TDE (which they resist to do so still) and TDE had no official overlay for Gentoo users. It also tries to be some central place, in which all goods of other floating around TDE overlays should be centralized. So everyone is welcome to contribute to it, just with creating some PR in TGW.
 
-NOTE: hal compilation is now broken. If you know how to fix it, write me an email.
+Please don't report bugs to Gentoo bugzilla or Fat-Zer and instead of this, report issues to the tde-packages-gentoo repo at TGW.
+
+The overlay will be filled with ebuilds of ported to CMake programs from the Trinity Project mainly and that is the goal, but while CMake conversion is still in work and will be for some time, it will most likely offer also ebuilds of TDE applications not already converted to CMake and using autotools instead.
+
+Another goal is to offer also custom versions of specific libraries like libsdl or xine-lib, with added support for TDE and aRts, for example, which is deactivated from the official Gentoo ebuilds or preserve ebuilds related to TDE and/or TQt, which were removed from Portage. So the hope is, we can get the good old user experience of a KDE3 (now TDE) based Gentoo system back and get back control, like it was until 2008.
+
+While the goal is that this overlay works out the box without any problems, there can't be any guarantee for that and you might expect some problems from time to time, if there are Gentoo or TDE specific changes, for example. If so, you are free to open some issue in TGW to the tde-packaging-gentoo repo about that and maybe the problem can be fixed in some time.
+
+If you are interested in ebuilds for some packages that are not in the overlay or you have any fixes, you can create some PR in TGW and if your work is good, the ebuilds can be added. Also *any* help, from every Gentoo user loving TDE will be highly appreciated. You can also join the TDE IRC channel to get in touch with Chris, if you need any further help or want to help out with this overlay.
+
+Some guideline for this overlay is: Freedom of choice for everything. There should be in no case any forced or hardcoded USE flags, to build in any optional support some Gentoo users don't want to have or want on their systems. All building options TDE is offering, should be reflected in this overlay.

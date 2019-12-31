@@ -18,7 +18,7 @@ KEYWORDS=
 IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma networkmanager openexr
 	spell sudo tiff utempter upower udisks old_udisks xcomposite +xrandr"
 
-MY_DEPEND=">=dev-qt/tqtinterface-${TRINITY_VER}
+MY_DEPEND=">=dev-tqt/tqtinterface-${TRINITY_VER}
 	>=dev-libs/libxslt-1.1.16
 	>=dev-libs/libxml2-2.6.6
 	>=dev-libs/libpcre-6.6

@@ -8,19 +8,17 @@ inherit trinity-meta
 
 DESCRIPTION="The reliable Trinity session manager that talks the standard X11R6"
 KEYWORDS=
-IUSE="hal upower"
+IUSE="upower"
 
 DEPEND="
 	dev-libs/dbus-tqt
-	upower? ( dev-libs/dbus-1-tqt )
-	hal? ( sys-apps/hal ) "
+	upower? ( dev-libs/dbus-1-tqt ) "
 
 RDEPEND="${RDEPEND}
 	upower? ( sys-power/upower ) "
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with hal HAL )
 		$(cmake-utils_use_with upower UPOWER )
 	)
 

@@ -6,7 +6,7 @@ TRINITY_MODULE_NAME="tdebase"
 
 inherit trinity-meta
 
-DESCRIPTION="The part of TDE ui that handles icons, desktop, screensaver etc"
+DESCRIPTION="The part of TDE UI that handles icons, desktop, screensaver etc"
 KEYWORDS=
 IUSE="pam xscreensaver"
 
@@ -19,7 +19,7 @@ COMMON_DEPEND="x11-libs/libXrender
 	# so until we separate the kcontrol modules into separate ebuilds :-),
 	# there's a dep here
 DEPEND="${COMMON_DEPEND}
-	xscreensaver? ( x11-proto/scrnsaverproto )
+	xscreensaver? ( x11-base/xorg-proto )
 	xscreensaver? ( x11-misc/xscreensaver )"
 # TODO remove x11-misc/xscreensaver after TDE bug # will be fixed
 RDEPEND="${COMMON_DEPEND}

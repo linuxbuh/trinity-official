@@ -12,7 +12,7 @@ SLOT="0"
 KEYWORDS="alpha amd64 hppa ia64 ~mips ppc ppc64 sparc x86 ~x86-fbsd"
 IUSE=""
 
-DEPEND="virtual/pam"
+DEPEND="sys-libs/pam"
 RDEPEND="${DEPEND}"
 
 src_install() {

@@ -11,7 +11,7 @@ KEYWORDS=
 IUSE="pam"
 
 RDEPEND="
-	pam? ( virtual/pam )"
+	pam? ( sys-libs/pam )"
 DEPEND="${RDEPEND}"
 
 src_configure() {

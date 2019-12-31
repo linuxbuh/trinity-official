@@ -21,7 +21,7 @@ IUSE=""
 DEPEND=">=dev-libs/skyutils-2.8-r5[ssl]"
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/${P}-verizon.diff" )
+PATCHES=( "${FILESDIR}/${P}-verizon.patch" )
 
 src_prepare() {
 	default

@@ -18,7 +18,7 @@ KEYWORDS=
 IUSE="alsa -artswrappersuid jack mp3 nas vorbis"
 SLOT="$TRINITY_VER"
 
-DEPEND="dev-qt/tqtinterface
+DEPEND="dev-tqt/tqtinterface
 	dev-libs/glib:2
 	media-libs/audiofile
 	mp3? ( media-libs/libmad )

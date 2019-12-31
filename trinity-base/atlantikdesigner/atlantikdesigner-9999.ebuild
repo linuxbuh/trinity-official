@@ -2,10 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 EAPI="5"
-TRINITY_MODULE_NAME="tdebase"
+TRINITY_MODULE_NAME="tdeaddons"
 
 inherit trinity-meta
 
-DESCRIPTION="Makes TQt-only apps use several TDE dialogs."
-KEYWORDS=
-IUSE=""
+DESCRIPTION="Atlantik gameboard designer"
+KEYWORDS=""
+IUSE+=""
+DEPEND=">=trinity-base/atlantik-${PV}:${SLOT}"

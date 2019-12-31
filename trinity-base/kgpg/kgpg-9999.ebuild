@@ -13,4 +13,4 @@ IUSE=""
 RDEPEND="app-crypt/gnupg
 	|| ( app-crypt/pinentry[qt4]
 		app-crypt/pinentry[gtk]
-		app-crypt/pinentry[qt3] )"
+		app-crypt/pinentry[tqt] )"
