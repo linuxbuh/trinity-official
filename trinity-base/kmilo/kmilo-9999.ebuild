@@ -12,7 +12,7 @@ IUSE="asus-laptop dell-laptop powerbook-laptop thinkpad-laptop vaio-laptop lm_se
 
 DEPEND="powerbook-laptop? ( app-laptop/pbbuttonsd )"
 RDEPEND="${DEPEND}
-	lm_sensors? ( sys-apps/lm_sensors )"
+	lm_sensors? ( sys-apps/lm-sensors )"
 
 src_configure() {
 	mycmakeargs=(
