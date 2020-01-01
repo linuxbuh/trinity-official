@@ -8,7 +8,7 @@ inherit trinity-meta
 
 DESCRIPTION="The Trinity Control Center"
 KEYWORDS=
-IUSE="samba logitech-mouse ieee1394 +xrandr"
+IUSE="samba logitech-mouse ieee1394 +xrandr +tdehw"
 
 DEPEND="x11-libs/libX11
 	x11-libs/libXrender
@@ -40,6 +40,7 @@ src_configure() {
 		$(cmake-utils_use_with logitech-mouse LIBUSB)
 		$(cmake-utils_use_with ieee1394 LIBRAW1394)
 		$(cmake-utils_use_with xrandr XRANDR)
+		$(cmake-utils_use_with tdehw TDEHWLIB)
 	)
 
 	trinity-meta_src_configure
