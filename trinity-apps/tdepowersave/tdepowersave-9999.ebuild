@@ -18,8 +18,8 @@ LICENSE="GPL-2 LGPL-2"
 DEPEND="x11-libs/libXScrnSaver 
 	x11-libs/libXext
 	x11-libs/libXtst 
-	dev-libs/dbus-tqt
-	dev-libs/dbus-1-tqt"
+	>=dev-libs/dbus-tqt-${PV}
+	>=dev-libs/dbus-1-tqt-${PV}"
 RDEPEND="${DEPEND}"
 
 need-trinity 14.0.0
