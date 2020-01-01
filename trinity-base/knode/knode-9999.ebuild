@@ -1,0 +1,18 @@
+# Copyright 2020 The Trinity Desktop Project
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+EAPI="5"
+TRINITY_MODULE_NAME="tdepim"
+
+inherit trinity-meta
+
+DESCRIPTION="A newsreader for TDE"
+
+DEPEND="
+	>=trinity-base/ktnef-${PV}:${SLOT}
+	>=trinity-base/libkmime-${PV}:${SLOT}
+	>=trinity-base/libtdepim-${PV}:${SLOT}
+	>=trinity-base/libkcal-${PV}:${SLOT}"
+RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdepim/"
