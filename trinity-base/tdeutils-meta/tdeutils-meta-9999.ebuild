@@ -33,4 +33,5 @@ RDEPEND="
 	>=trinity-base/ksim-${PV}:${SLOT}
 	>=trinity-base/ktimer-${PV}:${SLOT}
 	>=trinity-base/tdewallet-${PV}:${SLOT}
-	>=trinity-base/superkaramba-${PV}:${SLOT}"
+	>=trinity-base/superkaramba-${PV}:${SLOT}
+	>=trinity-base/tdefilereplace-${PV}:${SLOT}"
