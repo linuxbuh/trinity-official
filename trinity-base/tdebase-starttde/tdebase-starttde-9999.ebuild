@@ -7,8 +7,6 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta
 
 DESCRIPTION="starttde script, which starts a complete Trinity session, and associated scripts"
-KEYWORDS=
-IUSE=""
 
 RDEPEND="x11-apps/xmessage
 	x11-apps/xsetroot
@@ -30,8 +28,6 @@ TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm"
 PATCHES=( "$FILESDIR/${PN}-14-gentoo.patch")
 
 src_prepare() {
-#	epatch "${FILESDIR}/tdebase-starttde-trinity-gentoo.patch"
-
 	trinity-base_src_prepare
 }
 
