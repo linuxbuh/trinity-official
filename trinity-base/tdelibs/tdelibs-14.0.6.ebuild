@@ -14,7 +14,7 @@ DESCRIPTION="Trinity libraries needed by all TDE programs."
 HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="GPL-2 LGPL-2"
 SLOT="${TRINITY_VER}"
-KEYWORDS=
+KEYWORDS="~amd64"
 IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma networkmanager openexr
 	spell sudo tiff utempter upower udisks old_udisks xcomposite +xrandr"
 
@@ -66,7 +66,6 @@ src_configure() {
 		-DWITH_XCURSOR=ON
 		-DWITH_HSPELL=OFF
 		-DKDE4_DEFAULT_HOME=.kde4
-		-DWITH_TDEHWLIB=OFF
 		-DWITH_ARTS=OFF
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"

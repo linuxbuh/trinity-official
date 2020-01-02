@@ -7,9 +7,9 @@
 # Purpose: basic trinity functions and variables
 #
 
-inherit versionator multilib
+inherit multilib
 
-TRINITY_LIVEVER="14.0.0"
+TRINITY_LIVEVER="14.1.0"
 
 # @FUNCTION: set-trinityver
 # @USAGE: < version >
@@ -21,16 +21,10 @@ set-trinityver() {
 
 	# set install location:
 	# - 3rd party apps go into /usr, and have SLOT="0".
-	# - kde-base category ebuilds go into /usr/kde/$MAJORVER.$MINORVER,
+	# - kde-base category ebuilds go into /usr/trinity/$ETRINITY_VER,
 	# and have SLOT="$MAJORVER.$MINORVER".
-	# - This function exports $PREFIX (location to install to) and $KDEDIR
+	# - This function exports $PREFIX (location to install to) and $TDEDIR
 	# (location of kdelibs to link against) for all ebuilds.
-	#
-	# -- Overrides - deprecated but working for now: --
-	# - If $KDEPREFIX is defined (in the profile or env), it overrides everything
-	# and both base and 3rd party kde stuff goes in there.
-	# - If $KDELIBSDIR is defined, the kdelibs installed in that location will be
-	# used, even by kde-base packages.
 
 	# get version elements
 	if [[ -n "$1" ]]; then
@@ -40,28 +34,20 @@ set-trinityver() {
 	fi
 
 	case "$ETRINITY_VER" in
-		3.* )
-			export TRINITY_VER="$(get_version_component_range 1-2 "${ETRINITY_VER}")" ;;
 		9999 )
-			export TRINITY_VER="$(get_major_version "$TRINITY_LIVEVER" )" ;;
+			export TRINITY_VER="$(ver_cut 1 "$TRINITY_LIVEVER" )" ;;
 		* )
-			export TRINITY_VER="$(get_major_version "$ETRINITY_VER" )" ;;
+			export TRINITY_VER="$(ver_cut 1 "$ETRINITY_VER" )" ;;
 	esac
 
 	export TDEDIR="/usr/trinity/${TRINITY_VER}"
 	export TDEDIRS="/usr/trinity/${TRINITY_VER}"
 
-	# 3.5.x still uses KDE* variables
-	if [ "${TRINITY_VER}" = "3.5" ]; then
-		export KDEDIR="$TDEDIR"
-		export KDEDIRS="$TDEDIRS"
-	fi
-
-	# this sould solve problems like "cannot find libraries" espessialy when
-	# compiling kdelibs
-	# NOTE: That can breaks compilation of tdelibs:
-	#       binaries which runs during compilation are tring to load shared
-	#       libraries from the TDE's directory wich may be broken.
+	# this sould solve problems like "cannot find libraries", especially when
+	# compiling tdelibs
+	# NOTE: binaries which run during compilation and try to load shared
+	#       libraries from the TDE directory (which may be broken) may still
+	#	break compilation of tdelibs(?)
 	# TODO: fix that issue for tdelibs
 	adjust-trinity-paths
 }
@@ -101,7 +87,7 @@ adjust-trinity-paths() {
 	export PATH
 	export LD_LIBRARY_PATH
 
-	# Unset home paths so aplications wouldn't try to write to root's dir while build
+	# Unset home paths so applications wouldn't try to write to root's dir while building
 	unset TDEHOME
 	unset TDEROOTHOME
 }
@@ -141,12 +127,7 @@ need-trinity() {
 	set-trinityver $1
 	adjust-trinity-paths
 
-	case "$1" in
-		3.5*)
-			my_depend=">=trinity-base/kdelibs-${ETRINITY_VER}:3.5";;
-		*)
-			my_depend=">=trinity-base/tdelibs-${ETRINITY_VER}:${TRINITY_VER}";;
-	esac
+	my_depend=">=trinity-base/tdelibs-${ETRINITY_VER}:${TRINITY_VER}"
 
 	DEPEND="$DEPEND $my_depend"
 	RDEPEND="$RDEPEND $my_depend"
@@ -154,14 +135,14 @@ need-trinity() {
 
 # @ECLASS-VARIABLE: TRINITY_NEED_ARTS
 # @DESCRIPTION:
-# This variable is setted by need-arts function. Possible arguments values 'yes', 'no' and 'optional'
+# This variable is set by the need-arts function. Possible arguments values 'yes', 'no' and 'optional'
 # Default is 'no'
 TRINITY_NEED_ARTS="no"
 
 # @FUNCTION: need-arts
 # @USAGE: need-arts <yes|optional>
 # @DESCRIPTION:
-# This function adds DEPEND's for aRTs-support Possible arguments are 'yes' and 'optinal'
+# This function adds DEPENDs for aRTs support. Possible arguments are 'yes' and 'optinal'
 # 'yes' means arts is required, optional' results in USE flag arts.
 # NOTE: this function modifies IUSE DEPEND and RDEPEND variables, so if you call it before setting
 #       those variables don't forget to include the priviously setted value into them.
@@ -175,8 +156,7 @@ need-arts() {
 	TRINITY_NEED_ARTS=$1;
 
 	case "${TRINITY_VER}" in
-		"") die "You must call set-trinityver unctions to set TRINITY_VER before calling $FUNCNAME.";;
-		3.5*) tdelibs="trinity-base/kdelibs";;
+		"") die "You must call set-trinityver functions to set TRINITY_VER before calling $FUNCNAME.";;
 		*) tdelibs="trinity-base/tdelibs";;
 	esac
 

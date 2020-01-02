@@ -11,7 +11,7 @@ DESCRIPTION="Interface and abstraction library for TQt and Trinity"
 HOMEPAGE="http://trinitydesktop.org/"
 
 LICENSE="GPL-2"
-KEYWORDS=
+KEYWORDS="~amd64"
 SLOT="0"
 
 #Note:  for the sake of easier maintenance, building against QT3
