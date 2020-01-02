@@ -3,20 +3,19 @@
 # $Id$
 EAPI=7
 
-inherit eutils git-r3 flag-o-matic toolchain-funcs
+inherit eutils flag-o-matic toolchain-funcs
 
 SRCTYPE="free"
 DESCRIPTION="Trinity's Qt toolkit fork."
 HOMEPAGE="http://trinitydesktop.org/"
 
-#SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/dependencies/tqt3-trinity-${PV}.tar.xz"
-EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/dependencies/tqt3-trinity-${PV}.tar.xz"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="3.5"
-KEYWORDS=
+KEYWORDS="~amd64"
 IUSE="cups debug doc examples firebird ipv6 mysql nas nis opengl postgres sqlite xinerama"
-# no odbc, immtqt and immtqt-bc support anymore.
+# no odbc, immtqt or immtqt-bc support anymore.
 # TODO: optional support for xrender and xrandr
 
 RDEPEND="
@@ -43,6 +42,8 @@ DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
 
 TQTBASE="/usr/tqt3"
+
+S="${WORKDIR}/tqt3-trinity-${PV}"
 
 pkg_setup() {
 	export QTDIR="${S}"

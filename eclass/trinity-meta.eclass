@@ -16,17 +16,13 @@ HOMEPAGE="http://www.trinitydesktop.org/"
 set-trinityver
 [[ -z "$SLOT" ]] && SLOT="$TRINITY_VER"
 
-if [[ "$TRINITY_VER" == "3.5" ]]; then
 # common dependencies
-	DEPEND="trinity-base/kdelibs:${SLOT}"
-else
-	DEPEND="trinity-base/tdelibs:${SLOT}"
-fi
+DEPEND="trinity-base/tdelibs:${SLOT}"
 
 # @FUNCTION: trinity-meta_set_trinity_submodule
 # @DESCRIPTION:
-# sets the TRINITY_SUBMODULE variable to vth value aptained from ${PN}
-# if it doesn't set yet
+# sets the TRINITY_SUBMODULE variable to nth value obtained from ${PN}
+# if it isn't set yet
 trinity-meta_set_trinity_submodule() {
 	debug-print-function $FUNCNAME "$@"
 
@@ -49,18 +45,12 @@ trinity-meta_pkg_setup() {
 # @FUNCTION: trinity-meta_src_unpack
 # @DESCRIPTION:
 # Default source extract function. It tries to unpack only 
-# nessecary files.
+# necessary files.
 trinity-meta_src_unpack() {
 	debug-print-function ${FUNCNAME} "$@"
 
 	if [[ ${BUILD_TYPE} = live ]]; then
 		case "${TRINITY_SCM}" in
-			svn)
-				mkdir -p "$S"
-				ESVN_RESTRICT="export" subversion_src_unpack
-				subversion_wc_info
-				subversion_bootstrap
-				;;
 			git)
 				git-2_src_unpack
 				;;
@@ -82,8 +72,7 @@ trinity-meta_src_extract() {
 	if [[ "${BUILD_TYPE}" = live ]]; then
 		einfo "Exporting parts of working copy to ${S}"
 		case "$TRINITY_SCM" in
-			svn) trinity-meta_rsync_copy ;;
-			git) # we nothing can do to prevent git from unpacking code
+			git) # nothing we can do to prevent git from unpacking code
 				;;
 			*)  die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}"
 		esac
@@ -127,7 +116,6 @@ trinity-meta_rsync_copy() {
 
 	local rsync_options subdir targetdir wc_path escm
 	case "${TRINITY_SCM}" in
-		svn) wc_path="${ESVN_WC_PATH}";;
 		git) wc_path="${EGIT_STORE_DIR}/${EGIT_PROJECT}";;
 		*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 	esac
@@ -167,10 +155,8 @@ trinity-meta_create_extractlists() {
 
 	# add package-specific files and directories
 	case "${TRINITY_MODULE_NAME}" in
-		kdebase) TSM_EXTRACT_LIST+=" kcontrol/ kdmlib/" ;;
 		tdebase) TSM_EXTRACT_LIST+=" kcontrol/" ;;
-		*) ;; # nothing special for over modules
-#		*) die "TRINITY_MODULE_NAME ${TRINITY_MODULE_NAME} is not supported by function ${FUNCNAME}" ;;
+		*) ;; # nothing special for other modules
 	esac
 
 	TSM_EXTRACT_LIST+=" ${TSM_EXTRACT} ${TSM_EXTRACT_ALSO} cmake/ CMakeLists.txt"
@@ -203,13 +189,6 @@ trinity-meta_src_prepare() {
 			*) die "unknown patch type in the patch directory" ;;
 			esac
 		done;
-	fi
-	
-# fix bad cmake code fo 3.5.13.1
-	if [ $PV == "3.5.13.1" ]; then
-		[ -f "cmake/modules/FindTDE.cmake" ] && \
-			sed -ie 's!HINTS\s\+${\w*BIN\w*}!HINTS "${TDE_PREFIX}/bin" ${BIN_INSTALL_DIR}!' \
-				cmake/modules/FindTDE.cmake
 	fi
 	
 	trinity-base_src_prepare
