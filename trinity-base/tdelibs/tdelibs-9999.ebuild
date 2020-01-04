@@ -4,7 +4,7 @@
 EAPI="7"
 TRINITY_MODULE_NAME="$PN"
 
-inherit trinity-base multilib
+inherit trinity-base-2 multilib
 
 set-trinityver
 
@@ -15,8 +15,9 @@ HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="GPL-2 LGPL-2"
 SLOT="${TRINITY_VER}"
 KEYWORDS=
-IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma networkmanager openexr
-	spell sudo tiff utempter upower udisks old_udisks xcomposite +xrandr"
+IUSE+=" alsa avahi cups consolekit cryptsetup fam hwlib jpeg2k lua 
+	lzma networkmanager openexr pcsc-lite spell sudo tiff 
+	utempter upower xcomposite +xrandr"
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	>=dev-libs/libxslt-1.1.16
@@ -34,11 +35,13 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	x11-libs/libXrender
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( net-dns/avahi )
+	cryptsetup? ( sys-fs/cryptsetup )
 	cups? ( >=net-print/cups-1.1.19 )
 	fam? ( virtual/fam )
 	jpeg2k? ( media-libs/jasper )
 	lua? ( dev-lang/lua:* )
 	openexr? ( >=media-libs/openexr-1.2.2-r2 )
+	pcsc-lite? ( sys-apps/pcsc-lite )
 	spell? ( >=app-dicts/aspell-en-6.0.0 >=app-text/aspell-0.60.5 )
 	sudo? ( app-admin/sudo )
 	tiff? ( media-libs/tiff:= )
@@ -53,42 +56,44 @@ DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}
 	consolekit? ( sys-auth/consolekit )
 	upower? ( sys-power/upower )
-	udisks? ( sys-fs/udisks:2 )
-	old_udisks? ( sys-fs/udisks:0 )"
+	hwlib? ( || ( sys-fs/udisks sys-apps/udevil sys-apps/pmount ) )"
 
 src_configure() {
 	mycmakeargs=(
-		-DMALLOC_FULL=ON
+		-TDE_DMALLOC_FULL=ON
 		-DWITH_LIBIDN=ON
 		-DWITH_SSL=ON
 		-DWITH_LIBART=ON
 		-DWITH_PCRE=ON
-		-DWITH_XCURSOR=ON
 		-DWITH_HSPELL=OFF
-		-DKDE4_DEFAULT_HOME=.kde4
-		-DWITH_TDEHWLIB=OFF
+		-DWITH_PKCS=OFF
+		-DWITH_TDEHWLIB="$(usex hwlib)"
+		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
 		-DWITH_ARTS=OFF
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
+		-DWITH_CRYPTSETUP="$(usex cryptsetup)"
 		-DWITH_CUPS="$(usex cups)"
 		-DWITH_INOTIFY="$(usex kernel_linux)"
 		-DWITH_JASPER="$(usex jpeg2k)"
 		-DWITH_LUA="$(usex lua)"
 		-DWITH_LZMA="$(usex lzma)"
 		-DWITH_OPENEXR="$(usex openexr)"
+		-DWITH_PCSC="$(usex pcsc-lite)"
 		-DWITH_ASPELL="$(usex spell)"
 		-DWITH_GAMIN="$(usex fam)"
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_UTEMPTER="$(usex utempter)"
 		-DWITH_UPOWER="$(usex upower)"
-		-DWITH_UDISKS="$(usex old_udisks)"
-		-DWITH_UDISKS2="$(usex udisks)"
 		-DWITH_CONSOLEKIT="$(usex consolekit)"
 		-DWITH_NETWORK_MANAGER_BACKEND="$(usex networkmanager)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
 	)
+
+#		-DWITH_XCURSOR=ON
+#		-DKDE4_DEFAULT_HOME=.kde4
 
 	trinity-base_src_configure
 }
@@ -97,10 +102,10 @@ src_install() {
 	trinity-base_src_install
 
 	dodir /etc/env.d
-	# KDE implies that the install path is listed first in TDEDIRS and the user
-	# directory (implicitly added) to be the last entry. Doing otherwise breaks
+	# TDE expects that the install path is listed first in TDEDIRS and the user
+	# directory (implicitly added) is the last entry. Doing otherwise breaks
 	# certain functionality. Do not break this (once again *sigh*), but read the code.
-	# KDE saves the installed path implicitly and so this is not needed, /usr
+	# TDE saves the installed path implicitly and so this is not needed, /usr
 	# is set in ${TDEDIR}/share/config/kdeglobals and so TDEDIRS is not needed.
 
 	# List all the multilib libdirs
