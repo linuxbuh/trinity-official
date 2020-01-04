@@ -7,7 +7,7 @@
 # Purpose: make easy to install trinity ebuilds. 
 #
 
-inherit trinity-base trinity-functions cmake-utils
+inherit trinity-base-2 trinity-functions-2 cmake-utils
 
 LICENSE="GPL-2 LGPL-2"
 HOMEPAGE="http://www.trinitydesktop.org/"
@@ -16,18 +16,14 @@ HOMEPAGE="http://www.trinitydesktop.org/"
 set-trinityver
 [[ -z "$SLOT" ]] && SLOT="$TRINITY_VER"
 
-if [[ "$TRINITY_VER" == "3.5" ]]; then
 # common dependencies
-	DEPEND="trinity-base/kdelibs:${SLOT}"
-else
-	DEPEND="trinity-base/tdelibs:${SLOT}"
-fi
+DEPEND="trinity-base/tdelibs:${SLOT}"
 
-# @FUNCTION: trinity-meta_set_trinity_submodule
+# @FUNCTION: trinity-meta-2_set_trinity_submodule
 # @DESCRIPTION:
-# sets the TRINITY_SUBMODULE variable to vth value aptained from ${PN}
-# if it doesn't set yet
-trinity-meta_set_trinity_submodule() {
+# sets the TRINITY_SUBMODULE variable to nth value obtained from ${PN}
+# if it isn't set yet
+trinity-meta-2_set_trinity_submodule() {
 	debug-print-function $FUNCNAME "$@"
 
 	if [[ -z "$TRINITY_SUBMODULE" ]]; then
@@ -35,55 +31,48 @@ trinity-meta_set_trinity_submodule() {
 	fi
 }
 
-# @FUNCTION: trinity-meta_src_pkg_setup
+# @FUNCTION: trinity-meta-2_src_pkg_setup
 # @DESCRIPTION:
 # Default pkg_setup function. It sets the correct ${S}
 # nessecary files.
-trinity-meta_pkg_setup() {
+trinity-meta-2_pkg_setup() {
 	debug-print-function ${FUNCNAME} "$@"
 	adjust-trinity-paths
 
-	trinity-meta_set_trinity_submodule
+	trinity-meta-2_set_trinity_submodule
 }
 
-# @FUNCTION: trinity-meta_src_unpack
+# @FUNCTION: trinity-meta-2_src_unpack
 # @DESCRIPTION:
 # Default source extract function. It tries to unpack only 
-# nessecary files.
-trinity-meta_src_unpack() {
+# necessary files.
+trinity-meta-2_src_unpack() {
 	debug-print-function ${FUNCNAME} "$@"
 
 	if [[ ${BUILD_TYPE} = live ]]; then
 		case "${TRINITY_SCM}" in
-			svn)
-				mkdir -p "$S"
-				ESVN_RESTRICT="export" subversion_src_unpack
-				subversion_wc_info
-				subversion_bootstrap
-				;;
 			git)
 				git-2_src_unpack
 				;;
 			*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 		esac
 	fi
-	trinity-meta_src_extract
+	trinity-meta-2_src_extract
 }
 
-# @FUNCTION: trinity-meta_src_extract
+# @FUNCTION: trinity-meta-2_src_extract
 # @DESCRIPTION:
 # A function to extract the source for a split KDE ebuild.
 # Also see KMMODULE, KMEXTRACT
-trinity-meta_src_extract() {
+trinity-meta-2_src_extract() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	trinity-meta_create_extractlists
+	trinity-meta-2_create_extractlists
 
 	if [[ "${BUILD_TYPE}" = live ]]; then
 		einfo "Exporting parts of working copy to ${S}"
 		case "$TRINITY_SCM" in
-			svn) trinity-meta_rsync_copy ;;
-			git) # we nothing can do to prevent git from unpacking code
+			git) # nothing we can do to prevent git from unpacking code
 				;;
 			*)  die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}"
 		esac
@@ -119,15 +108,14 @@ trinity-meta_src_extract() {
 	fi
 }
 
-# @FUNCTION: trinity-meta_rsync_copy 
+# @FUNCTION: trinity-meta-2_rsync_copy 
 # @DESCRIPTION:
 # Copies files from svn or git repository to $S
-trinity-meta_rsync_copy() {
+trinity-meta-2_rsync_copy() {
 	debug-print-function ${FUNCNAME} "$@"
 
 	local rsync_options subdir targetdir wc_path escm
 	case "${TRINITY_SCM}" in
-		svn) wc_path="${ESVN_WC_PATH}";;
 		git) wc_path="${EGIT_STORE_DIR}/${EGIT_PROJECT}";;
 		*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 	esac
@@ -154,7 +142,7 @@ trinity-meta_rsync_copy() {
 # @DESCRIPTION:
 # Create lists of files and subdirectories to extract.
 # Also see descriptions of KMMODULE and KMEXTRACT 
-trinity-meta_create_extractlists() {
+trinity-meta-2_create_extractlists() {
 	debug-print-function ${FUNCNAME} "$@"
 	local submod
 	
@@ -167,10 +155,8 @@ trinity-meta_create_extractlists() {
 
 	# add package-specific files and directories
 	case "${TRINITY_MODULE_NAME}" in
-		kdebase) TSM_EXTRACT_LIST+=" kcontrol/ kdmlib/" ;;
 		tdebase) TSM_EXTRACT_LIST+=" kcontrol/" ;;
-		*) ;; # nothing special for over modules
-#		*) die "TRINITY_MODULE_NAME ${TRINITY_MODULE_NAME} is not supported by function ${FUNCNAME}" ;;
+		*) ;; # nothing special for other modules
 	esac
 
 	TSM_EXTRACT_LIST+=" ${TSM_EXTRACT} ${TSM_EXTRACT_ALSO} cmake/ CMakeLists.txt"
@@ -182,7 +168,7 @@ trinity-meta_create_extractlists() {
 # @FUNCTION: trinity-meta_src_prepare
 # @DESCRIPTION:
 # Default src prepare function. Currently it's only a stub.
-trinity-meta_src_prepare() {
+trinity-meta-2_src_prepare() {
 	debug-print-function ${FUNCNAME} "$@"
 	local shared_patch_dir f f_name;
 
@@ -205,21 +191,14 @@ trinity-meta_src_prepare() {
 		done;
 	fi
 	
-# fix bad cmake code fo 3.5.13.1
-	if [ $PV == "3.5.13.1" ]; then
-		[ -f "cmake/modules/FindTDE.cmake" ] && \
-			sed -ie 's!HINTS\s\+${\w*BIN\w*}!HINTS "${TDE_PREFIX}/bin" ${BIN_INSTALL_DIR}!' \
-				cmake/modules/FindTDE.cmake
-	fi
-	
-	trinity-base_src_prepare
+	trinity-base-2_src_prepare
 }
 
-# @FUNCTION: trinity-meta_src_configure
+# @FUNCTION: trinity-meta-2_src_configure
 # @DESCRIPTION:
 # Default source configure function. It sets apropriate cmake args.
 # Also see description of KMMODULE
-trinity-meta_src_configure() {
+trinity-meta-2_src_configure() {
 	debug-print-function ${FUNCNAME} "$@"
 
 	local item tsmargs mod
@@ -235,28 +214,28 @@ trinity-meta_src_configure() {
 		${tsmargs}
 	)
 
-	trinity-base_src_configure
+	trinity-base-2_src_configure
 }
 
-# @FUNCTION: trinity-meta_src_compile
+# @FUNCTION: trinity-meta-2_src_compile
 # @DESCRIPTION:
 # Just call trinity-base_src_compile.
-trinity-meta_src_compile() {
+trinity-meta-2_src_compile() {
 	debug-print-function ${FUNCNAME} "$@"
 	
-	trinity-base_src_compile
+	trinity-base-2_src_compile
 }
 
-# @FUNCTION: trinity-meta_src_install
+# @FUNCTION: trinity-meta-2_src_install
 # @DESCRIPTION:
 # Call default cmake install function. and install documentation.
-trinity-meta_src_install() {
+trinity-meta-2_src_install() {
 	debug-print-function ${FUNCNAME} "$@"
 	
-	TRINITY_BASE_NO_INSTALL_DOC="yes" trinity-base_src_install
+	TRINITY_BASE_NO_INSTALL_DOC="yes" trinity-base-2_src_install
 
-	trinity-base_create_tmp_docfiles $TSM_EXTRACT
-	trinity-base_install_docfiles
+	trinity-base-2_create_tmp_docfiles $TSM_EXTRACT
+	trinity-base-2_install_docfiles
 }
 
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install src_unpack pkg_setup

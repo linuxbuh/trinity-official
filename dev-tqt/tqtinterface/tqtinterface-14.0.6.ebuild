@@ -5,7 +5,7 @@ EAPI="7"
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="${PN}"
 
-inherit trinity-base
+inherit trinity-base-2
 
 DESCRIPTION="Interface and abstraction library for TQt and Trinity"
 HOMEPAGE="http://trinitydesktop.org/"

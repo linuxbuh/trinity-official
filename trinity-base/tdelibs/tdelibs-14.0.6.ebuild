@@ -4,7 +4,7 @@
 EAPI="7"
 TRINITY_MODULE_NAME="$PN"
 
-inherit trinity-base multilib
+inherit trinity-base-2 multilib
 
 set-trinityver
 
@@ -58,14 +58,12 @@ RDEPEND+=" ${MY_DEPEND}
 
 src_configure() {
 	mycmakeargs=(
-		-DMALLOC_FULL=ON
+		-DTDE_MALLOC_FULL=ON
 		-DWITH_LIBIDN=ON
 		-DWITH_SSL=ON
 		-DWITH_LIBART=ON
 		-DWITH_PCRE=ON
-		-DWITH_XCURSOR=ON
 		-DWITH_HSPELL=OFF
-		-DKDE4_DEFAULT_HOME=.kde4
 		-DWITH_ARTS=OFF
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
@@ -89,11 +87,14 @@ src_configure() {
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
 	)
 
-	trinity-base_src_configure
+#		-DWITH_XCURSOR=ON
+#		-DKDE4_DEFAULT_HOME=.kde4
+
+	trinity-base-2_src_configure
 }
 
 src_install() {
-	trinity-base_src_install
+	trinity-base-2_src_install
 
 	dodir /etc/env.d
 	# KDE implies that the install path is listed first in TDEDIRS and the user
@@ -125,8 +126,8 @@ cat <<EOF >"${D}/etc/revdep-rebuild/50-trinity-${SLOT}"
 SEARCH_DIRS="${TDEDIR}/bin ${TDEDIR}/lib*"
 EOF
 
-	trinity-base_create_tmp_docfiles
-	trinity-base_install_docfiles
+	trinity-base-2_create_tmp_docfiles
+	trinity-base-2_install_docfiles
 }
 
 pkg_postinst () {
