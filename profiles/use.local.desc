@@ -1,0 +1,3 @@
+trinity-base/tdelibs:hwlib - Media support via tdehwlib and dbus
+trinity-base/tdelibs:pcsc-lite - Smartcard support via pcsc-lite
+trinity-base/tdelibs:cryptsetup - Support for sys-fs/cryptsetup

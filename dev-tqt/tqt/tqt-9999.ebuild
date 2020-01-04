@@ -45,7 +45,7 @@ DEPEND="${RDEPEND}
 TQTBASE="/usr/tqt3"
 
 pkg_setup() {
-	export QTDIR="${S}"
+	export TQTDIR="${S}"
 
 	CXX=$(tc-getCXX)
 	if [[ ${CXX/g++/} != ${CXX} ]]; then
