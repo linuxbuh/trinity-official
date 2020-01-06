@@ -10,12 +10,12 @@ inherit trinity-base-2
 DESCRIPTION="D-BUS TQt bindings"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="GPL-2 LGPL-2"
-KEYWORDS=
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
 IUSE=""
 
 DEPEND="sys-apps/dbus
-	dev-tqt/tqtinterface"
+	=dev-tqt/tqtinterface-${PV}"
 RDEPEND="$DEPEND"
 
 src_configure() {

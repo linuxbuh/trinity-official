@@ -13,7 +13,7 @@ SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="3.5"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="cups debug doc examples firebird ipv6 mysql nas nis opengl postgres sqlite xinerama"
 # no odbc, immtqt or immtqt-bc support anymore.
 # TODO: optional support for xrender and xrandr
@@ -69,7 +69,7 @@ pkg_setup() {
 		*-linux-*|*-linux)
 			PLATNAME="linux" ;;
 		*)
-			die "Unknown CHOST, no platform choosed."
+			die "Unknown CHOST, no platform chosen."
 	esac
 
 	if [[ "$CHOST" == *64* && "$PLATCXX" == "g++" ]]; then

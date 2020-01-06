@@ -21,7 +21,7 @@ set-trinityver() {
 
 	# set install location:
 	# - 3rd party apps go into /usr, and have SLOT="0".
-	# - kde-base category ebuilds go into /usr/trinity/$ETRINITY_VER,
+	# - trinity-base category ebuilds go into /usr/trinity/$ETRINITY_VER,
 	# and have SLOT="$MAJORVER.$MINORVER".
 	# - This function exports $PREFIX (location to install to) and $TDEDIR
 	# (location of kdelibs to link against) for all ebuilds.
@@ -142,10 +142,10 @@ TRINITY_NEED_ARTS="no"
 # @FUNCTION: need-arts
 # @USAGE: need-arts <yes|optional>
 # @DESCRIPTION:
-# This function adds DEPENDs for aRTs support. Possible arguments are 'yes' and 'optinal'
-# 'yes' means arts is required, optional' results in USE flag arts.
+# This function adds DEPENDs for aRTs support. Possible arguments are 'yes' and 'optional'
+# 'yes' means arts is required, 'optional' results in USE flag arts.
 # NOTE: this function modifies IUSE DEPEND and RDEPEND variables, so if you call it before setting
-#       those variables don't forget to include the priviously setted value into them.
+#       those variables don't forget to include the previously set value when you set them again.
 need-arts() {
 	debug-print-function $FUNCNAME "$@"
 

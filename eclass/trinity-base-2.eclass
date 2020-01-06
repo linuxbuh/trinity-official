@@ -7,7 +7,6 @@
 # Purpose: support ebuilds for the trinity project (a kde3 fork).
 #
 
-RESTRICT=network-sandbox
 inherit trinity-functions-2 cmake-utils
 
 addwrite "/usr/tqt3/etc/settings"
@@ -294,7 +293,6 @@ trinity-base-2_src_install() {
 	debug-print-function ${FUNCNAME} "$@"
 	cmake-utils_src_install
 
-#	trinity-base_fix_desktop_files
 	if [[ -z "$TRINITY_BASE_NO_INSTALL_DOC" ||
 			"$TRINITY_BASE_NO_INSTALL_DOC" == "no" ]]; then
 		trinity-base-2_create_tmp_docfiles
@@ -351,50 +349,5 @@ trinity-base-2_install_docfiles() {
 	done
 	popd >/dev/null
 }
-
-# @FUNCTION: trinity-base_fix_desktop_files
-# @DESCRIPTION:  OBSOLETE??????
-# Perform desktop files modifications according to current version. You can pass
-# either desktop files or direcories to the parametrs. In case you'd pass a
-# directory the function will recursively search for all desktop files and
-# modify them. If no argument specified the function assume to work on the ${D};
-#trinity-base_fix_desktop_files() {
-	
-#	# Test if we have to perform any file fixing for current version
-#	case "3.5" in
-#		*${TRINITY_VER}*);;
-#		*) return 0 ;;
-#	esac
-#	
-#	local file_list dir_list f
-#	
-#	if [ "$#" != 0 ]; then
-#		# Get directories and files from arguments
-#		for f in $@; do
-#			if [ -f "$f" ]; then 
-#				file_list+=" $f"
-#			elif [ -d "$f" ]; then
-#				dir_list+=" $f"
-#			else
-#				eerror "${FUNCNAME}: bad argument type: $(stat -c %F "$f")"
-#			fi
-#		done
-#	else
-#		dir_list="${D}"
-#	fi
-#
-#	# Recursivly search for desktop files in directories
-#	for f in $dir_list; do
-#		file_list+="$(find ${f} -type f -name '*.desktop')"
-#	done
-#	
-#	# Performe the updates
-#	case "${TRINITY_VER}" in
-#	3.5)
-#		for f in $file_list; do
-#			sed -i '/^OnlyShowIn=/s/KDE/TDE/g' "$f"
-#		done;;
-#	esac
-#}
 
 EXPORT_FUNCTIONS src_configure src_compile src_install src_prepare
