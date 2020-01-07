@@ -3,26 +3,24 @@
 # $Id$
 EAPI=7
 
-inherit eutils git-r3 flag-o-matic toolchain-funcs
+inherit eutils git-r3 toolchain-funcs
 
 SRCTYPE="free"
 DESCRIPTION="Trinity's Qt toolkit fork."
 HOMEPAGE="http://trinitydesktop.org/"
 
-#SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/dependencies/tqt3-trinity-${PV}.tar.xz"
 EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="3.5"
 KEYWORDS=
 IUSE="cups debug doc examples firebird ipv6 mysql nas nis opengl postgres sqlite xinerama"
-# no odbc, immtqt and immtqt-bc support anymore.
 # TODO: optional support for xrender and xrandr
 
 RDEPEND="
 	virtual/jpeg:=
-	>=media-libs/freetype-2
-	>=media-libs/libmng-1.0.9
+	media-libs/freetype
+	media-libs/libmng
 	media-libs/libpng:=
 	sys-libs/zlib
 	x11-libs/libXft
@@ -33,12 +31,10 @@ RDEPEND="
 	cups? ( net-print/cups )
 	firebird? ( dev-db/firebird )
 	mysql? ( virtual/mysql )
-	nas? ( >=media-libs/nas-1.5 )
+	nas? ( media-libs/nas )
 	opengl? ( virtual/opengl virtual/glu )
 	postgres? ( dev-db/postgresql:= )
-	xinerama? ( x11-libs/libXinerama )
-	!dev-qt/qt:3
-	!dev-qt/qt-meta:3"
+	xinerama? ( x11-libs/libXinerama )"
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
 
@@ -82,12 +78,9 @@ src_prepare() {
 	# Apply user-provided patches
 	eapply_user
 
-	# Do not link with -rpath. See bug #75181.
+	# Do not link with -rpath. See Gentoo bug #75181.
 	find "${S}"/mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_RPATH.*:QMAKE_RPATH =:'
-
-	# set c/xxflags and ldflags
-	strip-flags
 
 	sed -i -e "s:QMAKE_CFLAGS_RELEASE.*=.*:QMAKE_CFLAGS_RELEASE=${CFLAGS}:" \
 		   -e "s:QMAKE_CXXFLAGS_RELEASE.*=.*:QMAKE_CXXFLAGS_RELEASE=${CXXFLAGS}:" \
@@ -116,8 +109,8 @@ src_prepare() {
 src_configure() {
 	export SYSCONF="${D}${TQTBASE}"/etc/settings
 
-	# Let's just allow writing to these directories during Qt emerge
-	# as it makes TQt much happier.
+	# Let's just allow writing to these directories
+	# during emerge as it makes TQt much happier.
 	addwrite "${TQTBASE}/etc/settings"
 	addwrite "${HOME}/.qt"
 	addwrite "${HOME}/.tqt"
@@ -252,6 +245,6 @@ pkg_postinst() {
 	elog "occurs you should recompile the packages providing these plugins,"
 	elog "and you should also make sure that TQt and its plugins were compiled with the"
 	elog "same version of GCC.  Packages that may need to be rebuilt are, for instance,"
-	elog "tde-base/tdelibs, tde-base/tdeartwork and tde-base/tdeartwork-styles."
+	elog "trinity-base/tdelibs and trinity-base/tdeartwork-styles."
 	echo
 }

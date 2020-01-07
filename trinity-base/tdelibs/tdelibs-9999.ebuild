@@ -2,10 +2,10 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdelibs"
 
-inherit trinity-base multilib
+inherit trinity-base-2 multilib
 
 set-trinityver
 
@@ -13,46 +13,47 @@ need-arts optional
 
 DESCRIPTION="Trinity libraries needed by all TDE programs."
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
+
 SLOT="${TRINITY_VER}"
-KEYWORDS=
-IUSE+=" alsa avahi cups consolekit cryptsetup fam hwlib jpeg2k lua 
+
+IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua 
 	lzma networkmanager openexr pcsc-lite spell sudo tiff 
-	utempter upower xcomposite +xrandr"
+	utempter upower xcomposite hwlib +xrandr "
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
-	>=dev-libs/libxslt-1.1.16
-	>=dev-libs/libxml2-2.6.6
-	>=dev-libs/libpcre-6.6
+	dev-libs/libxslt
+	dev-libs/libxml2
+	dev-libs/libpcre
 	net-dns/libidn
 	app-text/ghostscript-gpl
-	>=dev-libs/openssl-0.9.7d:=
+	dev-libs/openssl:=
 	media-libs/fontconfig
 	media-libs/freetype:2
 	media-libs/libart_lgpl
 	sys-apps/dbus
-	dev-libs/dbus-1-tqt
+	=dev-libs/dbus-1-tqt-${PV}
 	x11-libs/libXcursor
 	x11-libs/libXrender
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( net-dns/avahi )
 	cryptsetup? ( sys-fs/cryptsetup )
-	cups? ( >=net-print/cups-1.1.19 )
+	cups? ( net-print/cups )
 	fam? ( virtual/fam )
 	jpeg2k? ( media-libs/jasper )
 	lua? ( dev-lang/lua:* )
-	openexr? ( >=media-libs/openexr-1.2.2-r2 )
+	openexr? ( media-libs/openexr )
 	pcsc-lite? ( sys-apps/pcsc-lite )
-	spell? ( >=app-dicts/aspell-en-6.0.0 >=app-text/aspell-0.60.5 )
+	spell? ( app-dicts/aspell-en app-text/aspell )
 	sudo? ( app-admin/sudo )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
 	networkmanager? ( net-misc/networkmanager )
 	lzma? ( app-arch/xz-utils )
-	xrandr? ( >=x11-libs/libXrandr-1.2 )
+	xrandr? ( x11-libs/libXrandr )
 	xcomposite? ( x11-libs/libXcomposite )"
-# NOTE: upstream lacks avahi support, so the use flag is currenly masked
 # TODO: add elfres support via libr (not in portage now)
+# NOTE: Building without tdehwlib segfaults, so no choice until fixed.
 DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}
 	consolekit? ( sys-auth/consolekit )
@@ -68,8 +69,8 @@ src_configure() {
 		-DWITH_PCRE=ON
 		-DWITH_HSPELL=OFF
 		-DWITH_PKCS=OFF
-		-DWITH_TDEHWLIB="$(usex hwlib)"
-		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
+		-DWITH_TDEHWLIB=ON
+		-DWITH_TDEHWLIB_DAEMONS=ON
 		-DWITH_ARTS=OFF
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
@@ -93,11 +94,11 @@ src_configure() {
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
 	)
 
-	trinity-base_src_configure
+	trinity-base-2_src_configure
 }
 
 src_install() {
-	trinity-base_src_install
+	trinity-base-2_src_install
 
 	dodir /etc/env.d
 	# TDE expects that the install path is listed first in TDEDIRS and the user
@@ -129,8 +130,8 @@ cat <<EOF >"${D}/etc/revdep-rebuild/50-trinity-${SLOT}"
 SEARCH_DIRS="${TDEDIR}/bin ${TDEDIR}/lib*"
 EOF
 
-	trinity-base_create_tmp_docfiles
-	trinity-base_install_docfiles
+	trinity-base-2_create_tmp_docfiles
+	trinity-base-2_install_docfiles
 }
 
 pkg_postinst () {
