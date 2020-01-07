@@ -1,9 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 #
 # Original Author: Alexander Golubev (Fat-Zer)
+# Ported to git-r3 eclass and EAPI7 by E. Liddell
 # Purpose: basic trinity functions and variables
 #
 
@@ -24,7 +26,7 @@ set-trinityver() {
 	# - trinity-base category ebuilds go into /usr/trinity/$ETRINITY_VER,
 	# and have SLOT="$MAJORVER.$MINORVER".
 	# - This function exports $PREFIX (location to install to) and $TDEDIR
-	# (location of kdelibs to link against) for all ebuilds.
+	# (location of tdelibs to link against) for all ebuilds.
 
 	# get version elements
 	if [[ -n "$1" ]]; then
@@ -43,9 +45,9 @@ set-trinityver() {
 	export TDEDIR="/usr/trinity/${TRINITY_VER}"
 	export TDEDIRS="/usr/trinity/${TRINITY_VER}"
 
-	# this sould solve problems like "cannot find libraries", especially when
-	# compiling tdelibs
-	# NOTE: binaries which run during compilation and try to load shared
+	# This should solve problems like "cannot find libraries",
+	# especially when compiling tdelibs.
+	# NOTE: Binaries which run during compilation and try to load shared
 	#       libraries from the TDE directory (which may be broken) may still
 	#	break compilation of tdelibs(?)
 	# TODO: fix that issue for tdelibs
@@ -55,7 +57,7 @@ set-trinityver() {
 # @FUNCTION: get-trinity-libdirs
 # @USAGE:
 # @DESCRIPTION:
-# lists all the trinity library directories
+# Lists all the trinity library directories.
 get-trinity-libdirs() {
 	local rv
 	for libdir in $(get_all_libdirs); do
@@ -66,7 +68,7 @@ get-trinity-libdirs() {
 # @FUNCTION: adjust-trinity-paths
 # @USAGE: < version >
 # @DESCRIPTION:
-# Adjust PATH LDPATH and LD_LIBRARY_PATH to see only current trinity version
+# Adjusts PATH LDPATH and LD_LIBRARY_PATH to see only current trinity version.
 adjust-trinity-paths() {
 	debug-print-function $FUNCNAME "$@"
 	local libdir
@@ -135,15 +137,15 @@ need-trinity() {
 
 # @ECLASS-VARIABLE: TRINITY_NEED_ARTS
 # @DESCRIPTION:
-# This variable is set by the need-arts function. Possible arguments values 'yes', 'no' and 'optional'
-# Default is 'no'
+# This variable is set by the need-arts function.
+# Possible arguments are 'yes', 'no' and 'optional'. Default is 'no'.
 TRINITY_NEED_ARTS="no"
 
 # @FUNCTION: need-arts
 # @USAGE: need-arts <yes|optional>
 # @DESCRIPTION:
-# This function adds DEPENDs for aRTs support. Possible arguments are 'yes' and 'optional'
-# 'yes' means arts is required, 'optional' results in USE flag arts.
+# This function adds DEPENDs for aRTs support.
+# Possible arguments are 'yes' and 'optional' 'yes' means arts is required, 'optional' results in USE flag arts.
 # NOTE: this function modifies IUSE DEPEND and RDEPEND variables, so if you call it before setting
 #       those variables don't forget to include the previously set value when you set them again.
 need-arts() {

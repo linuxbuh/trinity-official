@@ -1,9 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 #
 # Original Author: fat-zer
+# Ported to git-r3 eclass and EAPI7 by E. Liddell
 # Purpose: support ebuilds for the trinity project (a kde3 fork).
 #
 
@@ -61,8 +63,7 @@ echo "${TRINITY_MODULE_NAME:=${PN}}" >/dev/null
 # This is a whitespace-separated list of translations this ebuild supports.
 # These translations are automatically added to IUSE. Therefore ebuilds must set
 # this variable before inheriting any eclasses. To enable only selected
-# translations, ebuilds must call enable_selected_linguas(). kde4-{base,meta}.eclass does
-# this for you.
+# translations, ebuilds must call enable_selected_linguas().
 
 # @ECLASS-VARIABLE: TRINITY_HANDBOOK
 # @DESCRIPTION:
@@ -177,10 +178,11 @@ fi
 
 # @FUNCTION: trinity-base-2_src_unpack
 # @DESCRIPTION:
-# A default src unpack function to be call git-v3_src_unpack either 
+# A default src unpack function to either call
+# git-r3_src_unpack or base_src_unpack.
 trinity-base-2_src_unpack() {
 	if [[ ${BUILD_TYPE} = live ]]; then
-		git-v3_src_unpack
+		git-r3_src_unpack
 	else
 		base_src_unpack
 	fi
@@ -260,7 +262,7 @@ trinity-base-2_src_configure() {
 		fi
 		if [[ "${TRINITY_HANDBOOK}" == optional ]]; then
 			eg_cmakeargs=( 
-					$(cmake-utils_use_with handbook DOC)
+					-DWITH_DOC="$(usex handbook)"
 					"${eg_cmakeargs[@]}" )
 		fi
 	fi
@@ -272,7 +274,7 @@ trinity-base-2_src_configure() {
 		"${mycmakeargs[@]}"
 	)
 
-#       $([[ "${TRINITY_NEED_ARTS}" == "optional" ]] && (cmake-utils_use_with arts ARTS))
+#       $([[ "${TRINITY_NEED_ARTS}" == "optional" ]] && (-DWITH_ARTS="$(usex arts)"))
 
 	cmake-utils_src_configure
 }
