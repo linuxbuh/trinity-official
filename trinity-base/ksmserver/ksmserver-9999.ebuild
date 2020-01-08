@@ -1,26 +1,26 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="The reliable Trinity session manager that talks the standard X11R6"
-KEYWORDS=
 IUSE="upower"
 
 DEPEND="
-	dev-libs/dbus-tqt
-	upower? ( dev-libs/dbus-1-tqt ) "
+	=dev-libs/dbus-tqt-${PV}
+	upower? ( =dev-libs/dbus-1-tqt-${PV} ) "
 
-RDEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
 	upower? ( sys-power/upower ) "
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with upower UPOWER )
+		-DWITH_UPOWER="$(usex upower)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

@@ -1,16 +1,16 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdeutils"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity gpg keyring manager"
-KEYWORDS=""
-IUSE=""
 
 RDEPEND="app-crypt/gnupg
-	|| ( app-crypt/pinentry[qt4]
+	|| ( app-crypt/pinentry[ncurses]
+		app-crypt/pinentry[qt5]
 		app-crypt/pinentry[gtk]
 		app-crypt/pinentry[tqt] )"
