@@ -1,12 +1,13 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
-DESCRIPTION="starttde script, which starts a complete Trinity session, and associated scripts"
+DESCRIPTION="Starttde script, which starts a complete Trinity session, and associated scripts"
 
 RDEPEND="x11-apps/xmessage
 	x11-apps/xsetroot
@@ -14,21 +15,19 @@ RDEPEND="x11-apps/xmessage
 	x11-apps/xrandr
 	x11-apps/mkfontdir
 	x11-apps/xprop
-	>=trinity-base/kdesktop-${PV}:${SLOT}
-	>=trinity-base/kcminit-${PV}:${SLOT}
-	>=trinity-base/ksmserver-${PV}:${SLOT}
-	>=trinity-base/twin-${PV}:${SLOT}
-	>=trinity-base/kpersonalizer-${PV}:${SLOT}
-	>=trinity-base/kreadconfig-${PV}:${SLOT}
-	>=trinity-base/ksplashml-${PV}:${SLOT}
-	>=trinity-base/tdeinit-${PV}:${SLOT}"
+	=trinity-base/kdesktop-${PV}
+	=trinity-base/kcminit-${PV}
+	=trinity-base/ksmserver-${PV}
+	=trinity-base/twin-${PV}
+	=trinity-base/kpersonalizer-${PV}
+	=trinity-base/kreadconfig-${PV}
+	=trinity-base/ksplashml-${PV}
+	=trinity-base/tdeinit-${PV}"
 
 TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm"
 
-PATCHES=( "$FILESDIR/${PN}-14-gentoo.patch")
-
 src_prepare() {
-	trinity-base_src_prepare
+	trinity-base-2_src_prepare
 }
 
 src_configure() {
@@ -36,21 +35,12 @@ src_configure() {
 }
 
 src_compile() {
-	# Patch the starttde script to setup the environment for KDE 4.0
-	# Add our TDEDIR
-	sed -i -e "s#@REPLACE_PREFIX@#${TDEDIR}#" \
-		"${S}/starttde" || die "Sed for PREFIX failed."
-
 	# List all the multilib libdirs
 	local _libdir _libdirs
 	for _libdir in $(get_all_libdirs); do
 		_libdirs="${_libdirs}:${PREFIX}/${_libdir}"
 	done
 	_libdirs=${_libdirs#:}
-
-	# Complete LDPATH
-	sed -i -e "s#@REPLACE_LIBS@#${_libdirs}#" \
-		"${S}/starttde" || die "Sed for LDPATH failed."
 }
 
 src_install() {

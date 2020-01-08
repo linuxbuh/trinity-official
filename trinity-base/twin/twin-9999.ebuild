@@ -1,13 +1,14 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta eutils
+inherit trinity-meta-2 eutils
 
 DESCRIPTION="Trinity window manager"
-KEYWORDS=
+
 IUSE="xcomposite xrandr xinerama +libconfig +pcre opengl"
 
 DEPEND="x11-libs/libXext
@@ -23,16 +24,16 @@ RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with xcomposite XCOMPOSITE)
-		$(cmake-utils_use_with xcomposite XFIXES)
-		$(cmake-utils_use_with xcomposite XRENDER)
-		$(cmake-utils_use_with xrandr XRANDR)
-		$(cmake-utils_use_with libconfig LIBCONFIG)
-		$(cmake-utils_use_with pcre PCRE)
-		$(cmake-utils_use_with xinerama XINERAMA)
+		-DWITH_XCOMPOSITE="$(usex xcomposite)"
+		-DWITH_XFIXES="$(usex xcomposite)"
+		-DWITH_XRENDER="$(usex xcomposite)"
+		-DWITH_XRANDR="$(usex xrandr)"
+		-DWITH_LIBCONFIG="$(usex libconfig)"
+		-DWITH_PCRE="$(usex pcre)"
+		-DWITH_XINERAMA="$(usex xinerama)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }
 
 pkg_postinst() {
