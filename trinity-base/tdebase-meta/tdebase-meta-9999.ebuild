@@ -1,61 +1,60 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 
-inherit trinity-functions
+inherit trinity-functions-2
 
 set-trinityver
 
 DESCRIPTION="tdebase metapackage - merge this to pull in all tdebase-derived packages"
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="$TRINITY_VER"
-KEYWORDS=
-IUSE=""
+SLOT="${TRINITY_VER}"
 
-RDEPEND=">=trinity-base/tdeinit-${PV}:${SLOT}
-	>=trinity-base/drkonqi-${PV}:${SLOT}
-	>=trinity-base/kappfinder-${PV}:${SLOT}
-	>=trinity-base/kate-${PV}:${SLOT}
-	>=trinity-base/kcheckpass-${PV}:${SLOT}
-	>=trinity-base/kcminit-${PV}:${SLOT}
-	>=trinity-base/kcontrol-${PV}:${SLOT}
-	>=trinity-base/kdcop-${PV}:${SLOT}
-	>=trinity-base/tdedebugdialog-${PV}:${SLOT}
-	>=trinity-base/tdepasswd-${PV}:${SLOT}
-	>=trinity-base/tdeprint-${PV}:${SLOT}
-	>=trinity-base/tdeeject-${PV}:${SLOT}
-	>=trinity-base/kdesktop-${PV}:${SLOT}
-	>=trinity-base/tdesu-${PV}:${SLOT}
-	>=trinity-base/kdialog-${PV}:${SLOT}
-	>=trinity-base/tdm-${PV}:${SLOT}
-	>=trinity-base/kfind-${PV}:${SLOT}
-	>=trinity-base/khelpcenter-${PV}:${SLOT}
-	>=trinity-base/khotkeys-${PV}:${SLOT}
-	>=trinity-base/kicker-${PV}:${SLOT}
-	>=trinity-base/tdebase-tdeioslaves-${PV}:${SLOT}
-	>=trinity-base/klipper-${PV}:${SLOT}
-	>=trinity-base/kmenuedit-${PV}:${SLOT}
-	>=trinity-base/konqueror-${PV}:${SLOT}
-	>=trinity-base/konsole-${PV}:${SLOT}
-	>=trinity-base/kpager-${PV}:${SLOT}
-	>=trinity-base/kpersonalizer-${PV}:${SLOT}
-	>=trinity-base/kreadconfig-${PV}:${SLOT}
-	>=trinity-base/tdescreensaver-${PV}:${SLOT}
-	>=trinity-base/ksmserver-${PV}:${SLOT}
-	>=trinity-base/ksplashml-${PV}:${SLOT}
-	>=trinity-base/kstart-${PV}:${SLOT}
-	>=trinity-base/ksysguard-${PV}:${SLOT}
-	>=trinity-base/ksystraycmd-${PV}:${SLOT}
-	>=trinity-base/ktip-${PV}:${SLOT}
-	>=trinity-base/twin-${PV}:${SLOT}
-	>=trinity-base/kxkb-${PV}:${SLOT}
-	>=trinity-base/libkonq-${PV}:${SLOT}
-	>=trinity-base/nsplugins-${PV}:${SLOT}
-	>=trinity-base/knetattach-${PV}:${SLOT}
-	>=trinity-base/tdebase-data-${PV}:${SLOT}
-	>=trinity-base/tdebase-starttde-${PV}:${SLOT}
-	>=trinity-base/krootbacking-${PV}:${SLOT}
-	>=trinity-base/tqt3integration-${PV}:${SLOT}"
+RDEPEND="=trinity-base/tdeinit-${PV}
+	=trinity-base/drkonqi-${PV}
+	=trinity-base/kappfinder-${PV}
+	=trinity-base/kate-${PV}
+	=trinity-base/kcheckpass-${PV}
+	=trinity-base/kcminit-${PV}
+	=trinity-base/kcontrol-${PV}
+	=trinity-base/kdcop-${PV}
+	=trinity-base/tdedebugdialog-${PV}
+	=trinity-base/tdepasswd-${PV}
+	=trinity-base/tdeprint-${PV}
+	=trinity-base/tdeeject-${PV}
+	=trinity-base/kdesktop-${PV}
+	=trinity-base/tdesu-${PV}
+	=trinity-base/kdialog-${PV}
+	=trinity-base/tdm-${PV}
+	=trinity-base/kfind-${PV}
+	=trinity-base/khelpcenter-${PV}
+	=trinity-base/khotkeys-${PV}
+	=trinity-base/kicker-${PV}
+	=trinity-base/tdebase-tdeioslaves-${PV}
+	=trinity-base/klipper-${PV}
+	=trinity-base/kmenuedit-${PV}
+	=trinity-base/konqueror-${PV}
+	=trinity-base/konsole-${PV}
+	=trinity-base/kpager-${PV}
+	=trinity-base/kpersonalizer-${PV}
+	=trinity-base/kreadconfig-${PV}
+	=trinity-base/tdescreensaver-${PV}
+	=trinity-base/ksmserver-${PV}
+	=trinity-base/ksplashml-${PV}
+	=trinity-base/kstart-${PV}
+	=trinity-base/ksysguard-${PV}
+	=trinity-base/ksystraycmd-${PV}
+	=trinity-base/ktip-${PV}
+	=trinity-base/twin-${PV}
+	=trinity-base/kxkb-${PV}
+	=trinity-base/libkonq-${PV}
+	=trinity-base/nsplugins-${PV}
+	=trinity-base/knetattach-${PV}
+	=trinity-base/tdebase-data-${PV}
+	=trinity-base/tdebase-starttde-${PV}
+	=trinity-base/krootbacking-${PV}
+	=trinity-base/tqt3integration-${PV}"
