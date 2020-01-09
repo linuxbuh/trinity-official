@@ -1,40 +1,38 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 
-inherit trinity-functions
+inherit trinity-functions-2
 
 set-trinityver
 
-DESCRIPTION="kdegraphics metapackage - merge this to pull in all kdegraphics-derived packages"
+DESCRIPTION="tdegraphics metapackage - merge this to pull in all tdegraphics-derived packages"
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"
-IUSE=""
-[[ ${PV} == *9999* ]] || \
-KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-	>=trinity-base/kamera-${PV}:${SLOT}
-	>=trinity-base/kcoloredit-${PV}:${SLOT}
-	>=trinity-base/kdvi-${PV}:${SLOT}
-	>=trinity-base/kfax-${PV}:${SLOT}
-	>=trinity-base/tdegraphics-tdefile-plugins-${PV}:${SLOT}
-	>=trinity-base/tdegraphics-doc-${PV}:${SLOT}
-	>=trinity-base/kgamma-${PV}:${SLOT}
-	>=trinity-base/kghostview-${PV}:${SLOT}
-	>=trinity-base/tdeiconedit-${PV}:${SLOT}
-	>=trinity-base/kmrml-${PV}:${SLOT}
-	>=trinity-base/kolourpaint-${PV}:${SLOT}
-	>=trinity-base/kooka-${PV}:${SLOT}
-	>=trinity-base/kpdf-${PV}:${SLOT}
-	>=trinity-base/kpovmodeler-${PV}:${SLOT}
-	>=trinity-base/kruler-${PV}:${SLOT}
-	>=trinity-base/ksnapshot-${PV}:${SLOT}
-	>=trinity-base/ksvg-${PV}:${SLOT}
-	>=trinity-base/kuickshow-${PV}:${SLOT}
-	>=trinity-base/kview-${PV}:${SLOT}
-	>=trinity-base/kviewshell-${PV}:${SLOT}
-	>=trinity-base/libkscan-${PV}:${SLOT}"
+	=trinity-base/kamera-${PV}
+	=trinity-base/kcoloredit-${PV}
+	=trinity-base/kdvi-${PV}
+	=trinity-base/kfax-${PV}
+	=trinity-base/tdegraphics-tdefile-plugins-${PV}
+	=trinity-base/tdegraphics-doc-${PV}
+	=trinity-base/kgamma-${PV}
+	=trinity-base/kghostview-${PV}
+	=trinity-base/tdeiconedit-${PV}
+	=trinity-base/kmrml-${PV}
+	=trinity-base/kolourpaint-${PV}
+	=trinity-base/kooka-${PV}
+	=trinity-base/kpdf-${PV}
+	=trinity-base/kpovmodeler-${PV}
+	=trinity-base/kruler-${PV}
+	=trinity-base/ksnapshot-${PV}
+	=trinity-base/ksvg-${PV}
+	=trinity-base/kuickshow-${PV}
+	=trinity-base/kview-${PV}
+	=trinity-base/kviewshell-${PV}
+	=trinity-base/libkscan-${PV}"

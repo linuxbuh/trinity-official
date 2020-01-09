@@ -1,37 +1,36 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 
-inherit trinity-functions
+inherit trinity-functions-2
 
 set-trinityver
 
 DESCRIPTION="tdeutils metapackage - merge this to pull in all tdeutils-derived packages"
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="$TRINITY_VER"
-IUSE=""
-KEYWORDS=""
 
 RDEPEND="
-	>=trinity-base/ark-${PV}:${SLOT}
-	>=trinity-base/tdeutils-doc-${PV}:${SLOT}
-	>=trinity-base/kcalc-${PV}:${SLOT}
-	>=trinity-base/kcharselect-${PV}:${SLOT}
-	>=trinity-base/tdelirc-${PV}:${SLOT}
-	>=trinity-base/kdf-${PV}:${SLOT}
-	>=trinity-base/kedit-${PV}:${SLOT}
-	>=trinity-base/kfloppy-${PV}:${SLOT}
-	>=trinity-base/kgpg-${PV}:${SLOT}
-	>=trinity-base/khexedit-${PV}:${SLOT}
-	>=trinity-base/kjots-${PV}:${SLOT}
-	>=trinity-base/klaptopdaemon-${PV}:${SLOT}
-	>=trinity-base/kmilo-${PV}:${SLOT}
-	>=trinity-base/kregexpeditor-${PV}:${SLOT}
-	>=trinity-base/ksim-${PV}:${SLOT}
-	>=trinity-base/ktimer-${PV}:${SLOT}
-	>=trinity-base/tdewallet-${PV}:${SLOT}
-	>=trinity-base/superkaramba-${PV}:${SLOT}
-	>=trinity-base/tdefilereplace-${PV}:${SLOT}"
+	=trinity-base/ark-${PV}
+	=trinity-base/tdeutils-doc-${PV}
+	=trinity-base/kcalc-${PV}
+	=trinity-base/kcharselect-${PV}
+	=trinity-base/tdelirc-${PV}
+	=trinity-base/kdf-${PV}
+	=trinity-base/kedit-${PV}
+	=trinity-base/kfloppy-${PV}
+	=trinity-base/kgpg-${PV}
+	=trinity-base/khexedit-${PV}
+	=trinity-base/kjots-${PV}
+	=trinity-base/klaptopdaemon-${PV}
+	=trinity-base/kmilo-${PV}
+	=trinity-base/kregexpeditor-${PV}
+	=trinity-base/ksim-${PV}
+	=trinity-base/ktimer-${PV}
+	=trinity-base/tdewallet-${PV}
+	=trinity-base/superkaramba-${PV}
+	=trinity-base/tdefilereplace-${PV}"

@@ -1,26 +1,27 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdeutils"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity system monitoring applets."
-KEYWORDS=""
+
 IUSE="snmp lm_sensors dell-laptop"
 
 DEPEND="lm_sensors? ( x11-libs/libXext )
 	snmp? ( net-analyzer/net-snmp )"
 RDEPEND="${DEPEND}
-	lm_sensors? ( sys-apps/lm_sensors )"
+	lm_sensors? ( sys-apps/lm-sensors )"
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with dell-laptop I8K)
-		$(cmake-utils_use_with snmp SNMP)
-		$(cmake-utils_use_with lm_sensors SENSORS)
+		-DWITH_I8K="$(usex dell-laptop)"
+		-DWITH_SNMP="$(usex snmp)"
+		-DWITH_SENSORS="$(usex lm_sensors)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }
