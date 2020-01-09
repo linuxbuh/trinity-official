@@ -1,28 +1,27 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 
-inherit trinity-functions
+inherit trinity-functions-2
 
 set-trinityver
 
-DESCRIPTION="kdetoys metapackage - merge this to pull in all kdetoys-derived packages"
+DESCRIPTION="tdetoys metapackage - merge this to pull in all tdetoys-derived packages"
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="$TRINITY_VER"
-IUSE=""
-KEYWORDS=
 
 RDEPEND="
-	>=trinity-base/amor-${PV}:${SLOT}
-	>=trinity-base/eyesapplet-${PV}:${SLOT}
-	>=trinity-base/fifteenapplet-${PV}:${SLOT}
-	>=trinity-base/tdetoys-doc-${PV}:${SLOT}
-	>=trinity-base/kmoon-${PV}:${SLOT}
-	>=trinity-base/kodo-${PV}:${SLOT}
-	>=trinity-base/kteatime-${PV}:${SLOT}
-	>=trinity-base/ktux-${PV}:${SLOT}
-	>=trinity-base/kweather-${PV}:${SLOT}
-	>=trinity-base/kworldclock-${PV}:${SLOT}"
+	>=trinity-base/amor-${PV}
+	>=trinity-base/eyesapplet-${PV}
+	>=trinity-base/fifteenapplet-${PV}
+	>=trinity-base/tdetoys-doc-${PV}
+	>=trinity-base/kmoon-${PV}
+	>=trinity-base/kodo-${PV}
+	>=trinity-base/kteatime-${PV}
+	>=trinity-base/ktux-${PV}
+	>=trinity-base/kweather-${PV}
+	>=trinity-base/kworldclock-${PV}"

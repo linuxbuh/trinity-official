@@ -1,17 +1,17 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdenetwork"
 TRINITY_SUBMODULE="lanbrowsing"
-inherit trinity-meta
+
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity Lan Information Server - allows to share information over a network."
-KEYWORDS=
-IUSE=""
 
 src_install() {
-	trinity-meta_src_install
+	trinity-meta-2_src_install
 
 	chmod u+s "${D}/${KDEDIR}/bin/reslisa"
 

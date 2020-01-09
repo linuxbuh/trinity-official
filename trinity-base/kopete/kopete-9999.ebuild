@@ -1,13 +1,13 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdenetwork"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity multi-protocol IM client"
-KEYWORDS=
 
 IUSE="jingle gsmlib netmeeting speex kernel_linux"
 PLUGINS="latex autoreplace history contactnotes crypt connectionstatus
@@ -31,14 +31,14 @@ REQUIRED_USE="
 #	xscreensaver? ( x11-libs/libXScrnSaver )
 #	xmpp|groupwice? =app-crypt/qca-1.0*
 BOTH_DEPEND="
-	jingle? ( dev-libs/glib:2 )
-	netmeeting? ( dev-libs/glib:2 )
+	jingle? ( dev-libs/glib )
+	netmeeting? ( dev-libs/glib )
 	webpresence? (
 		dev-libs/libxml2
 		dev-libs/libxslt )
 	jingle? (
 		dev-libs/expat
-		speex? ( >=media-libs/speex-1.1.6 )
+		speex? ( media-libs/speex )
 	)
 	gsmlib? ( app-mobilephone/gsmlib )
 	gadu? ( net-libs/libgadu )
@@ -73,40 +73,40 @@ RDEPEND="${BOTH_DEPEND}
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with jingle      JINGLE)
-		$(cmake-utils_use_with gsmlib      GSM)
-		$(cmake-utils_use_with netmeeting  WEBCAM)
-		$(cmake-utils_use_with speex       SPEEX)
+		-DWITH_JINGLE="$(usex jingle)"
+		-DWITH_GSM="$(usex gsmlib)"
+		-DWITH_WEBCAM="$(usex netmeeting)"
+		-DWITH_SPEEX="$(usex speex)"
 
-		$(cmake-utils_use_build latex            KOPETE_PLUGIN_LATEX)
-		$(cmake-utils_use_build autoreplace      KOPETE_PLUGIN_AUTOREPLACE)
-		$(cmake-utils_use_build history          KOPETE_PLUGIN_HISTORY)
-		$(cmake-utils_use_build contactnotes     KOPETE_PLUGIN_CONTACTNOTES)
-		$(cmake-utils_use_build crypt            KOPETE_PLUGIN_CRYPTOGRAPHY)
-		$(cmake-utils_use_build connectionstatus KOPETE_PLUGIN_CONNECTIONSTATUS)
-		$(cmake-utils_use_build translator       KOPETE_PLUGIN_TRANSLATOR)
-		$(cmake-utils_use_build nowlistening     KOPETE_PLUGIN_NOWLISTENING)
-		$(cmake-utils_use_build webpresence      KOPETE_PLUGIN_WEBPRESENCE)
-		$(cmake-utils_use_build texteffect       KOPETE_PLUGIN_TEXTEFFECT)
-		$(cmake-utils_use_build highlight        KOPETE_PLUGIN_HIGHLIGHT)
-		$(cmake-utils_use_build alias            KOPETE_PLUGIN_ALIAS)
-		$(cmake-utils_use_build motionautoaway   KOPETE_PLUGIN_MOTIONAUTOAWAY)
-		$(cmake-utils_use_build netmeeting       KOPETE_PLUGIN_NETMEETING)
-		$(cmake-utils_use_build addbookmarks     KOPETE_PLUGIN_ADDBOOKMARKS)
-		$(cmake-utils_use_build statistics       KOPETE_PLUGIN_STATISTICS)
-		$(cmake-utils_use_build smpppdcs         KOPETE_PLUGIN_SMPPPDCS)
+		-DWITH_KOPETE_PLUGIN_LATEX="$(usex latex)"
+		-DWITH_KOPETE_PLUGIN_AUTOREPLACE="$(usex autoreplace)"
+		-DWITH_KOPETE_PLUGIN_HISTORY="$(usex history)"
+		-DWITH_KOPETE_PLUGIN_CONTACTNOTES="$(usex contactnotes)"
+		-DWITH_KOPETE_PLUGIN_CRYPTOGRAPHY="$(usex crypt)"
+		-DWITH_KOPETE_PLUGIN_CONNECTIONSTATUS="$(usex connectionstatus)"
+		-DWITH_KOPETE_PLUGIN_TRANSLATOR="$(usex translator)"
+		-DWITH_KOPETE_PLUGIN_NOWLISTENING="$(usex nowlistening)"
+		-DWITH_KOPETE_PLUGIN_WEBPRESENCE="$(usex webpresence)"
+		-DWITH_KOPETE_PLUGIN_TEXTEFFECT="$(usex texteffect)"
+		-DWITH_KOPETE_PLUGIN_HIGHLIGHT="$(usex highlight)"
+		-DWITH_KOPETE_PLUGIN_ALIAS="$(usex alias)"
+		-DWITH_KOPETE_PLUGIN_MOTIONAUTOAWAY="$(usex motionautoaway)"
+		-DWITH_KOPETE_PLUGIN_NETMEETING="$(usex netmeeting)"
+		-DWITH_KOPETE_PLUGIN_ADDBOOKMARKS="$(usex addbookmarks)"
+		-DWITH_KOPETE_PLUGIN_STATISTICS="$(usex statistics)"
+		-DWITH_KOPETE_PLUGIN_SMPPPDCS="$(usex smpppdcs)"
 
-		$(cmake-utils_use_build gadu      KOPETE_PROTOCOL_GADU)
-		$(cmake-utils_use_build groupwise KOPETE_PROTOCOL_GROUPWISE)
-		$(cmake-utils_use_build irc       KOPETE_PROTOCOL_IRC)
-		$(cmake-utils_use_build xmpp    KOPETE_PROTOCOL_JABBER)
-		$(cmake-utils_use_build oscar     KOPETE_PROTOCOL_OSCAR)
-		$(cmake-utils_use_build msn       KOPETE_PROTOCOL_MSN)
-		$(cmake-utils_use_build sms       KOPETE_PROTOCOL_SMS)
-		$(cmake-utils_use_build sametime  KOPETE_PROTOCOL_MEANWHILE)
-		$(cmake-utils_use_build winpopup  KOPETE_PROTOCOL_WINPOPUP)
-		$(cmake-utils_use_build yahoo     KOPETE_PROTOCOL_YAHOO)
+		-DWITH_KOPETE_PROTOCOL_GADU="$(usex gadu)"
+		-DWITH_KOPETE_PROTOCOL_GROUPWISE="$(usex groupwise)"
+		-DWITH_KOPETE_PROTOCOL_IRC="$(usex irc)"
+		-DWITH_KOPETE_PROTOCOL_JABBER="$(usex xmpp)"
+		-DWITH_KOPETE_PROTOCOL_OSCAR="$(usex oscar)"
+		-DWITH_KOPETE_PROTOCOL_MSN="$(usex msn)"
+		-DWITH_KOPETE_PROTOCOL_SMS="$(usex sms)"
+		-DWITH_KOPETE_PROTOCOL_MEANWHILE="$(usex sametime)"
+		-DWITH_KOPETE_PROTOCOL_WINPOPUP="$(usex winpopup)"
+		-DWITH_KOPETE_PROTOCOL_YAHOO="$(usex yahoo)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }
