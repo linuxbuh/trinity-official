@@ -64,7 +64,6 @@ src_configure() {
 		-DWITH_LIBART=ON
 		-DWITH_PCRE=ON
 		-DWITH_HSPELL=OFF
-		-DWITH_ARTS=OFF
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
 		-DWITH_CUPS="$(usex cups)"

@@ -272,7 +272,7 @@ trinity-base-2_src_configure() {
 		"${mycmakeargs[@]}"
 	)
 
-#       $([[ "${TRINITY_NEED_ARTS}" == "optional" ]] && (cmake-utils_use_with arts ARTS))
+       $([[ "${TRINITY_NEED_ARTS}" == "optional" ]] && (-DWITH_ARTS="$(usex arts)"))
 
 	cmake-utils_src_configure
 }
