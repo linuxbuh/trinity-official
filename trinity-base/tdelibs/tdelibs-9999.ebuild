@@ -1,10 +1,11 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="7"
-TRINITY_MODULE_NAME="$PN"
+EAPI="5"
+TRINITY_MODULE_NAME="tdelibs"
 
-inherit trinity-base-2 multilib
+inherit trinity-base multilib
 
 set-trinityver
 
@@ -60,7 +61,7 @@ RDEPEND+=" ${MY_DEPEND}
 
 src_configure() {
 	mycmakeargs=(
-		-TDE_DMALLOC_FULL=ON
+		-DTDE_MALLOC_FULL=ON
 		-DWITH_LIBIDN=ON
 		-DWITH_SSL=ON
 		-DWITH_LIBART=ON
@@ -91,9 +92,6 @@ src_configure() {
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
 	)
-
-#		-DWITH_XCURSOR=ON
-#		-DKDE4_DEFAULT_HOME=.kde4
 
 	trinity-base_src_configure
 }
