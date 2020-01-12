@@ -259,10 +259,12 @@ trinity-base-2_src_configure() {
 			eg_cmakeargs=( -DBUILD_TRANSLATIONS=ON "${eg_cmakeargs[@]}" )
 		fi
 		if [[ "${TRINITY_HANDBOOK}" == optional ]]; then
-			eg_cmakeargs=( 
-					$(cmake-utils_use_with handbook DOC)
-					"${eg_cmakeargs[@]}" )
+			eg_cmakeargs=( -DWITH_DOC="$(usex handbook)" "${eg_cmakeargs[@]}" )
 		fi
+	fi
+
+	if [[ "${TRINITY_NEED_ARTS}" == "optional" ]]; then 
+		eg_cmakeargs=( -DWITH_ARTS="$(usex arts)" "${eg_cmakeargs[@]}" )
 	fi
 
 	mycmakeargs=(
@@ -271,8 +273,6 @@ trinity-base-2_src_configure() {
 		"${eg_cmakeargs[@]}"
 		"${mycmakeargs[@]}"
 	)
-
-       $([[ "${TRINITY_NEED_ARTS}" == "optional" ]] && (-DWITH_ARTS="$(usex arts)"))
 
 	cmake-utils_src_configure
 }
