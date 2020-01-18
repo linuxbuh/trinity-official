@@ -1,13 +1,13 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdegames"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="KMines is a classic mine sweeper game"
-KEYWORDS=""
-IUSE+=""
-DEPEND=">=trinity-base/libtdegames-${PV}:${SLOT}"
+
+DEPEND="=trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

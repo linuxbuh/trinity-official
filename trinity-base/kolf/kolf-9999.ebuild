@@ -1,16 +1,16 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdegames"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Minigolf Game by Trinity"
-KEYWORDS=""
-IUSE+=""
-DEPEND=">=trinity-base/libtdegames-${PV}:${SLOT}
-	>=trinity-base/arts-${PV}:${SLOT}"
+
+DEPEND="=trinity-base/libtdegames-${PV}
+	=trinity-base/arts-${PV}"
 RDEPEND="${DEPEND}"
 
 src_configure() {
@@ -18,5 +18,5 @@ src_configure() {
 		-DWITH_ARTS=ON
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

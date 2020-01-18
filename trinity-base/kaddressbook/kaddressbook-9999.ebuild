@@ -1,19 +1,19 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdepim"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Address Book"
-KEYWORDS=""
 IUSE+=" gnokii"
 
-COMMON_DEPEND=">=trinity-base/libtdepim-${PV}:${SLOT}
-	>=trinity-base/libkcal-${PV}:${SLOT}
-	>=trinity-base/certmanager-${PV}:${SLOT}
-	>=trinity-base/libtdenetwork-${PV}:${SLOT}
+COMMON_DEPEND="=trinity-base/libtdepim-${PV}
+	=trinity-base/libkcal-${PV}
+	=trinity-base/certmanager-${PV}
+	=trinity-base/libtdenetwork-${PV}
 	gnokii? ( app-mobilephone/gnokii )"
 
 DEPEND+=" ${COMMON_DEPEND}"
@@ -27,7 +27,7 @@ TSM_EXTRACT_ALSO="certmanager/lib/
 
 src_configure () {
 	mycmakeargs=(
-		$(cmake-utils_use_with gnokii GNOKII )
+		-DWITH_GNOKII="$(usex gnokii)"
 	)
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

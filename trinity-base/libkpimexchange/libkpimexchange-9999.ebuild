@@ -1,17 +1,17 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdepim"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity PIM exchange library"
-KEYWORDS=""
-IUSE+=""
-COMMON_DEPEND=">=trinity-base/libkcal-${PV}:${SLOT}
-	>=trinity-base/ktnef-${PV}:${SLOT}
-	>=trinity-base/libkmime-${PV}:${SLOT}"
+
+COMMON_DEPEND="=trinity-base/libkcal-${PV}
+	=trinity-base/ktnef-${PV}
+	=trinity-base/libkmime-${PV}"
 
 DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}"
