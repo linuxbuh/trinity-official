@@ -9,5 +9,5 @@ inherit trinity-meta-2
 TRINITY_SUBMODULE="l10n pics applnk"
 
 DESCRIPTION="Icons, localization data and .desktop files from kdebase."
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""

@@ -9,7 +9,7 @@ inherit trinity-meta-2
 TSM_EXTRACT="tdeioslave"
 
 DESCRIPTION="Generic Trinity TDEIOslaves"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="samba ldap sasl openexr +tdehw"
 
 DEPEND="x11-libs/libXcursor

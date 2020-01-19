@@ -7,7 +7,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="KCMInit - runs startup's initialization for Control Modules."
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="x11-libs/libX11

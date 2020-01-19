@@ -7,5 +7,5 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity init binary replacing some functions of the starttde script"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""

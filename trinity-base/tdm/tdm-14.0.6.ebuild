@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="pam xdmcp xcomposite sak +xrandr"
 
 DEPEND="pam? ( trinity-base/tdebase-pam )

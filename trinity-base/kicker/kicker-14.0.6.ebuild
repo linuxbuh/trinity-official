@@ -7,7 +7,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="The Trinity application starter panel, capable of applets and extensions"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="xcomposite"
 
 DEPEND="=trinity-base/libkonq-${PV}

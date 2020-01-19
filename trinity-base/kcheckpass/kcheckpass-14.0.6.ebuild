@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="A simple password checker, used by any software in need of user authentication."
 IUSE="pam"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND="pam? ( sys-libs/pam )"
 DEPEND="${RDEPEND}"

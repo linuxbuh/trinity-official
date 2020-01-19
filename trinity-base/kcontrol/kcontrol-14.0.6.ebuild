@@ -7,7 +7,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Control Center"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="samba logitech-mouse ieee1394 +xrandr +tdehw"
 
 DEPEND="x11-libs/libX11
