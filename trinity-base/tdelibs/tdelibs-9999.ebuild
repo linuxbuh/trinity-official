@@ -29,8 +29,8 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	app-text/ghostscript-gpl
 	dev-libs/openssl:=
 	media-libs/fontconfig
-	media-libs/freetype:2
-	media-libs/libart_lgpl
+	media-libs/freetype
+	=media-libs/libart_lgpl-${PV}
 	sys-apps/dbus
 	=dev-libs/dbus-1-tqt-${PV}
 	x11-libs/libXcursor

@@ -14,11 +14,11 @@ IUSE="opengl xscreensaver arts"
 DEPEND="
 	=trinity-base/tdescreensaver-${PV}
 	=trinity-base/krootbacking-${PV}
-	media-libs/libart_lgpl
+	=media-libs/libart_lgpl-${PV}
 	opengl? ( virtual/opengl )
 	xscreensaver? ( x11-misc/xscreensaver )
 	arts? ( trinity-base/arts )"
-RDEPEND="$DEPEND"
+RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="FindXscreensaver.cmake"
 
