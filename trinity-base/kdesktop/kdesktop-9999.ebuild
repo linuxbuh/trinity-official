@@ -34,6 +34,7 @@ src_configure() {
 		-DWITH_XRENDER=ON
 		-DWITH_PAM="$(usex pam)"
 		-DWITH_XSCREENSAVER="$(usex xscreensaver)"
+		-DTDESCREENSAVER_PAM_SERVICE=tde
 	)
 
 	trinity-meta-2_src_configure

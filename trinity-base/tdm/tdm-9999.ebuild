@@ -40,6 +40,7 @@ src_configure() {
 		-DWITH_XDMCP="$(usex xdmcp)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_PAM="$(usex pam)"
+		-DTDM_PAM_SERVICE=tde
 	)
 
 	trinity-meta-2_src_configure
