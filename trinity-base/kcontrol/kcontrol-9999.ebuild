@@ -42,6 +42,7 @@ src_configure() {
 		-DWITH_LIBRAW1394="$(usex ieee1394)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_TDEHWLIB="$(usex hwlib)"
+		-DXSCREENSAVER_DIR="/usr/$(get_libdir)/misc/xscreensaver"
 	)
 
 	trinity-meta-2_src_configure
