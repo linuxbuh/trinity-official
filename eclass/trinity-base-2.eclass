@@ -229,8 +229,12 @@ trinity-base-2_src_prepare() {
 			for dir in $(find ${TEG_DOC_DIR} -mindepth 1 -maxdepth 1 -type d ); do
 				lang="$(basename "$dir")"
 				if [[	"$lang" == "${PN}" || \
+						"$lang" == "en" || \
+						"$lang" == "man" || \
+						"$lang" == "doxy" || \
+						"$lang" == "online" || \
 						"$lang" == "${TRINITY_MODULE_NAME}"  ]] ; then
-					echo -n; # do nothing it's main documentation
+					echo -n; # do nothing it's main documentation or not related
 				elif ! has "$lang" ${TRINITY_LANGS}; then
 					eerror "Documentation translated to language $lang seems to present in the package but is not supported by the ebuild"
 				elif ! has $lang ${LINGUAS}; then
@@ -261,10 +265,12 @@ trinity-base-2_src_configure() {
 			eg_cmakeargs=( -DBUILD_TRANSLATIONS=ON "${eg_cmakeargs[@]}" )
 		fi
 		if [[ "${TRINITY_HANDBOOK}" == optional ]]; then
-			eg_cmakeargs=( 
-					-DWITH_DOC="$(usex handbook)"
-					"${eg_cmakeargs[@]}" )
+			eg_cmakeargs=( -DBUILD_DOC="$(usex handbook)" "${eg_cmakeargs[@]}" )
 		fi
+	fi
+
+	if [[ "${TRINITY_NEED_ARTS}" == "optional" ]]; then
+		eg_cmakeargs=( -DWITH_ARTS="$(usex arts)" "${eg_cmakeargs[@]}" )
 	fi
 
 	mycmakeargs=(
@@ -273,8 +279,6 @@ trinity-base-2_src_configure() {
 		"${eg_cmakeargs[@]}"
 		"${mycmakeargs[@]}"
 	)
-
-#       $([[ "${TRINITY_NEED_ARTS}" == "optional" ]] && (-DWITH_ARTS="$(usex arts)"))
 
 	cmake-utils_src_configure
 }

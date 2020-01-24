@@ -71,7 +71,6 @@ src_configure() {
 		-DWITH_PKCS=OFF
 		-DWITH_TDEHWLIB=ON
 		-DWITH_TDEHWLIB_DAEMONS=ON
-		-DWITH_ARTS=OFF
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
 		-DWITH_CRYPTSETUP="$(usex cryptsetup)"
@@ -140,7 +139,7 @@ pkg_postinst () {
 		einfo "It can be overriden on a user-level by adding:"
 		einfo "  [super-user-command]"
 		einfo "    super-user-command=su"
-		einfo "to the kdeglobal config file which is should be usually"
+		einfo "to the kdeglobals config file which is should be usually"
 		einfo "located in the ~/.trinity/share/config/ directory."
 	fi
 }
