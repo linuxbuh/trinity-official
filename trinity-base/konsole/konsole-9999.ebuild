@@ -9,16 +9,20 @@ inherit trinity-meta-2
 
 DESCRIPTION="X terminal for use with Trinity."
 
+IUSE="sudo"
+
 DEPEND="x11-libs/libX11
 	x11-libs/libXrender"
 
 RDEPEND="${DEPEND}
+	sudo? ( app-admin/sudo )
 	x11-apps/bdftopcf
 	=trinity-base/kcontrol-${PV}"
 
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XRENDER=ON
+		-DWITH_SUDO_KONSOLE_SUPER_USER_COMMAND="$(usex sudo)"
 	)
 
 	trinity-meta-2_src_configure
