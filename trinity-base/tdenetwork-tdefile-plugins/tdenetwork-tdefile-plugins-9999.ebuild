@@ -1,11 +1,10 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdenetwork"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
-DESCRIPTION="kfile plugins from the kdenetwork provides a torrent file support."
-KEYWORDS=
-IUSE=""
+DESCRIPTION="tdefile plugins from the tdenetwork provides a torrent file support."

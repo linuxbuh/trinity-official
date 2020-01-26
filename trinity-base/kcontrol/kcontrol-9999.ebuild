@@ -1,14 +1,15 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Control Center"
-KEYWORDS=
-IUSE="samba logitech-mouse ieee1394 +xrandr +tdehw"
+
+IUSE="samba logitech-mouse ieee1394 hwlib +xrandr "
 
 DEPEND="x11-libs/libX11
 	x11-libs/libXrender
@@ -17,17 +18,17 @@ DEPEND="x11-libs/libX11
 	logitech-mouse? ( virtual/libusb:0 )
 	ieee1394? ( sys-libs/libraw1394 )
 	xrandr? ( x11-libs/libXrandr )
-	>=trinity-base/tdelibs-${PV}:${SLOT}[xrandr?]
-	>=trinity-base/libkonq-${PV}:${SLOT}
-	>=trinity-base/kicker-${PV}:${SLOT}"
+	=trinity-base/tdelibs-${PV}[xrandr?]
+	=trinity-base/libkonq-${PV}
+	=trinity-base/kicker-${PV}"
 
 RDEPEND="${DEPEND}
 	sys-apps/usbutils
-	>=trinity-base/kcminit-${PV}:${SLOT}
-	>=trinity-base/tdebase-data-${PV}:${SLOT}
-	>=trinity-base/tdesu-${PV}:${SLOT}
-	>=trinity-base/khelpcenter-${PV}:${SLOT}
-	>=trinity-base/khotkeys-${PV}:${SLOT}"
+	=trinity-base/kcminit-${PV}
+	=trinity-base/tdebase-data-${PV}
+	=trinity-base/tdesu-${PV}
+	=trinity-base/khelpcenter-${PV}
+	=trinity-base/khotkeys-${PV}"
 
 TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/"
 
@@ -36,12 +37,13 @@ src_configure() {
 		-DWITH_XCURSOR=ON
 		-DWITH_XRENDER=ON
 		-DWITH_USBIDS=/usr/share/misc/usb.ids
-		$(cmake-utils_use_with samba SAMBA)
-		$(cmake-utils_use_with logitech-mouse LIBUSB)
-		$(cmake-utils_use_with ieee1394 LIBRAW1394)
-		$(cmake-utils_use_with xrandr XRANDR)
-		$(cmake-utils_use_with tdehw TDEHWLIB)
+		-DWITH_SAMBA="$(usex samba)"
+		-DWITH_LIBUSB="$(usex logitech-mouse)"
+		-DWITH_LIBRAW1394="$(usex ieee1394)"
+		-DWITH_XRANDR="$(usex xrandr)"
+		-DWITH_TDEHWLIB="$(usex hwlib)"
+		-DXSCREENSAVER_DIR="/usr/$(get_libdir)/misc/xscreensaver"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

@@ -1,20 +1,21 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="A network enabled task manager/system monitor"
-KEYWORDS=
-IUSE=" dell-laptop"
-# TODO: make support for sensors when it will be supported by cmake scripts
+
+IUSE=" dell-laptop lm_sensors"
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with dell-laptop I8K)
+		-DWITH_I8K="$(usex dell-laptop)"
+		-DWITH_SENSORS="$(usex lm_sensors)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

@@ -1,17 +1,16 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdegraphics"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Kooka is a Trinity application which provides access to scanner hardware"
-KEYWORDS=
-IUSE=""
 
 DEPEND="
-	>=trinity-base/libkscan-${PV}:${SLOT}
+	=trinity-base/libkscan-${PV}
 	media-libs/tiff:="
 RDEPEND="${DEPEND}"
 

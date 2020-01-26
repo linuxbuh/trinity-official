@@ -1,28 +1,30 @@
 # Copyright 1999-2013 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 #
 # Original Author: fat-zer
+# Ported to git-r3 eclass and EAPI7 by E. Liddell
 # Purpose: make easy to install trinity ebuilds. 
 #
 
 inherit trinity-base-2 trinity-functions-2 cmake-utils
 
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
 HOMEPAGE="http://www.trinitydesktop.org/"
 
-# set slot, TDEDIR, TRINITY_VER and PREFIX
+# Set slot, TDEDIR, TRINITY_VER and PREFIX
 set-trinityver
 [[ -z "$SLOT" ]] && SLOT="$TRINITY_VER"
 
-# common dependencies
+# Common dependencies
 DEPEND="trinity-base/tdelibs:${SLOT}"
 
 # @FUNCTION: trinity-meta-2_set_trinity_submodule
 # @DESCRIPTION:
-# sets the TRINITY_SUBMODULE variable to nth value obtained from ${PN}
-# if it isn't set yet
+# Sets the TRINITY_SUBMODULE variable to
+# the value obtained from ${PN} if it isn't set yet.
 trinity-meta-2_set_trinity_submodule() {
 	debug-print-function $FUNCNAME "$@"
 
@@ -33,8 +35,8 @@ trinity-meta-2_set_trinity_submodule() {
 
 # @FUNCTION: trinity-meta-2_src_pkg_setup
 # @DESCRIPTION:
-# Default pkg_setup function. It sets the correct ${S}
-# nessecary files.
+# Default pkg_setup function.
+# It sets the correct ${S} necessary files.
 trinity-meta-2_pkg_setup() {
 	debug-print-function ${FUNCNAME} "$@"
 	adjust-trinity-paths
@@ -44,15 +46,15 @@ trinity-meta-2_pkg_setup() {
 
 # @FUNCTION: trinity-meta-2_src_unpack
 # @DESCRIPTION:
-# Default source extract function. It tries to unpack only 
-# necessary files.
+# Default source extract function.
+# It tries to unpack only necessary files.
 trinity-meta-2_src_unpack() {
 	debug-print-function ${FUNCNAME} "$@"
 
 	if [[ ${BUILD_TYPE} = live ]]; then
 		case "${TRINITY_SCM}" in
 			git)
-				git-2_src_unpack
+				git-r3_src_unpack
 				;;
 			*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 		esac
@@ -62,8 +64,8 @@ trinity-meta-2_src_unpack() {
 
 # @FUNCTION: trinity-meta-2_src_extract
 # @DESCRIPTION:
-# A function to extract the source for a split KDE ebuild.
-# Also see KMMODULE, KMEXTRACT
+# A function to extract the source for a split TDE ebuild.
+# Also see KMMODULE, KMEXTRACT.
 trinity-meta-2_src_extract() {
 	debug-print-function ${FUNCNAME} "$@"
 
@@ -72,7 +74,7 @@ trinity-meta-2_src_extract() {
 	if [[ "${BUILD_TYPE}" = live ]]; then
 		einfo "Exporting parts of working copy to ${S}"
 		case "$TRINITY_SCM" in
-			git) # nothing we can do to prevent git from unpacking code
+			git) # Nothing we can do to prevent git from unpacking code
 				;;
 			*)  die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}"
 		esac
@@ -140,20 +142,20 @@ trinity-meta-2_rsync_copy() {
 
 # @FUNCTION: trinity-meta_create_extractlists
 # @DESCRIPTION:
-# Create lists of files and subdirectories to extract.
-# Also see descriptions of KMMODULE and KMEXTRACT 
+# Creates lists of files and subdirectories to extract.
+# Also see descriptions of KMMODULE and KMEXTRACT.
 trinity-meta-2_create_extractlists() {
 	debug-print-function ${FUNCNAME} "$@"
 	local submod
 	
-	# if $TSM_EXTRACT is not set assign it to dirs named in TRINITY_SUBMODULE
+	# If $TSM_EXTRACT is not set assign it to dirs named in TRINITY_SUBMODULE
 	if [ -z "${TSM_EXTRACT}" ]; then
 		for submod in ${TRINITY_SUBMODULE}; do
 			TSM_EXTRACT="${TSM_EXTRACT} ${submod}/"
 		done
 	fi
 
-	# add package-specific files and directories
+	# Add package-specific files and directories
 	case "${TRINITY_MODULE_NAME}" in
 		tdebase) TSM_EXTRACT_LIST+=" kcontrol/ tdmlib/" ;;
 		*) ;; # nothing special for other modules
@@ -197,7 +199,7 @@ trinity-meta-2_src_prepare() {
 # @FUNCTION: trinity-meta-2_src_configure
 # @DESCRIPTION:
 # Default source configure function. It sets apropriate cmake args.
-# Also see description of KMMODULE
+# Also see description of KMMODULE.
 trinity-meta-2_src_configure() {
 	debug-print-function ${FUNCNAME} "$@"
 
@@ -219,7 +221,7 @@ trinity-meta-2_src_configure() {
 
 # @FUNCTION: trinity-meta-2_src_compile
 # @DESCRIPTION:
-# Just call trinity-base_src_compile.
+# Just calls trinity-base_src_compile.
 trinity-meta-2_src_compile() {
 	debug-print-function ${FUNCNAME} "$@"
 	
@@ -228,7 +230,7 @@ trinity-meta-2_src_compile() {
 
 # @FUNCTION: trinity-meta-2_src_install
 # @DESCRIPTION:
-# Call default cmake install function. and install documentation.
+# Calls default cmake install function and installs documentation.
 trinity-meta-2_src_install() {
 	debug-print-function ${FUNCNAME} "$@"
 	

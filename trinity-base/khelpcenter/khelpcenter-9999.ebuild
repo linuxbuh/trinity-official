@@ -1,30 +1,28 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundatio
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 TRINITY_SUBMODULE="khelpcenter doc"
 
 DESCRIPTION="The Trinity help center."
-KEYWORDS=
 
 RDEPEND="
-	>=trinity-base/tdebase-tdeioslaves-${PV}:${SLOT}
-	>=www-misc/htdig-3.2.0_beta6-r1"
-IUSE=""
+	=trinity-base/tdebase-tdeioslaves-${PV}
+	www-misc/htdig"
 
 pkg_setup() {
-	# we should reduce MAKEOPTS -j parametr to no more than 4
+	# Issue some warning if MAKEOPTS -j parameter is higher than 4
 	local makeopts_j
 	makeopts_j="$(echo "$MAKEOPTS" | sed -n 's/\(^\|.*\s\)\(-j\s*[0-9]\+\)\(\s.*\|$\)/\2/p')"
 	if [ -n "$makeopts_j" -a "$makeopts_j" > 4 ]; then
-		export MAKEOPTS="${MAKEOPTS//"${makeopts_j}"/-j4}"
 
-		ewarn "This ebuild needs huge amoumt of memmory to compile in highly parallel"
-		ewarn "mode so it can chew it all. MAKEOPTS are reduced to \"$MAKEOPTS\"."
+		ewarn "This ebuild needs huge amount of memmory to compile in highly parallel"
+		ewarn "mode so it can chew it all. Please change your MAKEOPTS if building fails."
 	fi
 
-	trinity-meta_pkg_setup
+	trinity-meta-2_pkg_setup
 }

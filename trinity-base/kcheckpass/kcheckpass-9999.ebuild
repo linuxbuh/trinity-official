@@ -1,13 +1,13 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="A simple password checker, used by any software in need of user authentication."
-KEYWORDS=
 IUSE="pam"
 
 RDEPEND="
@@ -16,8 +16,9 @@ DEPEND="${RDEPEND}"
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with pam PAM)
+		-DWITH_PAM="$(usex pam)"
+		-DKCHECKPASS_PAM_SERVICE=tde
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

@@ -1,13 +1,14 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdemultimedia"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
-DESCRIPTION="Trinity mixer gui"
-KEYWORDS=
+DESCRIPTION="Trinity mixer GUI"
+
 IUSE="alsa"
 
 DEPEND="alsa? ( media-libs/alsa-lib )"
@@ -15,8 +16,8 @@ RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with alsa ALSA)
+		-DWITH_ALSA="$(usex alsa)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

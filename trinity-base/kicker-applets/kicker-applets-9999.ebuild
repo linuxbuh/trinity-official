@@ -1,16 +1,15 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdeaddons"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="kicker applets"
-KEYWORDS=""
-IUSE+=""
-DEPEND=">=trinity-base/kicker-${PV}:${SLOT}"
 
+DEPEND="=trinity-base/kicker-${PV}"
 RDEPEND="${DEPEND}"
 
 # no xmms support

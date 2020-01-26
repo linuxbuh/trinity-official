@@ -1,26 +1,27 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdeaddons"
 
-inherit trinity-meta db-use
+inherit trinity-meta-2 db-use
 
 DESCRIPTION="Various plugins for Noatun."
-KEYWORDS=""
+
 IUSE="arts sdl berkdb"
 
 COMMON_DEPEND="
-	>=trinity-base/noatun-${PV}:${SLOT}
-	arts? ( >=trinity-base/arts-${PV}:${SLOT} )
+	=trinity-base/noatun-${PV}
+	arts? ( =trinity-base/arts-${PV} )
 	berkdb? ( =sys-libs/db-4*:= )
 "
 DEPEND="${COMMON_DEPEND}
-	sdl? ( >=media-libs/libsdl-1.2 )
+	sdl? ( media-libs/libsdl )
 "
 
 RDEPEND="${COMMON_DEPEND}
-	sdl? ( >=media-libs/libsdl-1.2[X] )
+	sdl? ( media-libs/libsdl[X] )
 "
 
 src_compile() {
@@ -41,5 +42,5 @@ src_compile() {
 		)
 	fi
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

@@ -1,22 +1,21 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tde-i18n"
 
-inherit trinity-base cmake-utils l10n
+inherit trinity-base-2 cmake-utils l10n
 
 set-trinityver
 
 DESCRIPTION="Trinity internationalization package"
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"
-KEYWORDS=""
-IUSE=""
 
-DEPEND=">=trinity-base/tdelibs-${PV}:${SLOT}"
+DEPEND="=trinity-base/tdelibs-${PV}"
 RDEPEND="${DEPEND}"
 
 PLOCALES="af ar az be bg bn br bs ca cs csb cy da de el en_GB eo es et
@@ -37,7 +36,7 @@ run_phase() {
 	pushd "$S/$dir" || die "No such dir: $dir"
 	CMAKE_USE_DIR="${S}/${dir}"
 	BUILD_DIR="${WORKDIR}/${dir}-build"
-	trinity-base_${phase}
+	trinity-base-2_${phase}
 	popd
 }
 

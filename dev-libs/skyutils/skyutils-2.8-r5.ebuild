@@ -1,18 +1,18 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI="7"
 inherit flag-o-matic autotools
 
 DESCRIPTION="Library of assorted C utility functions"
-# Was: http://zekiller.skytech.org/coders_en.html
 HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
 SRC_URI="mirror://gentoo/${P}.tar.gz"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
-KEYWORDS="amd64 ~ppc ~ppc64 ~sparc x86"
+KEYWORDS="amd64 ppc ppc64 sparc x86"
 IUSE="ssl"
 
 DEPEND="ssl? ( dev-libs/openssl:0=[sslv3] )"

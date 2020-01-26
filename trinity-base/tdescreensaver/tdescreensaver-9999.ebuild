@@ -1,30 +1,26 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity screensaver framework"
-KEYWORDS=
+
 IUSE="opengl +krootbacking"
-# CHECKME: if this use needed
+
 DEPEND="x11-libs/libXt
 	opengl? ( virtual/opengl )
-	krootbacking? ( >=trinity-base/krootbacking-${PV}:${TRINITY_VER} )
-	!!trinity-base/kscreensaver:${TRINITY_VER}"
+	krootbacking? ( =trinity-base/krootbacking-${PV} )"
 RDEPEND="${DEPEND}"
 
 src_configure () {
-	if use opengl; then
-		ewarn "OpenGL is not supported by trinity build system yet."
-		ewarn "This use flag is here just for future/past capability"
-	fi
 
 	mycmakeargs=(
-		$(cmake-utils_use_with opengl OPENGL )
+		-DWITH_OPENGL="$(usex opengl)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

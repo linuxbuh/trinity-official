@@ -1,22 +1,24 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdegames"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity Bounce Ball Game"
-KEYWORDS=""
+
 IUSE+="+arts"
-DEPEND=">=trinity-base/libtdegames-${PV}:${SLOT}
-	arts? ( >=trinity-base/arts-${PV}:${SLOT} )"
+
+DEPEND="=trinity-base/libtdegames-${PV}
+	arts? ( >=trinity-base/arts-${PV} )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with arts ARTS)
+		-DWITH_ARTS="$(usex arts)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

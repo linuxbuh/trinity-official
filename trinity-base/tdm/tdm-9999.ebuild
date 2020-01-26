@@ -1,32 +1,33 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
-DESCRIPTION="Trinity login manager, similar to xdm and gdm"
-KEYWORDS=
+DESCRIPTION="Trinity login manager, similar to XDM and GDM"
+
 IUSE="pam xdmcp xcomposite sak +xrandr"
 
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
 	xrandr? ( x11-libs/libXrandr )
-	>=trinity-base/tdelibs-${PV}:${SLOT}[xrandr?]
+	=trinity-base/tdelibs-${PV}[xrandr?]
 	sys-apps/dbus
 	x11-libs/libXtst
-	>=trinity-base/kcontrol-${PV}:${SLOT}
-	dev-libs/dbus-tqt"
+	=trinity-base/kcontrol-${PV}
+	=dev-libs/dbus-tqt-${PV}"
 
 RDEPEND="${DEPEND}
-	>=trinity-base/tdepasswd-${PV}:${SLOT}
+	=trinity-base/tdepasswd-${PV}
 	x11-apps/xinit
 	x11-apps/xmessage"
 
 pkg_setup() {
-	trinity-meta_pkg_setup;
+	trinity-meta-2_pkg_setup;
 	use sak && TRINITY_SUBMODULE+=" tsak"
 }
 
@@ -35,30 +36,31 @@ src_configure() {
 		-DWITH_XTEST=ON
 		-DWITH_LIBART=ON
 		-DWITH_SHADOW=ON
-		$(cmake-utils_use_with xcomposite XCOMPOSITE )
-		$(cmake-utils_use_with xdmcp XDMCP )
-		$(cmake-utils_use_with xrandr XRANDR )
-		$(cmake-utils_use_with pam PAM )
+		-DWITH_XCOMPOSITE="$(usex xcomposite)"
+		-DWITH_XDMCP="$(usex xdmcp)"
+		-DWITH_XRANDR="$(usex xrandr)"
+		-DWITH_PAM="$(usex pam)"
+		-DTDM_PAM_SERVICE=tde
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }
 
 src_install() {
 	cmake-utils_src_install
 
-	# Customize the kdmrc configuration
+	# Customize the tdmrc configuration
 	sed -i -e "s:#SessionsDirs=:SessionsDirs=/usr/share/xsessions\n#SessionsDirs=:" \
 		"${D}/${TDEDIR}/share/config/tdm/tdmrc" || die "sed tdmrc failed"
 
-	# install XSession upstream script seems to be debian-cpecific
+	# Install XSession upstream script seems to be debian-cpecific
 	cp "${FILESDIR}/${P}-xsession.script" "${D}/${TDEDIR}/share/config/tdm/Xsession"
 	sed -i -e "s!@TRINITY_INSTALL_PATH@!${TDEDIR}!" "${D}/${TDEDIR}/share/config/tdm/Xsession" \
 		|| die "sed tdmrc failed"
 }
 
 pkg_postinst() {
-	# set the default kdm face icon if it's not already set by the system admin
+	# Set the default TDM face icon if it's not already set by the system admin
 	# because this is user-overrideable in that way, it's not in src_install
 	if [ ! -e "${ROOT}${TDEDIR}/share/apps/tdm/faces/.default.face.icon" ];	then
 		mkdir -p "${ROOT}${TDEDIR}/share/apps/tdm/faces"

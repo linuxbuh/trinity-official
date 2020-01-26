@@ -1,13 +1,14 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdeutils"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="kded module supports some hardware input devices, such as special keys"
-KEYWORDS=""
+
 IUSE="asus-laptop dell-laptop powerbook-laptop thinkpad-laptop vaio-laptop lm_sensors"
 
 DEPEND="powerbook-laptop? ( app-laptop/pbbuttonsd )"
@@ -16,13 +17,13 @@ RDEPEND="${DEPEND}
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with asus-laptop ASUS)
-		$(cmake-utils_use_with dell-laptop I8K)
-		$(cmake-utils_use_with powerbook-laptop POWERBOOK2)
-		$(cmake-utils_use_with thinkpad-laptop THINKPAD)
-		$(cmake-utils_use_with vaio-laptop VAIO)
-		$(cmake-utils_use_with lm_sensors SENSORS)
+		-DWITH_ASUS="$(usex asus-laptop)"
+		-DWITH_I8K="$(usex dell-laptop)"
+		-DWITH_POWERBOOK2="$(usex powerbook-laptop)"
+		-DWITH_THINKPAD="$(usex thinkpad-laptop)"
+		-DWITH_VAIO="$(usex vaio-laptop)"
+		-DWITH_SENSORS="$(usex lm_sensors)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

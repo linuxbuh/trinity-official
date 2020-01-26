@@ -1,41 +1,37 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 TSM_EXTRACT="tdeioslave"
 
 DESCRIPTION="Generic Trinity TDEIOslaves"
-KEYWORDS=
 IUSE="samba ldap sasl openexr +tdehw"
 
 DEPEND="x11-libs/libXcursor
-	openexr? ( >=media-libs/openexr-1.2.2-r2 )
+	net-libs/rpcsvc-proto
+	openexr? ( media-libs/openexr )
 	samba? ( net-fs/samba )
 	ldap? ( net-nds/openldap )
 	sasl? ( dev-libs/cyrus-sasl )"
 
-RDEPEND="${DEPEND}"
-# CHECKME: optional dependencies
-#DEPEND="
-#	>=dev-libs/cyrus-sasl-2
-#	x11-apps/xhost
 RDEPEND="${DEPEND}
 	virtual/ssh
-	trinity-base/tdeeject:${SLOT}"
+	=trinity-base/tdeeject-${PV}"
 
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XCURSOR=ON
-		$(cmake-utils_use_with samba SAMBA)
-		$(cmake-utils_use_with ldap LDAP)
-		$(cmake-utils_use_with sasl SASL)
-		$(cmake-utils_use_with openexr OPENEXR)
-		$(cmake-utils_use_with tdehw TDEHWLIB)
+		-DWITH_SAMBA="$(usex samba)"
+		-DWITH_LDAP="$(usex ldap)"
+		-DWITH_SASL="$(usex sasl)"
+		-DWITH_OPENEXR="$(usex openexr)"
+		-DWITH_TDEHWLIB="$(usex tdehw)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }

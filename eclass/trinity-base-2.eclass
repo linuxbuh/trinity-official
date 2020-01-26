@@ -61,8 +61,7 @@ echo "${TRINITY_MODULE_NAME:=${PN}}" >/dev/null
 # This is a whitespace-separated list of translations this ebuild supports.
 # These translations are automatically added to IUSE. Therefore ebuilds must set
 # this variable before inheriting any eclasses. To enable only selected
-# translations, ebuilds must call enable_selected_linguas(). kde4-{base,meta}.eclass does
-# this for you.
+# translations, ebuilds must call enable_selected_linguas().
 
 # @ECLASS-VARIABLE: TRINITY_HANDBOOK
 # @DESCRIPTION:
@@ -177,10 +176,10 @@ fi
 
 # @FUNCTION: trinity-base-2_src_unpack
 # @DESCRIPTION:
-# A default src unpack function to be call git-v3_src_unpack either 
+# A default src unpack function to call git-v3_src_unpack if necessary
 trinity-base-2_src_unpack() {
 	if [[ ${BUILD_TYPE} = live ]]; then
-		git-v3_src_unpack
+		git-r3_src_unpack
 	else
 		base_src_unpack
 	fi
@@ -259,11 +258,11 @@ trinity-base-2_src_configure() {
 			eg_cmakeargs=( -DBUILD_TRANSLATIONS=ON "${eg_cmakeargs[@]}" )
 		fi
 		if [[ "${TRINITY_HANDBOOK}" == optional ]]; then
-			eg_cmakeargs=( -DWITH_DOC="$(usex handbook)" "${eg_cmakeargs[@]}" )
+			eg_cmakeargs=( -DBUILD_DOC="$(usex handbook)" "${eg_cmakeargs[@]}" )
 		fi
 	fi
 
-	if [[ "${TRINITY_NEED_ARTS}" == "optional" ]]; then 
+	if [[ "${TRINITY_NEED_ARTS}" == "optional" ]]; then
 		eg_cmakeargs=( -DWITH_ARTS="$(usex arts)" "${eg_cmakeargs[@]}" )
 	fi
 

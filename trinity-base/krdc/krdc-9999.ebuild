@@ -1,13 +1,13 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
-EAPI="5"
+EAPI="7"
 TRINITY_MODULE_NAME="tdenetwork"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity remote desktop connection (RDP and VNC) client"
-KEYWORDS=
 IUSE="rdp slp"
 
 DEPEND="
@@ -15,12 +15,12 @@ DEPEND="
 	slp? ( net-libs/openslp )
 	x11-libs/libXext"
 RDEPEND="${DEPEND}
-	rdp? ( >=net-misc/rdesktop-1.4.1 )"
+	rdp? ( net-misc/rdesktop )"
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_with slp SLP)
+		-DWITH_SLP="$(usex slp)"
 	)
 
-	trinity-meta_src_configure
+	trinity-meta-2_src_configure
 }
