@@ -8,10 +8,10 @@ TRINITY_MODULE_NAME="tdenetwork"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity remote desktop connection (RDP and VNC) client"
-IUSE="rdp slp"
+IUSE="rdp slp libressl"
 
-DEPEND="
-	dev-libs/openssl:=
+DEPEND="!libressl? ( dev-libs/openssl:= )
+	libressl? ( dev-libs/libressl:= )
 	slp? ( net-libs/openslp )
 	x11-libs/libXext"
 RDEPEND="${DEPEND}
