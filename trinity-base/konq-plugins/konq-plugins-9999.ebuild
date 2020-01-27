@@ -7,18 +7,10 @@ TRINITY_MODULE_NAME="tdeaddons"
 
 inherit trinity-meta-2
 
+need-arts optional
+
 DESCRIPTION="Various plugins for Konqueror."
 
-IUSE+="arts"
-
-DEPEND="=trinity-base/konqueror-${PV}
-	arts? ( =trinity-base/arts-${PV} )"
-RDEPEND="${DEPEND}"
-
-src_configure() {
-	mycmakeargs=(
-		-DWITH_ARTS="$(usex arts)"
-	)
-
-	trinity-meta-2_src_configure
-}
+MY_DEPEND="=trinity-base/konqueror-${PV}"
+DEPEND+=" ${MY_DEPEND}"
+RDEPEND+=" ${MY_DEPEND}"

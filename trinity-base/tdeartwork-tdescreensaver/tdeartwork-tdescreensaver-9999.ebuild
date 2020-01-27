@@ -7,18 +7,19 @@ TRINITY_MODULE_NAME="tdeartwork"
 
 inherit trinity-meta-2
 
+need-arts optional
+
 DESCRIPTION="Extra screensavers for Trinity"
 
-IUSE="opengl xscreensaver arts"
+IUSE+=" opengl xscreensaver"
 
-DEPEND="
-	=trinity-base/tdescreensaver-${PV}
+MY_DEPEND="=trinity-base/tdescreensaver-${PV}
 	=trinity-base/krootbacking-${PV}
 	=media-libs/libart_lgpl-${PV}
 	opengl? ( virtual/opengl )
-	xscreensaver? ( x11-misc/xscreensaver )
-	arts? ( trinity-base/arts )"
-RDEPEND="${DEPEND}"
+	xscreensaver? ( x11-misc/xscreensaver )"
+DEPEND+=" ${MY_DEPEND}"
+RDEPEND+=" ${MY_DEPEND}"
 
 TSM_EXTRACT_ALSO="FindXscreensaver.cmake"
 
@@ -27,7 +28,6 @@ src_configure() {
 		-DWITH_LIBART=ON
 		-DWITH_OPENGL="$(usex opengl)"
 		-DWITH_XSCREENSAVER="$(usex xscreensaver)"
-		-DWITH_ARTS="$(usex arts)"
 	)
 
 	trinity-meta-2_src_configure

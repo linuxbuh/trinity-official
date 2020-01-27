@@ -7,16 +7,10 @@ TRINITY_MODULE_NAME="tdegames"
 
 inherit trinity-meta-2
 
+need-arts yes
+
 DESCRIPTION="Trinity Space Game"
 
-DEPEND="=trinity-base/libtdegames-${PV}
-	=trinity-base/arts-${PV}"
-RDEPEND="${DEPEND}"
-
-src_configure() {
-	mycmakeargs=(
-		-DWITH_ARTS=ON
-	)
-
-	trinity-meta-2_src_configure
-}
+MY_DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND+=" ${MY_DEPEND}"
+RDEPEND+=" ${MY_DEPEND}"
