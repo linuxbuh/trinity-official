@@ -30,7 +30,7 @@ TSM_EXTRACT_ALSO="kcheckpass/"
 
 src_configure() {
 	mycmakeargs=(
-		-DWITH_XCURSORS=ON
+		-DWITH_XCURSOR=ON
 		-DWITH_XRENDER=ON
 		-DWITH_PAM="$(usex pam)"
 		-DWITH_XSCREENSAVER="$(usex xscreensaver)"

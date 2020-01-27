@@ -24,7 +24,7 @@ src_configure() {
 	mycmakeargs=(
 		-DWITH_XFIXES="$(usex xcomposite)"
 		-DWITH_XRENDER="$(usex xcomposite)"
-		-DWITH_XCOMPOSITE="$(usex xcomposite)"		
+		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 	)
 
 	trinity-meta-2_src_configure

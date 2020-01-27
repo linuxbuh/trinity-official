@@ -9,4 +9,4 @@ inherit trinity-meta-2
 DESCRIPTION="Window styles for Trinity"
 
 DEPEND="=trinity-base/twin-${PV}"
-RDEPEND="$DEPEND"
+RDEPEND="${DEPEND}"

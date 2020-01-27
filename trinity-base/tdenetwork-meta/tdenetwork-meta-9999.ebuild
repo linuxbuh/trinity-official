@@ -12,7 +12,7 @@ DESCRIPTION="tdenetwork metapackage - merge this to pull in all tdenetwork-deriv
 HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="$TRINITY_VER"
+SLOT="{$TRINITY_VER}"
 
 RDEPEND="
 	=trinity-base/dcoprss-${PV}

@@ -10,4 +10,4 @@ inherit trinity-meta-2
 DESCRIPTION="Trinity digital camera manager"
 
 DEPEND="media-libs/libgphoto2"
-RDEPEND="$DEPEND"
+RDEPEND="${DEPEND}"

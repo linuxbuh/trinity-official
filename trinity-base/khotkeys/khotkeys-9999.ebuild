@@ -16,7 +16,7 @@ RDEPEND+=" x11-libs/libXtst"
 
 src_configure() {
 	mycmakeargs=(
-		-D_WITH_XTEST=ON
+		-DWITH_XTEST=ON
 	)
 
 	trinity-meta-2_src_configure

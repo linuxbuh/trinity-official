@@ -10,7 +10,7 @@ inherit trinity-meta-2
 TSM_EXTRACT="tdeioslave"
 
 DESCRIPTION="Generic Trinity TDEIOslaves"
-IUSE="samba ldap sasl openexr +tdehw"
+IUSE="samba ldap sasl openexr +hwlib"
 
 DEPEND="x11-libs/libXcursor
 	net-libs/rpcsvc-proto
@@ -30,7 +30,7 @@ src_configure() {
 		-DWITH_LDAP="$(usex ldap)"
 		-DWITH_SASL="$(usex sasl)"
 		-DWITH_OPENEXR="$(usex openexr)"
-		-DWITH_TDEHWLIB="$(usex tdehw)"
+		-DWITH_TDEHWLIB="$(usex hwlib)"
 	)
 
 	trinity-meta-2_src_configure

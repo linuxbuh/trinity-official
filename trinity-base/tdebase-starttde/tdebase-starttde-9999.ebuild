@@ -38,7 +38,7 @@ src_compile() {
 	# List all the multilib libdirs
 	local _libdir _libdirs
 	for _libdir in $(get_all_libdirs); do
-		_libdirs="${_libdirs}:${PREFIX}/${_libdir}"
+		_libdirs="${_libdirs}:${TDEDIR}/${_libdir}"
 	done
 	_libdirs=${_libdirs#:}
 }

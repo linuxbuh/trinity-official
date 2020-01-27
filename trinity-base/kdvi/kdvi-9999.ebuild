@@ -11,6 +11,6 @@ DESCRIPTION="Trinity DVI viewer"
 
 DEPEND="media-libs/freetype
 	=trinity-base/kviewshell-${PV}"
-RDEPEND="$DEPEND"
+RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="kviewshell"
