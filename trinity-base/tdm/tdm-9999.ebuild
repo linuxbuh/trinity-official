@@ -9,16 +9,15 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
 
-IUSE="pam xdmcp xcomposite sak +xrandr"
+IUSE="pam xdmcp xcomposite sak +xrandr +hwlib +svg"
 
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
-	xrandr? ( x11-libs/libXrandr )
+	svg? ( =media-libs/libart_lgpl-${PV} )
 	=trinity-base/tdelibs-${PV}[xrandr?]
 	x11-libs/libXtst
-	=trinity-base/kcontrol-${PV}
-	=dev-libs/dbus-tqt-${PV}"
+	=trinity-base/kcontrol-${PV}"
 
 RDEPEND="${DEPEND}
 	=trinity-base/tdepasswd-${PV}
@@ -33,11 +32,12 @@ pkg_setup() {
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XTEST=ON
-		-DWITH_LIBART=ON
 		-DWITH_SHADOW=ON
+		-DWITH_LIBART="$(usex svg)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XDMCP="$(usex xdmcp)"
 		-DWITH_XRANDR="$(usex xrandr)"
+		-DWITH_TDEHWLIB="$(usex hwlib)"
 		-DWITH_PAM="$(usex pam)"
 		-DTDM_PAM_SERVICE=tde
 	)
@@ -80,7 +80,7 @@ pkg_postinst() {
 			sak_ok=no
 		else
 			if ! linux_chkconfig_present INPUT_UINPUT; then
-				eerror "You build tdm with sak feature enabled. "
+				eerror "You build TDM with SAK feature enabled. "
 				eerror "It requires the INPUT_UINPUT support enabled."
 				eerror "Please enable it:"
 				eerror "    CONFIG_INPUT_UINPUT=y"

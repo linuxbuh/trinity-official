@@ -6,21 +6,19 @@ EAPI=7
 inherit eutils git-r3 toolchain-funcs
 
 SRCTYPE="free"
-DESCRIPTION="Trinity's Qt toolkit fork."
+DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
 HOMEPAGE="http://trinitydesktop.org/"
 
 EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="3.5"
-KEYWORDS=
-IUSE="cups debug doc examples firebird ipv6 mysql nas nis opengl postgres sqlite xinerama"
-# TODO: optional support for xrender and xrandr
+IUSE="cups debug doc examples firebird ipv6 mysql nas nis +opengl postgres
+	sqlite +xinerama tablet +xrandr glib mng fontconfig +hiddenvisibility"
 
 RDEPEND="
 	virtual/jpeg:=
 	media-libs/freetype
-	media-libs/libmng
 	media-libs/libpng:=
 	sys-libs/zlib
 	x11-libs/libXft
@@ -34,7 +32,12 @@ RDEPEND="
 	nas? ( media-libs/nas )
 	opengl? ( virtual/opengl virtual/glu )
 	postgres? ( dev-db/postgresql:= )
-	xinerama? ( x11-libs/libXinerama )"
+	sqlite? ( dev-db/sqlite:= )
+	mng? ( media-libs/libmng )
+	glib? ( dev-libs/glib )
+	fontconfig? ( media-libs/fontconfig )
+	xinerama? ( x11-libs/libXinerama )
+	xrandr? ( x11-libs/libXrandr )"
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
 
@@ -80,9 +83,10 @@ src_prepare() {
 
 	# Do not link with -rpath. See Gentoo bug #75181.
 	find "${S}"/mkspecs -name qmake.conf | xargs \
-		sed -i -e 's:QMAKE_RPATH.*:QMAKE_RPATH =:'
+		sed -i -e 's:QMAKE_RPATH.*:QMAKE_RPATH =:' || die
 
 	sed -i -e "s:QMAKE_CFLAGS_RELEASE.*=.*:QMAKE_CFLAGS_RELEASE=${CFLAGS}:" \
+		   -e 's:QMAKE_CFLAGS\t\t=.*:QMAKE_CFLAGS =:' \
 		   -e "s:QMAKE_CXXFLAGS_RELEASE.*=.*:QMAKE_CXXFLAGS_RELEASE=${CXXFLAGS}:" \
 		   -e "s:QMAKE_LFLAGS_RELEASE.*=.*:QMAKE_LFLAGS_RELEASE=${LDFLAGS}:" \
 		   -e "s:\<QMAKE_CC\>.*=.*:QMAKE_CC=$(tc-getCC):" \
@@ -91,6 +95,11 @@ src_prepare() {
 		   -e "s:\<QMAKE_LINK_SHLIB\>.*=.*:QMAKE_LINK_SHLIB=$(tc-getCXX):" \
 		   -e "s:\<QMAKE_STRIP\>.*=.*:QMAKE_STRIP=:" \
 		"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
+
+	if use hiddenvisibility; then
+		sed -i -e 's:QMAKE_CFLAGS =:QMAKE_CFLAGS = -fvisibility=hidden -fvisibility-inlines-hidden:' \
+			"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
+	fi
 
 	if [ $(get_libdir) != "lib" ] ; then
 		sed -i -e "s:/lib$:/$(get_libdir):" \
@@ -101,9 +110,9 @@ src_prepare() {
 		   -e "s:LFLAGS.*=:LFLAGS=${LDFLAGS} :" \
 		"${S}/qmake/Makefile.unix" || die
 
-	# remove docs from install if we don't need it
+	# Remove docs from install if we don't need them
 	use doc || sed -i -e '/INSTALLS.*=.*htmldocs/d' \
-		"${S}/src/qt_install.pri"
+		"${S}/src/qt_install.pri" || die
 }
 
 src_configure() {
@@ -113,81 +122,67 @@ src_configure() {
 	# during emerge as it makes TQt much happier.
 	addwrite "${TQTBASE}/etc/settings"
 	addwrite "${HOME}/.qt"
-	addwrite "${HOME}/.tqt"
 
-	# common opts
-	myconf=" -sm -thread -stl -no-verbose -largefile -tablet -no-exceptions"
-	myconf+=" $(echo -{qt-imgfmt-,system-lib}{jpeg,mng,png})"
+	# Common options
+	myconf=" -sm -thread -stl -no-verbose -largefile -no-pch -inputmethod"
+	myconf+=" $(echo -{qt-imgfmt-,system-lib}{jpeg,png}) -qt-gif -system-zlib"
 	myconf+=" -platform ${PLATFORM} -xplatform ${PLATFORM}"
-	myconf+=" -xft -xrender -prefix ${TQTBASE}"
+	myconf+=" -xft -xrender -xshape -xkb -xcursor -prefix ${TQTBASE}"
 	myconf+=" -libdir ${TQTBASE}/$(get_libdir) -fast -no-sql-odbc"
 
 	[ "$(get_libdir)" != "lib" ] && myconf+="${myconf} -L/usr/$(get_libdir)"
 
-	use nas		&& myconf+=" -system-nas-sound"
+	# Optional options
+	use nas		&& myconf+=" -system-nas-sound" || myconf+=" -no-nas-sound"
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
-	use mysql	&& myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql" || myconf+=" -no-sql-mysql"
-	use postgres	&& myconf+=" -plugin-sql-psql -I/usr/include/postgresql/server -I/usr/include/postgresql/pgsql -I/usr/include/postgresql/pgsql/server" || myconf+=" -no-sql-psql"
-	use firebird    && myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
-	use sqlite	&& myconf+=" -plugin-sql-sqlite" || myconf+=" -no-sql-sqlite"
-	use cups	&& myconf+=" -cups" || myconf+=" -no-cups"
-	use opengl	&& myconf+=" -enable-module=opengl" || myconf+=" -disable-opengl"
-	use debug	&& myconf+=" -debug" || myconf+=" -release -no-g++-exceptions"
+	use xrandr	&& myconf+=" -xrandr" || myconf+=" -no-xrandr"
+	use mng       	&& myconf+=" -qt-imgfmt -system-libmng" || myconf+=" -no-imgfmt-mng"
+	use cups		&& myconf+=" -cups" || myconf+=" -no-cups"
+	use opengl	&& myconf+=" -enable-module=opengl -no-dlopen-opengl" || myconf+=" -disable-opengl"
 	use xinerama    && myconf+=" -xinerama" || myconf+=" -no-xinerama"
+	use ipv6       	&& myconf+=" -ipv6" || myconf+=" -no-ipv6"
+	use glib       	&& myconf+=" -glibmainloop" || myconf+=" -no-glibmainloop"
+	use fontconfig	&& myconf+=" -lfontconfig"
 
-	myconf+=" -system-zlib -qt-gif"
+	use debug	&& myconf+=" -debug" || myconf+=" -release -no-g++-exceptions -no-exceptions"
 
-	use ipv6        && myconf+=" -ipv6" || myconf+=" -no-ipv6"
+	use mysql		&& myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql" || myconf+=" -no-sql-mysql"
+	use postgres	&& myconf+=" -plugin-sql-psql -I/usr/include/postgresql/server -I/usr/include/postgresql/pgsql -I/usr/include/postgresql/pgsql/server" || myconf+=" -no-sql-psql"
+	use firebird    	&& myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
+	use sqlite		&& myconf+=" -plugin-sql-sqlite -plugin-sql-sqlite3" || myconf+=" -no-sql-sqlite -no-sql-sqlite3"
 
-	myconf+=" -dlopen-opengl"
+	use tablet		&& myconf+=" -tablet" || myconf+=" -no-tablet"
 
 	export YACC='byacc -d'
 	tc-export CC CXX
 	export LINK="$(tc-getCXX)"
 
-	einfo ./configure ${myconf}
 	./configure ${myconf} || die
 }
 
 src_compile() {
-	emake src-qmake src-moc sub-src
+	# Compile TQt with TQmake and TQmoc
+	emake src-qmake src-moc sub-src || die
 
-	export DYLD_LIBRARY_PATH="${S}/lib:/usr/X11R6/lib:${DYLD_LIBRARY_PATH}"
-	export LD_LIBRARY_PATH="${S}/lib:${LD_LIBRARY_PATH}"
+	# Compile TQt plugins (if any selected)
+	emake sub-plugins || die
 
-	emake sub-tools
+	# Compile TQDesigner (TQuic is needed by tdelibs), TQAssistant and friends (msg2tqm, qembed..)
+	emake sub-tools || die
 
+	# Compile examples and tutorials
 	if use examples; then
-		emake sub-tutorial sub-examples
+		emake sub-tutorial sub-examples || die
 	fi
-
-	# Make the msg2qm utility (not made by default)
-#	cd "${S}"/tools/msg2tqm
-#	../../bin/tqmake || die
-#	emake
-
-	# Make the qembed utility (not made by default)
-#	cd "${S}"/tools/qembed
-#	../../bin/tqmake || die
-#	emake
-
 }
 
 src_install() {
+	# Install TQt with all compiled before
 	emake INSTALL_ROOT="${D}" install
-	# Next executables are missing to be installed:
-	#	/usr/qt/3/bin/findtr
-	#	/usr/qt/3/bin/conv2ui
-	#	/usr/qt/3/bin/qt20fix
-	#	/usr/qt/3/bin/qtrename140
-	# I'm not sure if they are really needed
 
-	# fix pkgconfig location
+	# Fix pkgconfig location
 	dodir /usr/$(get_libdir)
 	mv "${D}${TQTBASE}/$(get_libdir)/pkgconfig" "${D}/usr/$(get_libdir)/"
-
-	# cleanup a bad symlink created by crappy install scrypt
-	rm -r "${D}${TQTBASE}/mkspec/${PLATFORM}/${PLATFORM}"
 
 	# List all the multilib libdirs
 	local libdirs
@@ -195,7 +190,7 @@ src_install() {
 		libdirs="${libdirs}:${TQTBASE}/${alibdir}"
 	done
 
-	# environment variables
+	# Set environment variables
 	cat <<EOF > "${T}"/44tqt3
 PATH=${TQTBASE}/bin
 ROOTPATH=${TQTBASE}/bin
@@ -222,6 +217,7 @@ EOF
 		doins -r "${S}"/doc
 	fi
 
+	# Install example and tutorial sources
 	if use examples; then
 		find "${S}"/examples "${S}"/tutorial -name Makefile | \
 			xargs sed -i -e "s:${S}:${TQTBASE}:g"
@@ -230,17 +226,14 @@ EOF
 		cp -r "${S}"/tutorial "${D}"${TQTBASE}/
 	fi
 
-	# misc build reqs
-
+	# Misc build requirements
 	sed -e "s:${S}:${TQTBASE}:g" \
 		"${S}"/.qmake.cache > "${D}"${TQTBASE}/.qmake.cache
-
-	dodoc FAQ README README-QT.TXT changes*
 }
 
 pkg_postinst() {
 	echo
-	elog "After a rebuild of TQt, it can happen that TQt plugins (such as TQt/TDE styles,"
+	elog "After rebuilding TQt, it can happen that TQt plugins (such as TQt/TDE styles,"
 	elog "or widgets for the TQt designer) are no longer recognized.  If this situation"
 	elog "occurs you should recompile the packages providing these plugins,"
 	elog "and you should also make sure that TQt and its plugins were compiled with the"

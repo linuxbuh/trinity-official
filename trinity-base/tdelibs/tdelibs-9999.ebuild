@@ -5,7 +5,7 @@
 EAPI="7"
 TRINITY_MODULE_NAME="tdelibs"
 
-inherit trinity-base-2 multilib
+inherit trinity-base-2
 
 set-trinityver
 
@@ -17,60 +17,84 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"
 
-IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua 
-	lzma networkmanager openexr pcsc-lite spell sudo tiff 
-	utempter upower xcomposite hwlib libressl +xrandr "
+# NOTE: Building without tdehwlib segfaults, but you can try and report.
+
+IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn
+	networkmanager openexr pcsc-lite spell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
+	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	dev-libs/libxslt
 	dev-libs/libxml2
-	dev-libs/libpcre
-	net-dns/libidn
 	app-text/ghostscript-gpl
-	!libressl? ( dev-libs/openssl:= )
-	libressl? ( dev-libs/libressl:= )
-	app-misc/ca-certificates
 	media-libs/fontconfig
 	media-libs/freetype
-	=media-libs/libart_lgpl-${PV}
 	=dev-libs/dbus-1-tqt-${PV}
+	x11-libs/libxshmfence
 	x11-libs/libXrender
+	ssl? (
+		app-misc/ca-certificates
+		!libressl? ( dev-libs/openssl:= )
+		libressl? ( dev-libs/libressl:= )
+	)
+	idn? ( net-dns/libidn )
+	pcre? ( dev-libs/libpcre )
+	svg? ( =media-libs/libart_lgpl-${PV} )
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( net-dns/avahi )
-	cryptsetup? ( sys-fs/cryptsetup )
 	cups? ( net-print/cups )
 	fam? ( virtual/fam )
 	jpeg2k? ( media-libs/jasper )
 	lua? ( dev-lang/lua:* )
 	openexr? ( media-libs/openexr )
-	pcsc-lite? ( sys-apps/pcsc-lite )
 	spell? ( app-dicts/aspell-en app-text/aspell )
 	sudo? ( app-admin/sudo )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
-	networkmanager? ( net-misc/networkmanager )
 	lzma? ( app-arch/xz-utils )
 	xrandr? ( x11-libs/libXrandr )
-	xcomposite? ( x11-libs/libXcomposite )"
-# TODO: add elfres support via libr (not in portage now)
-# NOTE: Building without tdehwlib segfaults, so no choice until fixed.
+	xcomposite? ( x11-libs/libXcomposite )
+	elficons? ( =sys-libs/libr-${PV} )
+	debug? ( sys-libs/binutils-libs:= )"
+
 DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}
-	consolekit? ( sys-auth/consolekit )
-	upower? ( sys-power/upower )
-	hwlib? ( || ( sys-fs/udisks sys-apps/udevil sys-apps/pmount ) )"
+	hwlib? (
+		sys-apps/pmount
+		pcsc-lite? ( sys-apps/pcsc-lite )
+		pkcs11? ( dev-libs/pkcs11-helper )
+		cryptsetup? ( sys-fs/cryptsetup )
+		networkmanager? ( net-misc/networkmanager )
+		consolekit? ( sys-auth/consolekit )
+		upower? ( sys-power/upower )
+		systemd? ( sys-apps/systemd:= )
+		old_udisks? ( sys-fs/udisks:0 )
+		udisks? ( sys-fs/udisks:2 )
+		udevil? ( sys-apps/udevil )
+	)"
 
 src_configure() {
 	mycmakeargs=(
-		-DTDE_MALLOC_FULL=ON
+		-DTDE_MALLOC="$(usex malloc)"
+		-DTDE_MALLOC_FULL="$(usex malloc)"
+		-DTDE_MALLOC_DEBUG="$(usex debug)"
 		-DWITH_LIBIDN=ON
-		-DWITH_SSL=ON
-		-DWITH_LIBART=ON
-		-DWITH_PCRE=ON
+		-DWITH_MITSHM=ON
 		-DWITH_HSPELL=OFF
-		-DWITH_PKCS=OFF
-		-DWITH_TDEHWLIB=ON
-		-DWITH_TDEHWLIB_DAEMONS=ON
+		-DWITH_HAL=OFF
+		-DWITH_DEVKITPOWER=OFF
+		-DWITH_OLD_XDG_STD=OFF
+		-DWITH_KDE4_MENU_SUFFIX=OFF
+		-DWITH_PCRE="$(usex pcre)"
+		-DWITH_LIBART="$(usex svg)"
+		-DWITH_SSL="$(usex ssl)"
+		-DWITH_LIBBFD="$(usex debug)"
+		-DWITH_ELFICON="$(usex elficons)"
+		-DWITH_TDEHWLIB="$(usex hwlib)"
+		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
+		-DWITH_UDISKS="$(usex old_udisks)"
+		-DWITH_UDISKS2="$(usex udisks)"
+		-DWITH_UDEVIL="$(usex udevil)"
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
 		-DWITH_CRYPTSETUP="$(usex cryptsetup)"
@@ -86,11 +110,14 @@ src_configure() {
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_UTEMPTER="$(usex utempter)"
 		-DWITH_UPOWER="$(usex upower)"
+		-DWITH_PKCS="$(usex pkcs11)"
 		-DWITH_CONSOLEKIT="$(usex consolekit)"
+		-DWITH_LOGINDPOWER="$(usex systemd)"
 		-DWITH_NETWORK_MANAGER_BACKEND="$(usex networkmanager)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
+		-DWITH_TDEICONLOADER_DEBUG="$(usex debug)"
 	)
 
 	trinity-base-2_src_configure
@@ -99,9 +126,11 @@ src_configure() {
 src_install() {
 	trinity-base-2_src_install
 	
-	# Make TDE to use our system certificates
-	rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
-	dosym /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
+	if use ssl; then
+		# Make TDE to use our system certificates
+		rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
+		dosym /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
+	fi
 
 	dodir /etc/env.d
 	# TDE expects that the install path is listed first in TDEDIRS and the user
@@ -145,5 +174,20 @@ pkg_postinst () {
 		einfo "    super-user-command=su"
 		einfo "to the kdeglobals config file which is should be usually"
 		einfo "located in the ~/.trinity/share/config/ directory."
+	fi
+	if use malloc; then
+		einfo "You have build TDE with it's own malloc implementation."
+		einfo "That might result in better memory use for you when using TDE."
+		einfo "But it could also result in a slightly different performance."
+		einfo "With Gentoo you are free to choose what works better for you."
+		einfo "If you remove the malloc USE flag, GLIBC's malloc will be used."
+	fi
+	if ! use hwlib; then
+		for flag in consolekit networkmanager upower systemd old_udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
+			use $flag && \
+				ewarn "USE=\"$flag\" is passed, but it doesn't change anything due to" && \
+				ewarn "$flag support in ${P} take effect only if the TDE hwlib is enabled."
+		done
+
 	fi
 }

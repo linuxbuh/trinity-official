@@ -12,6 +12,7 @@ IUSE="pam xscreensaver"
 
 COMMON_DEPEND="x11-libs/libXrender
 	x11-libs/libXcursor
+	=dev-libs/dbus-1-tqt-${PV}
 	=trinity-base/libkonq-${PV}
 	=trinity-base/kcontrol-${PV}
 	xscreensaver? ( x11-libs/libXScrnSaver )"

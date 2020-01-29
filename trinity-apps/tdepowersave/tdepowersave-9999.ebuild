@@ -18,7 +18,6 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 DEPEND="x11-libs/libXScrnSaver
 	x11-libs/libXext
 	x11-libs/libXtst
-	=dev-libs/dbus-tqt-${PV}
 	=dev-libs/dbus-1-tqt-${PV}"
 RDEPEND="${DEPEND}"
 

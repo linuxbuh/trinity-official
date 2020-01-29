@@ -1,5 +1,2 @@
-#compiles but does nothing
-trinity-base/tdelibs avahi
-
 #broken but being fixed as of Jan. 2019
 trinity-base/tdelibs cryptsetup
