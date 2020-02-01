@@ -11,9 +11,8 @@ DESCRIPTION="Trinity splashscreen framework (of Trinity itself, not of individua
 
 IUSE="xinerama"
 
-DEPEND="x11-libs/libXcursor
-	xinerama? ( x11-base/xorg-proto )"
-RDEPEND="$DEPEND"
+DEPEND="xinerama? ( x11-base/xorg-proto )"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(

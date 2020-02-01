@@ -266,6 +266,10 @@ trinity-base-2_src_configure() {
 		eg_cmakeargs=( -DWITH_ARTS="$(usex arts)" "${eg_cmakeargs[@]}" )
 	fi
 
+	if [[ "${TRINITY_NEED_ARTS}" == "yes" ]]; then
+		eg_cmakeargs=( -DWITH_ARTS=ON "${eg_cmakeargs[@]}" )
+	fi
+
 	mycmakeargs=(
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}${TDEDIR}"
 		-DCMAKE_INSTALL_RPATH="${EPREFIX}${TDEDIR}"

@@ -7,18 +7,12 @@ TRINITY_MODULE_NAME="tdegames"
 
 inherit trinity-meta-2
 
+need-arts optional
+
+# Needs some dependency to play "au" sounds.
+
 DESCRIPTION="Trinity Bounce Ball Game"
 
-IUSE+="+arts"
-
-DEPEND="=trinity-base/libtdegames-${PV}
-	arts? ( >=trinity-base/arts-${PV} )"
-RDEPEND="${DEPEND}"
-
-src_configure() {
-	mycmakeargs=(
-		-DWITH_ARTS="$(usex arts)"
-	)
-
-	trinity-meta-2_src_configure
-}
+MY_DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND+=" ${MY_DEPEND}"
+RDEPEND+=" ${MY_DEPEND}"

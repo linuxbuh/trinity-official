@@ -16,7 +16,6 @@ DEPEND="pam? ( trinity-base/tdebase-pam )
 	xcomposite? ( x11-libs/libXcomposite )
 	xrandr? ( x11-libs/libXrandr )
 	=trinity-base/tdelibs-${PV}[xrandr?]
-	sys-apps/dbus
 	x11-libs/libXtst
 	=trinity-base/kcontrol-${PV}
 	=dev-libs/dbus-tqt-${PV}"

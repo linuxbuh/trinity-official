@@ -16,6 +16,7 @@ RDEPEND="${DEPEND}"
 src_configure () {
 	mycmakeargs=(
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
+		-DWITH_SUDO_KONSOLE_SUPER_USER_COMMAND="$(usex sudo)"
 	)
 
 	trinity-meta-2_src_configure
@@ -27,8 +28,7 @@ pkg_postinst () {
 		einfo "It can be overriden on a user-level by adding:"
 		einfo "  [super-user-command]"
 		einfo "    super-user-command=su"
-		einfo "to the kdeglobal config file which is should be usually"
+		einfo "to the kdeglobals config file which is should be usually"
 		einfo "located in the ~/.trinity/share/config/ directory."
-
 	fi
 }

@@ -7,38 +7,38 @@ TRINITY_MODULE_NAME="tdeaddons"
 
 inherit trinity-meta-2 db-use
 
+need-arts optional
+
 DESCRIPTION="Various plugins for Noatun."
 
-IUSE="arts sdl berkdb"
+IUSE+=" sdl berkdb"
 
 COMMON_DEPEND="
 	=trinity-base/noatun-${PV}
-	arts? ( =trinity-base/arts-${PV} )
 	berkdb? ( =sys-libs/db-4*:= )
 "
-DEPEND="${COMMON_DEPEND}
+DEPEND+=" ${COMMON_DEPEND}
 	sdl? ( media-libs/libsdl )
 "
 
-RDEPEND="${COMMON_DEPEND}
+RDEPEND+=" ${COMMON_DEPEND}
 	sdl? ( media-libs/libsdl[X] )
 "
 
 src_compile() {
 	mycmakeargs=(
-		"-DWITH_ARTS=$(usex arts)"
-		"-DWITH_SDL=$(usex sdl)"
+		-DWITH_SDL="$(usex sdl)"
 	)
 
 	if use berkdb; then
 		mycmakeargs=( "${mycmakeargs[@]}"
-			"-DWITH_BERKELEY_DB=ON"
-			"-DBERKELEY_DB_LIBS=$(db_libname)"
-			"-DBERKELEY_DB_INCLUDE_DIRS==${ROOT}$(db_includedir)"
+			-DWITH_BERKELEY_DB=ON
+			-DBERKELEY_DB_LIBS="$(db_libname)"
+			-DBERKELEY_DB_INCLUDE_DIRS="${ROOT}$(db_includedir)"
 		)
 	else
 		mycmakeargs=( "${mycmakeargs[@]}"
-			"-DWITH_BERKELEY_DB=OFF"
+			-DWITH_BERKELEY_DB=OFF
 		)
 	fi
 

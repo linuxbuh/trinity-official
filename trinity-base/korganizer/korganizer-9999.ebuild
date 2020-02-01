@@ -23,7 +23,7 @@ COMMON_DEPEND="
 	=trinity-base/libkpimidentities-${PV}
 	=trinity-base/kaddressbook-${PV}
 	exchange? ( =trinity-base/libkpimexchange-${PV} )"
-#	>=trinity-base/tdepim-tderesources-${PV}:${SLOT}
+#	=trinity-base/tdepim-tderesources-${PV}:${SLOT}
 
 DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}"

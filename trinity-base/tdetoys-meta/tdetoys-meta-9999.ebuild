@@ -12,7 +12,7 @@ DESCRIPTION="tdetoys metapackage - merge this to pull in all tdetoys-derived pac
 HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="$TRINITY_VER"
+SLOT="${TRINITY_VER}"
 
 RDEPEND="
 	>=trinity-base/amor-${PV}

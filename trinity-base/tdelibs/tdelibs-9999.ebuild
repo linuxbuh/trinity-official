@@ -19,7 +19,7 @@ SLOT="${TRINITY_VER}"
 
 IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua 
 	lzma networkmanager openexr pcsc-lite spell sudo tiff 
-	utempter upower xcomposite hwlib +xrandr "
+	utempter upower xcomposite hwlib libressl +xrandr "
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	dev-libs/libxslt
@@ -27,13 +27,13 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	dev-libs/libpcre
 	net-dns/libidn
 	app-text/ghostscript-gpl
-	dev-libs/openssl:=
+	!libressl? ( dev-libs/openssl:= )
+	libressl? ( dev-libs/libressl:= )
+	app-misc/ca-certificates
 	media-libs/fontconfig
 	media-libs/freetype
 	=media-libs/libart_lgpl-${PV}
-	sys-apps/dbus
 	=dev-libs/dbus-1-tqt-${PV}
-	x11-libs/libXcursor
 	x11-libs/libXrender
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( net-dns/avahi )
@@ -98,6 +98,10 @@ src_configure() {
 
 src_install() {
 	trinity-base-2_src_install
+	
+	# Make TDE to use our system certificates
+	rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
+	dosym /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
 
 	dodir /etc/env.d
 	# TDE expects that the install path is listed first in TDEDIRS and the user
