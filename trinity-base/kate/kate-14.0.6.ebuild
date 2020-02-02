@@ -1,4 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 EAPI="7"
@@ -8,4 +9,3 @@ inherit trinity-meta-2
 
 DESCRIPTION="Kate is an MDI texteditor."
 KEYWORDS="~amd64 ~x86"
-IUSE=""

@@ -1,4 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 EAPI="7"
@@ -11,8 +12,9 @@ need-arts optional
 DESCRIPTION="Trinity hotkey daemon"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND+=" x11-libs/libXtst"
-RDEPEND+=" x11-libs/libXtst"
+MY_DEPEND="x11-libs/libXtst"
+DEPEND+=" ${MY_DEPEND}"
+RDEPEND+=" ${MY_DEPEND}"
 
 src_configure() {
 	mycmakeargs=(

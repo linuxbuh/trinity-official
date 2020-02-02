@@ -1,4 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 EAPI="7"
@@ -12,7 +13,7 @@ IUSE="xcomposite"
 
 DEPEND="=trinity-base/libkonq-${PV}
 	=trinity-base/tdebase-data-${PV}
-	dev-libs/dbus-tqt
+	=dev-libs/dbus-tqt-${PV}
 	xcomposite? ( x11-libs/libXrender
 		x11-libs/libXfixes
 		x11-libs/libXcomposite )"

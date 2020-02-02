@@ -1,4 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 EAPI="7"
@@ -8,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Control Center"
 KEYWORDS="~amd64 ~x86"
-IUSE="samba logitech-mouse ieee1394 +xrandr +tdehw"
+IUSE="samba logitech-mouse ieee1394 hwlib +xrandr "
 
 DEPEND="x11-libs/libX11
 	x11-libs/libXrender
@@ -40,7 +41,8 @@ src_configure() {
 		-DWITH_LIBUSB="$(usex logitech-mouse)"
 		-DWITH_LIBRAW1394="$(usex ieee1394)"
 		-DWITH_XRANDR="$(usex xrandr)"
-		-DWITH_TDEHWLIB="$(usex tdehw)"
+		-DWITH_TDEHWLIB="$(usex hwlib)"
+		-DXSCREENSAVER_DIR="/usr/$(get_libdir)/misc/xscreensaver"
 	)
 
 	trinity-meta-2_src_configure

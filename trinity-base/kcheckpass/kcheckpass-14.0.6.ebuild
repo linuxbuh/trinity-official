@@ -17,6 +17,7 @@ DEPEND="${RDEPEND}"
 src_configure() {
 	mycmakeargs=(
 		-DWITH_PAM="$(usex pam)"
+		-DKCHECKPASS_PAM_SERVICE=tde
 	)
 
 	trinity-meta-2_src_configure

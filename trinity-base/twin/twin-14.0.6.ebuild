@@ -27,6 +27,7 @@ src_configure() {
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XFIXES="$(usex xcomposite)"
 		-DWITH_XRENDER="$(usex xcomposite)"
+		-DWITH_OPENGL="$(usex opengl)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_LIBCONFIG="$(usex libconfig)"
 		-DWITH_PCRE="$(usex pcre)"
