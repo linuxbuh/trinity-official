@@ -1,9 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 #
 # Original Author: fat-zer
+# Ported to git-r3 eclass and EAPI7 by E. Liddell
 # Purpose: support ebuilds for the trinity project (a kde3 fork).
 #
 
@@ -226,8 +228,12 @@ trinity-base-2_src_prepare() {
 			for dir in $(find ${TEG_DOC_DIR} -mindepth 1 -maxdepth 1 -type d ); do
 				lang="$(basename "$dir")"
 				if [[	"$lang" == "${PN}" || \
+						"$lang" == "en" || \
+						"$lang" == "man" || \
+						"$lang" == "doxy" || \
+						"$lang" == "online" || \
 						"$lang" == "${TRINITY_MODULE_NAME}"  ]] ; then
-					echo -n; # do nothing it's main documentation
+					echo -n; # do nothing it's main documentation or not related
 				elif ! has "$lang" ${TRINITY_LANGS}; then
 					eerror "Documentation translated to language $lang seems to present in the package but is not supported by the ebuild"
 				elif ! has $lang ${LINGUAS}; then
