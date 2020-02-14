@@ -7,10 +7,10 @@ TRINITY_MODULE_NAME="tdebase"
 
 inherit trinity-meta-2
 
-DESCRIPTION="KCMInit - runs startups initialization for Control Modules."
+DESCRIPTION="KCMInit - initializes Control Modules during startup."
 
 DEPEND="x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXrender
 	x11-libs/libXtst"
-RDEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}"
