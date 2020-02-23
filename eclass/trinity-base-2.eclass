@@ -176,8 +176,7 @@ fi
 
 # @FUNCTION: trinity-base-2_src_unpack
 # @DESCRIPTION:
-# A default src unpack function to either call
-# git-r3_src_unpack or base_src_unpack.
+# A default src unpack function to call git-v3_src_unpack if necessary
 trinity-base-2_src_unpack() {
 	if [[ "${BUILD_TYPE}" == "live" ]]; then
 		git-r3_src_unpack

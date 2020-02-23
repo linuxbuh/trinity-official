@@ -1,8 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="$PN"
+TRINITY_MODULE_NAME="tdelibs"
 
 inherit trinity-base-2 multilib
 
@@ -12,59 +13,87 @@ need-arts optional
 
 DESCRIPTION="Trinity libraries needed by all TDE programs."
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
+
 SLOT="${TRINITY_VER}"
+
+# NOTE: Building without tdehwlib segfaults, but you can try and report.
+
+IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn
+	networkmanager openexr pcsc-lite spell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
+	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
 KEYWORDS="~amd64 ~x86"
-IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma networkmanager openexr
-	spell sudo tiff utempter upower udisks old_udisks xcomposite +xrandr"
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
-	>=dev-libs/libxslt-1.1.16
-	>=dev-libs/libxml2-2.6.6
-	>=dev-libs/libpcre-6.6
-	net-dns/libidn
+	dev-libs/libxslt
+	dev-libs/libxml2
 	app-text/ghostscript-gpl
-	>=dev-libs/openssl-0.9.7d:=
 	media-libs/fontconfig
-	media-libs/freetype:2
-	media-libs/libart_lgpl
-	sys-apps/dbus
-	dev-libs/dbus-1-tqt
+	media-libs/freetype
+	=dev-libs/dbus-1-tqt-${PV}
+	x11-libs/libxshmfence
 	x11-libs/libXcursor
 	x11-libs/libXrender
+	ssl? (
+		app-misc/ca-certificates
+		!libressl? ( dev-libs/openssl:= )
+		libressl? ( dev-libs/libressl:= )
+	)
+	idn? ( net-dns/libidn )
+	pcre? ( dev-libs/libpcre )
+	svg? ( =media-libs/libart_lgpl-${PV} )
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( net-dns/avahi )
-	cups? ( >=net-print/cups-1.1.19 )
+	cups? ( net-print/cups )
 	fam? ( virtual/fam )
 	jpeg2k? ( media-libs/jasper )
 	lua? ( dev-lang/lua:* )
-	openexr? ( >=media-libs/openexr-1.2.2-r2 )
-	spell? ( >=app-dicts/aspell-en-6.0.0 >=app-text/aspell-0.60.5 )
+	openexr? ( media-libs/openexr )
+	spell? ( app-dicts/aspell-en app-text/aspell )
 	sudo? ( app-admin/sudo )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
-	networkmanager? ( net-misc/networkmanager )
 	lzma? ( app-arch/xz-utils )
-	xrandr? ( >=x11-libs/libXrandr-1.2 )
-	xcomposite? ( x11-libs/libXcomposite )"
-# NOTE: upstream lacks avahi support, so the use flag is currenly masked
-# TODO: add elfres support via libr (not in portage now)
+	xrandr? ( x11-libs/libXrandr )
+	xcomposite? ( x11-libs/libXcomposite )
+	elficons? ( =sys-libs/libr-${PV} )
+	debug? ( sys-libs/binutils-libs:= )"
+
 DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}
-	consolekit? ( sys-auth/consolekit )
-	upower? ( sys-power/upower )
-	udisks? ( sys-fs/udisks:2 )
-	old_udisks? ( sys-fs/udisks:0 )"
+	hwlib? (
+		!udevil? ( !udisks? ( !old_udisks? ( sys-apps/pmount ) ) )
+		pkcs11? ( dev-libs/pkcs11-helper )
+		networkmanager? ( net-misc/networkmanager )
+		consolekit? ( sys-auth/consolekit )
+		upower? ( sys-power/upower )
+		systemd? ( sys-apps/systemd:= )
+		old_udisks? ( sys-fs/udisks:0 )
+		udisks? ( sys-fs/udisks:2 )
+		udevil? ( sys-apps/udevil )
+	)"
 
 src_configure() {
 	mycmakeargs=(
-		-DTDE_MALLOC_FULL=ON
+		-DTDE_MALLOC="$(usex malloc)"
+		-DTDE_MALLOC_FULL="$(usex malloc)"
+		-DTDE_MALLOC_DEBUG="$(usex debug)"
 		-DWITH_LIBIDN=ON
-		-DWITH_SSL=ON
-		-DWITH_LIBART=ON
-		-DWITH_PCRE=ON
+		-DWITH_MITSHM=ON
 		-DWITH_HSPELL=OFF
-		-DWITH_ARTS=OFF
+		-DWITH_HAL=OFF
+		-DWITH_DEVKITPOWER=OFF
+		-DWITH_OLD_XDG_STD=OFF
+		-DWITH_KDE4_MENU_SUFFIX=OFF
+		-DWITH_PCRE="$(usex pcre)"
+		-DWITH_LIBART="$(usex svg)"
+		-DWITH_SSL="$(usex ssl)"
+		-DWITH_LIBBFD="$(usex debug)"
+		-DWITH_ELFICON="$(usex elficons)"
+		-DWITH_TDEHWLIB="$(usex hwlib)"
+		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
+		-DWITH_UDISKS="$(usex old_udisks)"
+		-DWITH_UDISKS2="$(usex udisks)"
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
 		-DWITH_CUPS="$(usex cups)"
@@ -78,13 +107,13 @@ src_configure() {
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_UTEMPTER="$(usex utempter)"
 		-DWITH_UPOWER="$(usex upower)"
-		-DWITH_UDISKS="$(usex old_udisks)"
-		-DWITH_UDISKS2="$(usex udisks)"
 		-DWITH_CONSOLEKIT="$(usex consolekit)"
+		-DWITH_LOGINDPOWER="$(usex systemd)"
 		-DWITH_NETWORK_MANAGER_BACKEND="$(usex networkmanager)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
+		-DWITH_TDEICONLOADER_DEBUG="$(usex debug)"
 	)
 
 	trinity-base-2_src_configure
@@ -92,12 +121,18 @@ src_configure() {
 
 src_install() {
 	trinity-base-2_src_install
+	
+	if use ssl; then
+		# Make TDE to use our system certificates
+		rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
+		dosym /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
+	fi
 
 	dodir /etc/env.d
-	# KDE implies that the install path is listed first in TDEDIRS and the user
-	# directory (implicitly added) to be the last entry. Doing otherwise breaks
+	# TDE expects that the install path is listed first in TDEDIRS and the user
+	# directory (implicitly added) is the last entry. Doing otherwise breaks
 	# certain functionality. Do not break this (once again *sigh*), but read the code.
-	# KDE saves the installed path implicitly and so this is not needed, /usr
+	# TDE saves the installed path implicitly and so this is not needed, /usr
 	# is set in ${TDEDIR}/share/config/kdeglobals and so TDEDIRS is not needed.
 
 	# List all the multilib libdirs
@@ -133,7 +168,22 @@ pkg_postinst () {
 		einfo "It can be overriden on a user-level by adding:"
 		einfo "  [super-user-command]"
 		einfo "    super-user-command=su"
-		einfo "to the kdeglobal config file which is should be usually"
+		einfo "to the kdeglobals config file which is should be usually"
 		einfo "located in the ~/.trinity/share/config/ directory."
+	fi
+	if use malloc; then
+		einfo "You have build TDE with it's own malloc implementation."
+		einfo "That might result in better memory use for you when using TDE."
+		einfo "But it could also result in a slightly different performance."
+		einfo "With Gentoo you are free to choose what works better for you."
+		einfo "If you remove the malloc USE flag, GLIBC's malloc will be used."
+	fi
+	if ! use hwlib; then
+		for flag in consolekit networkmanager upower systemd old_udisks udisks udevil; do
+			use $flag && \
+				ewarn "USE=\"$flag\" is passed, but it doesn't change anything due to" && \
+				ewarn "$flag support in ${P} take effect only if the TDE hwlib is enabled."
+		done
+
 	fi
 }

@@ -156,7 +156,7 @@ trinity-meta-2_create_extractlists() {
 
 	# Add package-specific files and directories
 	case "${TRINITY_MODULE_NAME}" in
-		tdebase) TSM_EXTRACT_LIST+=" kcontrol/" ;;
+		tdebase) TSM_EXTRACT_LIST+=" kcontrol/ tdmlib/" ;;
 		*) ;; # nothing special for other modules
 	esac
 
