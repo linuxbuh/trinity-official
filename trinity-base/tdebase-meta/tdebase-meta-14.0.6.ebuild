@@ -1,4 +1,5 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 EAPI="7"
@@ -9,11 +10,10 @@ set-trinityver
 
 DESCRIPTION="tdebase metapackage - merge this to pull in all tdebase-derived packages"
 HOMEPAGE="http://www.trinitydesktop.org/"
-LICENSE="GPL-2 LGPL-2"
+LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="$TRINITY_VER"
+SLOT="${TRINITY_VER}"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 RDEPEND="=trinity-base/drkonqi-${PV}
 	=trinity-base/kappfinder-${PV}
