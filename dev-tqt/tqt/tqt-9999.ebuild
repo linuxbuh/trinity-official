@@ -162,17 +162,21 @@ src_configure() {
 
 src_compile() {
 	# Compile TQt with TQmake and TQmoc
-	emake src-qmake src-moc sub-src || die
+	emake src-qmake src-moc sub-src
 
 	# Compile TQt plugins (if any selected)
-	emake sub-plugins || die
+	emake sub-plugins
+	
+	# Point to libs for the tools to build fine too
+	export DYLD_LIBRARY_PATH="${S}/lib:${DYLD_LIBRARY_PATH}"
+	export LD_LIBRARY_PATH="${S}/lib:${LD_LIBRARY_PATH}"
 
 	# Compile TQDesigner (TQuic is needed by tdelibs), TQAssistant and friends (msg2tqm, qembed..)
-	emake sub-tools || die
+	emake sub-tools
 
 	# Compile examples and tutorials
 	if use examples; then
-		emake sub-tutorial sub-examples || die
+		emake sub-tutorial sub-examples
 	fi
 }
 
