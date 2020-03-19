@@ -15,7 +15,7 @@ DEPEND="x11-libs/libX11
 	x11-libs/libXrender
 	x11-libs/libXcursor
 	samba? ( net-fs/samba )
-	logitech-mouse? ( virtual/libusb:0 )
+	logitech-mouse? ( dev-libs/libusb-compat )
 	ieee1394? ( sys-libs/libraw1394 )
 	=trinity-base/tdelibs-${PV}[xrandr?]
 	=trinity-base/libkonq-${PV}
