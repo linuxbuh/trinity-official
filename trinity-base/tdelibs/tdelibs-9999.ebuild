@@ -19,7 +19,7 @@ SLOT="${TRINITY_VER}"
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 
-IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm
+IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm elogind
 	networkmanager openexr pcsc-lite spell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
 	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
 
@@ -68,13 +68,19 @@ RDEPEND+=" ${MY_DEPEND}
 		networkmanager? ( net-misc/networkmanager )
 		consolekit? ( sys-auth/consolekit )
 		upower? ( sys-power/upower )
-		systemd? ( sys-apps/systemd:= )
+		systemd? ( sys-apps/systemd )
+		elogind? ( sys-auth/elogind )
 		old_udisks? ( sys-fs/udisks:0 )
 		udisks? ( sys-fs/udisks:2 )
 		udevil? ( sys-apps/udevil )
 	)"
 
 src_configure() {
+	local enable_logind="OFF"
+	if use systemd || use elogind; then
+		enable_logind="ON"
+	fi
+
 	mycmakeargs=(
 		-DTDE_MALLOC="$(usex malloc)"
 		-DTDE_MALLOC_FULL="$(usex malloc)"
@@ -114,7 +120,7 @@ src_configure() {
 		-DWITH_UPOWER="$(usex upower)"
 		-DWITH_PKCS="$(usex pkcs11)"
 		-DWITH_CONSOLEKIT="$(usex consolekit)"
-		-DWITH_LOGINDPOWER="$(usex systemd)"
+		-DWITH_LOGINDPOWER="${enable_logind}"
 		-DWITH_NETWORK_MANAGER_BACKEND="$(usex networkmanager)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XRANDR="$(usex xrandr)"
@@ -185,7 +191,7 @@ pkg_postinst () {
 		einfo "If you remove the malloc USE flag, GLIBC's malloc will be used."
 	fi
 	if ! use hwlib; then
-		for flag in consolekit networkmanager upower systemd old_udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
+		for flag in consolekit networkmanager upower systemd elogind old_udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
 			use $flag && \
 				ewarn "USE=\"$flag\" is passed, but it doesn't change anything due to" && \
 				ewarn "$flag support in ${P} take effect only if the TDE hwlib is enabled."
