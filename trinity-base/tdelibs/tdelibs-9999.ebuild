@@ -19,7 +19,7 @@ SLOT="${TRINITY_VER}"
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 
-IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn
+IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm
 	networkmanager openexr pcsc-lite spell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
 	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
 
@@ -30,13 +30,13 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	media-libs/fontconfig
 	media-libs/freetype
 	=dev-libs/dbus-1-tqt-${PV}
-	x11-libs/libxshmfence
 	x11-libs/libXrender
 	ssl? (
 		app-misc/ca-certificates
 		!libressl? ( dev-libs/openssl:= )
 		libressl? ( dev-libs/libressl:= )
 	)
+	shm? ( x11-libs/libxshmfence )
 	idn? ( net-dns/libidn )
 	pcre? ( dev-libs/libpcre )
 	svg? ( =media-libs/libart_lgpl-${PV} )
@@ -60,7 +60,8 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}
 	hwlib? (
-		sys-apps/pmount
+		acct-group/plugdev
+		!udevil? ( !udisks? ( !old_udisks? ( sys-apps/pmount ) ) )
 		pcsc-lite? ( sys-apps/pcsc-lite )
 		pkcs11? ( dev-libs/pkcs11-helper )
 		cryptsetup? ( sys-fs/cryptsetup )
@@ -78,13 +79,13 @@ src_configure() {
 		-DTDE_MALLOC="$(usex malloc)"
 		-DTDE_MALLOC_FULL="$(usex malloc)"
 		-DTDE_MALLOC_DEBUG="$(usex debug)"
-		-DWITH_LIBIDN=ON
-		-DWITH_MITSHM=ON
 		-DWITH_HSPELL=OFF
 		-DWITH_HAL=OFF
 		-DWITH_DEVKITPOWER=OFF
 		-DWITH_OLD_XDG_STD=OFF
 		-DWITH_KDE4_MENU_SUFFIX=OFF
+		-DWITH_LIBIDN="$(usex idn)"
+		-DWITH_MITSHM="$(usex shm)"
 		-DWITH_PCRE="$(usex pcre)"
 		-DWITH_LIBART="$(usex svg)"
 		-DWITH_SSL="$(usex ssl)"
@@ -109,6 +110,7 @@ src_configure() {
 		-DWITH_GAMIN="$(usex fam)"
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_UTEMPTER="$(usex utempter)"
+		-DUTEMPTER_HELPER="/usr/sbin/utempter"
 		-DWITH_UPOWER="$(usex upower)"
 		-DWITH_PKCS="$(usex pkcs11)"
 		-DWITH_CONSOLEKIT="$(usex consolekit)"
@@ -189,5 +191,9 @@ pkg_postinst () {
 				ewarn "$flag support in ${P} take effect only if the TDE hwlib is enabled."
 		done
 
+	fi
+	if use hwlib; then
+		einfo "Please add your user to the plugdev group to be able"
+		einfo "to use the features of the TDE hwlibdaemons like suspend."
 	fi
 }
