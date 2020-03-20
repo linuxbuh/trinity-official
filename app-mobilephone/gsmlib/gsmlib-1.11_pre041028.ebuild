@@ -1,7 +1,6 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="7"
 
