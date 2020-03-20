@@ -5,7 +5,7 @@
 EAPI="7"
 TRINITY_MODULE_NAME="tdegames"
 
-inherit trinity-meta
+inherit trinity-meta-2
 
 DESCRIPTION="Trinity four-in-a-row game"
 
