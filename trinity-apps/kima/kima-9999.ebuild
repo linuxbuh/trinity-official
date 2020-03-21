@@ -15,12 +15,12 @@ DESCRIPTION="A Kicker monitoring applet"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-need-trinity 14.1.0
+need-trinity
 
 SLOT="${TRINITY_VER}"
 
 # NVControl support needs the nvidia-settings package,
-# which isn't in the portage tree anymore. So if there
+# which isn't in the Portage tree anymore. So if there
 # is interest, it could be imported to the overlay maybe.
 
 src_configure() {

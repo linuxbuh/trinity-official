@@ -15,7 +15,7 @@ SLOT="0"
 
 DEPEND="sys-apps/dbus
 	=dev-tqt/tqtinterface-${PV}"
-RDEPEND="$DEPEND"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	cmake-utils_src_configure

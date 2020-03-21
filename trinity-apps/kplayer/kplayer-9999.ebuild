@@ -22,6 +22,6 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 DEPEND="media-video/mplayer"
 RDEPEND="${DEPEND}"
 
-need-trinity 14.1.0
+need-trinity
 
 SLOT="${TRINITY_VER}"

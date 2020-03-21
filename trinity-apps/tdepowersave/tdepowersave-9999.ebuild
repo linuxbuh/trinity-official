@@ -21,6 +21,6 @@ DEPEND="x11-libs/libXScrnSaver
 	=dev-libs/dbus-1-tqt-${PV}"
 RDEPEND="${DEPEND}"
 
-need-trinity 14.1.0
+need-trinity
 
 SLOT="${TRINITY_VER}"

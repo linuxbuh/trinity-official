@@ -18,8 +18,6 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity
 
-offer-hiddenvisibility yes
-
 SLOT="${TRINITY_VER}"
 
 IUSE+=" dvb dpms gstreamer xinerama vorbis encode xcb"

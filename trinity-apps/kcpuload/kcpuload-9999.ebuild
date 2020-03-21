@@ -13,6 +13,6 @@ DESCRIPTION="A small CPU meter for Kicker"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-need-trinity 14.1.0
+need-trinity
 
 SLOT="${TRINITY_VER}"

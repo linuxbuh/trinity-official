@@ -18,16 +18,16 @@ DESCRIPTION="A graphical shutdown utility for TDE"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-need-trinity 14.1.0
-
-SLOT="${TRINITY_VER}"
-
 IUSE="extras"
 
 RDEPEND="
 	=trinity-base/tdesu-${PV}
 	=trinity-base/kcontrol-${PV}
 	=trinity-base/kdialog-${PV}"
+
+need-trinity
+
+SLOT="${TRINITY_VER}"
 
 src_configure() {
 	mycmakeargs=(

@@ -1,5 +1,6 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
+
 EAPI="7"
 TRINITY_MODULE_TYPE="applications"
 
@@ -19,7 +20,7 @@ DESCRIPTION="Advanced music player for TDE."
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-need-trinity 14.1.0
+need-trinity
 
 SLOT="${TRINITY_VER}"
 
