@@ -8,16 +8,11 @@ TRINITY_MODULE_NAME="${PN}"
 inherit trinity-base-2
 
 DESCRIPTION="Interface and abstraction library for TQt and Trinity"
-HOMEPAGE="http://trinitydesktop.org/"
-
-LICENSE="GPL-2"
-KEYWORDS=
+HOMEPAGE="http://www.trinitydesktop.org/"
+LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 
-#Note:  for the sake of easier maintenance, building against QT3
-#	(no T) is no longer a thing.
-DEPEND="~dev-tqt/tqt-${PV}
-	!!x11-libs/tqtinterface"
+DEPEND="=dev-tqt/tqt-${PV}"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -26,8 +21,7 @@ pkg_setup() {
 
 src_configure() {
 	mycmakeargs=(
-		-DUSE_QT3=ON
-		-DQT_PREFIX_DIR="$TQTDIR"
+		-DQT_PREFIX_DIR="${TQTDIR}"
 	 )
 
 	 cmake-utils_src_configure
