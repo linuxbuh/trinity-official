@@ -41,7 +41,7 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	pcre? ( dev-libs/libpcre )
 	svg? ( =media-libs/libart_lgpl-${PV} )
 	alsa? ( media-libs/alsa-lib )
-	avahi? ( net-dns/avahi )
+	avahi? ( =dev-tqt/avahi-tqt-${PV} )
 	cups? ( net-print/cups )
 	fam? ( virtual/fam )
 	jpeg2k? ( media-libs/jasper )
