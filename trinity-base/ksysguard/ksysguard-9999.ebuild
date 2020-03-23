@@ -9,15 +9,15 @@ inherit trinity-meta-2
 
 DESCRIPTION="A network enabled task manager/system monitor"
 
-IUSE="dell-laptop lm_sensors"
+IUSE="dell-laptop lm-sensors"
 
-DEPEND="lm_sensors? ( sys-apps/lm-sensors )"
+DEPEND="lm-sensors? ( sys-apps/lm-sensors )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
 		-DWITH_I8K="$(usex dell-laptop)"
-		-DWITH_SENSORS="$(usex lm_sensors)"
+		-DWITH_SENSORS="$(usex lm-sensors)"
 	)
 
 	trinity-meta-2_src_configure

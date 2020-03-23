@@ -9,18 +9,18 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity system monitoring applets."
 
-IUSE="snmp lm_sensors dell-laptop"
+IUSE="snmp lm-sensors dell-laptop"
 
-DEPEND="lm_sensors? ( x11-libs/libXext )
+DEPEND="lm-sensors? ( x11-libs/libXext )
 	snmp? ( net-analyzer/net-snmp )"
 RDEPEND="${DEPEND}
-	lm_sensors? ( sys-apps/lm-sensors )"
+	lm-sensors? ( sys-apps/lm-sensors )"
 
 src_configure() {
 	mycmakeargs=(
 		-DWITH_I8K="$(usex dell-laptop)"
 		-DWITH_SNMP="$(usex snmp)"
-		-DWITH_SENSORS="$(usex lm_sensors)"
+		-DWITH_SENSORS="$(usex lm-sensors)"
 	)
 
 	trinity-meta-2_src_configure
