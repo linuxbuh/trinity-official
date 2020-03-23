@@ -7,6 +7,8 @@ TRINITY_MODULE_TYPE="applications"
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
+TRINITY_LANGS="de"
+
 inherit trinity-base-2
 
 DESCRIPTION="A small CPU meter for Kicker"
