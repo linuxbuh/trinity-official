@@ -20,7 +20,7 @@ SLOT="${TRINITY_VER}"
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 
 IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm elogind
-	networkmanager openexr pcsc-lite spell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
+	networkmanager openexr pcsc-lite aspell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
 	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
@@ -47,7 +47,7 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	jpeg2k? ( media-libs/jasper )
 	lua? ( dev-lang/lua:* )
 	openexr? ( media-libs/openexr )
-	spell? ( app-dicts/aspell-en app-text/aspell )
+	aspell? ( app-text/aspell )
 	sudo? ( app-admin/sudo )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
@@ -112,7 +112,7 @@ src_configure() {
 		-DWITH_LZMA="$(usex lzma)"
 		-DWITH_OPENEXR="$(usex openexr)"
 		-DWITH_PCSC="$(usex pcsc-lite)"
-		-DWITH_ASPELL="$(usex spell)"
+		-DWITH_ASPELL="$(usex aspell)"
 		-DWITH_GAMIN="$(usex fam)"
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_UTEMPTER="$(usex utempter)"
