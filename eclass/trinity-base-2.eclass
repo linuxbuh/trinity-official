@@ -1,12 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 #
 # Original Author: fat-zer
 # Ported to git-r3 eclass and EAPI7 by E. Liddell
-# Purpose: support ebuilds for the trinity project (a kde3 fork).
+# Purpose: Support ebuilds for the Trinity Desktop (KDE3 fork).
 #
 
 inherit trinity-functions-2 cmake-utils
@@ -15,7 +14,7 @@ addwrite "/usr/tqt3/etc/settings"
 addpredict "/usr/tqt3/etc/settings"
 
 # ban EAPI 0-6
-case $EAPI in
+case ${EAPI} in
 	0|1|2|3|4|5|6) die "EAPI=${EAPI} is not supported" ;;
 	7) ;;
 	*) die "Unknown EAPI=${EAPI}"
@@ -24,7 +23,7 @@ esac
 # @ECLASS-VARIABLE: BUILD_TYPE
 # @DESCRIPTION:
 # Determines the build type: live or release
-if [[ ${PV} = *9999* ]]; then
+if [[ "${PV}" == *"9999"* ]]; then
 	BUILD_TYPE="live"
 else
 	BUILD_TYPE="release"
@@ -108,9 +107,9 @@ TRINITY_COMMON_DOCS="AUTHORS BUGS CHANGELOG CHANGES COMMENTS COMPLIANCE COMPILIN
 TRINITY_BASE_SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases"
 
 #reset TRINITY_SCM and inherit proper eclass
-if [[ ${BUILD_TYPE} = live ]]; then
+if [[ "${BUILD_TYPE}" == "live" ]]; then
 	# set default TRINITY_SCM if not set
-	[[ -z "$TRINITY_SCM" ]] && TRINITY_SCM=git
+	[[ -z "${TRINITY_SCM}" ]] && TRINITY_SCM="git"
 
 	case ${TRINITY_SCM} in
 		git) inherit git-r3 ;;
@@ -122,7 +121,7 @@ if [[ ${BUILD_TYPE} = live ]]; then
 	EGIT_BRANCH="${TRINITY_GIT_BRANCH:=master}"
 
 #	S="${WORKDIR}/${TRINITY_MODULE_NAME}"
-elif [[ "${BUILD_TYPE}" == release ]]; then
+elif [[ "${BUILD_TYPE}" == "release" ]]; then
 	mod_name="${TRINITY_MODULE_NAME}"
 	mod_ver="${TRINITY_MODULE_VER:=${PV}}"
 
@@ -133,7 +132,7 @@ elif [[ "${BUILD_TYPE}" == release ]]; then
 	if [[ -n "${TRINITY_MODULE_TYPE}" ]] ; then
 		SRC_URI="${TRINITY_BASE_SRC_URI}/R${mod_ver}/main/${TRINITY_MODULE_TYPE}/$TRINITY_TARBALL"
 	else
-		SRC_URI="${TRINITY_BASE_SRC_URI}/R${mod_ver}/main/$TRINITY_TARBALL"
+		SRC_URI="${TRINITY_BASE_SRC_URI}/R${mod_ver}/main/${TRINITY_TARBALL}"
 	fi
 
 	S="${WORKDIR}/${full_mod_name}"
@@ -150,22 +149,21 @@ if [[ -n "${TRINITY_EXTRAGEAR_PACKAGING}" ]]; then
 
 # @ECLASS-VARIABLE: TEG_DOC_DIR
 # @DESCRIPTION:
-# Change the documentation directory for extragear packages. The default is
-# ${S}/doc
+# Change the documentation directory for extragear packages. The default is ${S}/doc
 	TEG_DOC_DIR="${TEG_DOC_DIR:-${S}/doc}"
 
 	if [[ -n "${TRINITY_LANGS}" || -n "${TRINITY_DOC_LANGS}" ]]; then
 		for lang in ${TRINITY_LANGS} ${TRINITY_DOC_LANGS}; do
-			IUSE="${IUSE} linguas_${lang}"
+			IUSE+=" l10n_${lang}"
 		done
 
 		trinityhandbookdepend="
-			app-text/docbook-xml-dtd:4.2
+			app-text/docbook-xml-dtd
 			app-text/docbook-xsl-stylesheets
 		"
 		case ${TRINITY_HANDBOOK} in
 			yes | always)
-				DEPEDND+=" ${trinityhandbookdepend}"
+				DEPEND+=" ${trinityhandbookdepend}"
 				;;
 			optional)
 				IUSE+=" +handbook"
@@ -181,7 +179,7 @@ fi
 # A default src unpack function to either call
 # git-r3_src_unpack or base_src_unpack.
 trinity-base-2_src_unpack() {
-	if [[ ${BUILD_TYPE} = live ]]; then
+	if [[ "${BUILD_TYPE}" == "live" ]]; then
 		git-r3_src_unpack
 	else
 		base_src_unpack
@@ -193,7 +191,7 @@ trinity-base-2_src_unpack() {
 # @DESCRIPTION:
 # General pre-configure and pre-compile function for Trinity applications.
 trinity-base-2_src_prepare() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 
 	local dir lang
 
@@ -204,41 +202,41 @@ trinity-base-2_src_prepare() {
 	eapply_user
 	
 	# Handle documentation and translations for extragear packages
-	if [[ -n "$TRINITY_EXTRAGEAR_PACKAGING" ]]; then
+	if [[ -n "${TRINITY_EXTRAGEAR_PACKAGING}" ]]; then
 		# remove languages that have not been selected
-		if [[ -n $TRINITY_LANGS ]]; then
+		if [[ -n "${TRINITY_LANGS}" ]]; then
 			einfo "Removing unselected translations from ${TEG_PO_DIR}"
 			for dir in $(find ${TEG_PO_DIR} -mindepth 1 -maxdepth 1 -type d ); do
-				lang="$(basename "$dir")"
-				if ! has "$lang" ${TRINITY_LANGS}; then
-					eerror "Translation $lang seems to present in the package but is not supported by the ebuild"
-				elif ! has $lang ${LINGUAS}; then
-					rm -rf $dir
+				lang="$(basename "${dir}")"
+				if ! has "${lang}" ${TRINITY_LANGS}; then
+					eerror "Translation ${lang} seems to present in the package but is not supported by the ebuild"
+				elif ! has ${lang} ${L10N}; then
+					rm -rf ${dir}
 				fi
 			done
 		fi
 
-		# if we removed all translations we should point it
+		# If we removed all translations we should point it
 		if [[ -z $(find ${TEG_PO_DIR} -mindepth 1 -maxdepth 1 -type d) ]]; then
-			TRINITY_NO_TRANSLATIONS=yes
+			TRINITY_NO_TRANSLATIONS="yes"
 		fi
 		
-		# remove not selected documentation
-		if [[ -n $TRINITY_DOC_LANGS ]]; then
+		# Remove not selected documentation
+		if [[ -n "${TRINITY_DOC_LANGS}" ]]; then
 			einfo "Removing unselected documentation from ${TEG_DOC_DIR}"
 			for dir in $(find ${TEG_DOC_DIR} -mindepth 1 -maxdepth 1 -type d ); do
-				lang="$(basename "$dir")"
-				if [[	"$lang" == "${PN}" || \
-						"$lang" == "en" || \
-						"$lang" == "man" || \
-						"$lang" == "doxy" || \
-						"$lang" == "online" || \
-						"$lang" == "${TRINITY_MODULE_NAME}"  ]] ; then
-					echo -n; # do nothing it's main documentation or not related
-				elif ! has "$lang" ${TRINITY_LANGS}; then
-					eerror "Documentation translated to language $lang seems to present in the package but is not supported by the ebuild"
-				elif ! has $lang ${LINGUAS}; then
-					rm -rf $dir
+				lang="$(basename "${dir}")"
+				if [[	"${lang}" == "${PN}" || \
+						"${lang}" == "en" || \
+						"${lang}" == "man" || \
+						"${lang}" == "doxy" || \
+						"${lang}" == "online" || \
+						"${lang}" == "${TRINITY_MODULE_NAME}"  ]] ; then
+					echo -n; # Do nothing it's main documentation
+				elif ! has "${lang}" ${TRINITY_LANGS}; then
+					eerror "Documentation translated to language ${lang} seems to present in the package but is not supported by the ebuild"
+				elif ! has ${lang} ${L10N}; then
+					rm -rf ${dir}
 				fi
 			done
 		fi
@@ -252,19 +250,19 @@ trinity-base-2_src_prepare() {
 # @DESCRIPTION:
 # Call standard cmake-utils_src_onfigure and add some common arguments.
 trinity-base-2_src_configure() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	local eg_cmakeargs	
 	
 	[[ -n "${PREFIX}" ]] && export PREFIX="${TDEDIR}"
 
-	if [[ -n "$TRINITY_EXTRAGEAR_PACKAGING" ]]; then
+	if [[ -n "${TRINITY_EXTRAGEAR_PACKAGING}" ]]; then
 		eg_cmakeargs=( -DBUILD_ALL=ON )
-		if [[ "$TRINITY_NO_TRANSLATIONS" == "yes" ]]; then
+		if [[ "${TRINITY_NO_TRANSLATIONS}" == "yes" ]]; then
 			eg_cmakeargs=( -DBUILD_TRANSLATIONS=OFF "${eg_cmakeargs[@]}" )
 		else
 			eg_cmakeargs=( -DBUILD_TRANSLATIONS=ON "${eg_cmakeargs[@]}" )
 		fi
-		if [[ "${TRINITY_HANDBOOK}" == optional ]]; then
+		if [[ "${TRINITY_HANDBOOK}" == "optional" ]]; then
 			eg_cmakeargs=( -DBUILD_DOC="$(usex handbook)" "${eg_cmakeargs[@]}" )
 		fi
 	fi
@@ -291,7 +289,7 @@ trinity-base-2_src_configure() {
 # @DESCRIPTION:
 # Just call cmake-utils_src_compile.
 trinity-base-2_src_compile() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	
 	cmake-utils_src_compile
 }
@@ -300,11 +298,11 @@ trinity-base-2_src_compile() {
 # @DESCRIPTION:
 # Call standard cmake-utils_src_install and installs common documentation. 
 trinity-base-2_src_install() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	cmake-utils_src_install
 
-	if [[ -z "$TRINITY_BASE_NO_INSTALL_DOC" ||
-			"$TRINITY_BASE_NO_INSTALL_DOC" == "no" ]]; then
+	if [[ -z "${TRINITY_BASE_NO_INSTALL_DOC}" ||
+			"${TRINITY_BASE_NO_INSTALL_DOC}" == "no" ]]; then
 		trinity-base-2_create_tmp_docfiles
 		trinity-base-2_install_docfiles
 	fi
@@ -315,27 +313,27 @@ trinity-base-2_src_install() {
 # Create docfiles in the form ${TMP_DOCDIR}/path.to.docfile.COMMON_NAME
 # Also see the description for TRINITY_COMMON_DOCS and TMP_DOCDIR.
 trinity-base-2_create_tmp_docfiles() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	local srcdirs dir docfile targetdoc
 
-	if [[ -z "$TMP_DOCDIR" || ! -d "$TMP_DOCDIR" ]] ; then
-		TMP_DOCDIR="$T/docs"
+	if [[ -z "${TMP_DOCDIR}" || ! -d "${TMP_DOCDIR}" ]] ; then
+		TMP_DOCDIR="${T}/docs"
 		mkdir -p ${TMP_DOCDIR}
 	fi
 
-	if [[ -z "$@" ]] ; then
+	if [[ -z "${@}" ]] ; then
 		srcdirs="./"
 	else
-		srcdirs="$@"
+		srcdirs="${@}"
 	fi
 
 	einfo "Generating documentation list..."
-	for dir in $srcdirs; do
+	for dir in ${srcdirs}; do
 		for doc in ${TRINITY_COMMON_DOCS}; do
-			for docfile in $(find $dir -type f -name "*${doc}*"); do
+			for docfile in $(find ${dir} -type f -name *"${doc}"*); do
 				targetdoc="${docfile//\//.}"
 				targetdoc="${targetdoc#..}"
-				cp "${docfile}" "$TMP_DOCDIR/${targetdoc}"
+				cp "${docfile}" "${TMP_DOCDIR}/${targetdoc}"
 			done
 		done
 	done
@@ -346,11 +344,11 @@ trinity-base-2_create_tmp_docfiles() {
 # @DESCRIPTION:
 # Install documentation from ${TMP_DOCDIR} or from first argument.
 trinity-base-2_install_docfiles() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	local doc docdir
-	[[ -n "$TMP_DOCDIR" ]] && docdir="$TMP_DOCDIR"
-	[[ -n "$1" ]] && docdir="$1"
-	[[ -z "$docdir" ]] && die "docdir is not set in ${FUNCNAME}."
+	[[ -n "${TMP_DOCDIR}" ]] && docdir="${TMP_DOCDIR}"
+	[[ -n "${1}" ]] && docdir="${1}"
+	[[ -z "${docdir}" ]] && die "docdir is not set in ${FUNCNAME}."
 
 	pushd "${docdir}" >/dev/null
 	find . -maxdepth 1 -type f | while read doc; do

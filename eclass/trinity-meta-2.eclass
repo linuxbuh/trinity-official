@@ -1,34 +1,33 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 #
 # Original Author: fat-zer
 # Ported to git-r3 eclass and EAPI7 by E. Liddell
-# Purpose: make easy to install trinity ebuilds. 
+# Purpose: Make it easy to install Trinity ebuilds.
 #
 
-inherit trinity-base-2 trinity-functions-2 cmake-utils
+inherit trinity-base-2
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 HOMEPAGE="http://www.trinitydesktop.org/"
 
 # Set slot, TDEDIR, TRINITY_VER and PREFIX
 set-trinityver
-[[ -z "$SLOT" ]] && SLOT="$TRINITY_VER"
+[[ -z "${SLOT}" ]] && SLOT="${TRINITY_VER}"
 
 # Common dependencies
-DEPEND="trinity-base/tdelibs:${SLOT}"
+need-trinity
 
 # @FUNCTION: trinity-meta-2_set_trinity_submodule
 # @DESCRIPTION:
 # Sets the TRINITY_SUBMODULE variable to
 # the value obtained from ${PN} if it isn't set yet.
 trinity-meta-2_set_trinity_submodule() {
-	debug-print-function $FUNCNAME "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 
-	if [[ -z "$TRINITY_SUBMODULE" ]]; then
+	if [[ -z "${TRINITY_SUBMODULE}" ]]; then
 		TRINITY_SUBMODULE="${PN#${TRINITY_MODULE_NAME}-}"
 	fi
 }
@@ -38,7 +37,7 @@ trinity-meta-2_set_trinity_submodule() {
 # Default pkg_setup function.
 # It sets the correct ${S} necessary files.
 trinity-meta-2_pkg_setup() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	adjust-trinity-paths
 
 	trinity-meta-2_set_trinity_submodule
@@ -49,9 +48,9 @@ trinity-meta-2_pkg_setup() {
 # Default source extract function.
 # It tries to unpack only necessary files.
 trinity-meta-2_src_unpack() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 
-	if [[ ${BUILD_TYPE} = live ]]; then
+	if [[ "${BUILD_TYPE}" == "live" ]]; then
 		case "${TRINITY_SCM}" in
 			git)
 				git-r3_src_unpack
@@ -67,13 +66,13 @@ trinity-meta-2_src_unpack() {
 # A function to extract the source for a split TDE ebuild.
 # Also see KMMODULE, KMEXTRACT.
 trinity-meta-2_src_extract() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 
 	trinity-meta-2_create_extractlists
 
-	if [[ "${BUILD_TYPE}" = live ]]; then
+	if [[ "${BUILD_TYPE}" == "live" ]]; then
 		einfo "Exporting parts of working copy to ${S}"
-		case "$TRINITY_SCM" in
+		case "${TRINITY_SCM}" in
 			git) # Nothing we can do to prevent git from unpacking code
 				;;
 			*)  die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}"
@@ -81,7 +80,7 @@ trinity-meta-2_src_extract() {
 	else
 		local tarfile tarparams f extractlist
 
-		case $TRINITY_TARBALL in
+		case ${TRINITY_TARBALL} in
 			*.gz)
 				tarparams=" --gzip"
 				;;
@@ -98,23 +97,23 @@ trinity-meta-2_src_extract() {
 
 		ebegin "Unpacking parts of ${TRINITY_TARBALL} to ${WORKDIR}"
 
-		for f in $TSM_EXTRACT_LIST;	do
+		for f in ${TSM_EXTRACT_LIST};	do
 			extractlist+=" ${topdir}/${f}"
 		done
 
 		tar -xpf "${tarfile}" ${tarparams} -C "${WORKDIR}"  ${extractlist} 2> /dev/null  \
 				|| echo "tar extract command failed at least partially - continuing anyway"
 
-		# Make sure $S points to right place
+		# Make sure ${S} points to right place
 		[[ "${WORKDIR}/${topdir}" != "${S}" ]] && S="${WORKDIR}/${topdir}"
 	fi
 }
 
 # @FUNCTION: trinity-meta-2_rsync_copy 
 # @DESCRIPTION:
-# Copies files from svn or git repository to $S
+# Copies files from git repository to ${S}.
 trinity-meta-2_rsync_copy() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 
 	local rsync_options subdir targetdir wc_path escm
 	case "${TRINITY_SCM}" in
@@ -122,7 +121,7 @@ trinity-meta-2_rsync_copy() {
 		*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 	esac
 
-	rsync_options="--group --links --owner --perms --quiet --exclude=.svn/ --exclude=.git/"
+	rsync_options="--group --links --owner --perms --quiet --exclude=.git/"
 
 	# Copy ${TRINITY_MODULE_NAME} non-recursively (toplevel files)
 	rsync ${rsync_options} "${wc_path}"/* "${S}" \
@@ -132,7 +131,7 @@ trinity-meta-2_rsync_copy() {
 		rsync --recursive ${rsync_options} "${wc_path}/cmake" "${S}" \
 			|| die "rsync: can't export cmake files to '${S}'."
 	fi
-	# Copy all subdirectories listed in $TSM_EXTRACT_LIST
+	# Copy all subdirectories listed in ${TSM_EXTRACT_LIST}
 	for subdir in ${TSM_EXTRACT_LIST}; do
 		rsync --recursive ${rsync_options} "${wc_path}/${subdir}" \
 			"${S}/$(dirname subdir)" \
@@ -140,16 +139,16 @@ trinity-meta-2_rsync_copy() {
 	done
 }
 
-# @FUNCTION: trinity-meta_create_extractlists
+# @FUNCTION: trinity-meta-2_create_extractlists
 # @DESCRIPTION:
 # Creates lists of files and subdirectories to extract.
 # Also see descriptions of KMMODULE and KMEXTRACT.
 trinity-meta-2_create_extractlists() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	local submod
 	
-	# If $TSM_EXTRACT is not set assign it to dirs named in TRINITY_SUBMODULE
-	if [ -z "${TSM_EXTRACT}" ]; then
+	# If ${TSM_EXTRACT} is not set assign it to dirs named in TRINITY_SUBMODULE
+	if [[ -z "${TSM_EXTRACT}" ]]; then
 		for submod in ${TRINITY_SUBMODULE}; do
 			TSM_EXTRACT="${TSM_EXTRACT} ${submod}/"
 		done
@@ -171,22 +170,22 @@ trinity-meta-2_create_extractlists() {
 # @DESCRIPTION:
 # Default src prepare function. Currently it's only a stub.
 trinity-meta-2_src_prepare() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	local shared_patch_dir f f_name;
 
 	shared_patch_dir="${FILESDIR}/shared/${TRINITY_MODULE_NAME}-${PV}/patches/"
-	if [ -d "${shared_patch_dir}" ]; then
+	if [[ -d "${shared_patch_dir}" ]]; then
 		find "${shared_patch_dir}" -type f | while read f; do
 			f_name="$(basename "${f}")"
 			case "${f_name}" in
 			*.diff | *.patch ) epatch "${f}" ;;
 			*.gz ) cp "${f}" "${T}"
-				gunzip ${T}/${f_name}
-				epatch  ${T}/${f_name%.gz}
+				gunzip   "${T}/${f_name}"
+				epatch   "${T}/${f_name%.gz}"
 				;;
 			*.bz2 ) cp "${f}" "${T}"
-				bunzip2 ${T}/${f_name}
-				epatch  ${T}/${f_name%.bz2}
+				bunzip2  "${T}/${f_name}"
+				epatch   "${T}/${f_name%.bz2}"
 				;;
 			*) die "unknown patch type in the patch directory" ;;
 			esac
@@ -201,11 +200,11 @@ trinity-meta-2_src_prepare() {
 # Default source configure function. It sets apropriate cmake args.
 # Also see description of KMMODULE.
 trinity-meta-2_src_configure() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 
 	local item tsmargs mod
 
-	for item in $TRINITY_SUBMODULE; do
+	for item in ${TRINITY_SUBMODULE}; do
 		mod="${item^^}"
 		mod="${mod//-/_}"
 		tsmargs+=" -DBUILD_${mod}=ON"
@@ -223,7 +222,7 @@ trinity-meta-2_src_configure() {
 # @DESCRIPTION:
 # Just calls trinity-base_src_compile.
 trinity-meta-2_src_compile() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	
 	trinity-base-2_src_compile
 }
@@ -232,11 +231,11 @@ trinity-meta-2_src_compile() {
 # @DESCRIPTION:
 # Calls default cmake install function and installs documentation.
 trinity-meta-2_src_install() {
-	debug-print-function ${FUNCNAME} "$@"
+	debug-print-function ${FUNCNAME} "${@}"
 	
 	TRINITY_BASE_NO_INSTALL_DOC="yes" trinity-base-2_src_install
 
-	trinity-base-2_create_tmp_docfiles $TSM_EXTRACT
+	trinity-base-2_create_tmp_docfiles ${TSM_EXTRACT}
 	trinity-base-2_install_docfiles
 }
 
