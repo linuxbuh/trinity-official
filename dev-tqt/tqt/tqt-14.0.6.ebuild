@@ -1,4 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -48,7 +49,7 @@ TQTBASE="/usr/tqt3"
 S="${WORKDIR}/tqt3-trinity-${PV}"
 
 pkg_setup() {
-	export QTDIR="${S}"
+	export TQTDIR="${S}"
 
 	CXX=$(tc-getCXX)
 	if [[ ${CXX/g++/} != ${CXX} ]]; then
@@ -89,9 +90,6 @@ src_prepare() {
 	find "${S}"/mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_RPATH.*:QMAKE_RPATH =:' || die
 
-	# set c/xxflags and ldflags
-	strip-flags
-
 	sed -i -e "s:QMAKE_CFLAGS_RELEASE.*=.*:QMAKE_CFLAGS_RELEASE=${CFLAGS}:" \
 		   -e 's:QMAKE_CFLAGS\t\t=.*:QMAKE_CFLAGS =:' \
 		   -e "s:QMAKE_CXXFLAGS_RELEASE.*=.*:QMAKE_CXXFLAGS_RELEASE=${CXXFLAGS}:" \
@@ -129,7 +127,6 @@ src_configure() {
 	# during emerge as it makes TQt much happier.
 	addwrite "${TQTBASE}/etc/settings"
 	addwrite "${HOME}/.qt"
-	addwrite "${HOME}/.tqt"
 
 	# Common options
 	myconf=" -sm -thread -stl -no-verbose -largefile -no-pch -inputmethod"
@@ -172,6 +169,10 @@ src_compile() {
 
 	# Compile TQt plugins (if any selected)
 	emake sub-plugins || die
+	
+	# Point to libs for the tools to build fine too
+	export DYLD_LIBRARY_PATH="${S}/lib:${DYLD_LIBRARY_PATH}"
+	export LD_LIBRARY_PATH="${S}/lib:${LD_LIBRARY_PATH}"
 
 	# Compile TQDesigner (TQuic is needed by tdelibs), TQAssistant and friends (msg2tqm, qembed..)
 	emake sub-tools || die

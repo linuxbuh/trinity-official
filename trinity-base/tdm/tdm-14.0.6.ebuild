@@ -1,7 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
@@ -9,13 +8,13 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
 
-IUSE="pam xdmcp xcomposite sak +xrandr"
+IUSE="pam xdmcp xcomposite sak +xrandr +hwlib +svg"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
-	xrandr? ( x11-libs/libXrandr )
+	svg? ( =media-libs/libart_lgpl-${PV} )
 	=trinity-base/tdelibs-${PV}[xrandr?]
 	sys-apps/dbus
 	x11-libs/libXtst
@@ -35,11 +34,12 @@ pkg_setup() {
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XTEST=ON
-		-DWITH_LIBART=ON
+		-DWITH_LIBART="$(usex svg)"
 		-DWITH_SHADOW=ON
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XDMCP="$(usex xdmcp)"
 		-DWITH_XRANDR="$(usex xrandr)"
+		-DWITH_TDEHWLIB="$(usex hwlib)"
 		-DWITH_PAM="$(usex pam)"
 		-DTDM_PAM_SERVICE=tde
 	)

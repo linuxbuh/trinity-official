@@ -1,7 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
@@ -28,7 +27,7 @@ pkg_postinst () {
 		einfo "It can be overriden on a user-level by adding:"
 		einfo "  [super-user-command]"
 		einfo "    super-user-command=su"
-		einfo "to the kdeglobal config file which is should be usually"
+		einfo "to the kdeglobals config file which is should be usually"
 		einfo "located in the ~/.trinity/share/config/ directory."
 
 	fi

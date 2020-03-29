@@ -1,7 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
@@ -10,7 +9,7 @@ inherit trinity-meta-2
 DESCRIPTION="The Trinity Control Center"
 
 KEYWORDS="~amd64 ~x86"
-IUSE="samba logitech-mouse ieee1394 +xrandr +hwlib +xrandr"
+IUSE="samba logitech-mouse ieee1394 +svg +hwlib +xrandr "
 
 DEPEND="x11-libs/libX11
 	x11-libs/libXrender
@@ -18,7 +17,6 @@ DEPEND="x11-libs/libX11
 	samba? ( net-fs/samba )
 	logitech-mouse? ( virtual/libusb:0 )
 	ieee1394? ( sys-libs/libraw1394 )
-	xrandr? ( x11-libs/libXrandr )
 	=trinity-base/tdelibs-${PV}[xrandr?]
 	=trinity-base/libkonq-${PV}
 	=trinity-base/kicker-${PV}"
@@ -29,7 +27,8 @@ RDEPEND="${DEPEND}
 	=trinity-base/tdebase-data-${PV}
 	=trinity-base/tdesu-${PV}
 	=trinity-base/khelpcenter-${PV}
-	=trinity-base/khotkeys-${PV}"
+	=trinity-base/khotkeys-${PV}
+	svg? ( =media-libs/libart_lgpl-${PV} )"
 
 TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/"
 
@@ -43,6 +42,7 @@ src_configure() {
 		-DWITH_LIBRAW1394="$(usex ieee1394)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_TDEHWLIB="$(usex hwlib)"
+		-DWITH_LIBART="$(usex svg)"
 		-DXSCREENSAVER_DIR="/usr/$(get_libdir)/misc/xscreensaver"
 	)
 
