@@ -12,7 +12,7 @@ DESCRIPTION="The Trinity help center."
 
 RDEPEND="
 	=trinity-base/tdebase-tdeioslaves-${PV}
-	www-misc/htdig"
+	|| ( www-misc/htdig www-misc/hldig )"
 
 pkg_setup() {
 	# Issue some warning if MAKEOPTS -j parameter is higher than 4
