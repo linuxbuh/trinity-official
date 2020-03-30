@@ -28,7 +28,7 @@ pkg_postinst () {
 		einfo "It can be overriden on a user-level by adding:"
 		einfo "  [super-user-command]"
 		einfo "    super-user-command=su"
-		einfo "to the kdeglobals config file which is should be usually"
+		einfo "to the kdeglobals config file, which is usually"
 		einfo "located in the ~/.trinity/share/config/ directory."
 	fi
 }

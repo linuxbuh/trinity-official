@@ -20,8 +20,10 @@ SLOT="${TRINITY_VER}"
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 
 IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm elogind
-	networkmanager openexr pcsc-lite aspell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
-	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
+	networkmanager openexr pcsc-lite aspell ispell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
+	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug spell"
+
+REQUIRED_USE="spell? ( aspell ispell )"
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	dev-libs/libxslt
@@ -47,8 +49,11 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	jpeg2k? ( media-libs/jasper )
 	lua? ( dev-lang/lua:* )
 	openexr? ( media-libs/openexr )
-	aspell? ( app-text/aspell )
 	sudo? ( app-admin/sudo )
+	spell? (
+		aspell? ( app-text/aspell )
+		ispell? ( app-text/ispell )
+	)
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
 	lzma? ( app-arch/xz-utils )
@@ -176,30 +181,38 @@ EOF
 
 pkg_postinst () {
 	if use sudo; then
+		echo
 		einfo "Remember that the sudo use flag sets only the default superuser command."
 		einfo "It can be overriden on a user-level by adding:"
 		einfo "  [super-user-command]"
 		einfo "    super-user-command=su"
-		einfo "to the kdeglobals config file which is should be usually"
+		einfo "to the kdeglobals config file, which is usually"
 		einfo "located in the ~/.trinity/share/config/ directory."
+		echo
 	fi
 	if use malloc; then
-		einfo "You have build TDE with it's own malloc implementation."
+		echo
+		einfo "You have build TDE with its own malloc implementation."
 		einfo "That might result in better memory use for you when using TDE."
 		einfo "But it could also result in a slightly different performance."
 		einfo "With Gentoo you are free to choose what works better for you."
 		einfo "If you remove the malloc USE flag, GLIBC's malloc will be used."
+		echo
 	fi
 	if ! use hwlib; then
 		for flag in consolekit networkmanager upower systemd elogind old_udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
 			use $flag && \
-				ewarn "USE=\"$flag\" is passed, but it doesn't change anything due to" && \
-				ewarn "$flag support in ${P} take effect only if the TDE hwlib is enabled."
+				echo
+				ewarn "USE=\"$flag\" is passed, but it doesn't change anything because" && \
+				ewarn "$flag support in ${P} takes effect only if the TDE hwlib is enabled."
+				echo
 		done
 
 	fi
 	if use hwlib; then
+		echo
 		einfo "Please add your user to the plugdev group to be able"
 		einfo "to use the features of the TDE hwlibdaemons like suspend."
+		echo
 	fi
 }
