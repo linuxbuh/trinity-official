@@ -19,4 +19,7 @@ need-trinity
 
 SLOT="${TRINITY_VER}"
 
-RDEPEND+=" net-wireless/wireless-tools"
+RDEPEND+=" 
+	net-wireless/wireless-tools
+	|| ( net-misc/dhcp net-misc/dhcpcd )
+"
