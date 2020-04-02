@@ -8,7 +8,7 @@ TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="bs de es fr hu it ja nl
-		pl pt_BR ru sl sv tr zh_CN zh_TW"
+	pl pt_BR ru sl sv tr zh_CN zh_TW"
 
 inherit trinity-base-2
 
@@ -19,6 +19,14 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 need-trinity
 
 SLOT="${TRINITY_VER}"
+
+src_configure() {
+	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
+	)
+
+	trinity-base-2_src_configure
+}
 
 pkg_postinst () {
 	echo

@@ -25,6 +25,7 @@ SLOT="${TRINITY_VER}"
 
 src_configure() {
 	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
 		-DWITH_NVCONTROL=OFF
 	)
 

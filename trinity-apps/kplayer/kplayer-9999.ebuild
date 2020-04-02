@@ -19,9 +19,17 @@ DESCRIPTION="KPlayer is a TDE media player based on mplayer."
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-DEPEND="media-video/mplayer"
-RDEPEND="${DEPEND}"
-
 need-trinity
 
 SLOT="${TRINITY_VER}"
+
+DEPEND+=" media-video/mplayer"
+RDEPEND+=" ${DEPEND}"
+
+src_configure() {
+	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
+	)
+
+	trinity-base-2_src_configure
+}

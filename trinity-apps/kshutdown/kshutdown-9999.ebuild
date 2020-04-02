@@ -7,9 +7,8 @@ TRINITY_MODULE_TYPE="applications"
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
-TRINITY_LANGS="ar bg cs de es fr hu it nl
-		pl pt_BR ru sk sv tr zh_CN"
-
+TRINITY_LANGS="ar bg cs de es fr hu it nl pl pt_BR ru sk sv tr zh_CN"
+		
 TRINITY_DOC_LANGS="de"
 
 inherit trinity-base-2
@@ -18,19 +17,20 @@ DESCRIPTION="A graphical shutdown utility for TDE"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-IUSE="extras"
-
-RDEPEND="
-	=trinity-base/tdesu-${PV}
-	=trinity-base/kcontrol-${PV}
-	=trinity-base/kdialog-${PV}"
-
 need-trinity
 
 SLOT="${TRINITY_VER}"
 
+IUSE+=" extras"
+
+RDEPEND+="
+	=trinity-base/tdesu-${PV}
+	=trinity-base/kcontrol-${PV}
+	=trinity-base/kdialog-${PV}"
+
 src_configure() {
 	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
 		-DBUILD_EXTRAS="$(usex extras)"
 	)
 

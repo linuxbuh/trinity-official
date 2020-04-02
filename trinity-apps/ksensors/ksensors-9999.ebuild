@@ -6,18 +6,26 @@ TRINITY_MODULE_TYPE="applications"
 
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
-TRINITY_LANGS="cs de en es fr nb nl pl sv"
-TRINITY_DOC_LANGS="en"
+
+TRINITY_LANGS="cs de es fr nb nl pl sv"
 
 inherit trinity-base-2
 
-DESCRIPTION="A TDE GUI frontend to lm-sensors"
+DESCRIPTION="A TDE GUI frontend to LM-Sensors"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
-
-DEPEND="sys-apps/lm-sensors"
-RDEPEND="${DEPEND}"
 
 need-trinity
 
 SLOT="${TRINITY_VER}"
+
+DEPEND+=" sys-apps/lm-sensors"
+RDEPEND+=" ${DEPEND}"
+
+src_configure() {
+	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
+	)
+
+	trinity-base-2_src_configure
+}

@@ -16,12 +16,12 @@ DESCRIPTION="A simple backup system for TDE."
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-RDEPEND="=trinity-base/kcontrol-${PV}
-	app-backup/rdiff-backup"
-
 need-trinity
 
 SLOT="${TRINITY_VER}"
+
+RDEPEND+=" =trinity-base/kcontrol-${PV}
+	app-backup/rdiff-backup"
 
 pkg_postinst () {
 	echo

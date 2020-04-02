@@ -22,7 +22,6 @@ SLOT="${TRINITY_VER}"
 
 IUSE+=" dvb dpms gstreamer xinerama vorbis encode xcb"
 
-
 DEPEND+=" 
 	x11-base/xorg-proto
 	media-libs/xine-lib
@@ -40,6 +39,7 @@ RDEPEND+=" ${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
 		-DWITH_XTEST=ON
 		-DWITH_DPMS="$(usex dpms)"
 		-DWITH_XINERAMA="$(usex xinerama)"

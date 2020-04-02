@@ -20,5 +20,5 @@ need-trinity
 
 SLOT="${TRINITY_VER}"
 
-DEPEND="=trinity-base/konsole-${PV}"
-RDEPEND="${DEPEND}"
+DEPEND+=" =trinity-base/konsole-${PV}"
+RDEPEND+=" ${DEPEND}"

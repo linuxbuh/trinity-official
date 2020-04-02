@@ -6,8 +6,11 @@ TRINITY_MODULE_TYPE="applications"
 
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
-TRINITY_LANGS="ar bg cs da de en el es fi fr hi hu it ja km lt nb nl pa pl pt pt_BR ru sl_SI sv tr uk zh_CN zh_TW"
-TRINITY_DOC_LANGS="cs de en fi hu nb"
+
+TRINITY_LANGS="ar bg cs da de el es fi fr hi hu it ja km lt
+	nb nl pa pl pt pt_BR ru sl_SI sv tr uk zh_CN zh_TW"
+
+TRINITY_DOC_LANGS="cs de fi hu nb"
 
 inherit trinity-base-2
 
@@ -15,12 +18,20 @@ DESCRIPTION="A TDE frontend for power management"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-DEPEND="x11-libs/libXScrnSaver
-	x11-libs/libXext
-	x11-libs/libXtst
-	=dev-libs/dbus-1-tqt-${PV}"
-RDEPEND="${DEPEND}"
-
 need-trinity
 
 SLOT="${TRINITY_VER}"
+
+DEPEND+=" x11-libs/libXScrnSaver
+	x11-libs/libXext
+	x11-libs/libXtst
+	=dev-libs/dbus-1-tqt-${PV}"
+RDEPEND+=" ${DEPEND}"
+
+src_configure() {
+	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
+	)
+
+	trinity-base-2_src_configure
+}

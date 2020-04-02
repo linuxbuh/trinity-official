@@ -18,3 +18,10 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 need-trinity
 
 SLOT="${TRINITY_VER}"
+
+src_configure() {
+	mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
+
+	trinity-base-2_src_configure
+}

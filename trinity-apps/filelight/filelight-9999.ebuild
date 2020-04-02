@@ -7,8 +7,12 @@ TRINITY_MODULE_TYPE="applications"
 
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
-TRINITY_LANGS="az bg br ca cs cy da de el en_GB es et fr ga gl is it ja ka lt nb nl pl pt pt_BR ro ru rw sr sr@Latn sv ta tr uk"
-TRINITY_DOC_LANGS=" da es et it pt ru sv"
+
+TRINITY_LANGS="az bg br ca cs cy da de el en_GB es
+	et fr ga gl is it ja ka lt nb nl pl pt pt_BR
+	ro ru rw sr sr@Latn sv ta tr uk"
+
+TRINITY_DOC_LANGS="da es et it pt ru sv"
 
 inherit trinity-base-2
 
