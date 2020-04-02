@@ -19,16 +19,20 @@ need-trinity
 
 SLOT="${TRINITY_VER}"
 
-IUSE+=" cisco smartcard openvpn"
+IUSE+=" cisco smartcard +openvpn strongswan pptpd libreswan"
 
 # Other VPN clients will be added by request, controlled over USE.
+#		 If you miss any, please let us know! 
 
 DEPEND+=" sys-apps/net-tools
 	dev-libs/libgcrypt"
 RDEPEND+=" ${DEPEND}
 	cisco? ( net-misc/vpnc )
 	smartcard? ( dev-libs/openct )
-	openvpn? ( net-vpn/openvpn )"
+	openvpn? ( net-vpn/openvpn )
+	strongswan? ( net-vpn/strongswan )
+	libreswan? ( net-vpn/libreswan )
+	pptpd? ( net-vpn/pptpd )"
 
 src_configure() {
 	mycmakeargs=(
