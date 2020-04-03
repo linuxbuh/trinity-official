@@ -22,6 +22,6 @@ SLOT="${TRINITY_VER}"
 src_configure() {
 	mycmakeargs=(
 		-DBUILD_TRANSLATIONS=ON
-
+	)
 	trinity-base-2_src_configure
 }

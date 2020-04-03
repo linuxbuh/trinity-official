@@ -23,7 +23,8 @@ IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +i
 	networkmanager openexr pcsc-lite aspell ispell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
 	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug spell"
 
-REQUIRED_USE="spell? ( aspell ispell )"
+REQUIRED_USE="
+	spell? ( || ( aspell ispell ) )"
 
 MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	dev-libs/libxslt
@@ -138,7 +139,7 @@ src_configure() {
 
 src_install() {
 	trinity-base-2_src_install
-	
+
 	if use ssl; then
 		# Make TDE to use our system certificates
 		rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
