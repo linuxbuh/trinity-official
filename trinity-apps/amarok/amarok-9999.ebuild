@@ -34,17 +34,17 @@ SLOT="${TRINITY_VER}"
 #
 # - No Support for DAAP because it's not tested if that works with Mongrel2.
 #
-# - Building without MP4 support will fail at the moment.
-#
 # - As of January 2020, building with anything newer than xine-lib-1.2.9 will fail.
 #
 # - Otherwise the ebuild should offer all what can be done with CMake at the moment.
-#   As of January 2020, work is in process to get the CMake port done.
 
-IUSE="konqsidebar +xine ipod riokarma ifp njb mtp +mp4 inotify visualization"
+IUSE+=" konqsidebar +xine ipod riokarma ifp njb mtp mp4
+	inotify visualization amazon mysql postgres opengl"
 
+REQUIRED_USE="xine"
 
-DEPEND="
+DEPEND+="
+	dev-lang/ruby:*
 	media-libs/taglib
 	<media-libs/xine-lib-1.2.10
 	dev-db/sqlite
@@ -53,16 +53,20 @@ DEPEND="
 	riokarma? ( media-libs/libkarma )
 	ifp? ( media-libs/libifp )
 	njb? ( media-libs/libnjb )
+	opengl? ( virtual/opengl )
+	postgres? ( dev-db/postgresql )
 	mtp? ( media-libs/libmtp )
+	mysql? ( virtual/mysql )
 	visualization? (
 		media-libs/libsdl
 		media-plugins/libvisual-plugins
 	)
 "
-RDEPEND="${DEPEND}"
+RDEPEND+=" ${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
+		-DWITH_AMAZON="$(usex amazon)"
 		-DWITH_KONQSIDEBAR="$(usex konqsidebar)"
 		-DWITH_XINE="$(usex xine)"
 		-DWITH_IPOD="$(usex ipod)"
@@ -72,7 +76,11 @@ src_configure() {
 		-DWITH_MTP="$(usex mtp)"
 		-DWITH_MP4V2="$(usex mp4)"
 		-DWITH_INOTIFY="$(usex inotify)"
+		-DWITH_OPENGL="$(usex opengl)"
 		-DWITH_LIBVISUAL="$(usex visualization)"
+		-DWITH_MYSQL="$(usex mysql)"
+		-DWITH_POSTGRESQL="$(usex postgres)"
+		-DWITH_SYSTEM_SQLITE=ON
 		-DWITH_YAUAP=OFF
 		-DWITH_AKODE=OFF
 		-DWITH_DAAP=OFF
