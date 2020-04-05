@@ -19,8 +19,8 @@ SLOT="${TRINITY_VER}"
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 
-IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm elogind
-	networkmanager openexr pcsc-lite aspell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
+IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma +svg +idn +shm elogind
+	networkmanager openexr aspell sudo tiff utempter elficons +ssl kernel_linux
 	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
 
 KEYWORDS="~amd64 ~x86"
@@ -65,10 +65,7 @@ DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}
 	hwlib? (
 		acct-group/plugdev
-		!udevil? ( !udisks? ( !old_udisks? ( sys-apps/pmount ) ) )
-		pcsc-lite? ( sys-apps/pcsc-lite )
-		pkcs11? ( dev-libs/pkcs11-helper )
-		cryptsetup? ( sys-fs/cryptsetup )
+		!udisks? ( !old_udisks? ( sys-apps/pmount ) )
 		networkmanager? ( net-misc/networkmanager )
 		consolekit? ( sys-auth/consolekit )
 		upower? ( sys-power/upower )
@@ -76,8 +73,14 @@ RDEPEND+=" ${MY_DEPEND}
 		elogind? ( sys-auth/elogind )
 		old_udisks? ( sys-fs/udisks:0 )
 		udisks? ( sys-fs/udisks:2 )
-		udevil? ( sys-apps/udevil )
 	)"
+
+#Revisit these USE flags and dependencies for 14.0.8
+#pkcs11 pcsc-lite udevil cryptsetup 
+#		pcsc-lite? ( sys-apps/pcsc-lite )
+#		pkcs11? ( dev-libs/pkcs11-helper )
+#		cryptsetup? ( sys-fs/cryptsetup )
+#		udevil? ( sys-apps/udevil )
 
 src_configure() {
 	local enable_logind="OFF"
@@ -105,24 +108,20 @@ src_configure() {
 		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
 		-DWITH_UDISKS="$(usex old_udisks)"
 		-DWITH_UDISKS2="$(usex udisks)"
-		-DWITH_UDEVIL="$(usex udevil)"
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex avahi)"
-		-DWITH_CRYPTSETUP="$(usex cryptsetup)"
 		-DWITH_CUPS="$(usex cups)"
 		-DWITH_INOTIFY="$(usex kernel_linux)"
 		-DWITH_JASPER="$(usex jpeg2k)"
 		-DWITH_LUA="$(usex lua)"
 		-DWITH_LZMA="$(usex lzma)"
 		-DWITH_OPENEXR="$(usex openexr)"
-		-DWITH_PCSC="$(usex pcsc-lite)"
 		-DWITH_ASPELL="$(usex aspell)"
 		-DWITH_GAMIN="$(usex fam)"
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_UTEMPTER="$(usex utempter)"
 		-DUTEMPTER_HELPER="/usr/sbin/utempter"
 		-DWITH_UPOWER="$(usex upower)"
-		-DWITH_PKCS="$(usex pkcs11)"
 		-DWITH_CONSOLEKIT="$(usex consolekit)"
 		-DWITH_LOGINDPOWER="${enable_logind}"
 		-DWITH_NETWORK_MANAGER_BACKEND="$(usex networkmanager)"
@@ -131,6 +130,14 @@ src_configure() {
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
 		-DWITH_TDEICONLOADER_DEBUG="$(usex debug)"
 	)
+
+	#These options are not available in this version of the package.
+	#Revisit for 14.0.8.
+
+	#		-DWITH_UDEVIL="$(usex udevil)"
+	#		-DWITH_CRYPTSETUP="$(usex cryptsetup)"
+	#		-DWITH_PCSC="$(usex pcsc-lite)"
+	#		-DWITH_PKCS="$(usex pkcs11)"
 
 	trinity-base-2_src_configure
 }

@@ -9,6 +9,7 @@ inherit trinity-meta-2
 DESCRIPTION="kicker applet for Trinity and X clipboard management"
 KEYWORDS="~amd64 ~x86"
 DEPEND="x11-libs/libXfixes"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
