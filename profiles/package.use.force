@@ -1,3 +1,8 @@
 # Chris (2020-04-22)
 # Building without tdehwlib segfaults, but you can try and report.
-=trinity-libs/tdelibs-9999 hwlib
+=trinity-base/tdelibs-9999 hwlib
+
+Chris (2020-04-22)
+# As of today Kaffeine can be only build with xinerama support.
+# If that is fixed, the build option will be optional again.
+trinity-apps/kaffeine xinerama

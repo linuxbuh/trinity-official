@@ -21,7 +21,7 @@ need-trinity
 
 SLOT="${TRINITY_VER}"
 
-IUSE+=" dvb dpms gstreamer vorbis encode xcb"
+IUSE+=" dvb dpms gstreamer vorbis encode xcb xinerama"
 
 # As of April 2020 Kaffeine can be only build with xinerama support.
 # If that is fixed, the build option will be optional again.
@@ -38,7 +38,7 @@ DEPEND+="
 	encode? ( media-sound/lame  )
 	vorbis? ( media-libs/libvorbis )
 	xcb? ( x11-libs/libxcb )
-	x11-libs/libXinerama
+	xinerama? ( x11-libs/libXinerama )
 	dvb? ( virtual/linuxtv-dvb-headers )"
 RDEPEND+=" ${DEPEND}"
 
@@ -47,7 +47,7 @@ src_configure() {
 		-DBUILD_TRANSLATIONS=ON
 		-DWITH_XTEST=ON
 		-DWITH_DPMS="$(usex dpms)"
-		-DWITH_XINERAMA=ON
+		-DWITH_XINERAMA="$(usex xinerama)"
 		-DWITH_XCB="$(usex xcb)"
 		-DWITH_GSTREAMER="$(usex gstreamer)"
 		-DWITH_OGGVORBIS="$(usex vorbis)"
