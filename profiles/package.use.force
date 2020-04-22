@@ -1,0 +1,3 @@
+# Chris (2020-04-22)
+# Building without tdehwlib segfaults, but you can try and report.
+=trinity-libs/tdelibs-9999 hwlib
