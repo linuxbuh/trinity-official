@@ -15,6 +15,7 @@ DEPEND="${RDEPEND}"
 
 src_configure() {
 	mycmakeargs=(
+		-DWITH_SHADOW=ON
 		-DWITH_PAM="$(usex pam)"
 		-DKCHECKPASS_PAM_SERVICE=tde
 	)
