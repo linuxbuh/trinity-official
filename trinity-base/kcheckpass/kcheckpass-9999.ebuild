@@ -10,8 +10,7 @@ inherit trinity-meta-2
 DESCRIPTION="A simple password checker, used by any software in need of user authentication."
 IUSE="pam"
 
-RDEPEND="
-	pam? ( sys-libs/pam )"
+RDEPEND="pam? ( trinity-base/tdebase-pam )"
 DEPEND="${RDEPEND}"
 
 src_configure() {

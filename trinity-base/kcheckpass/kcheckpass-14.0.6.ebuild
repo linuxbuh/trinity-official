@@ -10,7 +10,7 @@ DESCRIPTION="A simple password checker, used by any software in need of user aut
 IUSE="pam"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND="pam? ( sys-libs/pam )"
+RDEPEND="pam? ( trinity-base/tdebase-pam )"
 DEPEND="${RDEPEND}"
 
 src_configure() {
