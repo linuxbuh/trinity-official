@@ -58,6 +58,7 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
 	lzma? ( app-arch/xz-utils )
+	hwlib? ( virtual/libudev:= )
 	xrandr? ( x11-libs/libXrandr )
 	xcomposite? ( x11-libs/libXcomposite )
 	elficons? ( =sys-libs/libr-${PV} )
