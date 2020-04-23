@@ -6,4 +6,12 @@ TRINITY_MODULE_NAME="tdepim"
 
 inherit trinity-meta-2
 
-DESCRIPTION="TDE library for processing messages in MIME format"
+DESCRIPTION="Trinity PGP library"
+
+DEPEND="
+	dev-libs/libical
+	=trinity-base/ktnef-${PV}
+	=trinity-base/libkmime-${PV}"
+RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdepim/"

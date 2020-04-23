@@ -6,4 +6,4 @@ TRINITY_MODULE_NAME="tdepim"
 
 inherit trinity-meta-2
 
-DESCRIPTION="TDE library for processing messages in MIME format"
+DESCRIPTION="TDE library to enable support for sieve, used by KMail"
