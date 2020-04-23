@@ -17,7 +17,6 @@ DEPEND="x11-libs/libXt
 RDEPEND="${DEPEND}"
 
 src_configure () {
-
 	mycmakeargs=(
 		-DWITH_OPENGL="$(usex opengl)"
 	)

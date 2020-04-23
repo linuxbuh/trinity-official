@@ -11,9 +11,8 @@ need-arts optional
 
 DESCRIPTION="Trinity hotkey daemon"
 
-MY_DEPEND="x11-libs/libXtst"
-DEPEND+=" ${MY_DEPEND}"
-RDEPEND+=" ${MY_DEPEND}"
+DEPEND="x11-libs/libXtst"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(

@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
+
 EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
@@ -9,7 +9,9 @@ inherit trinity-meta-2
 
 DESCRIPTION="The part of TDE UI that handles icons, desktop, screensaver etc"
 IUSE="pam xscreensaver"
+
 KEYWORDS="~amd64 ~x86"
+
 COMMON_DEPEND="x11-libs/libXrender
 	x11-libs/libXcursor
 	=dev-libs/dbus-1-tqt-${PV}

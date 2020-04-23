@@ -1,7 +1,7 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
+
 EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
@@ -27,6 +27,7 @@ src_configure() {
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XFIXES="$(usex xcomposite)"
 		-DWITH_XRENDER="$(usex xcomposite)"
+		-DWITH_OPENGL="$(usex opengl)"
 		-DWITH_XRANDR="$(usex xrandr)"
 		-DWITH_LIBCONFIG="$(usex libconfig)"
 		-DWITH_PCRE="$(usex pcre)"

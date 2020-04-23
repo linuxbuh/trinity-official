@@ -1,9 +1,10 @@
 # Copyright 1999-2016 Gentoo Foundation
+# Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
 TRINITY_MODULE_TYPE="dependencies"
-TRINITY_MODULE_NAME="${PN}"
+TRINITY_MODULE_NAME="tqtinterface"
 
 inherit trinity-base-2
 
@@ -23,7 +24,7 @@ pkg_setup() {
 src_configure() {
 	mycmakeargs=(
 		-DQT_PREFIX_DIR="${TQTDIR}"
-	 )
+	)
 
 	 cmake-utils_src_configure
 }

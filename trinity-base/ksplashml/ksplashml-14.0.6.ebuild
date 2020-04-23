@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
+
 EAPI="7"
 TRINITY_MODULE_NAME="tdebase"
 
@@ -9,11 +9,11 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity splashscreen framework (of Trinity itself, not of individual apps)"
 KEYWORDS="~amd64 ~x86"
+
 IUSE="xinerama"
 
-DEPEND="x11-libs/libXcursor
-	xinerama? ( x11-base/xorg-proto )"
-RDEPEND="$DEPEND"
+DEPEND="xinerama? ( x11-base/xorg-proto )"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(

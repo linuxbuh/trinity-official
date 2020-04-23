@@ -138,7 +138,7 @@ src_configure() {
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
 	use xrandr	&& myconf+=" -xrandr" || myconf+=" -no-xrandr"
 	use mng       	&& myconf+=" -qt-imgfmt -system-libmng" || myconf+=" -no-imgfmt-mng"
-	use cups		&& myconf+=" -cups" || myconf+=" -no-cups"
+	use cups	&& myconf+=" -cups" || myconf+=" -no-cups"
 	use opengl	&& myconf+=" -enable-module=opengl -no-dlopen-opengl" || myconf+=" -disable-opengl"
 	use xinerama    && myconf+=" -xinerama" || myconf+=" -no-xinerama"
 	use ipv6       	&& myconf+=" -ipv6" || myconf+=" -no-ipv6"
@@ -147,12 +147,12 @@ src_configure() {
 
 	use debug	&& myconf+=" -debug" || myconf+=" -release -no-g++-exceptions -no-exceptions"
 
-	use mysql		&& myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql" || myconf+=" -no-sql-mysql"
+	use mysql	&& myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql" || myconf+=" -no-sql-mysql"
 	use postgres	&& myconf+=" -plugin-sql-psql -I/usr/include/postgresql/server -I/usr/include/postgresql/pgsql -I/usr/include/postgresql/pgsql/server" || myconf+=" -no-sql-psql"
-	use firebird    	&& myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
-	use sqlite		&& myconf+=" -plugin-sql-sqlite -plugin-sql-sqlite3" || myconf+=" -no-sql-sqlite -no-sql-sqlite3"
+	use firebird    && myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
+	use sqlite	&& myconf+=" -plugin-sql-sqlite -plugin-sql-sqlite3" || myconf+=" -no-sql-sqlite -no-sql-sqlite3"
 
-	use tablet		&& myconf+=" -tablet" || myconf+=" -no-tablet"
+	use tablet	&& myconf+=" -tablet" || myconf+=" -no-tablet"
 
 	export YACC='byacc -d'
 	tc-export CC CXX

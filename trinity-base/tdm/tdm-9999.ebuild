@@ -16,6 +16,7 @@ DEPEND="pam? ( trinity-base/tdebase-pam )
 	xcomposite? ( x11-libs/libXcomposite )
 	svg? ( =media-libs/libart_lgpl-${PV} )
 	=trinity-base/tdelibs-${PV}[xrandr?]
+	sys-apps/dbus
 	x11-libs/libXtst
 	=trinity-base/kcontrol-${PV}"
 
