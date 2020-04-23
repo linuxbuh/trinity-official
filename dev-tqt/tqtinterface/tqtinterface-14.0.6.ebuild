@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 SLOT="0"
 
 DEPEND="~dev-tqt/tqt-${PV}
-	virtual/glu )"
+	virtual/glu"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
