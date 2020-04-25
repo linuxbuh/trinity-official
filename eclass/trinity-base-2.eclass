@@ -329,7 +329,7 @@ trinity-base-2_create_tmp_docfiles() {
 	einfo "Generating documentation list..."
 	for dir in ${srcdirs}; do
 		for doc in ${TRINITY_COMMON_DOCS}; do
-			for docfile in $(find ${dir} -type f -name *"${doc}"*); do
+			for docfile in $(find ${dir} -type f -name "*${doc}*"); do
 				targetdoc="${docfile//\//.}"
 				targetdoc="${targetdoc#..}"
 				cp "${docfile}" "${TMP_DOCDIR}/${targetdoc}"
