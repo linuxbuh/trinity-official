@@ -13,7 +13,7 @@ RDEPEND="x11-apps/xmessage
 	x11-apps/xsetroot
 	x11-apps/xset
 	x11-apps/xrandr
-	x11-apps/mkfontdir
+	x11-apps/mkfontscale
 	x11-apps/xprop
 	=trinity-base/kdesktop-${PV}
 	=trinity-base/kcminit-${PV}
