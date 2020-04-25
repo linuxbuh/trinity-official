@@ -180,3 +180,18 @@ need-arts() {
 	DEPEND+=" ${my_depend}";
 	RDEPEND+=" ${my_depend}";
 }
+
+trinity_l10n_for_each_locale_do() {
+	local locs x
+
+		for x in ${TRINITY_LANGS}
+		do
+			if has ${x} ${L10N} ; then
+				locs+=" ${x}"
+			fi
+		done
+
+	for x in ${locs}; do
+		"${@}" ${x} || die "failed to process enabled ${x} locale"
+	done
+}
