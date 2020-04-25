@@ -14,8 +14,8 @@ SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="3.5"
-IUSE="cups debug doc examples firebird ipv6 mysql nas nis +opengl postgres
-	sqlite +xinerama tablet +xrandr glib mng fontconfig +hiddenvisibility"
+IUSE="cups debug doc examples firebird ipv6 mysql nas nis +opengl postgres styles
+	imext sqlite +xinerama tablet +xrandr glib mng fontconfig +hiddenvisibility"
 
 KEYWORDS="~amd64 ~x86"
 
@@ -27,12 +27,18 @@ RDEPEND="
 	x11-libs/libXft
 	x11-libs/libXcursor
 	x11-libs/libXi
+	x11-libs/libXmu
+	x11-libs/libICE
+	x11-libs/libXext
+	x11-libs/libXt
+	x11-libs/libX11
 	x11-libs/libXrandr
 	x11-libs/libSM
 	cups? ( net-print/cups )
 	firebird? ( dev-db/firebird )
 	mysql? ( virtual/mysql )
 	nas? ( media-libs/nas )
+	nis? ( net-libs/libnsl )
 	opengl? ( virtual/opengl virtual/glu )
 	postgres? ( dev-db/postgresql:= )
 	sqlite? ( dev-db/sqlite:= )
@@ -49,7 +55,18 @@ TQTBASE="/usr/tqt3"
 S="${WORKDIR}/tqt3-trinity-${PV}"
 
 pkg_setup() {
-	export TQTDIR="${S}"
+	if use imext; then
+		ewarn
+		ewarn "You are going to compile binary imcompatible immodule for TQt. This means"
+		ewarn "you have to recompile everything depending on TQt after you install it."
+		ewarn "Be aware."
+		ewarn
+		ewarn "You can do that with: revdep-rebuild --library 'libtqt-mt.so.3'"
+		ewarn "To use that command, you need to install app-portage/gentoolkit."
+		ewarn
+	fi
+
+	export QTDIR="${S}"
 
 	CXX=$(tc-getCXX)
 	if [[ ${CXX/g++/} != ${CXX} ]]; then
@@ -90,6 +107,7 @@ src_prepare() {
 	find "${S}"/mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_RPATH.*:QMAKE_RPATH =:' || die
 
+	# Make qmake.conf respect our flags and toolchain
 	sed -i -e "s:QMAKE_CFLAGS_RELEASE.*=.*:QMAKE_CFLAGS_RELEASE=${CFLAGS}:" \
 		   -e 's:QMAKE_CFLAGS\t\t=.*:QMAKE_CFLAGS =:' \
 		   -e "s:QMAKE_CXXFLAGS_RELEASE.*=.*:QMAKE_CXXFLAGS_RELEASE=${CXXFLAGS}:" \
@@ -100,7 +118,14 @@ src_prepare() {
 		   -e "s:\<QMAKE_LINK_SHLIB\>.*=.*:QMAKE_LINK_SHLIB=$(tc-getCXX):" \
 		   -e "s:\<QMAKE_STRIP\>.*=.*:QMAKE_STRIP=:" \
 		"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
-
+		
+	# Remove obsolete X11 and OpenGL searchpaths
+	find "${S}"/mkspecs -name qmake.conf | xargs \
+		sed -i -e 's:QMAKE_INCDIR_X11\t=.*:QMAKE_INCDIR_X11\t=:' \
+			-e 's:QMAKE_LIBDIR_X11\t=.*:QMAKE_LIBDIR_X11\t=:' \
+			-e 's:QMAKE_INCDIR_OPENGL\t=.*:QMAKE_INCDIR_OPENGL\t=:' \
+			-e 's:QMAKE_LIBDIR_OPENGL\t=.*:QMAKE_LIBDIR_OPENGL\t=:' || die
+		
 	if use hiddenvisibility; then
 		sed -i -e 's:QMAKE_CFLAGS =:QMAKE_CFLAGS = -fvisibility=hidden -fvisibility-inlines-hidden:' \
 			"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
@@ -109,6 +134,12 @@ src_prepare() {
 	if [ $(get_libdir) != "lib" ] ; then
 		sed -i -e "s:/lib$:/$(get_libdir):" \
 			"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
+		sed -i -e "s:/usr/lib /lib:/usr/$(get_libdir) /$(get_libdir):" \
+			"${S}/config.tests/unix/"*.test || die
+		sed -i -e "s:/usr/lib /lib:/usr/$(get_libdir) /$(get_libdir):" \
+			"${S}/config.tests/x11/"*.test || die
+		sed -i -e "s:/lib /usr/lib:/$(get_libdir) /usr/$(get_libdir):" \
+			"${S}/config.tests/unix/checkavail" || die
 	fi
 
 	sed -i -e "s:CXXFLAGS.*=:CXXFLAGS=${CXXFLAGS} :" \
@@ -143,13 +174,15 @@ src_configure() {
 	use firebird    && myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
 	use fontconfig	&& myconf+=" -lfontconfig"
 	use glib       	&& myconf+=" -glibmainloop" || myconf+=" -no-glibmainloop"
+	use imext       	&& myconf+=" -inputmethod-ext" || myconf+=" -no-inputmethod-ext"
 	use ipv6       	&& myconf+=" -ipv6" || myconf+=" -no-ipv6"
-	use mng       	&& myconf+=" -qt-imgfmt -system-libmng" || myconf+=" -no-imgfmt-mng"
+	use mng       	&& myconf+=" -qt-imgfmt-mng -system-libmng" || myconf+=" -no-imgfmt-mng"
 	use mysql	&& myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql" || myconf+=" -no-sql-mysql"
 	use nas		&& myconf+=" -system-nas-sound" || myconf+=" -no-nas-sound"
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
 	use opengl	&& myconf+=" -enable-module=opengl -no-dlopen-opengl" || myconf+=" -disable-opengl"
 	use postgres	&& myconf+=" -plugin-sql-psql -I/usr/include/postgresql/server -I/usr/include/postgresql/pgsql -I/usr/include/postgresql/pgsql/server" || myconf+=" -no-sql-psql"
+	use styles	&& myconf+=" -plugin-style-cde -plugin-style-compact -plugin-style-motif -plugin-style-motifplus -plugin-style-platinum -plugin-style-sgi -plugin-style-windows" || myconf+=" -no-style-cde -no-style-compact -no-style-motif -no-style-motifplus -no-style-platinum -no-style-sgi -no-style-windows"
 	use sqlite	&& myconf+=" -plugin-sql-sqlite -plugin-sql-sqlite3" || myconf+=" -no-sql-sqlite -no-sql-sqlite3"
 	use tablet	&& myconf+=" -tablet" || myconf+=" -no-tablet"
 	use xinerama    && myconf+=" -xinerama" || myconf+=" -no-xinerama"
@@ -184,6 +217,10 @@ src_compile() {
 }
 
 src_install() {
+	# Fix qmake.conf files
+	find "${S}"/mkspecs -name qmake.conf | xargs \
+		sed -i -e "s:\$(QTDIR):${TQTBASE}:" || die
+
 	# Install TQt with all compiled before
 	emake INSTALL_ROOT="${D}" install
 
