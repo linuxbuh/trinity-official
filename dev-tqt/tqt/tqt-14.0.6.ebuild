@@ -217,12 +217,12 @@ src_compile() {
 }
 
 src_install() {
-	# Fix qmake.conf files
-	find "${S}"/mkspecs -name qmake.conf | xargs \
-		sed -i -e "s:\$(QTDIR):${TQTBASE}:" || die
-
 	# Install TQt with all compiled before
 	emake INSTALL_ROOT="${D}" install
+
+	# Fix qmake.conf files
+	find "${D}${TQTBASE}/mkspecs" -name qmake.conf | xargs \
+		sed -i -e "s:\$(QTDIR):${TQTBASE}:" || die
 
 	# Fix pkgconfig location
 	dodir /usr/$(get_libdir)
