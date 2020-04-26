@@ -13,8 +13,10 @@ HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 
-DEPEND="=dev-tqt/tqt-${PV}
-	virtual/glu"
+IUSE="+opengl"
+
+DEPEND="=dev-tqt/tqt-${PV}[opengl=]
+	opengl? ( virtual/glu )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
