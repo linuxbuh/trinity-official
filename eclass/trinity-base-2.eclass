@@ -10,6 +10,9 @@
 
 inherit trinity-functions-2 cmake-utils
 
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
 addwrite "/usr/tqt3/etc/settings"
 addpredict "/usr/tqt3/etc/settings"
 

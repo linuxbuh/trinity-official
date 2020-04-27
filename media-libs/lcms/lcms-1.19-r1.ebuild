@@ -7,9 +7,12 @@ PYTHON_COMPAT=( python2_{6,7} )
 
 inherit autotools eutils python-r1
 
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
 DESCRIPTION="A lightweight, speed optimized color management engine"
 HOMEPAGE="http://www.littlecms.com/"
-SRC_URI="http://www.littlecms.com/${P}.tar.gz"
+SRC_URI="mirror://sourceforge/lcms/${PV}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

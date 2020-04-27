@@ -6,6 +6,9 @@ EAPI="7"
 
 inherit eutils git-r3 toolchain-funcs
 
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
 SRCTYPE="free"
 DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
 HOMEPAGE="http://trinitydesktop.org/"

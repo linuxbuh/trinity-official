@@ -4,6 +4,9 @@
 
 EAPI="7"
 
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
 DESCRIPTION="Micro Linux distro to boot from a CD and play every video file localized in the CD root"
 HOMEPAGE="http://movix.sourceforge.net"
 SRC_URI="mirror://sourceforge/movix/${P}.tar.gz"

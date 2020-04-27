@@ -6,6 +6,9 @@ EAPI="7"
 
 inherit autotools
 
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
 DESCRIPTION="HTTP/HTML indexing and searching system"
 HOMEPAGE="https://github.com/solbu/hldig"
 SRC_URI="http://github.com/solbu/${PN}/archive/v${PV}.tar.gz"

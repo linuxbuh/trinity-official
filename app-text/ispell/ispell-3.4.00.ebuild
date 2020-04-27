@@ -2,9 +2,12 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-RESTRICT="mirror"
+EAPI="7"
+
 inherit toolchain-funcs
+
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
 
 DESCRIPTION="fast screen-oriented spelling checker"
 HOMEPAGE="http://fmg-www.cs.ucla.edu/geoff/ispell.html"
