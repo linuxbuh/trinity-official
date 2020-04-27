@@ -52,7 +52,7 @@ If you want to use TDM (KDM replacement of TDE), just don't forget to change ```
 
 From time to time it is an good idea to update your TDE live install, because as it is build from [master branch](https://mirror.git.trinitydesktop.org/patches/), there are changes nearly every day. If you don't know how this changes are related and your last re-build was some time ago, the best is to rebuild TDE fully. You can simply do that with the following chain of commands. First make sure you have emerged ``` gentoolkit ``` and use that command that should re-build nearly all TDE related packages:
 
-``` emerge --oneshot tqt && emerge --oneshot tqtinterface && emerge --oneshot arts && emerge --oneshot tdelibs && emerge -a --oneshot `equery depends tdelibs|awk '{print " ="$1}'` ```
+``` emerge -av1 tqt tqtinterface dbus-1-tqt arts tdelibs && emerge -av1 `equery depends tdelibs|awk '{print " ="$1}'` ```
 
 That should bring your TDE install in a fairly consistent state again.
 
