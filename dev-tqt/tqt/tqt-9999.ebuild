@@ -159,7 +159,7 @@ src_configure() {
 	addwrite "${HOME}/.qt"
 
 	# Common options
-	myconf=" -sm -thread -stl -no-verbose -largefile -no-pch -inputmethod"
+	myconf=" -sm -thread -stl -no-verbose -largefile -no-pch -inputmethod -qt-style-motif"
 	myconf+=" $(echo -{qt-imgfmt-,system-lib}{jpeg,png}) -qt-gif -system-zlib"
 	myconf+=" -platform ${PLATFORM} -xplatform ${PLATFORM}"
 	myconf+=" -xft -xrender -xshape -xkb -xcursor -prefix ${TQTBASE}"
@@ -188,8 +188,9 @@ src_configure() {
 
 	use imext	&& myconf+=" -inputmethod-ext" || myconf+=" -no-inputmethod-ext"
 	use tablet	&& myconf+=" -tablet" || myconf+=" -no-tablet"
-
-	use styles	&& myconf+=" -plugin-style-cde -plugin-style-compact -plugin-style-motif -plugin-style-motifplus -plugin-style-platinum -plugin-style-sgi -plugin-style-windows" || myconf+=" -no-style-cde -no-style-compact -no-style-motif -no-style-motifplus -no-style-platinum -no-style-sgi -no-style-windows"
+	
+	# Don't build styles, except requested (Motif is mandatory for TDE)
+	use styles	&& myconf+=" -plugin-style-cde -plugin-style-compact -plugin-style-motifplus -plugin-style-platinum -plugin-style-sgi -plugin-style-windows" || myconf+=" -no-style-cde -no-style-compact -no-style-motifplus -no-style-platinum -no-style-sgi -no-style-windows"
 
 	export YACC='byacc -d'
 	tc-export CC CXX

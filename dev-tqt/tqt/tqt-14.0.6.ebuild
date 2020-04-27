@@ -163,7 +163,7 @@ src_configure() {
 	addwrite "${HOME}/.qt"
 
 	# Common options
-	myconf=" -sm -thread -stl -no-verbose -largefile -no-pch -inputmethod"
+	myconf=" -sm -thread -stl -no-verbose -largefile -no-pch -inputmethod -qt-style-motif"
 	myconf+=" $(echo -{qt-imgfmt-,system-lib}{jpeg,png}) -qt-gif -system-zlib"
 	myconf+=" -platform ${PLATFORM} -xplatform ${PLATFORM}"
 	myconf+=" -xft -xrender -xshape -xkb -xcursor -prefix ${TQTBASE}"
@@ -185,7 +185,8 @@ src_configure() {
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
 	use opengl	&& myconf+=" -enable-module=opengl -no-dlopen-opengl" || myconf+=" -disable-opengl"
 	use postgres	&& myconf+=" -plugin-sql-psql -I/usr/include/postgresql/server -I/usr/include/postgresql/pgsql -I/usr/include/postgresql/pgsql/server" || myconf+=" -no-sql-psql"
-	use styles	&& myconf+=" -plugin-style-cde -plugin-style-compact -plugin-style-motif -plugin-style-motifplus -plugin-style-platinum -plugin-style-sgi -plugin-style-windows" || myconf+=" -no-style-cde -no-style-compact -no-style-motif -no-style-motifplus -no-style-platinum -no-style-sgi -no-style-windows"
+	# Don't build styles, except requested (Motif is mandatory for TDE)
+	use styles	&& myconf+=" -plugin-style-cde -plugin-style-compact -plugin-style-motifplus -plugin-style-platinum -plugin-style-sgi -plugin-style-windows" || myconf+=" -no-style-cde -no-style-compact -no-style-motifplus -no-style-platinum -no-style-sgi -no-style-windows"
 	use sqlite	&& myconf+=" -plugin-sql-sqlite -plugin-sql-sqlite3" || myconf+=" -no-sql-sqlite -no-sql-sqlite3"
 	use tablet	&& myconf+=" -tablet" || myconf+=" -no-tablet"
 	use xinerama    && myconf+=" -xinerama" || myconf+=" -no-xinerama"
