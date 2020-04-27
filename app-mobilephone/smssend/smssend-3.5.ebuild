@@ -6,9 +6,12 @@ EAPI="7"
 
 inherit autotools
 
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
 DESCRIPTION="Universal SMS sender"
 HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
-SRC_URI="mirror://gentoo/${P}.tar.gz"
+SRC_URI="https://mirror.amdmi3.ru/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -20,10 +23,13 @@ RDEPEND="${DEPEND}"
 
 PATCHES=( "${FILESDIR}/${P}-verizon.patch" )
 
+S="${WORKDIR}/${PN}"
+
 src_prepare() {
 	default
 
-	sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/g' configure.in \
+        mv "${S}"/configure.in "${S}"/configure.ac
+	sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/g' configure.ac \
 		|| die 'failed to rename AM_CONFIG_HEADER macro'
 
 	eautoreconf
