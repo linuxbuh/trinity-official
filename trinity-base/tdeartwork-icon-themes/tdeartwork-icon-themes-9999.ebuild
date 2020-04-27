@@ -6,7 +6,6 @@ EAPI="7"
 TRINITY_MODULE_NAME="tdeartwork"
 
 inherit trinity-meta-2
-KMMODULE="IconThemes"
 
 DESCRIPTION="Icon themes for Trinity"
 
