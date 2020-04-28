@@ -21,18 +21,9 @@ RDEPEND+=" ${DEPEND}
 		app-accessibility/flite
 		app-accessibility/freetts )"
 
-pkg_setup() {
-	if ! use arts && ! use alsa && ! use akode; then
-		ewarn "No audio backend chosen. Defaulting to trinity-base/arts."
-	fi
-	
-	trinity-meta-2_pkg_setup
-}
+REQUIRED_USE="|| ( arts akode alsa )"
 
 src_configure() {
-	if ! use alsa && ! use akode; then
-		need-arts yes
-	else
 
 	mycmakeargs=(
 		-DWITH_ARTS="$(usex arts)"
