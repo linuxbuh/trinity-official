@@ -199,3 +199,48 @@ trinity_l10n_for_each_locale_do() {
 		"${@}" ${x} || die "failed to process enabled ${x} locale"
 	done
 }
+
+trinity-admin-prepare() {
+        pushd "${PWD}/admin"
+        libtoolize -c || die "Error libtoolize"
+        cp -Rp /usr/share/aclocal/libtool.m4 "libtool.m4.in" || die "No such file: libtool.m4"
+        popd
+}
+
+trinity-gen-configure() {
+        trinity-admin-prepare
+        emake -f admin/Makefile.common || die "Error creating configuration"
+}
+
+trinity-econf() {
+        local myconf
+        myconf=(--prefix="${TDEDIR}"
+                --bindir="${TDEDIR}/bin"
+                --datadir="${TDEDIR}/share"
+                --includedir="${TDEDIR}/include"
+                --libdir="${TDEDIR}/$(get_libdir)"
+                --disable-dependency-tracking
+                --enable-new-ldflags
+                --enable-final
+                --enable-closure
+                --enable-rpath)
+
+        if has "debug" ${IUSE} || has "-debug" ${IUSE} || has "+debug" ${IUSE}; then
+                use debug &&  myconf+=(--enable-debug=yes) || myconf+=(--disable-debug)
+        else
+                 myconf+=(--disable-debug)
+        fi
+
+        if [[ "${TRINITY_NEED_ARTS}" == "yes" ]]; then
+                echo "configure ${myconf[@]} $@"
+                ./configure ${myconf[@]} $@ || die "Error creating configuration"
+        elif [[ "${TRINITY_NEED_ARTS}" == "optional" ]]; then
+                use arts || myconf+=(--without-arts)
+                echo "./configure ${myconf[@]} $@"
+                build_arts=$(usex arts yes no) ./configure ${myconf[@]} $@ || die "Error creating configuration"
+        else
+                myconf+=(--without-arts)
+                echo "./configure ${myconf[@]} $@"
+                build_arts=no ./configure ${myconf[@]} $@ || die "Error creating configuration"
+        fi
+}
