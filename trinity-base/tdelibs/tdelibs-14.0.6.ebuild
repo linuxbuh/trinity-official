@@ -54,7 +54,7 @@ COMMON_DEPEND="
 		libressl? ( dev-libs/libressl:= )
 	)
 	sudo? ( app-admin/sudo )
-	svg? ( media-libs/libart_lgpl )
+	svg? ( ~media-libs/libart_lgpl-14.0.7 )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
 	xcomposite? ( x11-libs/libXcomposite )
