@@ -13,7 +13,19 @@ SRCTYPE="free"
 DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
 HOMEPAGE="http://trinitydesktop.org/"
 
-SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/dependencies/tqt3-trinity-${PV}.tar.xz"
+MY_PN="tqt3"
+
+if [[ ${PV} = 14.0.999 ]]; then
+	inherit git-r3
+        EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/${MY_PN}"
+        EGIT_BRANCH="r14.0.x"
+elif [[ ${PV} = 9999 ]]; then
+	inherit git-r3
+        EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/${MY_PN}"
+else
+	SRC_URI="https://mirror.git.trinitydesktop.org/cgit/${PN}/snapshot/${MY_PN}-r${PV}.tar.gz"
+fi
+
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="3.5"
@@ -55,7 +67,11 @@ DEPEND="${RDEPEND}
 
 TQTBASE="/usr/tqt3"
 
-S="${WORKDIR}/tqt3-trinity-${PV}"
+if [[ ${PV} = 14.0.999 ]] || [[ ${PV} = 9999 ]]; then
+        S="${WORKDIR}/${P}"
+else
+        S="${WORKDIR}/${MY_PN}-r${PV}"
+fi
 
 pkg_setup() {
 	if use imext; then

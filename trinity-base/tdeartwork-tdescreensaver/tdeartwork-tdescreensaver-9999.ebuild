@@ -15,7 +15,7 @@ IUSE+=" opengl xscreensaver kclock"
 
 DEPEND+=" =trinity-base/tdescreensaver-${PV}
 	=trinity-base/krootbacking-${PV}
-	kclock? ( =media-libs/libart_lgpl-${PV} )
+	kclock? ( media-libs/libart_lgpl )
 	opengl? ( virtual/opengl )
 	xscreensaver? ( x11-misc/xscreensaver )"
 RDEPEND+=" ${DEPEND}"

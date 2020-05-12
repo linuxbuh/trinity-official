@@ -4,7 +4,7 @@
 
 EAPI="7"
 
-inherit eutils git-r3 toolchain-funcs
+inherit eutils toolchain-funcs
 
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
@@ -13,7 +13,19 @@ SRCTYPE="free"
 DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
 HOMEPAGE="http://trinitydesktop.org/"
 
-EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
+MY_PN="tqt3"
+
+if [[ ${PV} = 14.0.999 ]]; then
+	inherit git-r3
+        EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/${MY_PN}"
+        EGIT_BRANCH="r14.0.x"
+elif [[ ${PV} = 9999 ]]; then
+	inherit git-r3
+        EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/${MY_PN}"
+else
+	SRC_URI="https://mirror.git.trinitydesktop.org/cgit/${PN}/snapshot/${MY_PN}-r${PV}.tar.gz"
+fi
+
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="3.5"
@@ -50,6 +62,12 @@ RDEPEND="
 	xrandr? ( x11-libs/libXrandr )"
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
+
+if [[ ${PV} = 14.0.999 ]] || [[ ${PV} = 9999 ]]; then
+	S="${WORKDIR}/${P}"
+else
+	S="${WORKDIR}/${MY_PN}-r${PV}"
+fi
 
 TQTBASE="/usr/tqt3"
 

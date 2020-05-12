@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 	=trinity-base/tdesu-${PV}
 	=trinity-base/khelpcenter-${PV}
 	=trinity-base/khotkeys-${PV}
-	svg? ( =media-libs/libart_lgpl-${PV} )"
+	svg? ( media-libs/libart_lgpl )"
 
 TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/"
 

@@ -8,7 +8,13 @@
 # Purpose: Support ebuilds for the Trinity Desktop (KDE3 fork).
 #
 
-inherit trinity-functions-2 cmake-utils
+inherit trinity-functions-2
+
+if check_admin ; then
+	inherit autotools
+else
+	inherit cmake-utils
+fi
 
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
@@ -28,10 +34,20 @@ esac
 # Determines the build type: live or release
 if [[ "${PV}" == *"9999"* ]]; then
 	BUILD_TYPE="live"
+elif [[ "${PV}" = "14.0.999"* ]]; then
+	BUILD_TYPE="live_branch"
 else
 	BUILD_TYPE="release"
 fi
 export BUILD_TYPE
+
+BDEPEND+="
+	=trinity-base/trinity-common-admin-${PV}
+	=trinity-base/trinity-common-cmake-${PV}
+	=trinity-base/trinity-common-libltdl-${PV}
+"
+
+export TRINITY_MODULE_DIR="/usr/trinity/modules"
 
 # @ECLASS-VARIABLE: TRINITY_MODULE_NAME
 # @DESCRIPTION:
@@ -107,7 +123,8 @@ TRINITY_COMMON_DOCS="AUTHORS BUGS CHANGELOG CHANGES COMMENTS COMPLIANCE COMPILIN
 # @ECLASS-VARIABLE: TRINITY_BASE_SRC_URI
 # @DESCRIPTION:
 # The top SRC_URI for all trinity packages
-TRINITY_BASE_SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases"
+#TRINITY_BASE_SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases"
+TRINITY_BASE_SRC_URI="https://mirror.git.trinitydesktop.org/cgit"
 
 #reset TRINITY_SCM and inherit proper eclass
 if [[ "${BUILD_TYPE}" == "live" ]]; then
@@ -122,21 +139,39 @@ if [[ "${BUILD_TYPE}" == "live" ]]; then
 	#set some variables
 	EGIT_REPO_URI="${TRINITY_GIT_MIRROR:=https://mirror.git.trinitydesktop.org/gitea/TDE/${TRINITY_MODULE_NAME}}"
 	EGIT_BRANCH="${TRINITY_GIT_BRANCH:=master}"
+	EGIT_SUBMODULES=()
 
 #	S="${WORKDIR}/${TRINITY_MODULE_NAME}"
+
+elif [[ "${BUILD_TYPE}" == "live_branch" ]] ; then
+	# set default TRINITY_SCM if not set
+	[[ -z "${TRINITY_SCM}" ]] && TRINITY_SCM="git"
+
+	case ${TRINITY_SCM} in
+		git) inherit git-r3 ;;
+		*) die "Unsupported TRINITY_SCM=${TRINITY_SCM}" ;;
+	esac
+        #set some variables
+        EGIT_REPO_URI="${TRINITY_GIT_MIRROR:=https://mirror.git.trinitydesktop.org/gitea/TDE/${TRINITY_MODULE_NAME}}"
+        EGIT_BRANCH="${TRINITY_GIT_BRANCH:=r14.0.x}"
+	EGIT_SUBMODULES=()
+
 elif [[ "${BUILD_TYPE}" == "release" ]]; then
 	mod_name="${TRINITY_MODULE_NAME}"
 	mod_ver="${TRINITY_MODULE_VER:=${PV}}"
 
 	#Note:  Only releases in the 14.0 series are presently supported.
-	full_mod_name="${mod_name}-trinity-${mod_ver}"
-	TRINITY_TARBALL="${full_mod_name}.tar.xz"
+#	full_mod_name="${mod_name}-trinity-${mod_ver}"
+	full_mod_name="${mod_name}-r${mod_ver}"
+	#TRINITY_TARBALL="${full_mod_name}.tar.xz"
+	TRINITY_TARBALL="${full_mod_name}.tar.gz"
 	
-	if [[ -n "${TRINITY_MODULE_TYPE}" ]] ; then
+#	if [[ -n "${TRINITY_MODULE_TYPE}" ]] ; then
 		SRC_URI="${TRINITY_BASE_SRC_URI}/R${mod_ver}/main/${TRINITY_MODULE_TYPE}/$TRINITY_TARBALL"
-	else
-		SRC_URI="${TRINITY_BASE_SRC_URI}/R${mod_ver}/main/${TRINITY_TARBALL}"
-	fi
+#	else
+#		SRC_URI="${TRINITY_BASE_SRC_URI}/R${mod_ver}/main/${TRINITY_TARBALL}"
+		SRC_URI="https://mirror.git.trinitydesktop.org/cgit/${mod_name}/snapshot/${TRINITY_TARBALL}"
+#	fi
 
 	S="${WORKDIR}/${full_mod_name}"
 else
@@ -183,9 +218,17 @@ fi
 trinity-base-2_src_unpack() {
 	if [[ "${BUILD_TYPE}" == "live" ]]; then
 		git-r3_src_unpack
+	elif [[ "${BUILD_TYPE}" == "live_branch" ]]; then
+		git-r3_src_unpack
 	else
-		base_src_unpack
+		unpack ${A}
+		#base_src_unpack
 	fi
+
+	if check_libltdl ; then
+		TRINITY_COMMON_MODULE="cmake admin libltdl"
+	fi
+	trinity-common-module-copy
 }
 
 
@@ -211,7 +254,8 @@ trinity-base-2_src_prepare() {
 			for dir in $(find ${TEG_PO_DIR} -mindepth 1 -maxdepth 1 -type d ); do
 				lang="$(basename "${dir}")"
 				if ! has "${lang}" ${TRINITY_LANGS}; then
-					eerror "Translation ${lang} seems to present in the package but is not supported by the ebuild"
+					#eerror "Translation ${lang} seems to present in the package but is not supported by the ebuild"
+					ewarn "Translation ${lang} seems to present in the package but is not supported by the ebuild"
 				elif ! has ${lang} ${L10N}; then
 					rm -rf ${dir}
 				fi
@@ -243,8 +287,8 @@ trinity-base-2_src_prepare() {
 			done
 		fi
 	fi
-
-    cmake-utils_src_prepare
+    check_admin && trinity-gen-configure
+    check_admin && eapply_user || cmake-utils_src_prepare
 }
 
 
@@ -284,7 +328,7 @@ trinity-base-2_src_configure() {
 		"${mycmakeargs[@]}"
 	)
 
-	cmake-utils_src_configure
+	check_admin && trinity-econf ||  cmake-utils_src_configure
 }
 
 # @FUNCTION: trinity-base-2_src_compile
@@ -293,7 +337,7 @@ trinity-base-2_src_configure() {
 trinity-base-2_src_compile() {
 	debug-print-function ${FUNCNAME} "${@}"
 	
-	cmake-utils_src_compile
+	check_admin && emake || cmake-utils_src_compile
 }
 
 # @FUNCTION: trinity-base-2_src_install
@@ -301,7 +345,7 @@ trinity-base-2_src_compile() {
 # Call standard cmake-utils_src_install and installs common documentation. 
 trinity-base-2_src_install() {
 	debug-print-function ${FUNCNAME} "${@}"
-	cmake-utils_src_install
+	check_admin && emake install DESTDIR="${D}" || cmake-utils_src_install
 
 	if [[ -z "${TRINITY_BASE_NO_INSTALL_DOC}" ||
 			"${TRINITY_BASE_NO_INSTALL_DOC}" == "no" ]]; then
@@ -360,4 +404,4 @@ trinity-base-2_install_docfiles() {
 	popd >/dev/null
 }
 
-EXPORT_FUNCTIONS src_configure src_compile src_install src_prepare
+EXPORT_FUNCTIONS src_configure src_compile src_install src_prepare src_unpack

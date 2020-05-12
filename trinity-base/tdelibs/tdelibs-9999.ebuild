@@ -42,7 +42,7 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	shm? ( x11-libs/libxshmfence )
 	idn? ( net-dns/libidn )
 	pcre? ( dev-libs/libpcre )
-	svg? ( =media-libs/libart_lgpl-${PV} )
+	svg? ( media-libs/libart_lgpl )
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( =dev-tqt/avahi-tqt-${PV} )
 	cups? ( net-print/cups )

@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
-	svg? ( =media-libs/libart_lgpl-${PV} )
+	svg? ( media-libs/libart_lgpl )
 	=trinity-base/tdelibs-${PV}[xrandr?]
 	sys-apps/dbus
 	x11-libs/libXtst

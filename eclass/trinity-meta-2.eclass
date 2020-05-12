@@ -57,8 +57,19 @@ trinity-meta-2_src_unpack() {
 				;;
 			*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 		esac
+	elif [[ "${BUILD_TYPE}" == "live_branch" ]]; then
+		case "${TRINITY_SCM}" in
+			git)
+				git-r3_src_unpack
+				;;
+			*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
+		esac
 	fi
 	trinity-meta-2_src_extract
+	if check_libltdl ; then
+                TRINITY_COMMON_MODULE="cmake admin libltdl"
+        fi
+	trinity-common-module-copy
 }
 
 # @FUNCTION: trinity-meta-2_src_extract
@@ -77,6 +88,15 @@ trinity-meta-2_src_extract() {
 				;;
 			*)  die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}"
 		esac
+
+	elif [[ "${BUILD_TYPE}" == "live_branch" ]]; then
+		einfo "Exporting parts of working copy to ${S}"
+		case "${TRINITY_SCM}" in
+			git) # Nothing we can do to prevent git from unpacking code
+				;;
+			*)  die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}"
+		esac
+
 	else
 		local tarfile tarparams f extractlist
 
@@ -162,6 +182,8 @@ trinity-meta-2_create_extractlists() {
 
 	TSM_EXTRACT_LIST+=" ${TSM_EXTRACT} ${TSM_EXTRACT_ALSO} cmake/ CMakeLists.txt"
 	TSM_EXTRACT_LIST+=" config.h.cmake ConfigureChecks.cmake"
+	check_admin && TSM_EXTRACT_LIST+=" configure.in.in Makefile.am.in \
+					ChangeLog AUTHORS NEWS README"
 
  	debug-print "line ${LINENO} ${ECLASS} ${FUNCNAME}: TSM_EXTRACT_LIST=\"${TSM_EXTRACT_LIST}\""
 }

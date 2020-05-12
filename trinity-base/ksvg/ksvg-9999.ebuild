@@ -11,7 +11,7 @@ DESCRIPTION="SVG viewer library and embeddable kpart"
 
 DEPEND="media-libs/freetype
 	media-libs/fontconfig
-	=media-libs/libart_lgpl-${PV}
+	media-libs/libart_lgpl
 	media-libs/lcms:0
 	dev-libs/fribidi"
 RDEPEND="${DEPEND}"
