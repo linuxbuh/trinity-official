@@ -7,3 +7,9 @@ TRINITY_MODULE_NAME="tdepim"
 inherit trinity-meta-2
 
 DESCRIPTION="TDE library to enable support for sieve, used by KMail"
+
+DEPEND="
+	=trinity-base/libtdepim-${PV}
+"
+
+RDEPEND="$DEPEND"

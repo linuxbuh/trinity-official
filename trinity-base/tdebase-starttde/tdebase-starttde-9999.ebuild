@@ -24,7 +24,7 @@ RDEPEND="x11-apps/xmessage
 	=trinity-base/ksplashml-${PV}
 	=trinity-base/tdeinit-${PV}"
 
-TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm"
+TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm r14-xdg-update migratekde3"
 
 src_prepare() {
 	trinity-base-2_src_prepare
