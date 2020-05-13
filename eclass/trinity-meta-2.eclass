@@ -54,6 +54,7 @@ trinity-meta-2_src_unpack() {
 		case "${TRINITY_SCM}" in
 			git)
 				git-r3_src_unpack
+				trinity-meta-2_src_delete
 				;;
 			*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 		esac
@@ -61,6 +62,7 @@ trinity-meta-2_src_unpack() {
 		case "${TRINITY_SCM}" in
 			git)
 				git-r3_src_unpack
+				trinity-meta-2_src_delete
 				;;
 			*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 		esac
@@ -259,6 +261,44 @@ trinity-meta-2_src_install() {
 
 	trinity-base-2_create_tmp_docfiles ${TSM_EXTRACT}
 	trinity-base-2_install_docfiles
+}
+
+# @FUNCTION: trinity-meta-2_src_src_delete
+# @DESCRIPTION:
+# Default src_delete function for git.
+# Removes unnecessary files.
+trinity-meta-2_src_delete() {
+	local x i dir dirs array num
+
+	dir="${WORKDIR}/tempdir"
+	trinity-meta-2_create_extractlists
+
+	pushd ${S}
+	mkdir ${dir}
+
+	for x in ${TSM_EXTRACT_LIST}
+	do
+		array=(${x//\// })
+		num=${#array[@]}
+
+		if [ ${num} -gt 1 ] ; then
+			for (( i=0; i<$[${num}-1]; i++ ));
+			do
+				dirs+="${array[$i]}/"
+			done
+
+			mkdir -p ${dir}/${dirs}
+			cp -af ${x} ${dir}/${dirs}
+			unset dirs
+		else
+			cp -af ${x} ${dir}/
+		fi
+	done
+
+	rm -rf *
+	cp -af ${dir}/. .
+	rm -rf ${dir}
+	popd
 }
 
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install src_unpack pkg_setup

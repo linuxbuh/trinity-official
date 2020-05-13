@@ -3,6 +3,7 @@
 
 EAPI="7"
 TRINITY_MODULE_NAME="tdepim"
+: ${CMAKE_MAKEFILE_GENERATOR:=emake}
 
 inherit trinity-meta-2
 
@@ -39,8 +40,9 @@ TSM_EXTRACT_ALSO="
 	libtdenetwork/
 	certmanager/lib/
 	libtdepim/
-	korganizer/korganizerinterface.h
-	korganizer/kcalendarinterface.h
+	korganizer/kcalendariface.h
+	korganizer/korganizeriface.h
+	libkpimidentities/
 	libkpgp/
 	libkmime/
 	libksieve/
