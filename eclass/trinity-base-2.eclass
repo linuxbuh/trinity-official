@@ -46,6 +46,10 @@ BDEPEND+="
 	=trinity-base/trinity-common-cmake-${PV}
 	=trinity-base/trinity-common-libltdl-${PV}
 "
+if [[ "${BUILD_TYPE}" == "live" ]] && [[ "${TRINITY_MODULE_NAME}" == "tdenetwork" ]] ; then
+	BDEPEND+="=trinity-base/trinity-common-libtdevnc-${PV}"
+	TRINITY_COMMON_MODULE="cmake libtdevnc"
+fi
 
 export TRINITY_MODULE_DIR="/usr/trinity/modules"
 
