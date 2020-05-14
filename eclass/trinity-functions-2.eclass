@@ -261,7 +261,7 @@ check_libltdl() {
 }
 
 check_admin() {
-        ADMIN_LIST+=" tdewebdev kscope gwenview kmymoney "
+        ADMIN_LIST+=" tdewebdev kscope gwenview kmymoney tdeaccessibility "
         if has ${PN} ${ADMIN_LIST} ; then
                 return 0
         elif has ${TRINITY_MODULE_NAME} ${ADMIN_LIST} ; then
