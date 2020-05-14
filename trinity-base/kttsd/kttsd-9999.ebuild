@@ -15,10 +15,13 @@ HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="GPL-2 LGPL-2"
 KEYWORDS="~amd64 ~x86"
 SLOT="${TRINITY_VER}"
-IUSE="arts"
+
+IUSE="alsa arts"
 
 DEPEND="
 	=trinity-base/tdelibs-${PV}
+	arts? ( =trinity-base/tdemultimedia-arts-${PV} )
+	alsa? ( media-libs/alsa-lib )
 "
 
 RDEPEND="$DEPEND"
@@ -31,7 +34,6 @@ need-trinity
 
 src_configure() {
 	myconf=(--enable-ksayit-audio-plugins)
+	use alsa && myconf+=(--with-alsa)
 	trinity-econf ${myconf[@]}
 }
-
-

@@ -13,9 +13,10 @@ HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"
+IUSE="atlantik"
 
 RDEPEND="
-	=trinity-apps/atlantikdesigner-${PV}
+	atlantik? ( =trinity-apps/atlantikdesigner-${PV} )
 	=trinity-base/tdeaddons-doc-${PV}
 	=trinity-base/kaddressbook-plugins-${PV}
 	=trinity-base/kate-plugins-${PV}
