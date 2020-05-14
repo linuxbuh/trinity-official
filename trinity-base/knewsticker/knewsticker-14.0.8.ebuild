@@ -11,3 +11,10 @@ DESCRIPTION="kicker plugin: rss news ticker"
 
 DEPEND="=trinity-base/librss-${PV}"
 RDEPEND="${DEPEND}"
+
+src_configure() {
+	mycmakeargs=(
+		-DCMAKE_CXX_FLAGS="${CXXFLAGS} -I${TDEDIR}/include/rss"
+		)
+	trinity-meta-2_src_configure
+}
