@@ -11,3 +11,5 @@ DESCRIPTION="Trinity: Klickety is an adaptation of the clickomania game"
 
 DEPEND="=trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TRINITY_SUBMODULE="klickety libksirtet"
