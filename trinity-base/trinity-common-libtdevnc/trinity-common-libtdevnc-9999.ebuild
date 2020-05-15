@@ -5,7 +5,7 @@ EAPI="7"
 
 inherit eutils
 
-DESCRIPTION="Common cmake modules for Trinity Desktop Environment "
+DESCRIPTION="Common libtdevnc modules for Trinity Desktop Environment "
 HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="GPL-2"
 RESTRICT="nomirror"
