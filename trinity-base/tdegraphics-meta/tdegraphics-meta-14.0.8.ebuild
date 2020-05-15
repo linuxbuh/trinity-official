@@ -13,6 +13,7 @@ HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"
+IUSE="kmrml"
 
 RDEPEND="
 	=trinity-base/kamera-${PV}
@@ -24,7 +25,6 @@ RDEPEND="
 	=trinity-base/kgamma-${PV}
 	=trinity-base/kghostview-${PV}
 	=trinity-base/tdeiconedit-${PV}
-	=trinity-base/kmrml-${PV}
 	=trinity-base/kolourpaint-${PV}
 	=trinity-base/kooka-${PV}
 	=trinity-base/kpdf-${PV}
@@ -35,4 +35,5 @@ RDEPEND="
 	=trinity-base/kuickshow-${PV}
 	=trinity-base/kview-${PV}
 	=trinity-base/kviewshell-${PV}
-	=trinity-base/libkscan-${PV}"
+	=trinity-base/libkscan-${PV}
+	kmrml? ( =trinity-base/kmrml-${PV} )"
