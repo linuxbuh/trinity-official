@@ -6,7 +6,7 @@ TRINITY_MODULE_NAME="tdepim"
 
 inherit trinity-meta-2
 
-TSM_EXTRACT="tdeioslave"
+TSM_EXTRACT="tdeioslave libemailfunctions"
 TRINITY_SUBMODULE="tdeioslave"
 
 DESCRIPTION="PIM Trinity TDEIOslaves"
@@ -25,7 +25,7 @@ REQUIRED_USE="
 
 DEPEND="
 	net-libs/libtirpc
-	trinity-base/libkmime
+	=trinity-base/libkmime-${PV}
 	sasl? ( dev-libs/cyrus-sasl )"
 RDEPEND="${DEPEND}"
 

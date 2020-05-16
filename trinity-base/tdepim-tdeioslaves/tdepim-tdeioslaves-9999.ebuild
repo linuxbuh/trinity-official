@@ -6,7 +6,7 @@ TRINITY_MODULE_NAME="tdepim"
 
 inherit trinity-meta-2
 
-TSM_EXTRACT="tdeioslave"
+TSM_EXTRACT="tdeioslave libemailfunctions"
 TRINITY_SUBMODULE="tdeioslave"
 
 DESCRIPTION="PIM Trinity TDEIOslaves"
