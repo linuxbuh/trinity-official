@@ -6,10 +6,11 @@ TRINITY_MODULE_NAME="tdepim"
 
 inherit trinity-meta-2
 
-TSM_EXTRACT="tdeioslave libemailfunctions"
 TRINITY_SUBMODULE="tdeioslave"
 
 DESCRIPTION="PIM Trinity TDEIOslaves"
+LICENSE="|| ( GPL-2 GPL-3 )"
+KEYWORDS="~amd64 ~x86"
 
 IUSE="sasl sieve"
 
@@ -28,6 +29,10 @@ DEPEND="
 	=trinity-base/libkmime-${PV}
 	sasl? ( dev-libs/cyrus-sasl )"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="tdeioslave libemailfunctions libtdepim libkmime"
+
+CXXFLAGS+=" -I${TDEDIR}/include/libtdepim"
 
 src_configure() {
 	mycmakeargs=(

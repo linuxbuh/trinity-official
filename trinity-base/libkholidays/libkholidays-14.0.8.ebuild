@@ -8,5 +8,7 @@ TRINITY_MODULE_NAME="tdepim"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity library to compute holidays."
+LICENSE="|| ( GPL-2 GPL-3 )"
+KEYWORDS="~amd64 ~x86"
 
 TSM_EXTRACT_ALSO="libtdepim/"

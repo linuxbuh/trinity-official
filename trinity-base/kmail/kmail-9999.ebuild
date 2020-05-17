@@ -3,11 +3,12 @@
 
 EAPI="7"
 TRINITY_MODULE_NAME="tdepim"
-: ${CMAKE_MAKEFILE_GENERATOR:=emake}
 
 inherit trinity-meta-2
 
 DESCRIPTION="The email client for Trinity"
+LICENSE="|| ( GPL-2 GPL-3 )"
+KEYWORDS="~amd64 ~x86"
 
 IUSE="crypt imap mbox sasl"
 
@@ -31,7 +32,8 @@ RDEPEND="${COMMON_DEPEND}
 	crypt? ( app-crypt/pinentry )
 	=trinity-base/tdebase-tdeioslaves-${PV}
 	mbox? ( =trinity-base/tdepim-tdeioslaves-${PV} )
-	imap? ( =trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )"
+	imap? ( =trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )
+	sasl? ( =trinity-base/tdebase-tdeioslaves-${PV}[sasl=] )"
 
 TSM_EXTRACT_ALSO="
 	ktnef/

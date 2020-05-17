@@ -7,7 +7,13 @@ TRINITY_MODULE_NAME="tdepim"
 
 inherit trinity-meta-2
 
+set-trinityver
+
 DESCRIPTION="Trinity certificate manager gui"
+
+LICENSE="|| ( GPL-2 GPL-3 )"
+KEYWORDS="~amd64 ~x86"
+SLOT="${TRINITY_VER}"
 
 COMMON_DEPEND="=trinity-base/libtdenetwork-${PV}
 	app-crypt/gpgme

@@ -7,14 +7,11 @@ TRINITY_MODULE_NAME="tdepim"
 
 inherit trinity-meta-2
 
+set-trinityver
 DESCRIPTION="Trinity kmime library for Message Handling"
 
-TSM_EXTRACT_ALSO="libtdepim/"
+LICENSE="|| ( GPL-2 GPL-3 )"
+KEYWORDS="~amd64 ~x86"
+SLOT="${TRINITY_VER}"
 
-src_install() {
-	trinity-meta-2_src_install
-	pushd ${S}/libkmime
-	insinto ${TDEDIR}/include
-	doins *.h
-	popd
-}
+TSM_EXTRACT_ALSO="libtdepim/"

@@ -8,6 +8,8 @@ TRINITY_MODULE_NAME="tdepim"
 inherit trinity-meta-2
 
 DESCRIPTION="Common library for Trinity PIM applications."
+LICENSE="|| ( GPL-2 GPL-3 )"
+KEYWORDS="~amd64 ~x86"
 
 COMMON_DEPEND="
 	=trinity-base/ktnef-${PV}
