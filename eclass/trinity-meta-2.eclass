@@ -293,7 +293,7 @@ trinity-meta-2_src_delete() {
 
 			mkdir -p ${dir}/${newdir}
 			cp -af ${x} ${dir}/${newdir}
-			unset dirs
+			unset newdir
 		else
 			cp -af ${x} ${dir}/
 		fi
