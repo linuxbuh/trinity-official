@@ -7,14 +7,11 @@ TRINITY_MODULE_NAME="tdeedu"
 
 inherit trinity-meta-2
 
-set-trinityver
-
 DESCRIPTION="Touch typing tutor for Trinity"
 HOMEPAGE="http://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 KEYWORDS="~amd64 ~x86"
-SLOT="${TRINITY_VER}"
 IUSE="arts"
 
 DEPEND="=trinity-base/tdelibs-${PV}
@@ -23,6 +20,8 @@ DEPEND="=trinity-base/tdelibs-${PV}
 RDEPEND="${DEPEND}"
 
 need-arts optional
+
+TSM_EXTRACT_ALSO="libtdeedu"
 
 src_prepare() {
 	sed -i -e '/add_subdirectory( applnk    )/d' \

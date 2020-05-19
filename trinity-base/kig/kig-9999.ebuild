@@ -7,19 +7,17 @@ TRINITY_MODULE_NAME="tdeedu"
 
 inherit trinity-meta-2
 
-set-trinityver
-
 DESCRIPTION="Interactive geometry program for TDE"
 HOMEPAGE="http://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 KEYWORDS="~amd64 ~x86"
-SLOT="${TRINITY_VER}"
 IUSE="arts"
 
-DEPEND="=trinity-base/libtdeedu-${PV}
+DEPEND="
 	dev-libs/boost[python]
-	arts? ( =trinity-base/arts-${PV} )"
+	arts? ( =trinity-base/arts-${PV} )
+"
 RDEPEND="${DEPEND}"
 
 need-arts optional
