@@ -16,14 +16,27 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 
 KEYWORDS="~amd64 ~x86"
 SLOT="${TRINITY_VER}"
-IUSE=""
+IUSE="berkdb"
 
 DEPEND="
 	=trinity-base/tdelibs-${PV}
 	=trinity-base/libkcal-${PV}
 	=trinity-base/libtdepim-${PV}
+	berkdb? ( sys-libs/db )
 "
 
 RDEPEND="$DEPEND"
 
 need-trinity
+
+src_prepare() {
+	use berkdb && eapply ${FILESDIR}/${PN}-db.patch
+	trinity-meta-2_src_prepare
+}
+
+src_configure() {
+	mycmakeargs=(
+		-DWITH_DBSEARCHENGINE=$(usex berkdb ON OFF)
+	)
+	trinity-meta-2_src_configure
+}

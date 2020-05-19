@@ -1,0 +1,110 @@
+--- a/kbabel/kbabeldict/modules/dbsearchengine/database.cpp
++++ b/kbabel/kbabeldict/modules/dbsearchengine/database.cpp
+@@ -341,9 +341,9 @@ DataBaseManager::openDataBase ()
+     db_create (&indexDb, 0, 0);
+ 
+     ret = db->open (db,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 		    NULL,
+-#endif
++//#endif
+ 		    transfilename.local8Bit (), 0, DB_BTREE, 0, 0644);
+ 
+     if (ret == DB_OLD_VERSION)
+@@ -457,9 +457,9 @@ DataBaseManager::openDataBase ()
+ 		keysFile.unlink ();
+ 
+ 		ret = db->open (db,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 				NULL,
+-#endif
++//#endif
+ 				transfilename.local8Bit (), 0, DB_BTREE, 0,
+ 				0644);
+ 		if (ret != 0)
+@@ -483,9 +483,9 @@ DataBaseManager::openDataBase ()
+ 
+ 
+     ret = infoDb->open (infoDb,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 			NULL,
+-#endif
++//#endif
+ 			infofilename.local8Bit (), 0, DB_RECNO, 0, 0644);
+     if (ret != 0)
+       {
+@@ -501,9 +501,9 @@ DataBaseManager::openDataBase ()
+ // Words index database
+ 
+     ret = wordDb->open (wordDb,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 			NULL,
+-#endif
++//#endif
+ 			wordsfilename.local8Bit (), 0, DB_BTREE, 0, 0644);
+     if (ret != 0)
+       {
+@@ -515,9 +515,9 @@ DataBaseManager::openDataBase ()
+ //Index of keys.
+ 
+     ret = indexDb->open (indexDb,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 			 NULL,
+-#endif
++//#endif
+ 			 keysfilename.local8Bit (), 0, DB_RECNO, 0, 0644);
+     if (ret != 0)
+       {
+@@ -800,9 +800,9 @@ DataBaseManager::createDataBase (TQString directory,
+ 
+     db->set_flags (db, DB_RECNUM);
+     ret = db->open (db,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 		    NULL,
+-#endif
++//#endif
+ 		    filename.local8Bit (), 0, DB_BTREE, DB_CREATE | DB_EXCL,
+ 		    mode);
+     if (ret != 0)
+@@ -818,9 +818,9 @@ DataBaseManager::createDataBase (TQString directory,
+ 
+     db_create (&infoDb, 0, 0);
+     ret = infoDb->open (infoDb,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 			NULL,
+-#endif
++//#endif
+ 			filename.local8Bit (), 0, DB_RECNO, DB_CREATE, mode);
+     if (ret != 0)
+ 	iAmOk = false;
+@@ -833,9 +833,9 @@ DataBaseManager::createDataBase (TQString directory,
+ 
+     db_create (&wordDb, 0, 0);
+     ret = wordDb->open (wordDb,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 			NULL,
+-#endif
++//#endif
+ 			filename.local8Bit (), 0, DB_BTREE, DB_CREATE, mode);
+     if (ret != 0)
+ 	iAmOk = false;
+@@ -848,9 +848,9 @@ DataBaseManager::createDataBase (TQString directory,
+ 
+     db_create (&indexDb, 0, 0);
+     ret = indexDb->open (indexDb,
+-#if DB_VERSION_MINOR > 0
++//#if DB_VERSION_MINOR > 0
+ 			 NULL,
+-#endif
++//#endif
+ 			 filename.local8Bit (), 0, DB_RECNO, DB_CREATE, mode);
+     if (ret != 0)
+ 	iAmOk = false;
