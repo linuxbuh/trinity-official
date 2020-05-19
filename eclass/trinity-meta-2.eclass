@@ -268,7 +268,11 @@ trinity-meta-2_src_install() {
 # Default src_delete function for git.
 # Removes unnecessary files.
 trinity-meta-2_src_delete() {
-	local x i dir dirs array num
+	debug-print-function ${FUNCNAME} "${@}"
+	
+	local x i dir newdir array num mod_dir
+	# Directories that do not need to be deleted
+	mod_dir="cmake admin libltdl libtdevnc"
 
 	dir="${WORKDIR}/tempdir"
 	trinity-meta-2_create_extractlists
@@ -287,15 +291,23 @@ trinity-meta-2_src_delete() {
 				dirs+="${array[$i]}/"
 			done
 
-			mkdir -p ${dir}/${dirs}
-			cp -af ${x} ${dir}/${dirs}
+			mkdir -p ${dir}/${newdir}
+			cp -af ${x} ${dir}/${newdir}
 			unset dirs
 		else
 			cp -af ${x} ${dir}/
 		fi
 	done
+	einfo "Delete directories..."
+	for x in *
+	do
+		if ! has ${x} ${mod_dir} ; then
+			rm -rf ${x}
+		else
+			einfo "Skipping ${x}"
+		fi
+	done
 
-	rm -rf *
 	cp -af ${dir}/. .
 	rm -rf ${dir}
 	popd
