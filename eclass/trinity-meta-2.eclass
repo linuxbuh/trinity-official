@@ -274,7 +274,7 @@ trinity-meta-2_src_delete() {
 	# Directories that do not need to be deleted
 	mod_dir="cmake admin libltdl libtdevnc"
 
-	dir="${WORKDIR}/tempdir"
+	dir="${WORKDIR}/tmpdir"
 	trinity-meta-2_create_extractlists
 
 	pushd ${S}
