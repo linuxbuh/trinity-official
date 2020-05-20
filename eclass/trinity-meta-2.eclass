@@ -288,7 +288,7 @@ trinity-meta-2_src_delete() {
 		if [ ${num} -gt 1 ] ; then
 			for (( i=0; i<$[${num}-1]; i++ ));
 			do
-				dirs+="${array[$i]}/"
+				newdir+="${array[$i]}/"
 			done
 
 			mkdir -p ${dir}/${newdir}
