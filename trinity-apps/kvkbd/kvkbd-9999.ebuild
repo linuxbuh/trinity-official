@@ -20,7 +20,7 @@ need-trinity
 SLOT="${TRINITY_VER}"
 
 DEPEND+=" x11-libs/libXtst"
-RDEPEND=+=" ${DEPEND}"
+RDEPEND+=" ${DEPEND}"
 
 src_configure() {
 	mycmakeargs=(
