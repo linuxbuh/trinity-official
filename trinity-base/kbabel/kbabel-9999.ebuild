@@ -30,7 +30,6 @@ RDEPEND="$DEPEND"
 need-trinity
 
 src_prepare() {
-	use berkdb && eapply ${FILESDIR}/${PN}-db.patch
 	trinity-meta-2_src_prepare
 }
 
