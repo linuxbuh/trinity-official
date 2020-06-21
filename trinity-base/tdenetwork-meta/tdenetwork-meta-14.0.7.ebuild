@@ -23,7 +23,6 @@ RDEPEND="
 	~trinity-base/knewsticker-${PV}
 	~trinity-base/kopete-${PV}
 	~trinity-base/kpf-${PV}
-	~trinity-base/kppp-${PV}
 	~trinity-base/krdc-${PV}
 	~trinity-base/krfb-${PV}
 	~trinity-base/ksirc-${PV}
@@ -34,3 +33,6 @@ RDEPEND="
 	~trinity-base/tdenetwork-doc-${PV}
 	~trinity-base/tdenetwork-filesharing-${PV}
 	~trinity-base/tdenetwork-tdefile-plugins-${PV}"
+
+#Doesn't compile against current /usr/include/sys/socket.h (glibc-2.30-r8)
+#	~trinity-base/kppp-${PV}
