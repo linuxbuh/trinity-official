@@ -20,6 +20,7 @@ RDEPEND="arts? ( ~trinity-base/juk-${PV}
 		~trinity-base/kaboodle-${PV}
 		~trinity-base/tdemultimedia-arts-${PV} )
 	~trinity-base/kmix-${PV}
+	~trinity-base/libkcddb-${PV}
 	~trinity-base/tdemid-${PV}
 	~trinity-base/tdemultimedia-kappfinder-data-${PV}
 	~trinity-base/tdemultimedia-tdefile-plugins-${PV}"
@@ -27,12 +28,14 @@ RDEPEND="arts? ( ~trinity-base/juk-${PV}
 #Needs kscd, which we don't yet have an ebuild for, to do anything useful
 #	~trinity-base/tdemultimedia-tdeioslaves-${PV}
 
-#These were in KDE3, but TDE has no ebuilds for them as of Jun 2020
-#arts? ( ~trinity-base/artsplugin-akode-${PV}
-#		~trinity-base/artsplugin-audiofile-${PV}
-#		xine? ( ~trinity-base/artsplugin-xine-${PV} )
-#		~trinity-base/kaudiocreator-${PV}
-#		~trinity-base/krec-${PV}
-#		~trinity-base/noatun-${PV} )
+#.kcfgc -> .h problem
 #	~trinity-base/kscd-${PV}
-#	~trinity-base/libkcddb-${PV}
+
+#"krec can not be built without building arts"
+#		~trinity-base/krec-${PV}
+
+#Needs equivalent of KMCOMPILEONLY
+#		~trinity-base/kaudiocreator-${PV}
+
+#These were in KDE3, but TDE has no ebuilds for them as of Jun 2020
+#		~trinity-base/noatun-${PV} )
