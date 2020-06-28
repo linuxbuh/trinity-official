@@ -6,7 +6,7 @@ TRINITY_MODULE_NAME="tdemultimedia"
 
 inherit trinity-meta-2
 
-DESCRIPTION="KDE sound recorder"
+DESCRIPTION="TDE sound recorder"
 KEYWORDS="~amd64 ~x86"
 IUSE="encode mp3 vorbis"
 
@@ -15,7 +15,6 @@ DEPEND="~trinity-base/tdemultimedia-arts-${PV}
 			vorbis? ( media-libs/libvorbis ) )"
 RDEPEND="${DEPEND}"
 
-#KMCOMPILEONLY="arts"
 TSM_EXTRACT_ALSO="arts oggvorbis_artsplugin"
 
 src_configure() {
@@ -36,20 +35,19 @@ src_install() {
 	#able to pull that off.
 	rm -r ${D}/usr/trinity/14/share/apps/artscontrol/
 	rm -r ${D}/usr/trinity/14/share/apps/artsbuilder/
-	rm -r ${D}/usr/trinity/14/include/arts/
+	rm -r ${D}/usr/trinity/14/include/
 	rm -r ${D}/usr/trinity/14/lib64/libarts*
 	rm -r ${D}/usr/trinity/14/lib64/mcop/arts*
 	rm -r ${D}/usr/trinity/14/lib64/mcop/Arts/
 	rm -r ${D}/usr/trinity/14/share/icons/*/*/apps/artscontrol.png
 	rm -r ${D}/usr/trinity/14/share/icons/*/*/apps/artsbuilder.png
-	rm -r ${D}/usr/trinity/14/share/icons/hicolor/scalable/apps/artsbuilder.svgz
-	rm -r ${D}/usr/trinity/14/share/icons/hicolor/scalable/apps/artscontrol.svgz
-	rm -r ${D}/usr/trinity/14/share/icons/crystalsvg/*/actions/arts*
+	rm -r ${D}/usr/trinity/14/share/icons/hicolor/scalable/
+	rm -r ${D}/usr/trinity/14/share/icons/crystalsvg/
 	rm -r ${D}/usr/trinity/14/share/applications/tde/artscontrol.desktop
 	rm -r ${D}/usr/trinity/14/share/applications/tde/artsbuilder.desktop
 	rm -r ${D}/usr/trinity/14/bin/artscontrol
 	rm -r ${D}/usr/trinity/14/bin/artsbuilder
 	rm -r ${D}/usr/trinity/14/bin/midisend
-	rm -r ${D}/usr/trinity/14/share/mimelnk/application/x-artsbuilder.desktop
-	rm -r ${D}/usr/trinity/14/share/apps/kicker/applets/artscontrolapplet.desktop
+	rm -r ${D}/usr/trinity/14/share/mimelnk/
+	rm -r ${D}/usr/trinity/14/share/apps/kicker/
 }

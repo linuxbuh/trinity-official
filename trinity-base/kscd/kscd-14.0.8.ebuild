@@ -29,11 +29,9 @@ src_install() {
 	#Junk all the files that overlap with libkcddb.
 	#It would be cleaner not to let them install at all, but I wasn't
 	#able to pull that off.
-	rm -r ${D}/usr/trinity/14/share/apps/tdeconf_update/kcmcddb-emailsettings.upd
+	rm -r ${D}/usr/trinity/14/share/apps/tdeconf_update/
 	rm -r ${D}/usr/trinity/14/share/config.kcfg/libkcddb.kcfg
 	rm -r ${D}/usr/trinity/14/share/applications/tde/libkcddb.desktop
-	rm -r ${D}/usr/trinity/14/include/libkcddb/
-	rm -r ${D}/usr/trinity/14/lib64/libkcddb*
-	rm -r ${D}/usr/trinity/14/lib64/trinity/kcm_cddb*
-	rm -r ${D}/usr/trinity/14/lib64/libkcddb*
+	rm -r ${D}/usr/trinity/14/include/
+	rm -r ${D}/usr/trinity/14/lib64/
 }
