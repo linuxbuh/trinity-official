@@ -25,12 +25,9 @@ RDEPEND="arts? ( ~trinity-base/juk-${PV}
 	~trinity-base/krec-${PV}
 	~trinity-base/kscd-${PV}
 	~trinity-base/libkcddb-${PV}
+	~trinity-base/noatun-${PV}
 	~trinity-base/tdemid-${PV}
 	~trinity-base/tdemultimedia-kappfinder-data-${PV}
 	~trinity-base/tdemultimedia-doc-${PV}
 	~trinity-base/tdemultimedia-tdeioslaves-${PV}
 	~trinity-base/tdemultimedia-tdefile-plugins-${PV}"
-
-
-#"cannot find -lmpeg-shared"
-#		~trinity-base/noatun-${PV} )
