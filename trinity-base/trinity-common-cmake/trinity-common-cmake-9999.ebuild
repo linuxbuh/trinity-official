@@ -36,8 +36,11 @@ MODDIR="/usr/trinity/modules"
 
 src_install() {
 	dodir ${MODDIR}/${MY_PN}/modules
+	dodir ${MODDIR}/${MY_PN}/templates
 	insinto ${MODDIR}/${MY_PN}/modules
 	doins modules/*
+	insinto ${MODDIR}/${MY_PN}/templates
+	doins templates/*
 	exeinto ${MODDIR}/${MY_PN}
 	doexe *
 }

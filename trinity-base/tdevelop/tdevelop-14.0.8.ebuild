@@ -36,6 +36,8 @@ src_configure() {
 	mycmakeargs=(
 		-DCMAKE_CXX_FLAGS="${CXXFLAGS} -DNDEBUG -L${TQTBASE}/$(get_libdir)"
 		-DWITH_LANGUAGE_ALL=ON
+		-DWITH_BUILDTOOL_ALL=ON
+		-DBUILD_ALL=ON
 	)
 
 	trinity-base-2_src_configure
