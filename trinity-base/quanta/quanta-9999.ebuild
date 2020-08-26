@@ -53,12 +53,6 @@ src_unpack() {
 	unpack html.tar.bz2
 }
 
-src_prepare() {
-	eapply ${FILESDIR}/${PN}-kmdr.patch
-	trinity-gen-configure
-	eapply_user
-}
-
 src_install() {
 	dodir ${TDEDIR}/share/apps/quanta/doc
 
