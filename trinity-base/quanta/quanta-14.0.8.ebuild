@@ -54,7 +54,8 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply ${FILESDIR}/${PN}-kmdr.patch
+	source ${FILESDIR}/conv-func
+	conv_f
 	trinity-gen-configure
 	eapply_user
 }

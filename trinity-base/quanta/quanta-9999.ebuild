@@ -53,6 +53,13 @@ src_unpack() {
 	unpack html.tar.bz2
 }
 
+src_prepare() {
+	source ${FILESDIR}/conv-func
+	conv_f
+	trinity-gen-configure
+	eapply_user
+}
+
 src_install() {
 	dodir ${TDEDIR}/share/apps/quanta/doc
 
