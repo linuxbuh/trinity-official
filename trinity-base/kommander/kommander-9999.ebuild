@@ -30,10 +30,3 @@ RDEPEND="$DEPEND"
 need-trinity
 
 CXXFLAGS+=" -std=c++11 "
-
-src_prepare() {
-	source ${FILESDIR}/conv-func
-	conv_f
-	trinity-gen-configure
-	eapply_user
-}
