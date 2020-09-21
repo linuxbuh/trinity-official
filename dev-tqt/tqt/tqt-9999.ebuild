@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -10,7 +10,7 @@ inherit eutils git-r3 toolchain-funcs
 RESTRICT="mirror"
 
 SRCTYPE="free"
-DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
+DESCRIPTION="Trinity's Qt3 fork - a comprehensive C++ application development framework"
 HOMEPAGE="https://trinitydesktop.org/"
 
 EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
@@ -56,7 +56,7 @@ TQTBASE="/usr/tqt3"
 pkg_setup() {
 	if use imext; then
 		ewarn
-		ewarn "You are going to compile binary imcompatible immodule for TQt. This means"
+		ewarn "You are going to compile binary incompatible immodule for TQt. This means"
 		ewarn "you have to recompile everything depending on TQt after you install it."
 		ewarn "Be aware."
 		ewarn
@@ -117,7 +117,7 @@ src_prepare() {
 		   -e "s:\<QMAKE_LINK_SHLIB\>.*=.*:QMAKE_LINK_SHLIB=$(tc-getCXX):" \
 		   -e "s:\<QMAKE_STRIP\>.*=.*:QMAKE_STRIP=:" \
 		"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
-		
+
 	# Remove obsolete X11 and OpenGL searchpaths
 	find "${S}"/mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_INCDIR_X11\t=.*:QMAKE_INCDIR_X11\t=:' \
@@ -171,12 +171,12 @@ src_configure() {
 	use nas		&& myconf+=" -system-nas-sound" || myconf+=" -no-nas-sound"
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
 	use xrandr	&& myconf+=" -xrandr" || myconf+=" -no-xrandr"
-	use mng       	&& myconf+=" -qt-imgfmt-mng -system-libmng" || myconf+=" -no-imgfmt-mng"
+	use mng		&& myconf+=" -qt-imgfmt-mng -system-libmng" || myconf+=" -no-imgfmt-mng"
 	use cups	&& myconf+=" -cups" || myconf+=" -no-cups"
 	use opengl	&& myconf+=" -enable-module=opengl -no-dlopen-opengl" || myconf+=" -disable-opengl"
-	use xinerama    && myconf+=" -xinerama" || myconf+=" -no-xinerama"
-	use ipv6       	&& myconf+=" -ipv6" || myconf+=" -no-ipv6"
-	use glib       	&& myconf+=" -glibmainloop" || myconf+=" -no-glibmainloop"
+	use xinerama	&& myconf+=" -xinerama" || myconf+=" -no-xinerama"
+	use ipv6	&& myconf+=" -ipv6" || myconf+=" -no-ipv6"
+	use glib	&& myconf+=" -glibmainloop" || myconf+=" -no-glibmainloop"
 	use fontconfig	&& myconf+=" -lfontconfig"
 
 	use debug	&& myconf+=" -debug" || myconf+=" -release -no-g++-exceptions -no-exceptions"
@@ -188,7 +188,7 @@ src_configure() {
 
 	use imext	&& myconf+=" -inputmethod-ext" || myconf+=" -no-inputmethod-ext"
 	use tablet	&& myconf+=" -tablet" || myconf+=" -no-tablet"
-	
+
 	# Don't build styles, except requested (Motif is mandatory for TDE)
 	use styles	&& myconf+=" -plugin-style-cde -plugin-style-compact -plugin-style-motifplus -plugin-style-platinum -plugin-style-sgi -plugin-style-windows" || myconf+=" -no-style-cde -no-style-compact -no-style-motifplus -no-style-platinum -no-style-sgi -no-style-windows"
 
@@ -205,7 +205,7 @@ src_compile() {
 
 	# Compile TQt plugins (if any selected)
 	emake sub-plugins
-	
+
 	# Point to libs for the tools to build fine too
 	export DYLD_LIBRARY_PATH="${S}/lib:${DYLD_LIBRARY_PATH}"
 	export LD_LIBRARY_PATH="${S}/lib:${LD_LIBRARY_PATH}"

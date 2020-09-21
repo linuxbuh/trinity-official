@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -10,7 +10,7 @@ inherit eutils toolchain-funcs
 RESTRICT="mirror"
 
 SRCTYPE="free"
-DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
+DESCRIPTION="Trinity's Qt3 fork - a comprehensive C++ application development framework"
 HOMEPAGE="https://trinitydesktop.org/"
 
 SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/dependencies/tqt3-trinity-${PV}.tar.xz"
@@ -60,7 +60,7 @@ S="${WORKDIR}/tqt3-trinity-${PV}"
 pkg_setup() {
 	if use imext; then
 		ewarn
-		ewarn "You are going to compile binary imcompatible immodule for TQt. This means"
+		ewarn "You are going to compile binary incompatible immodule for TQt. This means"
 		ewarn "you have to recompile everything depending on TQt after you install it."
 		ewarn "Be aware."
 		ewarn
@@ -121,14 +121,14 @@ src_prepare() {
 		   -e "s:\<QMAKE_LINK_SHLIB\>.*=.*:QMAKE_LINK_SHLIB=$(tc-getCXX):" \
 		   -e "s:\<QMAKE_STRIP\>.*=.*:QMAKE_STRIP=:" \
 		"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
-		
+
 	# Remove obsolete X11 and OpenGL searchpaths
 	find "${S}"/mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_INCDIR_X11\t=.*:QMAKE_INCDIR_X11\t=:' \
 			-e 's:QMAKE_LIBDIR_X11\t=.*:QMAKE_LIBDIR_X11\t=:' \
 			-e 's:QMAKE_INCDIR_OPENGL\t=.*:QMAKE_INCDIR_OPENGL\t=:' \
 			-e 's:QMAKE_LIBDIR_OPENGL\t=.*:QMAKE_LIBDIR_OPENGL\t=:' || die
-		
+
 	if use hiddenvisibility; then
 		sed -i -e 's:QMAKE_CFLAGS =:QMAKE_CFLAGS = -fvisibility=hidden -fvisibility-inlines-hidden:' \
 			"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
@@ -174,12 +174,12 @@ src_configure() {
 	# Optional options
 	use cups	&& myconf+=" -cups" || myconf+=" -no-cups"
 	use debug	&& myconf+=" -debug" || myconf+=" -release -no-g++-exceptions -no-exceptions"
-	use firebird    && myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
+	use firebird	&& myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
 	use fontconfig	&& myconf+=" -lfontconfig"
-	use glib       	&& myconf+=" -glibmainloop" || myconf+=" -no-glibmainloop"
-	use imext       	&& myconf+=" -inputmethod-ext" || myconf+=" -no-inputmethod-ext"
-	use ipv6       	&& myconf+=" -ipv6" || myconf+=" -no-ipv6"
-	use mng       	&& myconf+=" -qt-imgfmt-mng -system-libmng" || myconf+=" -no-imgfmt-mng"
+	use glib	&& myconf+=" -glibmainloop" || myconf+=" -no-glibmainloop"
+	use imext	&& myconf+=" -inputmethod-ext" || myconf+=" -no-inputmethod-ext"
+	use ipv6	&& myconf+=" -ipv6" || myconf+=" -no-ipv6"
+	use mng		&& myconf+=" -qt-imgfmt-mng -system-libmng" || myconf+=" -no-imgfmt-mng"
 	use mysql	&& myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql" || myconf+=" -no-sql-mysql"
 	use nas		&& myconf+=" -system-nas-sound" || myconf+=" -no-nas-sound"
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
@@ -206,7 +206,7 @@ src_compile() {
 
 	# Compile TQt plugins (if any selected)
 	emake sub-plugins
-	
+
 	# Point to libs for the tools to build fine too
 	export DYLD_LIBRARY_PATH="${S}/lib:${DYLD_LIBRARY_PATH}"
 	export LD_LIBRARY_PATH="${S}/lib:${LD_LIBRARY_PATH}"
