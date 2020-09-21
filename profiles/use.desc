@@ -1,3 +1,4 @@
 arts - Adds support for aRts: the Trinity sound daemon
+hwlib - Media support via tdehwlib and dbus
 upower - Adds support for sys-power/upower 
 xrandr - Add support for xrandr
