@@ -6,9 +6,6 @@ EAPI="7"
 
 inherit flag-o-matic autotools
 
-# Don't use Gentoo mirrors
-RESTRICT="mirror"
-
 DESCRIPTION="Library of assorted C utility functions"
 HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
 SRC_URI="https://mirror.amdmi3.ru/distfiles/${P}.tar.gz"
@@ -18,7 +15,11 @@ SLOT="0"
 KEYWORDS="amd64 ppc ppc64 sparc x86"
 IUSE="ssl libressl"
 
-DEPEND="ssl? (
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
+DEPEND="
+	ssl? (
 		!libressl? ( dev-libs/openssl:= )
 		libressl? ( dev-libs/libressl:= )
 	)"
@@ -34,7 +35,7 @@ S="${WORKDIR}/${PN}"
 
 src_prepare() {
 	default
-	mv "${S}"/configure.in "${S}"/configure.ac
+	mv "${S}"/configure.in "${S}"/configure.ac || die
 	sed -i 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/g' configure.ac \
 		|| die 'failed to rename AM_CONFIG_HEADER macro'
 
