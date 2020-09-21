@@ -1,41 +1,42 @@
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_TYPE="applications"
 
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="bg ca da de es fr hu it ja nl pl pt_BR ru sk sv tr zh_CN"
-
 inherit trinity-base-2
 
 DESCRIPTION="VPN clients frontend for TDE"
 HOMEPAGE="https://trinitydesktop.org/"
-LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity
 
+LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
-
-IUSE+=" cisco smartcard +openvpn strongswan pptpd libreswan"
+IUSE+=" cisco libreswan +openvpn pptpd smartcard strongswan"
 
 # Other VPN clients will be added by request, controlled over USE.
-#		 If you miss any, please let us know! 
+#		 If you miss any, please let us know!
 
-DEPEND+=" sys-apps/net-tools
-	dev-libs/libgcrypt"
+DEPEND+="
+	dev-libs/libgcrypt
+	sys-apps/net-tools"
 RDEPEND+=" ${DEPEND}
-	cisco? ( net-misc/vpnc )
-	smartcard? ( dev-libs/openct )
-	openvpn? ( net-vpn/openvpn )
-	strongswan? ( net-vpn/strongswan )
+	cisco? ( net-vpn/vpnc )
 	libreswan? ( net-vpn/libreswan )
-	pptpd? ( net-vpn/pptpd )"
+	openvpn? ( net-vpn/openvpn )
+	pptpd? ( net-vpn/pptpd )
+	smartcard? ( dev-libs/openct )
+	strongswan? ( net-vpn/strongswan )"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DBUILD_TRANSLATIONS=ON
 	)
 
