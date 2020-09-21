@@ -15,7 +15,7 @@ IUSE="pam xdmcp xcomposite sak +xrandr +hwlib +svg"
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
-	svg? ( ~media-libs/libart_lgpl-14.0.7 )
+	svg? ( media-libs/libart_lgpl )
 	~trinity-base/tdelibs-${PV}[xrandr?]
 	sys-apps/dbus
 	x11-libs/libXtst

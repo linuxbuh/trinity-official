@@ -15,8 +15,8 @@ DESCRIPTION="Trinity libraries needed by all TDE programs"
 HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
 SLOT="${TRINITY_VER}"
+KEYWORDS="~amd64 ~x86"
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 IUSE+=" alsa cups debug elficons elogind fam +hwlib +idn jpeg2k kernel_linux
@@ -51,7 +51,7 @@ COMMON_DEPEND="
 		libressl? ( dev-libs/libressl:= )
 	)
 	sudo? ( app-admin/sudo )
-	svg? ( ~media-libs/libart_lgpl-14.0.7 )
+	svg? ( media-libs/libart_lgpl )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
 	xcomposite? ( x11-libs/libXcomposite )
