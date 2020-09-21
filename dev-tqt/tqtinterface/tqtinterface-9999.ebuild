@@ -3,16 +3,16 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="tqtinterface"
-
 inherit trinity-base-2
 
 DESCRIPTION="Interface and abstraction library for TQt and Trinity"
 HOMEPAGE="https://trinitydesktop.org/"
+
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
-
 IUSE="+opengl"
 
 DEPEND="~dev-tqt/tqt-${PV}[opengl=]
@@ -24,9 +24,9 @@ pkg_setup() {
 }
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DQT_PREFIX_DIR="${TQTDIR}"
 	)
 
-	 cmake-utils_src_configure
+	cmake-utils_src_configure
 }
