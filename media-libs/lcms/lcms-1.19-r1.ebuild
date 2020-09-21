@@ -3,15 +3,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
-PYTHON_COMPAT=( python2_{6,7} )
 
+PYTHON_COMPAT=( python2_7 )
 inherit autotools eutils python-r1
 
-# Don't use Gentoo mirrors
-RESTRICT="mirror"
-
-DESCRIPTION="A lightweight, speed optimized color management engine"
-HOMEPAGE="http://www.littlecms.com/"
+DESCRIPTION="Lightweight, speed optimized color management engine"
+HOMEPAGE="https://www.littlecms.com/"
 SRC_URI="mirror://sourceforge/lcms/${PV}/${P}.tar.gz"
 
 LICENSE="MIT"
@@ -19,14 +16,18 @@ SLOT="0"
 KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 m68k ~mips ppc ppc64 s390 sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~x64-solaris ~x86-solaris"
 IUSE="jpeg python static-libs tiff zlib"
 
-RDEPEND="tiff? ( media-libs/tiff:0 )
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
+RDEPEND="
 	jpeg? ( virtual/jpeg:0 )
-	zlib? ( sys-libs/zlib )
-	python? ( ${PYTHON_DEPS} )"
+	python? ( ${PYTHON_DEPS} )
+	tiff? ( media-libs/tiff:0 )
+	zlib? ( sys-libs/zlib )"
 DEPEND="${RDEPEND}
 	python? ( >=dev-lang/swig-1.3.31 )"
-
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 PATCHES=(
 	"${FILESDIR}/${P}-disable_static_modules.patch"
@@ -35,7 +36,7 @@ PATCHES=(
 
 src_prepare() {
 	# Python bindings are built/installed manually.
-	sed -e "/SUBDIRS =/s/ python//" -i Makefile.am
+	sed -e "/SUBDIRS =/s/ python//" -i Makefile.am || die
 
 	default
 
@@ -43,7 +44,7 @@ src_prepare() {
 
 	# run swig to regenerate lcms_wrap.cxx and lcms.py (bug #148728)
 	if use python; then
-		cd python
+		cd python || die
 		./swig_lcms || die "swig failed to regenerate files"
 	fi
 }
@@ -102,5 +103,5 @@ src_install() {
 	insinto /usr/share/lcms/profiles
 	doins testbed/*.icm
 
-	find "${D}" -name '*.la' -exec rm -f '{}' +
+	find "${ED}" -name '*.la' -delete || die
 }
