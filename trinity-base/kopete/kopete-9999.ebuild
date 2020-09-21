@@ -1,19 +1,19 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdenetwork"
 
+TRINITY_MODULE_NAME="tdenetwork"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity multi-protocol IM client"
 
-IUSE="jingle gsmlib netmeeting speex kernel_linux"
-PLUGINS="latex autoreplace history contactnotes crypt connectionstatus
-	translator nowlistening webpresence texteffect highlight alias
-	motionautoaway netmeeting addbookmarks statistics smpppdcs"
-PROTOCOLS="gadu groupwise irc xmpp oscar msn sms sametime winpopup yahoo"
+IUSE="gsmlib jingle kernel_linux netmeeting speex"
+PLUGINS="addbookmarks alias autoreplace connectionstatus contactnotes crypt
+	highlight history latex motionautoaway netmeeting nowlistening smpppdcs
+	statistics texteffect translator webpresence"
+PROTOCOLS="gadu groupwise irc msn oscar sametime sms winpopup xmpp yahoo"
 # unsupported USE="v4l2 opengl xscreensaver ssl emoticons-manager "
 # USE=xmms works only with xmms1
 IUSE="${IUSE} ${PLUGINS} ${PROTOCOLS}"
@@ -23,19 +23,20 @@ REQUIRED_USE="
 	netmeeting? ( msn )
 	speex? ( jingle xmpp )"
 
-# MISSING BOTH_DEPEND
+# MISSING COMMON_DEPEND
 #	x11-libs/libXrender
 #	xmpp? ( net-dns/libidn )
 #	kernel_linux? ( virtual/opengl )
 #	opengl? ( dev-qt/qt-meta[opengl] )
 #	xscreensaver? ( x11-libs/libXScrnSaver )
 #	xmpp|groupwice? =app-crypt/qca-1.0*
-BOTH_DEPEND="
+COMMON_DEPEND="
 	jingle? ( dev-libs/glib )
 	netmeeting? ( dev-libs/glib )
 	webpresence? (
 		dev-libs/libxml2
-		dev-libs/libxslt )
+		dev-libs/libxslt
+	)
 	jingle? (
 		dev-libs/expat
 		speex? ( media-libs/speex )
@@ -52,27 +53,27 @@ BOTH_DEPEND="
 #		x11-libs/libXv
 #	)
 #	xscreensaver? ( x11-proto/scrnsaverproto )
-DEPEND="${BOTH_DEPEND}
-	kernel_linux? (
-		virtual/os-headers
-	)
+DEPEND="${COMMON_DEPEND}
+	kernel_linux? ( virtual/os-headers )
 "
 
 # MISSING RDEPEND
 #     netmeeting? ( net-voip/ekiga )
 #     ssl? ( =app-crypt/qca-tls-1.0* )
-RDEPEND="${BOTH_DEPEND}
+RDEPEND="${COMMON_DEPEND}
 	crypt? ( app-crypt/gnupg )
 	latex? (
 		media-gfx/imagemagick
-		virtual/latex-base )
+		virtual/latex-base
+	)
 	sms? ( !gsmlib? ( || (
-				app-mobilephone/smsclient
-				app-mobilephone/smssend	) ) )
+		app-mobilephone/smsclient
+		app-mobilephone/smssend
+	) ) )
 "
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_JINGLE="$(usex jingle)"
 		-DWITH_GSM="$(usex gsmlib)"
 		-DWITH_WEBCAM="$(usex netmeeting)"
