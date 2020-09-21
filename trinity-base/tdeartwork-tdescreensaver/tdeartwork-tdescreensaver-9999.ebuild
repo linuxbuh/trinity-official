@@ -11,10 +11,11 @@ need-arts optional
 
 DESCRIPTION="Extra screensavers for Trinity"
 
-IUSE+=" opengl xscreensaver kclock"
+IUSE+=" kclock opengl xscreensaver"
 
-DEPEND+=" ~trinity-base/tdescreensaver-${PV}
+DEPEND+="
 	~trinity-base/krootbacking-${PV}
+	~trinity-base/tdescreensaver-${PV}
 	kclock? ( ~media-libs/libart_lgpl-${PV} )
 	opengl? ( virtual/opengl )
 	xscreensaver? ( x11-misc/xscreensaver )"
@@ -23,7 +24,7 @@ RDEPEND+=" ${DEPEND}"
 TSM_EXTRACT_ALSO="FindXscreensaver.cmake"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_LIBART="$(usex kclock)"
 		-DWITH_OPENGL="$(usex opengl)"
 		-DWITH_XSCREENSAVER="$(usex xscreensaver)"
