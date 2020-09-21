@@ -14,7 +14,7 @@ TRINITY_DOC_LANGS="cs"
 inherit trinity-base-2
 
 DESCRIPTION="A TDE GUI client for UPS system NUT"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

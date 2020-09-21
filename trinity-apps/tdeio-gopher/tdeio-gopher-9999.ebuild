@@ -14,7 +14,7 @@ TRINITY_LANGS="ar bg br bs ca ca@valencia cs cy da de el en_GB eo
 inherit trinity-base-2
 
 DESCRIPTION="TDEIO slave for gopher protocol"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

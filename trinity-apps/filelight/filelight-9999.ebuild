@@ -17,7 +17,7 @@ TRINITY_DOC_LANGS="da es et it pt ru sv"
 inherit trinity-base-2
 
 DESCRIPTION="Visualise disk usage with interactive map of concentric, segmented rings"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

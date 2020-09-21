@@ -13,7 +13,7 @@ TRINITY_LANGS="br cs da de el es et fi fr he hr hu is it ja
 inherit trinity-base-2
 
 DESCRIPTION="Email notification utility for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

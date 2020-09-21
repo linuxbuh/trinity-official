@@ -11,7 +11,7 @@ RESTRICT="mirror"
 
 SRCTYPE="free"
 DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 
 SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/dependencies/tqt3-trinity-${PV}.tar.xz"
 LICENSE="|| ( GPL-2 GPL-3 )"

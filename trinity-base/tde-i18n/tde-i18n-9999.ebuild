@@ -10,7 +10,7 @@ inherit trinity-base-2
 set-trinityver
 
 DESCRIPTION="Trinity internationalization package"
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"

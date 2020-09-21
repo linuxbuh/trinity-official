@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="libart-lgpl"
 inherit trinity-base-2
 
 DESCRIPTION="A LGPL version of libart maintained by TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 

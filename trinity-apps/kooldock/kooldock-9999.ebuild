@@ -12,7 +12,7 @@ TRINITY_LANGS="cs de es fr it nl pl sv"
 inherit trinity-base-2
 
 DESCRIPTION="A dock for TDE, which attemps to resemble the Mac OSX dock"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

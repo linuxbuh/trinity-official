@@ -12,7 +12,7 @@ TRINITY_LANGS="de"
 inherit trinity-base-2
 
 DESCRIPTION="Nmap graphical interface for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

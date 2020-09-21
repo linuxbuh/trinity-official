@@ -12,7 +12,7 @@ TRINITY_LANGS="ca de es fr nl tr"
 inherit trinity-base-2
 
 DESCRIPTION="Autostart module for KControl "
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

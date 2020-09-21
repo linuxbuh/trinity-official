@@ -12,7 +12,7 @@ TRINITY_LANGS="ar ca de es fr nb pl pt_BR sv zh_CN zh_TW"
 inherit trinity-base-2
 
 DESCRIPTION="User friendly TDE frontend for wireless network connection"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

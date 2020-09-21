@@ -12,7 +12,7 @@ TRINITY_LANGS="bg de hu it nl"
 inherit trinity-base-2
 
 DESCRIPTION="An alternative to the TDE-Menu"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

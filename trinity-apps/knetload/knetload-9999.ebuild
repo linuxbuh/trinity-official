@@ -14,7 +14,7 @@ TRINITY_LANGS="ar bs ca cs da de en_GB es et fr
 inherit trinity-base-2
 
 DESCRIPTION="A network meter for Kicker"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

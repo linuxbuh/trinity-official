@@ -13,7 +13,7 @@ TRINITY_LANGS="bs de es fr hu it ja nl
 inherit trinity-base-2
 
 DESCRIPTION="A powerful batch file renamer for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

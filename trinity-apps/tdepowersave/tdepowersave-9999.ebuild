@@ -15,7 +15,7 @@ TRINITY_DOC_LANGS="cs de fi hu nb"
 inherit trinity-base-2
 
 DESCRIPTION="A TDE frontend for power management"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

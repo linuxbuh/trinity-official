@@ -13,7 +13,7 @@ TRINITY_LANGS="ar bg br ca cs de el es et fr ga
 inherit trinity-base-2
 
 DESCRIPTION="A general purpose launcher for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

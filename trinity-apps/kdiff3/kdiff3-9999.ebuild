@@ -13,7 +13,7 @@ TRINITY_LANGS="ar az bg br ca cs cy da de el es et fr ga gl hi hu is it ja
 inherit trinity-base-2
 
 DESCRIPTION="A diff and merge program for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

@@ -12,7 +12,7 @@ TRINITY_LANGS="de el es et fr he it nl pl ru sk"
 inherit trinity-base-2
 
 DESCRIPTION="File manager for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

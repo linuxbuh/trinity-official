@@ -9,7 +9,7 @@ TRINITY_MODULE_NAME="dbus-tqt"
 inherit trinity-base-2
 
 DESCRIPTION="D-BUS TQt bindings"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 KEYWORDS="~amd64 ~x86"
 SLOT="0"

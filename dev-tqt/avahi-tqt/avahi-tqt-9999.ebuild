@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="${PN}"
 inherit trinity-base-2
 
 DESCRIPTION="Avahi TQt bindings"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 

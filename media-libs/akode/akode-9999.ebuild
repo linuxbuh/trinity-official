@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="akode"
 inherit trinity-base-2
 
 DESCRIPTION="A simple framework to decode the most common audio formats."
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 

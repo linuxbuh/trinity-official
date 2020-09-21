@@ -12,7 +12,7 @@ TRINITY_LANGS="de es fr hu nl pl ru sk zh_CN"
 inherit trinity-base-2
 
 DESCRIPTION="Tool for managing notes"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

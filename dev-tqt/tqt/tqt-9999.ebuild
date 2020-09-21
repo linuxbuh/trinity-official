@@ -11,7 +11,7 @@ RESTRICT="mirror"
 
 SRCTYPE="free"
 DESCRIPTION="Trinity's Qt3 toolkit fork - a comprehensive C++ application development framework."
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 
 EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
 LICENSE="|| ( GPL-2 GPL-3 )"

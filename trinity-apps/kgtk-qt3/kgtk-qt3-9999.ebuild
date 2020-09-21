@@ -12,7 +12,7 @@ TRINITY_LANGS="cs de es en_GB fr nl pl pt_BR ru zh_CN"
 inherit trinity-base-2
 
 DESCRIPTION="TDE dialogs in GTK 2.x applications "
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

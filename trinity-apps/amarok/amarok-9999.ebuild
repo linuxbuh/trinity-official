@@ -17,7 +17,7 @@ TRINITY_DOC_LANGS="da de es et fr it nl pl pt pt_BR ru sv"
 inherit trinity-base-2
 
 DESCRIPTION="Advanced music player for TDE."
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

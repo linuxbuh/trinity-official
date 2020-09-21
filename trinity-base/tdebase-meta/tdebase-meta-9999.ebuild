@@ -9,7 +9,7 @@ inherit trinity-functions-2
 set-trinityver
 
 DESCRIPTION="tdebase metapackage - merge this to pull in all tdebase-derived packages"
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"

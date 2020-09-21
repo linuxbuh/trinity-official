@@ -8,7 +8,7 @@ inherit trinity-functions-2
 set-trinityver
 
 DESCRIPTION="tdeutils metapackage - merge this to pull in all tdeutils-derived packages"
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 KEYWORDS="~amd64 ~x86"
 

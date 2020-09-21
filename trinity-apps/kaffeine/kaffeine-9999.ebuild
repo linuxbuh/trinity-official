@@ -14,7 +14,7 @@ TRINITY_LANGS="ar bg bn br ca cs da de el es et fi fr ga gl he
 inherit trinity-base-2
 
 DESCRIPTION="Media player for TDE using Xine and GStreamer backends."
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

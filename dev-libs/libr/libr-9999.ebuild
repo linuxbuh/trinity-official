@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="libr"
 inherit trinity-base-2
 
 DESCRIPTION="ELF resource access and editing library"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="( LGPL-2.1 )"
 SLOT="0"
 

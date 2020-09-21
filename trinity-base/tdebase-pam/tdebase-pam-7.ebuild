@@ -4,7 +4,7 @@
 inherit pam
 
 DESCRIPTION="pam.d files used by several Trinity components."
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="GPL-2"
 
 SLOT="0"

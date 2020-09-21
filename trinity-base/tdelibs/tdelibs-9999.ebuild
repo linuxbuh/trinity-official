@@ -12,7 +12,7 @@ set-trinityver
 need-arts optional
 
 DESCRIPTION="Trinity libraries needed by all TDE programs."
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"

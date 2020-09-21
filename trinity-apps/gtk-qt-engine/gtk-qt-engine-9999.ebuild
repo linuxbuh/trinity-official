@@ -12,7 +12,7 @@ TRINITY_LANGS="bg de es fr it nl nn ru sv tr"
 inherit trinity-base-2
 
 DESCRIPTION="Theme engine using TQt for GTK+2"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

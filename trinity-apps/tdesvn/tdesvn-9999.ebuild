@@ -12,7 +12,7 @@ TRINITY_LANGS="ca cs de es fr gl it ja lt nl pa ru sv"
 inherit trinity-base-2
 
 DESCRIPTION="Subversion client with tight TDE integration"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

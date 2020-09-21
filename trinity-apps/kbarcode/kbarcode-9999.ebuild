@@ -12,7 +12,7 @@ TRINITY_LANGS="de el es fi fr hu it nl pl sv tr"
 inherit trinity-base-2
 
 DESCRIPTION="Barcode and label printing application for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

@@ -12,7 +12,7 @@ inherit trinity-base-2
 set-trinityver
 
 DESCRIPTION="aRts, the Trinity sound (and all-around multimedia) server/output manager"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 IUSE="alsa -artswrappersuid jack mp3 vorbis"

@@ -12,7 +12,7 @@ TRINITY_LANGS="cs da de es fr it ja nl nn pl_PL pt ru sk tr zh_CN zh_TW"
 inherit trinity-base-2
 
 DESCRIPTION="A multi-purpose note-taking application for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

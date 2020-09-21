@@ -16,7 +16,7 @@ TRINITY_DOC_LANGS="da es et it pt ru sv"
 inherit trinity-base-2
 
 DESCRIPTION="A user friendly IRC Client for Trinity"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

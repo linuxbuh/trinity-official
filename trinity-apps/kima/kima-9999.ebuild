@@ -12,7 +12,7 @@ TRINITY_LANGS="de es et hu id nl sv tr"
 inherit trinity-base-2
 
 DESCRIPTION="A Kicker monitoring applet"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

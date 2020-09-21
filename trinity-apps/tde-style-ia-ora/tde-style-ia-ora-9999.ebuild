@@ -9,7 +9,7 @@ TRINITY_EXTRAGEAR_PACKAGING="no"
 inherit trinity-base-2
 
 DESCRIPTION="Ia Ora widget style for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

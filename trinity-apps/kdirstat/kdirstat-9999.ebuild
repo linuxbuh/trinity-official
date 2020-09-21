@@ -12,7 +12,7 @@ TRINITY_LANGS="de fr hu it ja"
 inherit trinity-base-2
 
 DESCRIPTION="A graphical disk usage utility for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

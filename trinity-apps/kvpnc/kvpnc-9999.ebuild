@@ -12,7 +12,7 @@ TRINITY_LANGS="bg ca da de es fr hu it ja nl pl pt_BR ru sk sv tr zh_CN"
 inherit trinity-base-2
 
 DESCRIPTION="VPN clients frontend for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

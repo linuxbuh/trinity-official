@@ -12,7 +12,7 @@ TRINITY_LANGS="de fr"
 inherit trinity-base-2
 
 DESCRIPTION="Locate TDEIO plugin"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

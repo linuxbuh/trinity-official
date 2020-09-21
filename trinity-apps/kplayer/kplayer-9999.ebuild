@@ -16,7 +16,7 @@ TRINITY_DOC_LANGS="da es it pt sv"
 inherit trinity-base-2
 
 DESCRIPTION="KPlayer is a TDE media player based on mplayer."
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

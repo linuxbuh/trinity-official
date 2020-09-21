@@ -9,7 +9,7 @@ inherit trinity-functions-2
 set-trinityver
 
 DESCRIPTION="tdeartwork meta package - merge this to pull in all tdeartwork-derived packages"
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"

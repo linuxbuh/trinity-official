@@ -13,7 +13,7 @@ TRINITY_LANGS="ar bg cs cy da de el es et fr ga gl hu it
 inherit trinity-base-2
 
 DESCRIPTION="Network interfaces monitor for the TDE systray"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

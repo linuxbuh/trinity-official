@@ -8,7 +8,7 @@ TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="A CD/DVD burning application for Trinity"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

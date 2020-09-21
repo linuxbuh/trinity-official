@@ -12,7 +12,7 @@ TRINITY_LANGS="cs de es fr nb nl pl sv"
 inherit trinity-base-2
 
 DESCRIPTION="A TDE GUI frontend to LM-Sensors"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

@@ -12,7 +12,7 @@ TRINITY_LANGS="de es fi fr it nl pl pt_BR ru sl uk"
 inherit trinity-base-2
 
 DESCRIPTION="TDE-Menu replacement "
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

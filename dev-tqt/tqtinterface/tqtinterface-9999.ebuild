@@ -9,7 +9,7 @@ TRINITY_MODULE_NAME="tqtinterface"
 inherit trinity-base-2
 
 DESCRIPTION="Interface and abstraction library for TQt and Trinity"
-HOMEPAGE="http://www.trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 

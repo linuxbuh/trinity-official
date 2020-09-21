@@ -12,7 +12,7 @@ TRINITY_LANGS="cs de it nl pt sk"
 inherit trinity-base-2
 
 DESCRIPTION="A complex calculator for TDE"
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity

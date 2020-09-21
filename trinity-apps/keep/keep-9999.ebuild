@@ -13,7 +13,7 @@ TRINITY_LANGS="bg br cs da de el es ga gl it ja
 inherit trinity-base-2
 
 DESCRIPTION="A simple backup system for TDE."
-HOMEPAGE="http://trinitydesktop.org/"
+HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity
