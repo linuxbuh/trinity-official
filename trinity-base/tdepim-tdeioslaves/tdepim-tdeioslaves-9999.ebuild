@@ -1,9 +1,10 @@
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdepim"
 
+TRINITY_MODULE_NAME="tdepim"
 inherit trinity-meta-2
 
 TSM_EXTRACT="tdeioslave"
@@ -13,7 +14,7 @@ DESCRIPTION="PIM Trinity TDEIOslaves"
 
 IUSE="sasl sieve"
 
-# The Sieve TDEIOslave won't build without SASL and 
+# The Sieve TDEIOslave won't build without SASL and
 # the IMAP4 TDEIOslave will lose the ability of SASL
 # authentification. To fulfill any expectation of users,
 # we offer two USE flags, which depend on each other.
@@ -30,7 +31,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_SASL=$(usex sieve)
 	)
 
