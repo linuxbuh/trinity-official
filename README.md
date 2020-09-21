@@ -8,7 +8,7 @@ At the moment this overlay can only offer a certain set of the TDE packages, but
 
 The current main work is more or less about porting the whole overlay to EAPI7 fully and away from EAPI5 and to clean it up and bring it in a healthy state again.
 
-This overlay is largely based on the very good and hard work of Fat-Zer who created and maintained this overlay many years, to a time when Gentoo users had no other choice, because Gentoo devs don't wanted to support TDE (which they resist to do so still today) and TDE had no official overlay for Gentoo users. This base was later ported by E. Liddell to use the newer git-r3.eclass and newer, EAPI7 complicant trinity eclasses. It also tries to be some central place, in which all goods of other floating around TDE overlays should be centralized. So everyone is welcome to contribute to it, just with creating some PR in TGW.
+This overlay is largely based on the very good and hard work of Fat-Zer who created and maintained this overlay many years, to a time when Gentoo users had no other choice for TDE had no official overlay for Gentoo users. This base was later ported by E. Liddell to use the newer git-r3.eclass and newer, EAPI7 complicant trinity eclasses. It also tries to be some central place, in which all goods of other floating around TDE overlays should be centralized. So everyone is welcome to contribute to it, just with creating some PR in TGW.
 
 **Please don't report bugs to the Gentoo bugzilla or Fat-Zer and instead of this, report issues at this repository.**
 
