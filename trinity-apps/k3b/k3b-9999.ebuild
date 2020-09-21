@@ -3,24 +3,24 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_TYPE="applications"
 
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="A CD/DVD burning application for Trinity"
 HOMEPAGE="https://trinitydesktop.org/"
-LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity
 
 need-arts optional
 
+LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
+IUSE+=" alsa css dvd dvdr emovix encode debug ffmpeg ffmpeg-all-codecs flac
++handbook mp3 sndfile taglib vcd vorbis"
 
-IUSE+=" css dvd dvdr vcd debug alsa ffmpeg ffmpeg_all_codecs \
-   flac sndfile taglib mp3 vorbis encode emovix +handbook"
-
-DEPEND+=" media-libs/libsamplerate
+DEPEND+="
+	media-libs/libsamplerate
 	media-libs/taglib
 	media-sound/cdparanoia
 	alsa? ( media-libs/alsa-lib )
@@ -30,20 +30,24 @@ DEPEND+=" media-libs/libsamplerate
 	flac? ( media-libs/flac[cxx] )
 	mp3? ( media-libs/libmad )
 	sndfile? ( media-libs/libsndfile )
-	vorbis? ( media-libs/libvorbis )"
+	vorbis? ( media-libs/libvorbis )
+"
 RDEPEND+=" ${DEPEND}
 	app-cdr/cdrdao
 	media-sound/normalize
 	virtual/cdrtools
-	dvdr? ( app-cdr/dvd+rw-tools )
 	css? ( media-libs/libdvdcss )
-	encode? ( media-sound/sox
-		media-video/transcode[dvd] )
+	dvdr? ( app-cdr/dvd+rw-tools )
 	emovix? ( media-video/emovix )
-	vcd? ( media-video/vcdimager )"
+	encode? (
+		media-sound/sox
+		media-video/transcode[dvd]
+	)
+	vcd? ( media-video/vcdimager )
+"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_HAL=OFF
 		-DWITH_SYSTEM_LIBSAMPLERATE=ON
 		-DWITH_MUSEPACK=OFF
