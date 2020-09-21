@@ -6,7 +6,7 @@
 		<name>Alexander Golubev</name>
 	</maintainer>
 	<use>
-		<flag name="tdehw">Use tdehwlib backend for media mount</flag>
+		<flag name="hwlib">Use tdehwlib backend for media mount</flag>
 	</use>
 	<longdescription>
 		kioslaves is the Trinity VFS framework which plugins present a filesystem-like view of arbitrary data.
