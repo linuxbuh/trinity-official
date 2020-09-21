@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="kicker plugin: rss news ticker"
 
-DEPEND="=trinity-base/librss-${PV}"
+DEPEND="~trinity-base/librss-${PV}"
 RDEPEND="${DEPEND}"

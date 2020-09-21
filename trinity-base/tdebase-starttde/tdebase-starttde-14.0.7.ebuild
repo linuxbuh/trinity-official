@@ -16,14 +16,14 @@ RDEPEND="x11-apps/xmessage
 	x11-apps/xrandr
 	x11-apps/mkfontscale
 	x11-apps/xprop
-	=trinity-base/kdesktop-${PV}
-	=trinity-base/kcminit-${PV}
-	=trinity-base/ksmserver-${PV}
-	=trinity-base/twin-${PV}
-	=trinity-base/kpersonalizer-${PV}
-	=trinity-base/kreadconfig-${PV}
-	=trinity-base/ksplashml-${PV}
-	=trinity-base/tdeinit-${PV}"
+	~trinity-base/kdesktop-${PV}
+	~trinity-base/kcminit-${PV}
+	~trinity-base/ksmserver-${PV}
+	~trinity-base/twin-${PV}
+	~trinity-base/kpersonalizer-${PV}
+	~trinity-base/kreadconfig-${PV}
+	~trinity-base/ksplashml-${PV}
+	~trinity-base/tdeinit-${PV}"
 
 TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm"
 

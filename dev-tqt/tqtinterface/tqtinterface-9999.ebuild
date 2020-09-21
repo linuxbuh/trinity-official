@@ -15,7 +15,7 @@ SLOT="0"
 
 IUSE="+opengl"
 
-DEPEND="=dev-tqt/tqt-${PV}[opengl=]
+DEPEND="~dev-tqt/tqt-${PV}[opengl=]
 	opengl? ( virtual/glu )"
 RDEPEND="${DEPEND}"
 

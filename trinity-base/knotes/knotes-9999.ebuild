@@ -9,8 +9,8 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity Notes application"
 
-COMMON_DEPEND="=trinity-base/libkcal-${PV}
-	=trinity-base/libtdepim-${PV}"
+COMMON_DEPEND="~trinity-base/libkcal-${PV}
+	~trinity-base/libtdepim-${PV}"
 DEPEND+=" $COMMON_DEPEND"
 RDEPEND+=" $COMMON_DEPEND"
 

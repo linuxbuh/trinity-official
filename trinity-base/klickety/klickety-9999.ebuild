@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity: Klickety is an adaptation of the clickomania game"
 
-DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

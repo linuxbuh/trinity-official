@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="A Trinity game similiar to Mahjongg"
 
-DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

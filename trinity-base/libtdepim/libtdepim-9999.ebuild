@@ -10,9 +10,9 @@ inherit trinity-meta-2
 DESCRIPTION="Common library for Trinity PIM applications."
 
 COMMON_DEPEND="
-	=trinity-base/ktnef-${PV}
-	=trinity-base/libkmime-${PV}
-	=trinity-base/libkcal-${PV}"
+	~trinity-base/ktnef-${PV}
+	~trinity-base/libkmime-${PV}
+	~trinity-base/libkcal-${PV}"
 DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}"
 

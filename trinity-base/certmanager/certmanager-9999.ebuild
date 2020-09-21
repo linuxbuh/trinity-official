@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity certificate manager gui"
 
-COMMON_DEPEND="=trinity-base/libtdenetwork-${PV}
+COMMON_DEPEND="~trinity-base/libtdenetwork-${PV}
 	app-crypt/gpgme
 	app-crypt/gnupg"
 DEPEND+=" ${COMMON_DEPEND}"

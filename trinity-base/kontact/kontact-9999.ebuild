@@ -9,10 +9,10 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity personal information manager"
 
-COMMON_DEPEND="=trinity-base/libtdepim-${PV}
-	=trinity-base/libkpimidentities-${PV}
-	=trinity-base/libkholidays-${PV}
-	=trinity-base/knotes-${PV}"
+COMMON_DEPEND="~trinity-base/libtdepim-${PV}
+	~trinity-base/libkpimidentities-${PV}
+	~trinity-base/libkholidays-${PV}
+	~trinity-base/knotes-${PV}"
 
 DEPEND+=" $COMMON_DEPEND"
 RDEPEND+=" $COMMON_DEPEND"

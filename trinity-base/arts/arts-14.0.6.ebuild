@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="alsa -artswrappersuid jack mp3 vorbis"
 SLOT="${TRINITY_VER}"
 
-DEPEND="=dev-tqt/tqtinterface-${PV}
+DEPEND="~dev-tqt/tqtinterface-${PV}
 	dev-libs/glib
 	media-libs/audiofile
 	mp3? ( media-libs/libmad )

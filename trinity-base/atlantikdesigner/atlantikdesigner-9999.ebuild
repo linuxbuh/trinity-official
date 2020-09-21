@@ -9,4 +9,4 @@ inherit trinity-meta-2
 
 DESCRIPTION="Atlantik gameboard designer"
 
-DEPEND="=trinity-base/atlantik-${PV}"
+DEPEND="~trinity-base/atlantik-${PV}"

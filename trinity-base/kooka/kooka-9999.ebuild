@@ -10,7 +10,7 @@ inherit trinity-meta-2
 DESCRIPTION="Kooka is a Trinity application which provides access to scanner hardware"
 
 DEPEND="
-	=trinity-base/libkscan-${PV}
+	~trinity-base/libkscan-${PV}
 	media-libs/tiff:="
 RDEPEND="${DEPEND}"
 

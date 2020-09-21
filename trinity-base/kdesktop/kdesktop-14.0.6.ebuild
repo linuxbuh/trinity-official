@@ -14,9 +14,9 @@ KEYWORDS="~amd64 ~x86"
 
 COMMON_DEPEND="x11-libs/libXrender
 	x11-libs/libXcursor
-	=dev-libs/dbus-1-tqt-${PV}
-	=trinity-base/libkonq-${PV}
-	=trinity-base/kcontrol-${PV}
+	~dev-libs/dbus-1-tqt-${PV}
+	~trinity-base/libkonq-${PV}
+	~trinity-base/kcontrol-${PV}
 	xscreensaver? ( x11-libs/libXScrnSaver )"
 	# Requires the desktop background settings module,
 	# so until we separate the kcontrol modules into separate ebuilds :-),
@@ -24,9 +24,9 @@ COMMON_DEPEND="x11-libs/libXrender
 DEPEND="${COMMON_DEPEND}
 	xscreensaver? ( x11-base/xorg-proto x11-misc/xscreensaver )"
 RDEPEND="${COMMON_DEPEND}
-	=trinity-base/kcheckpass-${PV}
-	=trinity-base/kdialog-${PV}
-	=trinity-base/konqueror-${PV}
+	~trinity-base/kcheckpass-${PV}
+	~trinity-base/kdialog-${PV}
+	~trinity-base/konqueror-${PV}
 	pam? ( trinity-base/tdebase-pam )"
 
 TSM_EXTRACT_ALSO="kcheckpass/"

@@ -9,9 +9,9 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity PIM identities library"
 
-COMMON_DEPEND="=trinity-base/certmanager-${PV}
-	=trinity-base/libtdepim-${PV}
-	=trinity-base/libkmime-${PV}"
+COMMON_DEPEND="~trinity-base/certmanager-${PV}
+	~trinity-base/libtdepim-${PV}
+	~trinity-base/libkmime-${PV}"
 DEPEND+=" $COMMON_DEPEND"
 RDEPEND+=" $COMMON_DEPEND"
 

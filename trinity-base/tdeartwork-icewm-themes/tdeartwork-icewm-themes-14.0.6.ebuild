@@ -11,7 +11,7 @@ DESCRIPTION="Themes for IceWM from the tdeartwork package."
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-	=trinity-base/tdeartwork-twin-styles-${PV}"
+	~trinity-base/tdeartwork-twin-styles-${PV}"
 
 pkg_postinst() {
 	elog "For more IceWM themes, install x11-themes/icewm-extra-themes"

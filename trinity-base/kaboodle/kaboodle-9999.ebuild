@@ -8,4 +8,4 @@ inherit trinity-meta-2
 
 DESCRIPTION="The Lean TDE Media Player"
 
-RDEPEND="=trinity-base/tdemultimedia-arts-${PV}"
+RDEPEND="~trinity-base/tdemultimedia-arts-${PV}"

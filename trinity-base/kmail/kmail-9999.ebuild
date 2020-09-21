@@ -14,23 +14,23 @@ IUSE="crypt imap mbox sasl"
 # so we trigger them to be build, depending on USE flags.
 
 COMMON_DEPEND="
-	=trinity-base/libtdepim-${PV}
-	=trinity-base/mimelib-${PV}
-	=trinity-base/libtdenetwork-${PV}
-	=trinity-base/ktnef-${PV}
-	=trinity-base/libkcal-${PV}
-	=trinity-base/libkmime-${PV}
-	=trinity-base/libkpgp-${PV}
-	=trinity-base/certmanager-${PV}
-	=trinity-base/libkpimidentities-${PV}
-	=trinity-base/libksieve-${PV}"
+	~trinity-base/libtdepim-${PV}
+	~trinity-base/mimelib-${PV}
+	~trinity-base/libtdenetwork-${PV}
+	~trinity-base/ktnef-${PV}
+	~trinity-base/libkcal-${PV}
+	~trinity-base/libkmime-${PV}
+	~trinity-base/libkpgp-${PV}
+	~trinity-base/certmanager-${PV}
+	~trinity-base/libkpimidentities-${PV}
+	~trinity-base/libksieve-${PV}"
 
 DEPEND="${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}
 	crypt? ( app-crypt/pinentry )
-	=trinity-base/tdebase-tdeioslaves-${PV}
-	mbox? ( =trinity-base/tdepim-tdeioslaves-${PV} )
-	imap? ( =trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )"
+	~trinity-base/tdebase-tdeioslaves-${PV}
+	mbox? ( ~trinity-base/tdepim-tdeioslaves-${PV} )
+	imap? ( ~trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )"
 
 TSM_EXTRACT_ALSO="
 	ktnef/

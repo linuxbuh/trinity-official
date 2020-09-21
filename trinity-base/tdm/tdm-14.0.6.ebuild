@@ -15,15 +15,15 @@ KEYWORDS="~amd64 ~x86"
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
-	svg? ( =media-libs/libart_lgpl-${PV} )
-	=trinity-base/tdelibs-${PV}[xrandr?]
+	svg? ( ~media-libs/libart_lgpl-${PV} )
+	~trinity-base/tdelibs-${PV}[xrandr?]
 	sys-apps/dbus
 	x11-libs/libXtst
-	=trinity-base/kcontrol-${PV}
-	=dev-libs/dbus-tqt-${PV}"
+	~trinity-base/kcontrol-${PV}
+	~dev-libs/dbus-tqt-${PV}"
 
 RDEPEND="${DEPEND}
-	=trinity-base/tdepasswd-${PV}
+	~trinity-base/tdepasswd-${PV}
 	x11-apps/xinit
 	x11-apps/xmessage"
 

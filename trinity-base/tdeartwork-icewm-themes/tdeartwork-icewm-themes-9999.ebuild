@@ -10,7 +10,7 @@ inherit trinity-meta-2
 DESCRIPTION="Themes for IceWM from the tdeartwork package."
 
 RDEPEND="
-	=trinity-base/tdeartwork-twin-styles-${PV}"
+	~trinity-base/tdeartwork-twin-styles-${PV}"
 
 pkg_postinst() {
 	elog "More IceWM themes are available installing x11-themes/icewm-themes"

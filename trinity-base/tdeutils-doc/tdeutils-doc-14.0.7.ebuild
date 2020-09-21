@@ -10,4 +10,4 @@ DESCRIPTION="Documentaion for tdeutils-derived packages"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-	=trinity-base/khelpcenter-${PV}"
+	~trinity-base/khelpcenter-${PV}"

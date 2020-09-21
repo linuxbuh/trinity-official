@@ -15,16 +15,16 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
 RDEPEND="
-	=trinity-apps/atlantikdesigner-${PV}
-	=trinity-base/tdeaddons-doc-${PV}
-	=trinity-base/kaddressbook-plugins-${PV}
-	=trinity-base/kate-plugins-${PV}
-	=trinity-base/kicker-applets-${PV}
-	=trinity-base/knewsticker-scripts-${PV}
-	=trinity-base/konq-plugins-${PV}
-	=trinity-base/ksig-${PV}
-	=trinity-base/renamedlg-plugins-${PV}
-	=trinity-base/tdeaddons-tdefile-plugins-${PV}"
-	
+	~trinity-apps/atlantikdesigner-${PV}
+	~trinity-base/tdeaddons-doc-${PV}
+	~trinity-base/kaddressbook-plugins-${PV}
+	~trinity-base/kate-plugins-${PV}
+	~trinity-base/kicker-applets-${PV}
+	~trinity-base/knewsticker-scripts-${PV}
+	~trinity-base/konq-plugins-${PV}
+	~trinity-base/ksig-${PV}
+	~trinity-base/renamedlg-plugins-${PV}
+	~trinity-base/tdeaddons-tdefile-plugins-${PV}"
+
 # trinity-base/noatun-plugins masked due to missing dependency: noatun
 # But not long anymore.. :-)

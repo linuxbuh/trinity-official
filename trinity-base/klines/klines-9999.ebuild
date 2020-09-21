@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity: Kolor Lines - a little game about balls and how to get rid of them"
 
-DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

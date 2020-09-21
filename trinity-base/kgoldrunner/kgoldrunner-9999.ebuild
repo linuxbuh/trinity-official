@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity: KGoldrunner is a game of action and puzzle solving"
 
-DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

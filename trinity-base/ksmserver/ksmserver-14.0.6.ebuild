@@ -12,7 +12,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="upower +hwlib"
 
 DEPEND="
-	upower? ( =dev-libs/dbus-1-tqt-${PV} ) "
+	upower? ( ~dev-libs/dbus-1-tqt-${PV} ) "
 
 RDEPEND="${DEPEND}
 	upower? ( sys-power/upower ) "

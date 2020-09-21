@@ -19,7 +19,7 @@ need-trinity
 
 SLOT="${TRINITY_VER}"
 
-RDEPEND+=" =trinity-base/tdm-${PV}"
+RDEPEND+=" ~trinity-base/tdm-${PV}"
 
 src_configure() {
 	mycmakeargs=(

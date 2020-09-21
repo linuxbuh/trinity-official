@@ -48,7 +48,7 @@ DEPEND+="
 	media-libs/taglib
 	dev-db/sqlite
 	xine? ( <media-libs/xine-lib-1.2.10 )
-	akode? ( =media-libs/akode-${PV} )
+	akode? ( ~media-libs/akode-${PV} )
 	mp4? ( media-libs/libmp4v2 )
 	ipod? ( media-libs/libgpod )
 	riokarma? ( media-libs/libkarma )

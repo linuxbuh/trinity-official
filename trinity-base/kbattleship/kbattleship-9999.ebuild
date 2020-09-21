@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Battleship clone"
 
-DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

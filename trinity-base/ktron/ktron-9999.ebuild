@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity tron game"
 
-DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

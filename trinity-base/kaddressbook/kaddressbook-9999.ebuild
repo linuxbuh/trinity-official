@@ -10,10 +10,10 @@ inherit trinity-meta-2
 DESCRIPTION="The Trinity Address Book"
 IUSE+=" gnokii"
 
-COMMON_DEPEND="=trinity-base/libtdepim-${PV}
-	=trinity-base/libkcal-${PV}
-	=trinity-base/certmanager-${PV}
-	=trinity-base/libtdenetwork-${PV}
+COMMON_DEPEND="~trinity-base/libtdepim-${PV}
+	~trinity-base/libkcal-${PV}
+	~trinity-base/certmanager-${PV}
+	~trinity-base/libtdenetwork-${PV}
 	gnokii? ( app-mobilephone/gnokii )"
 
 DEPEND+=" ${COMMON_DEPEND}"

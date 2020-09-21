@@ -11,4 +11,4 @@ DESCRIPTION="kworldclock from tdeartwork"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-	=trinity-base/kworldclock-${PV}"
+	~trinity-base/kworldclock-${PV}"

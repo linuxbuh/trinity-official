@@ -10,7 +10,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity G3/G4 fax viewer"
 
-DEPEND="=trinity-base/kviewshell-${PV}"
+DEPEND="~trinity-base/kviewshell-${PV}"
 RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="kviewshell"

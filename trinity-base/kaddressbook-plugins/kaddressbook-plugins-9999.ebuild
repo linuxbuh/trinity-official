@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Plugins for Trinity Addressbook"
 
-DEPEND="=trinity-base/kaddressbook-${PV}"
+DEPEND="~trinity-base/kaddressbook-${PV}"
 RDEPEND="${DEPEND}"

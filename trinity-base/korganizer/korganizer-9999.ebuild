@@ -12,18 +12,18 @@ DESCRIPTION="A Personal Organizer for Trinity"
 IUSE+=" exchange"
 
 COMMON_DEPEND="
-	=trinity-base/kgantt-${PV}
-	=trinity-base/libtdepim-${PV}
-	=trinity-base/libtdenetwork-${PV}
-	=trinity-base/libkcal-${PV}
-	=trinity-base/ktnef-${PV}
-	=trinity-base/libkmime-${PV}
-	=trinity-base/libkholidays-${PV}
-	=trinity-base/certmanager-${PV}
-	=trinity-base/libkpimidentities-${PV}
-	=trinity-base/kaddressbook-${PV}
-	exchange? ( =trinity-base/libkpimexchange-${PV} )"
-#	=trinity-base/tdepim-tderesources-${PV}:${SLOT}
+	~trinity-base/kgantt-${PV}
+	~trinity-base/libtdepim-${PV}
+	~trinity-base/libtdenetwork-${PV}
+	~trinity-base/libkcal-${PV}
+	~trinity-base/ktnef-${PV}
+	~trinity-base/libkmime-${PV}
+	~trinity-base/libkholidays-${PV}
+	~trinity-base/certmanager-${PV}
+	~trinity-base/libkpimidentities-${PV}
+	~trinity-base/kaddressbook-${PV}
+	exchange? ( ~trinity-base/libkpimexchange-${PV} )"
+#	~trinity-base/tdepim-tderesources-${PV}:${SLOT}
 
 DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}"

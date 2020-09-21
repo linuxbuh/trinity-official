@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="A Trinity potato game for kids"
 
-DEPEND="=trinity-base/libtdegames-${PV}"
+DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"

@@ -15,12 +15,12 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
 RDEPEND="
-	=trinity-base/tdeartwork-emoticons-${PV}
-	=trinity-base/tdeartwork-icon-themes-${PV}
-	=trinity-base/tdeartwork-icewm-themes-${PV}
-	=trinity-base/tdeartwork-tdescreensaver-${PV}
-	=trinity-base/tdeartwork-twin-styles-${PV}
-	=trinity-base/tdeartwork-kworldclock-${PV}
-	=trinity-base/tdeartwork-sounds-${PV}
-	=trinity-base/tdeartwork-styles-${PV}
-	=trinity-base/tdeartwork-wallpapers-${PV}"
+	~trinity-base/tdeartwork-emoticons-${PV}
+	~trinity-base/tdeartwork-icon-themes-${PV}
+	~trinity-base/tdeartwork-icewm-themes-${PV}
+	~trinity-base/tdeartwork-tdescreensaver-${PV}
+	~trinity-base/tdeartwork-twin-styles-${PV}
+	~trinity-base/tdeartwork-kworldclock-${PV}
+	~trinity-base/tdeartwork-sounds-${PV}
+	~trinity-base/tdeartwork-styles-${PV}
+	~trinity-base/tdeartwork-wallpapers-${PV}"

@@ -12,5 +12,5 @@ DESCRIPTION="The Trinity help center."
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-	=trinity-base/tdebase-tdeioslaves-${PV}
+	~trinity-base/tdebase-tdeioslaves-${PV}
 	|| ( www-misc/htdig www-misc/hldig )"

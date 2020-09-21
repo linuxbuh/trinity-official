@@ -13,6 +13,6 @@ need-arts optional
 
 DESCRIPTION="Trinity Bounce Ball Game"
 
-MY_DEPEND="=trinity-base/libtdegames-${PV}"
+MY_DEPEND="~trinity-base/libtdegames-${PV}"
 DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}"

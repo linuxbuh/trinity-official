@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 SLOT="0"
 
 DEPEND="sys-apps/dbus
-	=dev-tqt/tqtinterface-${PV}"
+	~dev-tqt/tqtinterface-${PV}"
 RDEPEND="${DEPEND}"
 
 src_configure() {

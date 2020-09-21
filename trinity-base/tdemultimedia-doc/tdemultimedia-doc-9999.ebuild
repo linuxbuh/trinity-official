@@ -9,7 +9,7 @@ inherit trinity-meta-2
 DESCRIPTION="Documentaion for tdemultimedia-derived packages"
 
 RDEPEND="
-	=trinity-base/khelpcenter-${PV}"
+	~trinity-base/khelpcenter-${PV}"
 
 pkg_setup() {
 	# Issue some warning if MAKEOPTS -j parameter is higher than 4

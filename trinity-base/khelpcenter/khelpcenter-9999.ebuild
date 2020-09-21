@@ -11,7 +11,7 @@ TRINITY_SUBMODULE="khelpcenter doc"
 DESCRIPTION="The Trinity help center."
 
 RDEPEND="
-	=trinity-base/tdebase-tdeioslaves-${PV}
+	~trinity-base/tdebase-tdeioslaves-${PV}
 	|| ( www-misc/htdig www-misc/hldig )"
 
 pkg_setup() {

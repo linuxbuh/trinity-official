@@ -20,7 +20,7 @@ need-trinity
 
 SLOT="${TRINITY_VER}"
 
-RDEPEND+=" =trinity-base/kcontrol-${PV}
+RDEPEND+=" ~trinity-base/kcontrol-${PV}
 	app-backup/rdiff-backup"
 
 pkg_postinst () {

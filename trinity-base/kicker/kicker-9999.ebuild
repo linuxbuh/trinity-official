@@ -10,15 +10,15 @@ inherit trinity-meta-2
 DESCRIPTION="The Trinity application starter panel, capable of applets and extensions"
 IUSE="xcomposite"
 
-DEPEND="=trinity-base/libkonq-${PV}
-	=trinity-base/tdebase-data-${PV}
-	=dev-libs/dbus-tqt-${PV}
+DEPEND="~trinity-base/libkonq-${PV}
+	~trinity-base/tdebase-data-${PV}
+	~dev-libs/dbus-tqt-${PV}
 	xcomposite? ( x11-libs/libXrender
 		x11-libs/libXfixes
 		x11-libs/libXcomposite )"
 
 RDEPEND="${DEPEND}
-	=trinity-base/kmenuedit-${PV}"
+	~trinity-base/kmenuedit-${PV}"
 
 src_configure() {
 	mycmakeargs=(

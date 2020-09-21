@@ -13,7 +13,7 @@ IUSE="opengl +krootbacking"
 
 DEPEND="x11-libs/libXt
 	opengl? ( virtual/opengl )
-	krootbacking? ( =trinity-base/krootbacking-${PV} )"
+	krootbacking? ( ~trinity-base/krootbacking-${PV} )"
 RDEPEND="${DEPEND}"
 
 src_configure () {

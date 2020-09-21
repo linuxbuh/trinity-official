@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="kicker applets"
 
-DEPEND="=trinity-base/kicker-${PV}"
+DEPEND="~trinity-base/kicker-${PV}"
 RDEPEND="${DEPEND}"
 
 # no xmms support

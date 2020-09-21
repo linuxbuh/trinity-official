@@ -10,7 +10,7 @@ DESCRIPTION="The aRts pipeline builder and other tools"
 
 IUSE="alsa akode audiofile mpeg xine"
 
-DEPEND="=trinity-base/arts-${PV}
+DEPEND="~trinity-base/arts-${PV}
 	alsa? ( media-libs/alsa-lib )
 	akode? ( =media-libs/akode-${PV} )
 	audiofile? ( media-libs/audiofile )

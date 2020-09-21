@@ -22,7 +22,7 @@ DEPEND="x11-libs/libXcursor
 
 RDEPEND="${DEPEND}
 	virtual/ssh
-	=trinity-base/tdeeject-${PV}"
+	~trinity-base/tdeeject-${PV}"
 
 src_configure() {
 	mycmakeargs=(

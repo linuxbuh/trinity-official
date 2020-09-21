@@ -25,13 +25,13 @@ IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma +svg +idn +shm elogind
 
 KEYWORDS="~amd64 ~x86"
 
-MY_DEPEND="=dev-tqt/tqtinterface-${PV}
+MY_DEPEND="~dev-tqt/tqtinterface-${PV}
 	dev-libs/libxslt
 	dev-libs/libxml2
 	app-text/ghostscript-gpl
 	media-libs/fontconfig
 	media-libs/freetype
-	=dev-libs/dbus-1-tqt-${PV}
+	~dev-libs/dbus-1-tqt-${PV}
 	x11-libs/libxshmfence
 	x11-libs/libXcursor
 	x11-libs/libXrender
@@ -43,7 +43,7 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	shm? ( x11-libs/libxshmfence )
 	idn? ( net-dns/libidn )
 	pcre? ( dev-libs/libpcre )
-	svg? ( =media-libs/libart_lgpl-${PV} )
+	svg? ( ~media-libs/libart_lgpl-${PV} )
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( net-dns/avahi )
 	cups? ( net-print/cups )
@@ -59,7 +59,7 @@ MY_DEPEND="=dev-tqt/tqtinterface-${PV}
 	hwlib? ( virtual/libudev:= )
 	xrandr? ( x11-libs/libXrandr )
 	xcomposite? ( x11-libs/libXcomposite )
-	elficons? ( =sys-libs/libr-${PV} )
+	elficons? ( ~sys-libs/libr-${PV} )
 	debug? ( sys-libs/binutils-libs:= )"
 
 DEPEND+=" ${MY_DEPEND}"

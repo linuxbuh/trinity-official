@@ -11,8 +11,8 @@ DESCRIPTION="Trinity kcal library for KOrganizer etc"
 
 DEPEND="
 	dev-libs/libical
-	=trinity-base/ktnef-${PV}
-	=trinity-base/libkmime-${PV}"
+	~trinity-base/ktnef-${PV}
+	~trinity-base/libkmime-${PV}"
 RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="libemailfunctions/ libtdepim/ libkmime/ ktnef/"

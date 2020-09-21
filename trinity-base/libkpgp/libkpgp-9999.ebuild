@@ -10,8 +10,8 @@ DESCRIPTION="Trinity PGP library"
 
 DEPEND="
 	dev-libs/libical
-	=trinity-base/ktnef-${PV}
-	=trinity-base/libkmime-${PV}"
+	~trinity-base/ktnef-${PV}
+	~trinity-base/libkmime-${PV}"
 RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="libtdepim/"

@@ -10,5 +10,5 @@ inherit trinity-meta-2
 DESCRIPTION="Trinity file find utility"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND="=trinity-base/libkonq-${PV}"
+DEPEND="~trinity-base/libkonq-${PV}"
 RDEPEND="${DEPEND}"

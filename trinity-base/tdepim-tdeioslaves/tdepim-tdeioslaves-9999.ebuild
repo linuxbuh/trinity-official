@@ -25,7 +25,7 @@ REQUIRED_USE="
 
 DEPEND="
 	net-libs/libtirpc
-	=trinity-base/libkmime-${PV}
+	~trinity-base/libkmime-${PV}
 	sasl? ( dev-libs/cyrus-sasl )"
 RDEPEND="${DEPEND}"
 

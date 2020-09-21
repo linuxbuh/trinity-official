@@ -15,24 +15,24 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
 RDEPEND="
-	=trinity-base/kamera-${PV}
-	=trinity-base/kcoloredit-${PV}
-	=trinity-base/kdvi-${PV}
-	=trinity-base/kfax-${PV}
-	=trinity-base/tdegraphics-tdefile-plugins-${PV}
-	=trinity-base/tdegraphics-doc-${PV}
-	=trinity-base/kgamma-${PV}
-	=trinity-base/kghostview-${PV}
-	=trinity-base/tdeiconedit-${PV}
-	=trinity-base/kmrml-${PV}
-	=trinity-base/kolourpaint-${PV}
-	=trinity-base/kooka-${PV}
-	=trinity-base/kpdf-${PV}
-	=trinity-base/kpovmodeler-${PV}
-	=trinity-base/kruler-${PV}
-	=trinity-base/ksnapshot-${PV}
-	=trinity-base/ksvg-${PV}
-	=trinity-base/kuickshow-${PV}
-	=trinity-base/kview-${PV}
-	=trinity-base/kviewshell-${PV}
-	=trinity-base/libkscan-${PV}"
+	~trinity-base/kamera-${PV}
+	~trinity-base/kcoloredit-${PV}
+	~trinity-base/kdvi-${PV}
+	~trinity-base/kfax-${PV}
+	~trinity-base/tdegraphics-tdefile-plugins-${PV}
+	~trinity-base/tdegraphics-doc-${PV}
+	~trinity-base/kgamma-${PV}
+	~trinity-base/kghostview-${PV}
+	~trinity-base/tdeiconedit-${PV}
+	~trinity-base/kmrml-${PV}
+	~trinity-base/kolourpaint-${PV}
+	~trinity-base/kooka-${PV}
+	~trinity-base/kpdf-${PV}
+	~trinity-base/kpovmodeler-${PV}
+	~trinity-base/kruler-${PV}
+	~trinity-base/ksnapshot-${PV}
+	~trinity-base/ksvg-${PV}
+	~trinity-base/kuickshow-${PV}
+	~trinity-base/kview-${PV}
+	~trinity-base/kviewshell-${PV}
+	~trinity-base/libkscan-${PV}"

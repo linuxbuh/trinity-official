@@ -10,5 +10,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Kate plugins and docs"
 
-DEPEND="=trinity-base/kate-${PV}"
+DEPEND="~trinity-base/kate-${PV}"
 RDEPEND="${DEPEND}"

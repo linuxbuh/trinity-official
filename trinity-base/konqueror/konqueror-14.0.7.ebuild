@@ -14,12 +14,12 @@ IUSE="java"
 # FIXME: support branding USE flag
 
 DEPEND="
-	=trinity-base/libkonq-${PV}"
+	~trinity-base/libkonq-${PV}"
 
 RDEPEND="${DEPEND}
-	=trinity-base/kcontrol-${PV}
-	=trinity-base/tdebase-tdeioslaves-${PV}
-	=trinity-base/kfind-${PV}
+	~trinity-base/kcontrol-${PV}
+	~trinity-base/tdebase-tdeioslaves-${PV}
+	~trinity-base/kfind-${PV}
 	java? ( virtual/jre )"
 
 TSM_EXTRACT_ALSO="kdesktop"

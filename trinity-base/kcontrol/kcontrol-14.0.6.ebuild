@@ -18,18 +18,18 @@ DEPEND="x11-libs/libX11
 	samba? ( net-fs/samba )
 	logitech-mouse? ( virtual/libusb:0 )
 	ieee1394? ( sys-libs/libraw1394 )
-	=trinity-base/tdelibs-${PV}[xrandr?]
-	=trinity-base/libkonq-${PV}
-	=trinity-base/kicker-${PV}"
+	~trinity-base/tdelibs-${PV}[xrandr?]
+	~trinity-base/libkonq-${PV}
+	~trinity-base/kicker-${PV}"
 
 RDEPEND="${DEPEND}
 	sys-apps/usbutils
-	=trinity-base/kcminit-${PV}
-	=trinity-base/tdebase-data-${PV}
-	=trinity-base/tdesu-${PV}
-	=trinity-base/khelpcenter-${PV}
-	=trinity-base/khotkeys-${PV}
-	svg? ( =media-libs/libart_lgpl-${PV} )"
+	~trinity-base/kcminit-${PV}
+	~trinity-base/tdebase-data-${PV}
+	~trinity-base/tdesu-${PV}
+	~trinity-base/khelpcenter-${PV}
+	~trinity-base/khotkeys-${PV}
+	svg? ( ~media-libs/libart_lgpl-${PV} )"
 
 TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/"
 

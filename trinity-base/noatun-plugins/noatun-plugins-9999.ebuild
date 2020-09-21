@@ -14,7 +14,7 @@ DESCRIPTION="Various plugins for Noatun."
 IUSE+=" sdl berkdb"
 
 COMMON_DEPEND="
-	=trinity-base/noatun-${PV}
+	~trinity-base/noatun-${PV}
 	berkdb? ( =sys-libs/db-4*:= )
 "
 DEPEND+=" ${COMMON_DEPEND}

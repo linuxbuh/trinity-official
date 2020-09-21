@@ -9,5 +9,5 @@ inherit trinity-meta-2
 DESCRIPTION="Window styles for Trinity"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND="=trinity-base/twin-${PV}"
+DEPEND="~trinity-base/twin-${PV}"
 RDEPEND="${DEPEND}"

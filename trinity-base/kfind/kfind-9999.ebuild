@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity file find utility"
 
-DEPEND="=trinity-base/libkonq-${PV}"
+DEPEND="~trinity-base/libkonq-${PV}"
 RDEPEND="${DEPEND}"

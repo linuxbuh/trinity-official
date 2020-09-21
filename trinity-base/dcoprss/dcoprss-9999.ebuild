@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity RSS server and client for DCOP"
 
-DEPEND="=trinity-base/librss-${PV}"
+DEPEND="~trinity-base/librss-${PV}"
 RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="librss/"

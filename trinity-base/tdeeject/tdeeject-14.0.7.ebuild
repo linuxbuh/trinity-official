@@ -10,6 +10,6 @@ inherit trinity-meta-2
 DESCRIPTION="Trinity eject frontend"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND="=trinity-base/kdialog-${PV}"
+DEPEND="~trinity-base/kdialog-${PV}"
 RDEPEND="${DEPEND}
 	virtual/eject"

@@ -13,7 +13,7 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 
 DEPEND="net-dns/avahi
-	=dev-tqt/tqtinterface-${PV}"
+	~dev-tqt/tqtinterface-${PV}"
 RDEPEND="${DEPEND}"
 
 src_configure() {

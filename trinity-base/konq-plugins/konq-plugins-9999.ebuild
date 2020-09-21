@@ -11,6 +11,6 @@ need-arts optional
 
 DESCRIPTION="Various plugins for Konqueror."
 
-MY_DEPEND="=trinity-base/konqueror-${PV}"
+MY_DEPEND="~trinity-base/konqueror-${PV}"
 DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}"

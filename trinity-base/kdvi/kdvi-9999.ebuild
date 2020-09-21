@@ -10,7 +10,7 @@ inherit trinity-meta-2
 DESCRIPTION="Trinity DVI viewer"
 
 DEPEND="media-libs/freetype
-	=trinity-base/kviewshell-${PV}"
+	~trinity-base/kviewshell-${PV}"
 RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="kviewshell"

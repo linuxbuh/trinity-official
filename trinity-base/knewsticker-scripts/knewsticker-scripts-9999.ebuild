@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Kicker applet - RSS news ticker"
 
-DEPEND="=trinity-base/knewsticker-${PV}"
+DEPEND="~trinity-base/knewsticker-${PV}"
 RDEPEND="${DEPEND}"

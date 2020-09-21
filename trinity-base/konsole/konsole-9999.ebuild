@@ -17,7 +17,7 @@ DEPEND="x11-libs/libX11
 RDEPEND="${DEPEND}
 	sudo? ( app-admin/sudo )
 	x11-apps/bdftopcf
-	=trinity-base/kcontrol-${PV}"
+	~trinity-base/kcontrol-${PV}"
 
 src_configure() {
 	mycmakeargs=(

@@ -8,5 +8,5 @@ TRINITY_MODULE_NAME="tdeartwork"
 inherit trinity-meta-2
 DESCRIPTION="Window styles for Trinity"
 
-DEPEND="=trinity-base/twin-${PV}"
+DEPEND="~trinity-base/twin-${PV}"
 RDEPEND="${DEPEND}"

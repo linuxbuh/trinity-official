@@ -11,6 +11,6 @@ need-arts yes
 
 DESCRIPTION="Minigolf Game by Trinity"
 
-MY_DEPEND="=trinity-base/libtdegames-${PV}"
+MY_DEPEND="~trinity-base/libtdegames-${PV}"
 DEPEND+=" ${MY_DEPEND}"
 RDEPEND+=" ${MY_DEPEND}"

@@ -9,5 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity screen gamma values kcontrol module"
 
-DEPEND="=trinity-base/kcontrol-${PV}"
+DEPEND="~trinity-base/kcontrol-${PV}"
 RDEPEND="${DEPEND}"
