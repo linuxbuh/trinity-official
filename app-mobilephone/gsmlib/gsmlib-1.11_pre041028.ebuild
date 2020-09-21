@@ -6,18 +6,16 @@ EAPI="7"
 
 inherit eutils
 
-# Don't use Gentoo mirrors
-RESTRICT="mirror"
-
 DESCRIPTION="Library and applications to access GSM mobile phones"
-SRC_URI="http://www.pxh.de/fs/gsmlib/snapshots/${PN}-pre${PV%_pre*}-${PV#*_pre}.tar.gz"
 HOMEPAGE="http://www.pxh.de/fs/gsmlib/"
+SRC_URI="http://www.pxh.de/fs/gsmlib/snapshots/${PN}-pre${PV%_pre*}-${PV#*_pre}.tar.gz"
 
-SLOT="0"
 LICENSE="LGPL-2"
+SLOT="0"
 KEYWORDS="amd64 ~ia64 ppc ppc64 sparc x86"
 
-RESTRICT="test"
+# Don't use Gentoo mirrors
+RESTRICT+=" mirror test"
 
 S="${WORKDIR}/${PN}-${PV%_pre*}"
 
