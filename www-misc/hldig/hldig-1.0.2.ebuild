@@ -6,27 +6,29 @@ EAPI="7"
 
 inherit autotools
 
-# Don't use Gentoo mirrors
-RESTRICT="mirror"
-
 DESCRIPTION="HTTP/HTML indexing and searching system"
 HOMEPAGE="https://github.com/solbu/hldig"
-SRC_URI="http://github.com/solbu/${PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/solbu/${PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm arm64 ppc ppc64 x86"
 IUSE="libressl ssl"
 
+# Don't use Gentoo mirrors
+RESTRICT="mirror"
+
 DEPEND="
-	!www-misc/htdig
-	sys-libs/zlib
 	app-arch/unzip
+	sys-libs/zlib
 	ssl? (
 		!libressl? ( dev-libs/openssl:0= )
 		libressl? ( dev-libs/libressl:0= )
-	)"
-RDEPEND="${DEPEND}"
+	)
+"
+RDEPEND="${DEPEND}
+	!www-misc/htdig
+"
 
 S="${WORKDIR}/${PN}-${PV}"
 
