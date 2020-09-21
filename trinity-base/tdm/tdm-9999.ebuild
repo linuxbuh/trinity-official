@@ -3,8 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
@@ -14,7 +14,7 @@ IUSE="pam xdmcp xcomposite sak +xrandr +hwlib +svg"
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
-	svg? ( ~media-libs/libart_lgpl-${PV} )
+	svg? ( media-libs/libart_lgpl )
 	~trinity-base/tdelibs-${PV}[xrandr?]
 	sys-apps/dbus
 	x11-libs/libXtst
@@ -31,7 +31,7 @@ pkg_setup() {
 }
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XTEST=ON
 		-DWITH_SHADOW=ON
 		-DWITH_LIBART="$(usex svg)"

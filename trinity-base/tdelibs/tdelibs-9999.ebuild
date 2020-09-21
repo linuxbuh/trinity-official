@@ -3,8 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdelibs"
 
+TRINITY_MODULE_NAME="tdelibs"
 inherit trinity-base-2
 
 set-trinityver
@@ -13,12 +13,11 @@ need-arts optional
 
 DESCRIPTION="Trinity libraries needed by all TDE programs."
 HOMEPAGE="https://trinitydesktop.org/"
-LICENSE="|| ( GPL-2 GPL-3 )"
 
+LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
-
 IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm elogind
 	networkmanager openexr pcsc-lite aspell ispell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
 	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug spell"
@@ -42,7 +41,7 @@ MY_DEPEND="~dev-tqt/tqtinterface-${PV}
 	shm? ( x11-libs/libxshmfence )
 	idn? ( net-dns/libidn )
 	pcre? ( dev-libs/libpcre )
-	svg? ( ~media-libs/libart_lgpl-${PV} )
+	svg? ( media-libs/libart_lgpl )
 	alsa? ( media-libs/alsa-lib )
 	avahi? ( ~dev-tqt/avahi-tqt-${PV} )
 	cups? ( net-print/cups )

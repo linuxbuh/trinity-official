@@ -3,13 +3,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Control Center"
-KEYWORDS="~amd64 ~x86"
 
+KEYWORDS="~amd64 ~x86"
 IUSE="samba logitech-mouse ieee1394 +svg +hwlib +xrandr "
 
 DEPEND="x11-libs/libX11
@@ -29,12 +29,12 @@ RDEPEND="${DEPEND}
 	~trinity-base/tdesu-${PV}
 	~trinity-base/khelpcenter-${PV}
 	~trinity-base/khotkeys-${PV}
-	svg? ( ~media-libs/libart_lgpl-${PV} )"
+	svg? ( media-libs/libart_lgpl )"
 
 TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XCURSOR=ON
 		-DWITH_XRENDER=ON
 		-DWITH_USBIDS=/usr/share/misc/usb.ids
