@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -11,74 +11,75 @@ set-trinityver
 
 need-arts optional
 
-DESCRIPTION="Trinity libraries needed by all TDE programs."
+DESCRIPTION="Trinity libraries needed by all TDE programs"
 HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
-IUSE+=" alsa avahi cups consolekit cryptsetup fam jpeg2k lua lzma udevil +svg +idn +shm elogind
-	networkmanager openexr pcsc-lite aspell ispell sudo tiff utempter elficons +ssl pkcs11 kernel_linux
-	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug spell"
+IUSE+=" alsa aspell consolekit cryptsetup cups debug elficons elogind fam +hwlib
++idn ispell jpeg2k kernel_linux libressl lua lzma +malloc networkmanager
+old-udisks openexr +pcre pcsc-lite pkcs11 +shm spell +ssl sudo +svg systemd tiff
+udevil udisks upower utempter xcomposite +xrandr zeroconf"
 
-REQUIRED_USE="
-	spell? ( || ( aspell ispell ) )"
+REQUIRED_USE="spell? ( || ( aspell ispell ) )"
 
-MY_DEPEND="~dev-tqt/tqtinterface-${PV}
+COMMON_DEPEND="
+	app-text/ghostscript-gpl
+	~dev-libs/dbus-1-tqt-${PV}
 	dev-libs/libxslt
 	dev-libs/libxml2
-	app-text/ghostscript-gpl
+	~dev-tqt/tqtinterface-${PV}
 	media-libs/fontconfig
 	media-libs/freetype
-	~dev-libs/dbus-1-tqt-${PV}
 	x11-libs/libXrender
+	alsa? ( media-libs/alsa-lib )
+	cups? ( net-print/cups )
+	debug? ( sys-libs/binutils-libs:= )
+	elficons? ( ~dev-libs/libr-${PV} )
+	fam? ( virtual/fam )
+	hwlib? ( virtual/libudev:= )
+	idn? ( net-dns/libidn )
+	jpeg2k? ( media-libs/jasper )
+	lua? ( dev-lang/lua:* )
+	lzma? ( app-arch/xz-utils )
+	openexr? ( media-libs/openexr )
+	pcre? ( dev-libs/libpcre )
+	shm? ( x11-libs/libxshmfence )
+	spell? (
+		aspell? ( app-text/aspell )
+		ispell? ( app-text/ispell )
+	)
 	ssl? (
 		app-misc/ca-certificates
 		!libressl? ( dev-libs/openssl:= )
 		libressl? ( dev-libs/libressl:= )
 	)
-	shm? ( x11-libs/libxshmfence )
-	idn? ( net-dns/libidn )
-	pcre? ( dev-libs/libpcre )
-	svg? ( media-libs/libart_lgpl )
-	alsa? ( media-libs/alsa-lib )
-	avahi? ( ~dev-tqt/avahi-tqt-${PV} )
-	cups? ( net-print/cups )
-	fam? ( virtual/fam )
-	jpeg2k? ( media-libs/jasper )
-	lua? ( dev-lang/lua:* )
-	openexr? ( media-libs/openexr )
 	sudo? ( app-admin/sudo )
-	spell? (
-		aspell? ( app-text/aspell )
-		ispell? ( app-text/ispell )
-	)
+	svg? ( media-libs/libart_lgpl )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
-	lzma? ( app-arch/xz-utils )
-	hwlib? ( virtual/libudev:= )
-	xrandr? ( x11-libs/libXrandr )
 	xcomposite? ( x11-libs/libXcomposite )
-	elficons? ( ~sys-libs/libr-${PV} )
-	debug? ( sys-libs/binutils-libs:= )"
-
-DEPEND+=" ${MY_DEPEND}"
-RDEPEND+=" ${MY_DEPEND}
+	xrandr? ( x11-libs/libXrandr )
+	zeroconf? ( ~dev-tqt/avahi-tqt-${PV} )
+"
+DEPEND+=" ${COMMON_DEPEND}"
+RDEPEND+=" ${COMMON_DEPEND}
 	hwlib? (
 		acct-group/plugdev
-		!udevil? ( !udisks? ( !old_udisks? ( sys-apps/pmount ) ) )
+		!udevil? ( !udisks? ( !old-udisks? ( sys-apps/pmount ) ) )
+		consolekit? ( sys-auth/consolekit )
+		cryptsetup? ( sys-fs/cryptsetup )
+		elogind? ( sys-auth/elogind )
+		networkmanager? ( net-misc/networkmanager )
+		old-udisks? ( sys-fs/udisks:0 )
 		pcsc-lite? ( sys-apps/pcsc-lite )
 		pkcs11? ( dev-libs/pkcs11-helper )
-		cryptsetup? ( sys-fs/cryptsetup )
-		networkmanager? ( net-misc/networkmanager )
-		consolekit? ( sys-auth/consolekit )
-		upower? ( sys-power/upower )
 		systemd? ( sys-apps/systemd )
-		elogind? ( sys-auth/elogind )
-		old_udisks? ( sys-fs/udisks:0 )
-		udisks? ( sys-fs/udisks:2 )
 		udevil? ( sys-apps/udevil )
+		udisks? ( sys-fs/udisks:2 )
+		upower? ( sys-power/upower )
 	)"
 
 src_configure() {
@@ -105,11 +106,11 @@ src_configure() {
 		-DWITH_ELFICON="$(usex elficons)"
 		-DWITH_TDEHWLIB="$(usex hwlib)"
 		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
-		-DWITH_UDISKS="$(usex old_udisks)"
+		-DWITH_UDISKS="$(usex old-udisks)"
 		-DWITH_UDISKS2="$(usex udisks)"
 		-DWITH_UDEVIL="$(usex udevil)"
 		-DWITH_ALSA="$(usex alsa)"
-		-DWITH_AVAHI="$(usex avahi)"
+		-DWITH_AVAHI="$(usex zeroconf)"
 		-DWITH_CRYPTSETUP="$(usex cryptsetup)"
 		-DWITH_CUPS="$(usex cups)"
 		-DWITH_INOTIFY="$(usex kernel_linux)"
@@ -201,7 +202,7 @@ pkg_postinst () {
 		echo
 	fi
 	if ! use hwlib; then
-		for flag in consolekit networkmanager upower systemd elogind old_udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
+		for flag in consolekit networkmanager upower systemd elogind old-udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
 			use $flag && \
 				echo
 				ewarn "USE=\"$flag\" is passed, but it doesn't change anything because" && \

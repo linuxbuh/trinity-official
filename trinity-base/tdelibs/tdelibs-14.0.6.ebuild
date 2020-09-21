@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -11,72 +11,72 @@ set-trinityver
 
 need-arts optional
 
-DESCRIPTION="Trinity libraries needed by all TDE programs."
+DESCRIPTION="Trinity libraries needed by all TDE programs"
 HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
-
-# NOTE: Building without tdehwlib segfaults, but you can try and report.
-IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma +svg +idn +shm elogind
-	networkmanager openexr aspell sudo tiff utempter elficons +ssl kernel_linux
-	upower xcomposite +hwlib libressl +xrandr +malloc systemd old_udisks udisks +pcre debug"
-
 KEYWORDS="~amd64 ~x86"
 
-MY_DEPEND="~dev-tqt/tqtinterface-${PV}
+# NOTE: Building without tdehwlib segfaults, but you can try and report.
+IUSE+=" alsa aspell consolekit cups debug elogind fam +hwlib +idn jpeg2k
+kernel_linux libressl lua lzma +malloc networkmanager old-udisks openexr +pcre
++shm +ssl sudo +svg systemd tiff udisks upower utempter xcomposite +xrandr
+zeroconf"
+
+COMMON_DEPEND="
+	app-text/ghostscript-gpl
+	~dev-libs/dbus-1-tqt-${PV}
 	dev-libs/libxslt
 	dev-libs/libxml2
-	app-text/ghostscript-gpl
+	~dev-tqt/tqtinterface-${PV}
 	media-libs/fontconfig
 	media-libs/freetype
-	~dev-libs/dbus-1-tqt-${PV}
 	x11-libs/libxshmfence
 	x11-libs/libXcursor
 	x11-libs/libXrender
+	alsa? ( media-libs/alsa-lib )
+	aspell? ( app-dicts/aspell-en app-text/aspell )
+	cups? ( net-print/cups )
+	debug? ( sys-libs/binutils-libs:= )
+	fam? ( virtual/fam )
+	hwlib? ( virtual/libudev:= )
+	idn? ( net-dns/libidn )
+	jpeg2k? ( media-libs/jasper )
+	lua? ( dev-lang/lua:* )
+	lzma? ( app-arch/xz-utils )
+	openexr? ( media-libs/openexr )
+	pcre? ( dev-libs/libpcre )
+	shm? ( x11-libs/libxshmfence )
 	ssl? (
 		app-misc/ca-certificates
 		!libressl? ( dev-libs/openssl:= )
 		libressl? ( dev-libs/libressl:= )
 	)
-	shm? ( x11-libs/libxshmfence )
-	idn? ( net-dns/libidn )
-	pcre? ( dev-libs/libpcre )
-	svg? ( media-libs/libart_lgpl )
-	alsa? ( media-libs/alsa-lib )
-	avahi? ( net-dns/avahi )
-	cups? ( net-print/cups )
-	fam? ( virtual/fam )
-	jpeg2k? ( media-libs/jasper )
-	lua? ( dev-lang/lua:* )
-	openexr? ( media-libs/openexr )
-	aspell? ( app-dicts/aspell-en app-text/aspell )
 	sudo? ( app-admin/sudo )
+	svg? ( media-libs/libart_lgpl )
 	tiff? ( media-libs/tiff:= )
 	utempter? ( sys-libs/libutempter )
-	lzma? ( app-arch/xz-utils )
-	hwlib? ( virtual/libudev:= )
-	xrandr? ( x11-libs/libXrandr )
 	xcomposite? ( x11-libs/libXcomposite )
-	elficons? ( ~sys-libs/libr-${PV} )
-	debug? ( sys-libs/binutils-libs:= )"
-
-DEPEND+=" ${MY_DEPEND}"
-RDEPEND+=" ${MY_DEPEND}
+	xrandr? ( x11-libs/libXrandr )
+	zeroconf? ( net-dns/avahi )
+"
+DEPEND+=" ${COMMON_DEPEND}"
+RDEPEND+=" ${COMMON_DEPEND}
 	hwlib? (
 		acct-group/plugdev
-		!udisks? ( !old_udisks? ( sys-apps/pmount ) )
-		networkmanager? ( net-misc/networkmanager )
+		!udisks? ( !old-udisks? ( sys-apps/pmount ) )
 		consolekit? ( sys-auth/consolekit )
-		upower? ( sys-power/upower )
-		systemd? ( sys-apps/systemd )
 		elogind? ( sys-auth/elogind )
-		old_udisks? ( sys-fs/udisks:0 )
+		networkmanager? ( net-misc/networkmanager )
+		old-udisks? ( sys-fs/udisks:0 )
+		systemd? ( sys-apps/systemd )
 		udisks? ( sys-fs/udisks:2 )
+		upower? ( sys-power/upower )
 	)"
 
 #Revisit these USE flags and dependencies for 14.0.8
-#pkcs11 pcsc-lite udevil cryptsetup 
+#pkcs11 pcsc-lite udevil cryptsetup
 #		pcsc-lite? ( sys-apps/pcsc-lite )
 #		pkcs11? ( dev-libs/pkcs11-helper )
 #		cryptsetup? ( sys-fs/cryptsetup )
@@ -103,13 +103,13 @@ src_configure() {
 		-DWITH_LIBART="$(usex svg)"
 		-DWITH_SSL="$(usex ssl)"
 		-DWITH_LIBBFD="$(usex debug)"
-		-DWITH_ELFICON="$(usex elficons)"
+		-DWITH_ELFICON=OFF
 		-DWITH_TDEHWLIB="$(usex hwlib)"
 		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
-		-DWITH_UDISKS="$(usex old_udisks)"
+		-DWITH_UDISKS="$(usex old-udisks)"
 		-DWITH_UDISKS2="$(usex udisks)"
 		-DWITH_ALSA="$(usex alsa)"
-		-DWITH_AVAHI="$(usex avahi)"
+		-DWITH_AVAHI="$(usex zeroconf)"
 		-DWITH_CUPS="$(usex cups)"
 		-DWITH_INOTIFY="$(usex kernel_linux)"
 		-DWITH_JASPER="$(usex jpeg2k)"
@@ -144,7 +144,7 @@ src_configure() {
 
 src_install() {
 	trinity-base-2_src_install
-	
+
 	if use ssl; then
 		# Make TDE to use our system certificates
 		rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
@@ -202,7 +202,7 @@ pkg_postinst () {
 		einfo "If you remove the malloc USE flag, GLIBC's malloc will be used."
 	fi
 	if ! use hwlib; then
-		for flag in consolekit networkmanager upower systemd old_udisks udisks udevil; do
+		for flag in consolekit networkmanager upower systemd old-udisks udisks udevil; do
 			use $flag && \
 				ewarn "USE=\"$flag\" is passed, but it doesn't change anything because" && \
 				ewarn "$flag support in ${P} takes effect only if the TDE hwlib is enabled."
