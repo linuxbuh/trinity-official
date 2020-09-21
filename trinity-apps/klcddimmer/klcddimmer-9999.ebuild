@@ -1,28 +1,29 @@
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_TYPE="applications"
 
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="de nl"
-
 inherit trinity-base-2
 
-DESCRIPTION="Applet to adjust LCD brightness "
+DESCRIPTION="Applet to adjust LCD brightness"
 HOMEPAGE="https://trinitydesktop.org/"
-LICENSE="|| ( GPL-2 GPL-3 )"
 
 need-trinity
 
+LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
 # There might be a dependency on smartdimmer needed.
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DBUILD_TRANSLATIONS=ON
 	)
 
