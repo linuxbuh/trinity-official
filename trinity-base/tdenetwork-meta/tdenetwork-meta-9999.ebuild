@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -12,7 +12,7 @@ DESCRIPTION="tdenetwork metapackage - merge this to pull in all tdenetwork-deriv
 HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="{$TRINITY_VER}"
+SLOT="${TRINITY_VER}"
 
 RDEPEND="
 	~trinity-base/dcoprss-${PV}
