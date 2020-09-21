@@ -1,9 +1,10 @@
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdemultimedia"
 
+TRINITY_MODULE_NAME="tdemultimedia"
 inherit trinity-meta-2
 
 TSM_EXTRACT="tdeioslave"
@@ -11,15 +12,15 @@ TRINITY_SUBMODULE="tdeioslave"
 
 DESCRIPTION="Multimedia Trinity TDEIOslaves"
 
-IUSE="flac cdparanoia"
+IUSE="cdparanoia flac"
 
 DEPEND="
-	flac? ( media-libs/flac )
-	cdparanoia? ( media-sound/cdparanoia )"
+	cdparanoia? ( media-sound/cdparanoia )
+	flac? ( media-libs/flac )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_FLAC=$(usex flac)
 		-DWITH_CDPARANOIA=$(usex cdparanoia)
 	)
