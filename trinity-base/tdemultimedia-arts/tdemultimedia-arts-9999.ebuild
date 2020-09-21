@@ -2,24 +2,26 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdemultimedia"
 
+TRINITY_MODULE_NAME="tdemultimedia"
 inherit trinity-meta-2
 
 DESCRIPTION="The aRts pipeline builder and other tools"
 
-IUSE="alsa akode audiofile mpeg xine"
+IUSE="akode alsa audiofile mpeg vorbis xine"
 
-DEPEND="~trinity-base/arts-${PV}
+DEPEND="
+	~trinity-base/arts-${PV}
+	akode? ( ~media-libs/akode-${PV} )
 	alsa? ( media-libs/alsa-lib )
-	akode? ( =media-libs/akode-${PV} )
 	audiofile? ( media-libs/audiofile )
+	vorbis? ( media-libs/libvorbis )
 	xine? ( media-libs/xine-lib )
-	vorbis? ( media-libs/libvorbis )"
-RDEPEND=" ${DEPEND}"
+"
+RDEPEND="${DEPEND}"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_ARTS_AKODE="$(usex akode)"
 		-DWITH_ARTS_AUDIOFILE="$(usex audiofile)"
