@@ -23,7 +23,7 @@ elif [[ ${PV} = 9999 ]]; then
 	inherit git-r3
         EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/${MY_PN}"
 else
-	SRC_URI="https://mirror.git.trinitydesktop.org/cgit/${PN}/snapshot/${MY_PN}-r${PV}.tar.gz"
+	SRC_URI="https://mirror.git.trinitydesktop.org/cgit/${MY_PN}/snapshot/${MY_PN}-r${PV}.tar.gz"
 fi
 
 LICENSE="|| ( GPL-2 GPL-3 )"
