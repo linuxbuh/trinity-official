@@ -34,11 +34,6 @@ fi
 
 MODDIR="/usr/trinity/modules"
 
-src_prepare() {
-	eapply ${FILESDIR}/admin-arm.patch
-	eapply_user
-}
-
 src_install() {
 	dodir "${MODDIR}/${MY_PN}"
 	cp -ax ${S}/* "${D}/${MODDIR}/${MY_PN}" || die

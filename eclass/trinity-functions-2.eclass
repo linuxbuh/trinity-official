@@ -241,6 +241,7 @@ trinity-admin-prepare() {
 	pushd "${PWD}/admin"
 	libtoolize -c || die
         cp -Rp /usr/share/aclocal/libtool.m4 "libtool.m4.in" || die
+	cp -Rp /usr/share/libtool/build-aux/config.* . || die
 	popd
 }
 
