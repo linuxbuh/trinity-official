@@ -10,7 +10,7 @@ inherit trinity-meta-2
 DESCRIPTION="Trinity crash handler gives the user feedback if a program crashed"
 
 IUSE="+hwlib"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="sys-devel/gdb"
 

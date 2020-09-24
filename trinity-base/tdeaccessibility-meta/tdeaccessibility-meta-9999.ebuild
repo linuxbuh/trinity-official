@@ -14,7 +14,7 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 
 SLOT="${TRINITY_VER}"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="
 	=trinity-base/tde-icons-mono-${PV}

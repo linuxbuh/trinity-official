@@ -19,7 +19,7 @@ HOMEPAGE="http://trinitydesktop.org/"
 	http://download.sourceforge.net/quanta/php_manual_en_20030401.tar.bz2"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 SLOT="${TRINITY_VER}"
 IUSE=""
 

@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity personal information manager"
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 COMMON_DEPEND="=trinity-base/libtdepim-${PV}
 	=trinity-base/libkpimidentities-${PV}

@@ -9,7 +9,7 @@ inherit trinity-meta-2
 DESCRIPTION="kded module that supports some hardware input devices, such as special keys"
 
 IUSE="asus-laptop dell-laptop powerbook-laptop thinkpad-laptop vaio-laptop lm_sensors"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="powerbook-laptop? ( app-laptop/pbbuttonsd )"
 RDEPEND="${DEPEND}

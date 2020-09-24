@@ -11,7 +11,7 @@ DESCRIPTION="Mathematical function plotter for Trinity"
 HOMEPAGE="http://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 src_prepare() {
 	sed -i -e '/add_subdirectory( applnk    )/d' \

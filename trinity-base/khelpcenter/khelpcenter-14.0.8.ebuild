@@ -9,7 +9,7 @@ inherit trinity-meta-2
 TRINITY_SUBMODULE="khelpcenter doc"
 
 DESCRIPTION="The Trinity help center."
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="
 	=trinity-base/tdebase-tdeioslaves-${PV}

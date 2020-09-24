@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity pim resource plugins"
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 #TSM_EXTRACT_ALSO="libtdepim/"
 DEPEND="=trinity-base/libtdepim-${PV}

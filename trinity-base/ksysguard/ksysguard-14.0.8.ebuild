@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="A network enabled task manager/system monitor"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="dell-laptop lm-sensors"
 
 DEPEND="lm-sensors? ( sys-apps/lm-sensors )"

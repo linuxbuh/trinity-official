@@ -10,7 +10,7 @@ inherit trinity-meta-2
 DESCRIPTION="The part of TDE UI that handles icons, desktop, screensaver etc"
 IUSE="pam xscreensaver"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 COMMON_DEPEND="x11-libs/libXrender
 	x11-libs/libXcursor

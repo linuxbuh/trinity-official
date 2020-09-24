@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Address Book"
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE+=" gnokii"
 
 COMMON_DEPEND="=trinity-base/libtdepim-${PV}

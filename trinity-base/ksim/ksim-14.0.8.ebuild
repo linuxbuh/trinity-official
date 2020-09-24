@@ -7,7 +7,7 @@ TRINITY_MODULE_NAME="tdeutils"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity system monitoring applets."
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="snmp lm_sensors dell-laptop"
 
 DEPEND="lm_sensors? ( x11-libs/libXext )

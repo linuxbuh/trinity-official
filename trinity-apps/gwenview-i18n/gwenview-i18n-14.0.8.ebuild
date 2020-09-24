@@ -14,7 +14,7 @@ DESCRIPTION="nternationalization support for Gwenview [Trinity]"
 HOMEPAGE="http://trinitydesktop.org/"
 
 LICENSE="GPL-2 LGPL-2"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~x86 ~amd64 ~arm ~arm64"
 SLOT="${TRINITY_VER}"
 
 need-trinity

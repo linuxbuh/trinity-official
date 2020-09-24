@@ -9,7 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity Notes application"
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 COMMON_DEPEND="=trinity-base/libkcal-${PV}
 	=trinity-base/libtdepim-${PV}"

@@ -10,7 +10,7 @@ inherit trinity-meta-2
 need-arts optional
 
 DESCRIPTION="Trinity hotkey daemon"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="x11-libs/libXtst"
 RDEPEND="${DEPEND}"

@@ -9,6 +9,6 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity Viewer for mail attachments using TNEF format"
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 TSM_EXTRACT_ALSO="libtdepim/"

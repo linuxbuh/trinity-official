@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="KControl module to configure and switch keyboard layouts"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="x11-libs/libXtst"
 RDEPEND="${DEPEND}

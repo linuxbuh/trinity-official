@@ -9,7 +9,7 @@ inherit trinity-meta-2
 DESCRIPTION="KLaptopdaemon - Trinity battery monitoring and management for laptops."
 
 IUSE="xscreensaver"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="x11-libs/libXtst
 	xscreensaver? ( x11-libs/libXScrnSaver )

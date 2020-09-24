@@ -10,7 +10,7 @@ inherit trinity-base-2
 DESCRIPTION="A LGPL version of libart maintained by TDE"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="LGPL-2.1"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 SLOT="0"
 
 src_configure() {

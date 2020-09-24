@@ -1,0 +1,12 @@
+--- a/config.guess	2020-09-24 19:46:14.987316580 +0300
++++ b/config.guess	2020-09-24 19:47:58.222110019 +0300
+@@ -818,6 +818,9 @@
+     arm*:Linux:*:*)
+ 	echo ${UNAME_MACHINE}-unknown-linux-gnu
+ 	exit ;;
++    aarch*:Linux:*:*)
++        echo ${UNAME_MACHINE}-unknown-linux-gnu
++        exit ;;
+     cris:Linux:*:*)
+ 	echo cris-axis-linux-gnu
+ 	exit ;;

@@ -10,4 +10,4 @@ inherit trinity-meta-2
 TRINITY_SUBMODULE="l10n pics applnk"
 
 DESCRIPTION="Icons, localization data and .desktop files from tdebase."
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"

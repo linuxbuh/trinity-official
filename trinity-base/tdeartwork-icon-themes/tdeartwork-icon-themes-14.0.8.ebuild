@@ -8,6 +8,6 @@ TRINITY_MODULE_NAME="tdeartwork"
 inherit trinity-meta-2
 
 DESCRIPTION="Icon themes for Trinity"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 TSM_EXTRACT="IconThemes/"

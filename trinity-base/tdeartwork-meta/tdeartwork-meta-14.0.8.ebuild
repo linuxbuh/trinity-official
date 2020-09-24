@@ -11,7 +11,7 @@ set-trinityver
 DESCRIPTION="tdeartwork meta package - merge this to pull in all tdeartwork-derived packages"
 HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 SLOT="${TRINITY_VER}"
 

@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="tdeartwork"
 inherit trinity-meta-2
 
 DESCRIPTION="Themes for IceWM from the tdeartwork package."
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="
 	=trinity-base/tdeartwork-twin-styles-${PV}"

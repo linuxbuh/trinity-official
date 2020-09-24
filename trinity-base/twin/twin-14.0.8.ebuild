@@ -8,7 +8,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2 eutils
 
 DESCRIPTION="Trinity window manager"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="xcomposite xrandr xinerama +libconfig +pcre opengl"
 
 DEPEND="x11-libs/libXext

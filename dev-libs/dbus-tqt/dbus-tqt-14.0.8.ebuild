@@ -11,7 +11,7 @@ inherit trinity-base-2
 DESCRIPTION="D-BUS TQt bindings"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 SLOT="0"
 
 DEPEND="sys-apps/dbus

@@ -8,7 +8,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity gui for su(1) or sudo"
 IUSE="sudo"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="sudo? ( app-admin/sudo )"
 RDEPEND="${DEPEND}"

@@ -32,7 +32,7 @@ SLOT="3.5"
 IUSE="cups debug doc examples firebird ipv6 mysql nas nis +opengl postgres styles
 	imext sqlite +xinerama tablet +xrandr glib mng fontconfig +hiddenvisibility"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="
 	virtual/jpeg:=

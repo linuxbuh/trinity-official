@@ -7,7 +7,7 @@ TRINITY_MODULE_NAME="tdeutils"
 inherit trinity-meta-2
 
 DESCRIPTION="A tool to create interactive applets for the Trinity desktop."
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 #FIXME: add xmms use
 IUSE=""
 

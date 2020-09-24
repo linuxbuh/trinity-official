@@ -7,7 +7,7 @@ TRINITY_MODULE_NAME="tdeutils"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity gpg keyring manager"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="app-crypt/gnupg
 	|| ( app-crypt/pinentry[ncurses]

@@ -8,4 +8,4 @@ TRINITY_SUBMODULE="kcharselect charselectapplet"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity character selection utility and panel applet"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"

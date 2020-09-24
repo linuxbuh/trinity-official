@@ -10,4 +10,4 @@ inherit trinity-meta-2
 need-arts optional
 
 DESCRIPTION="The embeddable part of konqueror"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"

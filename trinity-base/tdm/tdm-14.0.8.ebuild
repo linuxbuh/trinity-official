@@ -10,7 +10,7 @@ inherit trinity-meta-2
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
 
 IUSE="pam xdmcp xcomposite sak +xrandr +hwlib +svg"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )

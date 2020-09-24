@@ -14,7 +14,7 @@ DESCRIPTION="aRts, the Trinity sound (and all-around multimedia) server/output m
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 IUSE="alsa -artswrappersuid jack mp3 vorbis"
 SLOT="${TRINITY_VER}"
