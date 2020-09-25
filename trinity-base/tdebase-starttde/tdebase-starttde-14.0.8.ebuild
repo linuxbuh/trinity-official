@@ -9,6 +9,8 @@ inherit trinity-meta-2
 
 DESCRIPTION="Starttde script, which starts a complete Trinity session, and associated scripts"
 
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+
 RDEPEND="x11-apps/xmessage
 	x11-apps/xsetroot
 	x11-apps/xset
