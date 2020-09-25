@@ -8,7 +8,6 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Starttde script, which starts a complete Trinity session, and associated scripts"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 RDEPEND="x11-apps/xmessage
 	x11-apps/xsetroot
@@ -25,7 +24,7 @@ RDEPEND="x11-apps/xmessage
 	=trinity-base/ksplashml-${PV}
 	=trinity-base/tdeinit-${PV}"
 
-TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm"
+TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm r14-xdg-update migratekde3"
 
 src_prepare() {
 	trinity-base-2_src_prepare
@@ -48,8 +47,8 @@ src_install() {
 	# starttde script
 	exeinto "${TDEDIR}/bin"
 	doexe starttde
-	#doexe r14-xdg-update
-	#doexe migratekde3
+	doexe r14-xdg-update
+	doexe migratekde3
 
 	# startup and shutdown scripts
 	exeinto "${TDEDIR}/env"
