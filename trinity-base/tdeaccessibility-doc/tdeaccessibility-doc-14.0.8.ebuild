@@ -4,6 +4,7 @@
 
 EAPI="7"
 TRINITY_MODULE_NAME="tdeaccessibility"
+CHECK_ADMIN="yes"
 
 inherit trinity-meta-2
 

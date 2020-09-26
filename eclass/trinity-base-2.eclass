@@ -291,8 +291,13 @@ trinity-base-2_src_prepare() {
 			done
 		fi
 	fi
-    check_admin && trinity-gen-configure
-    check_admin && eapply_user || cmake-utils_src_prepare
+
+    if check_admin ; then
+	trinity-gen-configure
+        eapply_user
+    else
+        cmake-utils_src_prepare
+    fi
 }
 
 
@@ -332,7 +337,11 @@ trinity-base-2_src_configure() {
 		"${mycmakeargs[@]}"
 	)
 
-	check_admin && trinity-econf ||  cmake-utils_src_configure
+	if check_admin ; then 
+		trinity-econf
+	else
+		cmake-utils_src_configure
+	fi
 }
 
 # @FUNCTION: trinity-base-2_src_compile
@@ -341,7 +350,11 @@ trinity-base-2_src_configure() {
 trinity-base-2_src_compile() {
 	debug-print-function ${FUNCNAME} "${@}"
 	
-	check_admin && emake || cmake-utils_src_compile
+	if check_admin ; then
+		emake
+	else
+		cmake-utils_src_compile
+	fi
 }
 
 # @FUNCTION: trinity-base-2_src_install
@@ -349,7 +362,11 @@ trinity-base-2_src_compile() {
 # Call standard cmake-utils_src_install and installs common documentation. 
 trinity-base-2_src_install() {
 	debug-print-function ${FUNCNAME} "${@}"
-	check_admin && emake install DESTDIR="${D}" || cmake-utils_src_install
+	if check_admin ; then
+		emake install DESTDIR="${D}"
+	else
+		cmake-utils_src_install
+	fi
 
 	if [[ -z "${TRINITY_BASE_NO_INSTALL_DOC}" ||
 			"${TRINITY_BASE_NO_INSTALL_DOC}" == "no" ]]; then

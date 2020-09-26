@@ -11,6 +11,7 @@ set-trinityver
 
 DESCRIPTION="Gwenview is an image viewer for TDE"
 HOMEPAGE="http://trinitydesktop.org/"
+CHECK_ADMIN="yes"
 
 LICENSE="GPL-2 LGPL-2"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
