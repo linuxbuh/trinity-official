@@ -262,7 +262,7 @@ check_libltdl() {
 }
 
 check_admin() {
-        if [ ${CHECK_ADMIN:=no} == yes ] ; then
+        if [ ${CHECK_ADMIN:=no} == "yes" ] ; then
                 return 0
 	else
                 return 1
