@@ -124,6 +124,9 @@ src_prepare() {
 	find "${S}"/mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_RPATH.*:QMAKE_RPATH =:' || die
 
+	# Linking with libqt-mt.so
+	sed -i ${S}/mkspecs/*/qmake.conf -e 's|-lqt|-ltqt-mt|g' || die
+
 	# Make qmake.conf respect our flags and toolchain
 	sed -i -e "s:QMAKE_CFLAGS_RELEASE.*=.*:QMAKE_CFLAGS_RELEASE=${CFLAGS}:" \
 		   -e 's:QMAKE_CFLAGS\t\t=.*:QMAKE_CFLAGS =:' \
