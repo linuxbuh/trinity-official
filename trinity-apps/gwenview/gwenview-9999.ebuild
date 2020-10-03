@@ -21,6 +21,7 @@ IUSE=""
 DEPEND="
 	>=trinity-base/tdelibs-${PV}
 	=trinity-apps/gwenview-i18n-${PV}
+	media-gfx/exiv2
 "
 RDEPEND="$DEPEND"
 
