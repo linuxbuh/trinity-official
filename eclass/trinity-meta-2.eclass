@@ -255,8 +255,19 @@ trinity-meta-2_src_compile() {
 # @DESCRIPTION:
 # Calls default cmake install function and installs documentation.
 trinity-meta-2_src_install() {
+	local dir
 	debug-print-function ${FUNCNAME} "${@}"
-	
+
+	if check_admin ; then
+		for dir in ${TRINITY_SUBMODULE} ${TSM_EXTRACT}; do
+				if [[ -d "${S}"/$dir ]]; then
+					pushd "${S}"/$dir
+						emake DESTDIR="${D}" destdir="${D}" install || die "emake install failed."
+					popd
+				fi
+		done
+	fi
+
 	TRINITY_BASE_NO_INSTALL_DOC="yes" trinity-base-2_src_install
 
 	trinity-base-2_create_tmp_docfiles ${TSM_EXTRACT}

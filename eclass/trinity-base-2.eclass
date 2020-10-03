@@ -362,9 +362,10 @@ trinity-base-2_src_compile() {
 # Call standard cmake-utils_src_install and installs common documentation. 
 trinity-base-2_src_install() {
 	debug-print-function ${FUNCNAME} "${@}"
-	if check_admin ; then
+
+	if check_admin && [ $TRINITY_MODULE_NAME == "${PN}" ]; then
 		emake install DESTDIR="${D}"
-	else
+	elif ! check_admin ; then
 		cmake-utils_src_install
 	fi
 

@@ -74,5 +74,5 @@ EOF
 	done
 	cp -rf ${WORKDIR}/php ${WORKDIR}/php.docrc ${D}/${TDEDIR}/share/apps/quanta/doc
 
-	trinity-base-2_src_install
+	trinity-meta-2_src_install
 }
