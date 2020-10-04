@@ -11,7 +11,7 @@ inherit trinity-meta-2
 
 set-trinityver
 
-DESCRIPTION="KOffice image manipulation program for TDE [Trinity]"
+DESCRIPTION="KOffice vector drawing application for TDE [Trinity]"
 HOMEPAGE="http://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
@@ -22,24 +22,14 @@ IUSE=""
 DEPEND="=dev-tqt/tqt-${PV}[opengl]
 	=trinity-base/tdelibs-${PV}
 	=trinity-apps/koffice-libs-${PV}
-	media-libs/lcms:0=
-	media-libs/openexr
-	media-libs/tiff
-	virtual/jpeg
-	media-libs/libpng
-	media-libs/libexif
+	media-gfx/imagemagick
+	media-libs/libart_lgpl
 "
 
 RDEPEND="$DEPEND"
 
-TSM_EXTRACT_ALSO="lib"
-TRINITY_SUBMODULE="chalk filters/chalk"
-
-need-trinity
-
-CXXFLAGS+=" -std=c++11 "
-
-KMCOPYLIB="libkformula lib/kformula
+KMCOPYLIB="
+	libkformula lib/kformula
 	libkofficecore lib/kofficecore
 	libkofficeui lib/kofficeui
 	libkopainter lib/kopainter
@@ -47,19 +37,22 @@ KMCOPYLIB="libkformula lib/kformula
 	libkotext lib/kotext
 	libkwmf lib/kwmf
 	libkowmf lib/kwmf
-	libkstore lib/store
-	libkrossapi lib/kross/api
-	libkrossmain lib/kross/main"
+	libkstore lib/store"
+
+TSM_EXTRACT_ALSO="lib filters/liboofilter"
+TRINITY_SUBMODULE="karbon filters/karbon"
+
+need-trinity
+
+CXXFLAGS+=" -std=c++11 "
 
 src_unpack() {
 	trinity-meta-2_src_unpack
-	# FIXME - disable broken tests for now
-        sed -i -e "s:TESTSDIR =.*:TESTSDIR=:" ${S}/chalk/core/Makefile.am \
-                `ls ${S}/chalk/colorspaces/*/Makefile.am`
+	echo "SUBDIRS = liboofilter karbon" > ${S}/filters/Makefile.am
 }
 
 src_prepare() {
-	local search_path="${TDEDIR}/${get_libdir}"
+		local search_path="${TDEDIR}/${get_libdir}"
 	local libname dirname dirlist x
 	libname=""
 	for x in $KMCOPYLIB; do
@@ -71,33 +64,23 @@ src_prepare() {
 			pushd ${dirname}
 			if [ ! "$(find ${search_path} -maxdepth 1 -name ${libname}*) 2>/dev/null" == "" ]; then
 				ln -s ${TDEDIR}/$(get_libdir)/${libname}* .
-			fi
-			if [[ ! ${dirname} =~ "kross"* ]]
-			then
 				dirlist="${dirlist} ${dirname/lib\/}"
 			fi
 			popd
 			libname=""
 		fi
 	done
-	echo "SUBDIRS=$dirlist kross" > ${S}/lib/Makefile.am
-	echo "SUBDIRS= api main" > ${S}/lib/kross/Makefile.am
-	echo "chalk" >${S}/filters/Makefile.am
-
+	echo "SUBDIRS=$dirlist" > ${S}/lib/Makefile.am
 	trinity-meta-2_src_prepare
-
 	echo 'all:' > ${S}/Makefile.am
         echo 'install:' >> ${S}/Makefile.am
         echo '.PHONY: all' >> ${S}/Makefile.am
 }
 
-src_configure() {
-	trinity-meta-2_src_configure
-}
-
 src_compile() {
-	for i in $(find ${S}/lib -iname "*\.ui"); do
-		uic-tqt ${i} > ${i%.ui}.h
-	done
+	pushd filters/liboofilter
+		emake
+		cp .libs/liboofilter.a .
+	popd
 	trinity-meta-2_src_compile
 }
