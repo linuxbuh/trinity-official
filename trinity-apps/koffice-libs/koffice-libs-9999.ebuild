@@ -25,11 +25,11 @@ DEPEND="
 
 RDEPEND="$DEPEND"
 
-TRINITY_SUBMODULE="interfaces plugins tools lib/kopainter lib/kopalette lib/kotext lib/kformula
-		lib/kofficecore lib/kofficeui lib/koproperty lib/kross lib/kwmf lib/store
-		filters/olefilters filters/xsltfilter filters/generic_wrapper kounavail 
-		doc/koffice kounavail doc/thesaurus servicetypes mimetypes pics
-		templates autocorrect"
+TRINITY_SUBMODULE="lib lib/kwmf lib/store lib/kofficecore lib/kofficeui lib/kopainter 
+		lib/kopalette lib/kotext lib/kformula lib/koproperty lib/kross
+		filters/olefilters filters/xsltfilter filters/generic_wrapper
+		kounavail servicetypes mimetypes pics templates autocorrect
+		interfaces plugins tools"
 
 TSM_EXTRACT_ALSO="lib filters doc kchart"
 
