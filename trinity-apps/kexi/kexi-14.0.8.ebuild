@@ -1,4 +1,4 @@
-# Copyright 1999-20120 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -68,7 +68,12 @@ src_prepare() {
 			libname=""
 		fi
 	done
+
 	echo "SUBDIRS=$dirlist kross" > ${S}/lib/Makefile.am
+
+	sed -i "${S}/kexi/migration/keximigratetest.cpp" \
+       -e "/TDEApplication/ s|\");|\", true, true, true);|"
+
 	trinity-meta-2_src_prepare
 
 	echo 'all:' > ${S}/Makefile.am

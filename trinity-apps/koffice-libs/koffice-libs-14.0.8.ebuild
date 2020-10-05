@@ -1,4 +1,4 @@
-# Copyright 1999-20120 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -28,7 +28,8 @@ RDEPEND="$DEPEND"
 TRINITY_SUBMODULE="interfaces plugins tools lib/kopainter lib/kopalette lib/kotext lib/kformula
 		lib/kofficecore lib/kofficeui lib/koproperty lib/kross lib/kwmf lib/store
 		filters/olefilters filters/xsltfilter filters/generic_wrapper kounavail 
-		doc/koffice kounavail doc/thesaurus servicetypes"
+		doc/koffice kounavail doc/thesaurus servicetypes mimetypes pics
+		templates autocorrect"
 
 TSM_EXTRACT_ALSO="lib filters doc kchart"
 
