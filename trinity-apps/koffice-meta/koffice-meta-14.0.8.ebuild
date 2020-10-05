@@ -29,5 +29,5 @@ RDEPEND="
 	=trinity-apps/kspread-${PV}
 	=trinity-apps/kugar-${PV}
 	=trinity-apps/kword-${PV}
-	=trinity-base/koffice-doc-${PV}
+	=trinity-apps/koffice-doc-${PV}
 "
