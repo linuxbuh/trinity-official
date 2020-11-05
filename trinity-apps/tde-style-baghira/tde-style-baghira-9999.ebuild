@@ -8,7 +8,7 @@ TRINITY_EXTRAGEAR_PACKAGING="no"
 
 inherit trinity-base-2
 
-DESCRIPTION="Ia Ora widget style for TDE"
+DESCRIPTION="Baghira widget style for TDE"
 HOMEPAGE="http://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
