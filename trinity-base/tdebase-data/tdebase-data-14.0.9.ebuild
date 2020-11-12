@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -11,3 +11,5 @@ TRINITY_SUBMODULE="l10n pics applnk"
 
 DESCRIPTION="Icons, localization data and .desktop files from tdebase."
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+
+TSM_EXTRACT_ALSO="translations/"

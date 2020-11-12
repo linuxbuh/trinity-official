@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -10,15 +10,17 @@ inherit trinity-meta-2
 DESCRIPTION="The Trinity application starter panel, capable of applets and extensions"
 IUSE="xcomposite"
 
-DEPEND="=trinity-base/libkonq-${PV}
-	=trinity-base/tdebase-data-${PV}
-	=dev-libs/dbus-tqt-${PV}
+DEPEND="~trinity-base/libkonq-${PV}
+	~trinity-base/tdebase-data-${PV}
+	~dev-libs/dbus-tqt-${PV}
 	xcomposite? ( x11-libs/libXrender
 		x11-libs/libXfixes
 		x11-libs/libXcomposite )"
 
 RDEPEND="${DEPEND}
-	=trinity-base/kmenuedit-${PV}"
+	~trinity-base/kmenuedit-${PV}"
+
+TSM_EXTRACT_ALSO="translations/"
 
 src_configure() {
 	mycmakeargs=(

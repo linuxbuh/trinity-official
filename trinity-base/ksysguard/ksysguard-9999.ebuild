@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -13,6 +13,8 @@ IUSE="dell-laptop lm-sensors"
 
 DEPEND="lm-sensors? ( sys-apps/lm-sensors )"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="translations/"
 
 src_configure() {
 	mycmakeargs=(

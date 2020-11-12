@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -9,3 +9,5 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity tip-of-the-day displayer"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+
+TSM_EXTRACT_ALSO="translations/"

@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -14,12 +14,12 @@ IUSE="java"
 # FIXME: support branding USE flag
 
 DEPEND="
-	=trinity-base/libkonq-${PV}"
+	~trinity-base/libkonq-${PV}"
 
 RDEPEND="${DEPEND}
-	=trinity-base/kcontrol-${PV}
-	=trinity-base/tdebase-tdeioslaves-${PV}
-	=trinity-base/kfind-${PV}
+	~trinity-base/kcontrol-${PV}
+	~trinity-base/tdebase-tdeioslaves-${PV}
+	~trinity-base/kfind-${PV}
 	java? ( virtual/jre )"
 
-TSM_EXTRACT_ALSO="kdesktop"
+TSM_EXTRACT_ALSO="kdesktop translations/"

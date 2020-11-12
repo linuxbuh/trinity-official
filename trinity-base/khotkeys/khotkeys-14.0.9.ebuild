@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -14,6 +14,8 @@ KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="x11-libs/libXtst"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="translations/"
 
 src_configure() {
 	mycmakeargs=(

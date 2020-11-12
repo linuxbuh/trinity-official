@@ -1,31 +1,32 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 IUSE="pam xdmcp xcomposite sak +xrandr +hwlib +svg"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 
 DEPEND="pam? ( trinity-base/tdebase-pam )
 	xdmcp? ( x11-libs/libXdmcp )
 	xcomposite? ( x11-libs/libXcomposite )
 	svg? ( media-libs/libart_lgpl )
-	=trinity-base/tdelibs-${PV}[xrandr?]
+	~trinity-base/tdelibs-${PV}[xrandr?]
 	sys-apps/dbus
 	x11-libs/libXtst
-	=trinity-base/kcontrol-${PV}
-	=dev-libs/dbus-tqt-${PV}"
+	~trinity-base/kcontrol-${PV}"
 
 RDEPEND="${DEPEND}
-	=trinity-base/tdepasswd-${PV}
+	~trinity-base/tdepasswd-${PV}
 	x11-apps/xinit
 	x11-apps/xmessage"
+
+TSM_EXTRACT_ALSO="translations/"
 
 pkg_setup() {
 	trinity-meta-2_pkg_setup;
@@ -33,10 +34,10 @@ pkg_setup() {
 }
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XTEST=ON
-		-DWITH_LIBART="$(usex svg)"
 		-DWITH_SHADOW=ON
+		-DWITH_LIBART="$(usex svg)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XDMCP="$(usex xdmcp)"
 		-DWITH_XRANDR="$(usex xrandr)"
@@ -83,8 +84,8 @@ pkg_postinst() {
 			sak_ok=no
 		else
 			if ! linux_chkconfig_present INPUT_UINPUT; then
-				eerror "You have built tdm with the Secure Attention Key (SAK) feature enabled. "
-				eerror "It requires INPUT_UINPUT support to be enabled in the kernel."
+				eerror "You build TDM with SAK feature enabled. "
+				eerror "It requires the INPUT_UINPUT support enabled."
 				eerror "Please enable it:"
 				eerror "    CONFIG_INPUT_UINPUT=y"
 				eerror "in /usr/src/linux/.config or"

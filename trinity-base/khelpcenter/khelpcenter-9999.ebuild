@@ -11,8 +11,10 @@ TRINITY_SUBMODULE="khelpcenter doc"
 DESCRIPTION="The Trinity help center."
 
 RDEPEND="
-	=trinity-base/tdebase-tdeioslaves-${PV}
+	~trinity-base/tdebase-tdeioslaves-${PV}
 	|| ( www-misc/htdig www-misc/hldig )"
+
+TSM_EXTRACT_ALSO="translations/"
 
 pkg_setup() {
 	# Issue some warning if MAKEOPTS -j parameter is higher than 4

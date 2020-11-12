@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -9,6 +9,7 @@ inherit trinity-meta-2 eutils
 
 DESCRIPTION="Trinity window manager"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+
 IUSE="xcomposite xrandr xinerama +libconfig +pcre opengl"
 
 DEPEND="x11-libs/libXext
@@ -21,6 +22,8 @@ DEPEND="x11-libs/libXext
 	opengl? ( virtual/opengl )
 	pcre? ( dev-libs/libpcre[jit] )"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="translations/"
 
 src_configure() {
 	mycmakeargs=(

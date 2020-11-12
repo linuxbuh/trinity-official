@@ -1,30 +1,33 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 TSM_EXTRACT="tdeioslave"
+TSM_EXTRACT_ALSO="translations/"
 
 DESCRIPTION="Generic Trinity TDEIOslaves"
-IUSE="samba ldap sasl openexr +hwlib"
 
-DEPEND="x11-libs/libXcursor
+IUSE="+hwlib ldap openexr samba sasl"
+
+DEPEND="
 	net-libs/rpcsvc-proto
+	x11-libs/libXcursor
+	ldap? ( net-nds/openldap )
 	openexr? ( media-libs/openexr )
 	samba? ( net-fs/samba )
-	ldap? ( net-nds/openldap )
 	sasl? ( dev-libs/cyrus-sasl )"
 
 RDEPEND="${DEPEND}
-	virtual/ssh
-	=trinity-base/tdeeject-${PV}"
+	~trinity-base/tdeeject-${PV}
+	virtual/ssh"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XCURSOR=ON
 		-DWITH_SAMBA="$(usex samba)"
 		-DWITH_LDAP="$(usex ldap)"
