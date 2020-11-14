@@ -4,26 +4,19 @@
 
 EAPI="7"
 
-inherit trinity-functions-2
-
-set-trinityver
-
 DESCRIPTION="tdegraphics metapackage - merge this to pull in all tdegraphics-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
-LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="${TRINITY_VER}"
+LICENSE="metapackage"
+SLOT="14"
 
 RDEPEND="
 	~trinity-base/kamera-${PV}
 	~trinity-base/kcoloredit-${PV}
 	~trinity-base/kdvi-${PV}
 	~trinity-base/kfax-${PV}
-	~trinity-base/tdegraphics-tdefile-plugins-${PV}
-	~trinity-base/tdegraphics-doc-${PV}
 	~trinity-base/kgamma-${PV}
 	~trinity-base/kghostview-${PV}
-	~trinity-base/tdeiconedit-${PV}
 	~trinity-base/kmrml-${PV}
 	~trinity-base/kolourpaint-${PV}
 	~trinity-base/kooka-${PV}
@@ -35,4 +28,8 @@ RDEPEND="
 	~trinity-base/kuickshow-${PV}
 	~trinity-base/kview-${PV}
 	~trinity-base/kviewshell-${PV}
-	~trinity-base/libkscan-${PV}"
+	~trinity-base/libkscan-${PV}
+	~trinity-base/tdegraphics-doc-${PV}
+	~trinity-base/tdegraphics-tdefile-plugins-${PV}
+	~trinity-base/tdeiconedit-${PV}
+"

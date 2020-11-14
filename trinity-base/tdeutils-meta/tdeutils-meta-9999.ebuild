@@ -4,22 +4,16 @@
 
 EAPI="7"
 
-inherit trinity-functions-2
-
-set-trinityver
-
 DESCRIPTION="tdeutils metapackage - merge this to pull in all tdeutils-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
 
-LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
+LICENSE="metapackage"
+SLOT="14"
 
 RDEPEND="
 	~trinity-base/ark-${PV}
-	~trinity-base/tdeutils-doc-${PV}
 	~trinity-base/kcalc-${PV}
 	~trinity-base/kcharselect-${PV}
-	~trinity-base/tdelirc-${PV}
 	~trinity-base/kdf-${PV}
 	~trinity-base/kedit-${PV}
 	~trinity-base/kfloppy-${PV}
@@ -31,6 +25,9 @@ RDEPEND="
 	~trinity-base/kregexpeditor-${PV}
 	~trinity-base/ksim-${PV}
 	~trinity-base/ktimer-${PV}
-	~trinity-base/tdewallet-${PV}
 	~trinity-base/superkaramba-${PV}
-	~trinity-base/tdefilereplace-${PV}"
+	~trinity-base/tdefilereplace-${PV}
+	~trinity-base/tdelirc-${PV}
+	~trinity-base/tdeutils-doc-${PV}
+	~trinity-base/tdewallet-${PV}
+"

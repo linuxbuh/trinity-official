@@ -4,19 +4,14 @@
 
 EAPI="7"
 
-inherit trinity-functions-2
-
-set-trinityver
-
 DESCRIPTION="tdeaddons metapackage - merge this to pull in all tdeaddons-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
 
-LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
+LICENSE="metapackage"
+SLOT="14"
 
 RDEPEND="
 	~trinity-base/atlantikdesigner-${PV}
-	~trinity-base/tdeaddons-doc-${PV}
 	~trinity-base/kaddressbook-plugins-${PV}
 	~trinity-base/kate-plugins-${PV}
 	~trinity-base/kicker-applets-${PV}
@@ -24,7 +19,9 @@ RDEPEND="
 	~trinity-base/konq-plugins-${PV}
 	~trinity-base/ksig-${PV}
 	~trinity-base/renamedlg-plugins-${PV}
-	~trinity-base/tdeaddons-tdefile-plugins-${PV}"
+	~trinity-base/tdeaddons-doc-${PV}
+	~trinity-base/tdeaddons-tdefile-plugins-${PV}
+"
 
 # trinity-base/noatun-plugins masked due to missing dependency: noatun
 # But not long anymore.. :-)

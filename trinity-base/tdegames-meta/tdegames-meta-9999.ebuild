@@ -4,19 +4,14 @@
 
 EAPI="7"
 
-inherit trinity-functions-2
-
-set-trinityver
-
 DESCRIPTION="tdegames metapackage - merge this to pull in all tdegames-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
-LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="${TRINITY_VER}"
+LICENSE="metapackage"
+SLOT="14"
 
 RDEPEND="
 	~trinity-base/atlantik-${PV}
-	~trinity-base/tdegames-doc-${PV}
 	~trinity-base/kasteroids-${PV}
 	~trinity-base/katomic-${PV}
 	~trinity-base/kbackgammon-${PV}
@@ -48,4 +43,6 @@ RDEPEND="
 	~trinity-base/ktuberling-${PV}
 	~trinity-base/libtdegames-${PV}
 	~trinity-base/lskat-${PV}
-	~trinity-base/twin4-${PV}"
+	~trinity-base/tdegames-doc-${PV}
+	~trinity-base/twin4-${PV}
+"

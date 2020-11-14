@@ -4,24 +4,21 @@
 
 EAPI="7"
 
-inherit trinity-functions-2
-
-set-trinityver
-
 DESCRIPTION="tdetoys metapackage - merge this to pull in all tdetoys-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
-LICENSE="|| ( GPL-2 GPL-3 )"
 
-SLOT="${TRINITY_VER}"
+LICENSE="metapackage"
+SLOT="14"
 
 RDEPEND="
 	~trinity-base/amor-${PV}
 	~trinity-base/eyesapplet-${PV}
 	~trinity-base/fifteenapplet-${PV}
-	~trinity-base/tdetoys-doc-${PV}
 	~trinity-base/kmoon-${PV}
 	~trinity-base/kodo-${PV}
 	~trinity-base/kteatime-${PV}
 	~trinity-base/ktux-${PV}
 	~trinity-base/kweather-${PV}
-	~trinity-base/kworldclock-${PV}"
+	~trinity-base/kworldclock-${PV}
+	~trinity-base/tdetoys-doc-${PV}
+"
