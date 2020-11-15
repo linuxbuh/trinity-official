@@ -125,7 +125,7 @@ need-trinity() {
 	set-trinityver ${1}
 	adjust-trinity-paths
 
-	my_depend="~trinity-base/tdelibs-${ETRINITY_VER}"
+	my_depend="~trinity-base/tdelibs-${PV}"
 
 	DEPEND+=" ${my_depend}"
 	RDEPEND+=" ${my_depend}"
@@ -153,17 +153,11 @@ need-arts() {
 
 	TRINITY_NEED_ARTS="${1}"
 
-	case "${TRINITY_VER}" in
-		"") die "You must call the set-trinityver function to set TRINITY_VER before calling ${FUNCNAME}."
-			;;
-		*)
-			tdelibs="~trinity-base/tdelibs-${ETRINITY_VER}"
-			arts="~trinity-base/arts-${ETRINITY_VER}"
-			;;
-	esac
+	tdelibs="~trinity-base/tdelibs-${PV}"
+	arts="~trinity-base/arts-${PV}"
 
 	# Handle trinity-base/tdelibs in special way
-	if [[ "~${CATEGORY}/${P}" == "${tdelibs}" ]]; then
+	if [[ "${CATEGORY}/${PN}" == "trinity-base/tdelibs" ]]; then
 		if [[ "${1}" == "optional" ]]; then
 			my_depend=" arts? ( ${arts} )"
 			IUSE+=" arts"
