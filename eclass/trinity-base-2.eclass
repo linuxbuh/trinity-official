@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -163,6 +163,13 @@ else
 	die "Unknown BUILD_TYPE=${BUILD_TYPE}"
 fi
 
+if [[ ${CATEGORY} = trinity-base ]]; then
+	# Set SLOT, TDEDIR, TRINITY_VER and PREFIX
+	set-trinityver
+	[[ -z ${SLOT} ]] && SLOT=${TRINITY_VER}
+	# Common dependencies
+	[[ ${PN} != tdelibs ]] && need-trinity
+fi
 
 if [[ -n "${TRINITY_EXTRAGEAR_PACKAGING}" ]]; then 
 # @ECLASS-VARIABLE: TEG_PO_DIR

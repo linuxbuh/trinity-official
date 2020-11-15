@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
@@ -12,13 +12,6 @@ inherit trinity-base-2
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 HOMEPAGE="http://www.trinitydesktop.org/"
-
-# Set slot, TDEDIR, TRINITY_VER and PREFIX
-set-trinityver
-[[ -z "${SLOT}" ]] && SLOT="${TRINITY_VER}"
-
-# Common dependencies
-need-trinity
 
 # @FUNCTION: trinity-meta-2_set_trinity_submodule
 # @DESCRIPTION:
