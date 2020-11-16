@@ -3,11 +3,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_NAME="tdebase"
-
+TRINITY_NEED_ARTS="optional"
 inherit trinity-meta-2
-
-need-arts optional
 
 DESCRIPTION="Trinity hotkey daemon"
 
@@ -17,7 +16,7 @@ RDEPEND="${DEPEND}"
 TSM_EXTRACT_ALSO="translations/"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XTEST=ON
 	)
 
