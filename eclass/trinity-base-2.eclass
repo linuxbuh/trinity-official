@@ -163,7 +163,44 @@ else
 	die "Unknown BUILD_TYPE=${BUILD_TYPE}"
 fi
 
-if [[ ${CATEGORY} = trinity-base ]]; then
+if [[ ${BUILD_TYPE} == live ]]; then
+# @ECLASS-VARIABLE: TRINITY_VER
+# @DEPRECATED
+# @DESCRIPTION:
+# Synonymous with SLOT, this was used as a clutch between eclass and ebuilds to
+# set SLOT for release and live ebuilds by some means of version detection. But
+# for live it was really only using a hardcoded value inside trinity-functions-2
+# that we may as well hardcode here.
+# The *only* use in ebuilds is SLOT="${TRINITY_VER}" so this remains a fallback.
+	TRINITY_VER=14
+	if [[ ${CATEGORY} = trinity-base ]]; then
+		[[ -z ${SLOT} ]] && SLOT=${TRINITY_VER}
+	fi
+
+# @ECLASS-VARIABLE: TDEDIR
+# @DESCRIPTION:
+# Location of tdelibs to link against.
+# TODO: Rethink prefixing
+	export TDEDIR="/usr/trinity/${TRINITY_VER}"
+
+# @ECLASS-VARIABLE: TDEDIRS
+# @DESCRIPTION:
+# TDE expects that the install path is listed first in TDEDIRS
+# Reference: More information inside trinity-base/tdelibs package
+# TODO: Rethink prefixing
+	export TDEDIRS="/usr/trinity/${TRINITY_VER}"
+
+	# TODO: get rid of these hacks re prefixing
+	adjust-trinity-paths
+
+	case ${CATEGORY} in
+		trinity-base|trinity-apps)
+			[[ ${PN} != tdelibs ]] &&
+			COMMON_DEPEND+=" ~trinity-base/tdelibs-${PV}"
+			;;
+		*) ;;
+	esac
+elif [[ ${CATEGORY} = trinity-base ]]; then
 	# Set SLOT, TDEDIR, TRINITY_VER and PREFIX
 	set-trinityver
 	[[ -z ${SLOT} ]] && SLOT=${TRINITY_VER}
@@ -203,6 +240,10 @@ if [[ -n "${TRINITY_EXTRAGEAR_PACKAGING}" ]]; then
 		esac
 	fi
 fi
+
+DEPEND+=" ${COMMON_DEPEND}"
+RDEPEND+=" ${COMMON_DEPEND}"
+unset COMMON_DEPEND
 
 # @FUNCTION: trinity-base-2_src_unpack
 # @DESCRIPTION:
