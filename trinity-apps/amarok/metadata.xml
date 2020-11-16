@@ -8,7 +8,6 @@
 		<flag name="ifp">Enable support for iRiver devices access through <pkg>media-libs/libifp</pkg></flag>
 		<flag name="konqsidebar">Enable konqueror sidebar plugin</flag>
 		<flag name="njb">Enable support for NJB (Creative) devices access through <pkg>media-libs/libnjb</pkg></flag>
-		<flag name="riokarma">Enable support for Rio Karma devices via <pkg>media-libs/libkarma</pkg></flag>
 		<flag name="visualization">Support visualization plugins through <pkg>media-libs/libvisual</pkg></flag>
 	</use>
 </pkgmetadata>

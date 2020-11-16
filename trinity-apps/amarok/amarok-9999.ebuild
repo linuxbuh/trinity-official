@@ -31,7 +31,7 @@ SLOT="${TRINITY_VER}"
 #   The only ones supported at the moment are Xine and Akode.
 #   Yauap isn't in Portage tree, but could be added later.
 #
-# - Rio Karma support needs libkarma which neeeds to be added to our overlay later.
+# - Rio Karma support needs nonexistent media-libs/libkarma
 #
 # - No Support for DAAP because it's not tested if that works with Mongrel2.
 #
@@ -40,7 +40,7 @@ SLOT="${TRINITY_VER}"
 # - Otherwise the ebuild should offer all what can be done with CMake at the moment.
 
 IUSE="akode amazon ifp inotify ipod konqsidebar mp4 mtp mysql njb
-opengl postgres riokarma visualization +xine"
+opengl postgres visualization +xine"
 
 REQUIRED_USE="|| ( xine akode )"
 
@@ -57,7 +57,6 @@ DEPEND+="
 	njb? ( media-libs/libnjb )
 	opengl? ( virtual/opengl )
 	postgres? ( dev-db/postgresql )
-	riokarma? ( media-libs/libkarma )
 	visualization? (
 		media-libs/libsdl
 		media-plugins/libvisual-plugins
@@ -67,25 +66,25 @@ DEPEND+="
 RDEPEND+=" ${DEPEND}"
 
 src_configure() {
-	mycmakeargs=(
-		-DWITH_AMAZON="$(usex amazon)"
-		-DWITH_KONQSIDEBAR="$(usex konqsidebar)"
-		-DWITH_XINE="$(usex xine)"
-		-DWITH_AKODE="$(usex akode)"
-		-DWITH_IPOD="$(usex ipod)"
-		-DWITH_RIOKARMA="$(usex riokarma)"
-		-DWITH_IFP="$(usex ifp)"
-		-DWITH_NJB="$(usex njb)"
-		-DWITH_MTP="$(usex mtp)"
-		-DWITH_MP4V2="$(usex mp4)"
-		-DWITH_INOTIFY="$(usex inotify)"
-		-DWITH_OPENGL="$(usex opengl)"
-		-DWITH_LIBVISUAL="$(usex visualization)"
-		-DWITH_MYSQL="$(usex mysql)"
-		-DWITH_POSTGRESQL="$(usex postgres)"
+	local mycmakeargs=(
 		-DWITH_SYSTEM_SQLITE=ON
-		-DWITH_YAUAP=OFF
 		-DWITH_DAAP=OFF
+		-DWITH_RIOKARMA=OFF
+		-DWITH_YAUAP=OFF
+		-DWITH_AKODE="$(usex akode)"
+		-DWITH_AMAZON="$(usex amazon)"
+		-DWITH_IFP="$(usex ifp)"
+		-DWITH_INOTIFY="$(usex inotify)"
+		-DWITH_IPOD="$(usex ipod)"
+		-DWITH_KONQSIDEBAR="$(usex konqsidebar)"
+		-DWITH_MP4V2="$(usex mp4)"
+		-DWITH_MTP="$(usex mtp)"
+		-DWITH_MYSQL="$(usex mysql)"
+		-DWITH_NJB="$(usex njb)"
+		-DWITH_OPENGL="$(usex opengl)"
+		-DWITH_POSTGRESQL="$(usex postgres)"
+		-DWITH_LIBVISUAL="$(usex visualization)"
+		-DWITH_XINE="$(usex xine)"
 	)
 
 	trinity-base-2_src_configure
