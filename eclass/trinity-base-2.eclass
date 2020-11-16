@@ -241,6 +241,37 @@ if [[ -n "${TRINITY_EXTRAGEAR_PACKAGING}" ]]; then
 	fi
 fi
 
+# @ECLASS-VARIABLE: TRINITY_NEED_ARTS
+# @DESCRIPTION:
+# Default value is "no". If set to "yes", add an unconditional dependency on
+# trinity-base/arts and trinity-base/tdelibs[arts], if "optional" add both
+# dependencies with IUSE="arts".
+# TODO: This variable was set by the need-arts function but all invocations of
+# need-arts should be replaced by setting TRINITY_NEED_ARTS directly in ebuild
+# before inheriting this eclass.
+: ${TRINITY_NEED_ARTS:=no}
+
+case ${TRINITY_NEED_ARTS} in
+	no) ;;
+	yes)
+		COMMON_DEPEND+="
+			~trinity-base/arts-${PV}
+			~trinity-base/tdelibs-${PV}[arts]
+		"
+		;;
+	optional)
+		IUSE+=" arts"
+		COMMON_DEPEND+=" arts? (
+			~trinity-base/arts-${PV}
+			~trinity-base/tdelibs-${PV}[arts]
+		)"
+		;;
+	*)
+		eerror "Unknown value for \${TRINITY_NEED_ARTS}"
+		die "Value ${TRINITY_NEED_ARTS} is not supported"
+		;;
+esac
+
 DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}"
 unset COMMON_DEPEND
