@@ -19,6 +19,7 @@ TRINITY_LIVEVER="14.1.0"
 # !!! unfinished
 set-trinityver() {
 	debug-print-function ${FUNCNAME} "${@}"
+	[[ ${BUILD_TYPE} == live ]] && return
 
 	# Set install location:
 	# - The third party applications and libraries go into /usr, and have SLOT="0".
@@ -118,6 +119,7 @@ trinity_prepand_path_component() {
 # Sets the correct DEPEND and RDEPEND for the needed trinity < version >.
 need-trinity() {
 	debug-print-function ${FUNCNAME} "${@}"
+	[[ ${BUILD_TYPE} == live ]] && return
 
 	local my_depend
 
