@@ -133,12 +133,6 @@ need-trinity() {
 	RDEPEND+=" ${my_depend}"
 }
 
-# @ECLASS-VARIABLE: TRINITY_NEED_ARTS
-# @DESCRIPTION:
-# This variable is set by the need-arts function.
-# Possible arguments are 'yes', 'no' and 'optional'. Default is 'no'.
-TRINITY_NEED_ARTS="no"
-
 # @FUNCTION: need-arts
 # @USAGE: need-arts <yes|optional>
 # @DESCRIPTION:
