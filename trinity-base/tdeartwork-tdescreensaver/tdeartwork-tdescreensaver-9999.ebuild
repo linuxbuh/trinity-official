@@ -5,21 +5,21 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdeartwork"
+TRINITY_NEED_ARTS="optional"
 inherit trinity-meta-2
-
-need-arts optional
 
 DESCRIPTION="Extra screensavers for Trinity"
 
-IUSE+=" kclock opengl xscreensaver"
+IUSE="kclock opengl xscreensaver"
 
-DEPEND+="
+DEPEND="
 	~trinity-base/krootbacking-${PV}
 	~trinity-base/tdescreensaver-${PV}
 	kclock? ( ~media-libs/libart_lgpl-${PV} )
 	opengl? ( virtual/opengl )
-	xscreensaver? ( x11-misc/xscreensaver )"
-RDEPEND+=" ${DEPEND}"
+	xscreensaver? ( x11-misc/xscreensaver )
+"
+RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="FindXscreensaver.cmake"
 
