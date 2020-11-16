@@ -5,21 +5,18 @@
 EAPI="7"
 
 TRINITY_MODULE_TYPE="applications"
+TRINITY_NEED_ARTS="optional"
 inherit trinity-base-2
 
 DESCRIPTION="A CD/DVD burning application for Trinity"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
-need-arts optional
-
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
-IUSE+=" alsa css dvd dvdr emovix encode debug ffmpeg ffmpeg-all-codecs flac
+IUSE="alsa css dvd dvdr emovix encode debug ffmpeg ffmpeg-all-codecs flac
 +handbook mp3 sndfile taglib vcd vorbis"
 
-DEPEND+="
+DEPEND="
 	media-libs/libsamplerate
 	media-libs/taglib
 	media-sound/cdparanoia
@@ -32,7 +29,7 @@ DEPEND+="
 	sndfile? ( media-libs/libsndfile )
 	vorbis? ( media-libs/libvorbis )
 "
-RDEPEND+=" ${DEPEND}
+RDEPEND="${DEPEND}
 	app-cdr/cdrdao
 	media-sound/normalize
 	virtual/cdrtools
