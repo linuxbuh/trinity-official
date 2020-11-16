@@ -20,7 +20,7 @@ fi
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 IUSE+=" alsa arts aspell cryptsetup cups debug elficons elogind fam +hwlib
 +idn ispell jpeg2k kernel_linux libressl lua lzma malloc networkmanager
-old-udisks openexr +pcre pcsc-lite pkcs11 +shm spell +ssl sudo +svg systemd tiff
+openexr +pcre pcsc-lite pkcs11 +shm spell +ssl sudo +svg systemd tiff
 udevil udisks upower utempter xcomposite +xrandr zeroconf"
 
 REQUIRED_USE="spell? ( || ( aspell ispell ) )"
@@ -68,11 +68,10 @@ DEPEND="
 RDEPEND="${DEPEND}
 	hwlib? (
 		acct-group/plugdev
-		!udevil? ( !udisks? ( !old-udisks? ( sys-apps/pmount ) ) )
+		!udevil? ( !udisks? ( sys-apps/pmount ) )
 		cryptsetup? ( sys-fs/cryptsetup )
 		elogind? ( sys-auth/elogind )
 		networkmanager? ( net-misc/networkmanager )
-		old-udisks? ( sys-fs/udisks:0 )
 		pcsc-lite? ( sys-apps/pcsc-lite )
 		pkcs11? ( dev-libs/pkcs11-helper )
 		systemd? ( sys-apps/systemd )
@@ -97,6 +96,7 @@ src_configure() {
 		-DWITH_DEVKITPOWER=OFF
 		-DWITH_OLD_XDG_STD=OFF
 		-DWITH_KDE4_MENU_SUFFIX=OFF
+		-DWITH_UDISKS=OFF
 		-DWITH_ARTS="$(usex arts)"
 		-DWITH_LIBIDN="$(usex idn)"
 		-DWITH_MITSHM="$(usex shm)"
@@ -107,7 +107,6 @@ src_configure() {
 		-DWITH_ELFICON="$(usex elficons)"
 		-DWITH_TDEHWLIB="$(usex hwlib)"
 		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
-		-DWITH_UDISKS="$(usex old-udisks)"
 		-DWITH_UDISKS2="$(usex udisks)"
 		-DWITH_UDEVIL="$(usex udevil)"
 		-DWITH_ALSA="$(usex alsa)"
@@ -203,7 +202,7 @@ pkg_postinst () {
 		echo
 	fi
 	if ! use hwlib; then
-		for flag in networkmanager upower systemd elogind old-udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
+		for flag in networkmanager upower systemd elogind udisks udevil pkcs11 pcsc-lite cryptsetup; do
 			use $flag && \
 				echo
 				ewarn "USE=\"$flag\" is passed, but it doesn't change anything because" && \
