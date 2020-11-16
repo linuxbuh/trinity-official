@@ -7,10 +7,6 @@ EAPI="7"
 TRINITY_MODULE_NAME="tdelibs"
 inherit trinity-base-2
 
-set-trinityver
-
-need-arts optional
-
 DESCRIPTION="Trinity libraries needed by all TDE programs"
 HOMEPAGE="https://trinitydesktop.org/"
 
@@ -22,14 +18,14 @@ if [[ ${PV} != *9999* ]] ; then
 fi
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
-IUSE+=" alsa aspell cryptsetup cups debug elficons elogind fam +hwlib
+IUSE+=" alsa arts aspell cryptsetup cups debug elficons elogind fam +hwlib
 +idn ispell jpeg2k kernel_linux libressl lua lzma malloc networkmanager
 old-udisks openexr +pcre pcsc-lite pkcs11 +shm spell +ssl sudo +svg systemd tiff
 udevil udisks upower utempter xcomposite +xrandr zeroconf"
 
 REQUIRED_USE="spell? ( || ( aspell ispell ) )"
 
-COMMON_DEPEND="
+DEPEND="
 	app-text/ghostscript-gpl
 	~dev-libs/dbus-1-tqt-${PV}
 	dev-libs/libxslt
@@ -39,6 +35,7 @@ COMMON_DEPEND="
 	media-libs/freetype
 	x11-libs/libXrender
 	alsa? ( media-libs/alsa-lib )
+	arts? ( ~trinity-base/arts-${PV} )
 	cups? ( net-print/cups )
 	debug? ( sys-libs/binutils-libs:= )
 	elficons? ( ~dev-libs/libr-${PV} )
@@ -68,8 +65,7 @@ COMMON_DEPEND="
 	xrandr? ( x11-libs/libXrandr )
 	zeroconf? ( ~dev-tqt/avahi-tqt-${PV} )
 "
-DEPEND+=" ${COMMON_DEPEND}"
-RDEPEND+=" ${COMMON_DEPEND}
+RDEPEND="${DEPEND}
 	hwlib? (
 		acct-group/plugdev
 		!udevil? ( !udisks? ( !old-udisks? ( sys-apps/pmount ) ) )
@@ -83,7 +79,8 @@ RDEPEND+=" ${COMMON_DEPEND}
 		udevil? ( sys-apps/udevil )
 		udisks? ( sys-fs/udisks:2 )
 		upower? ( sys-power/upower )
-	)"
+	)
+"
 
 src_configure() {
 	local enable_logind="OFF"
@@ -91,7 +88,7 @@ src_configure() {
 		enable_logind="ON"
 	fi
 
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DTDE_MALLOC="$(usex malloc)"
 		-DTDE_MALLOC_FULL="$(usex malloc)"
 		-DTDE_MALLOC_DEBUG="$(usex debug)"
@@ -100,6 +97,7 @@ src_configure() {
 		-DWITH_DEVKITPOWER=OFF
 		-DWITH_OLD_XDG_STD=OFF
 		-DWITH_KDE4_MENU_SUFFIX=OFF
+		-DWITH_ARTS="$(usex arts)"
 		-DWITH_LIBIDN="$(usex idn)"
 		-DWITH_MITSHM="$(usex shm)"
 		-DWITH_PCRE="$(usex pcre)"
