@@ -10,24 +10,21 @@ TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="cs da de es fr it ja nl nn pl_PL pt ru sk tr zh_CN zh_TW"
+TRINITY_NEED_ARTS="optional"
 inherit trinity-base-2
 
 DESCRIPTION="Multi-purpose note-taking application for TDE"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
-need-arts optional
-
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
-IUSE+=" crypt kontact +svg"
+IUSE="crypt kontact +svg"
 
-DEPEND+="
+DEPEND="
 	crypt? ( app-crypt/gpgme )
 	kontact? ( ~trinity-base/kontact-${PV} )
 	svg? ( ~media-libs/libart_lgpl-${PV} )"
-RDEPEND+=" ${DEPEND}"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	local mycmakeargs=(
