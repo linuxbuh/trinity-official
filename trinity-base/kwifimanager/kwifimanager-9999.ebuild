@@ -3,15 +3,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_NAME="tdenetwork"
 TRINITY_SUBMODULE="wifi"
-
+TRINITY_NEED_ARTS="optional"
 inherit trinity-meta-2
-
-need-arts optional
 
 DESCRIPTION="Trinity wifi (wireless network) gui"
 
-MY_DEPEND="net-wireless/wireless-tools"
-DEPEND+=" ${MY_DEPEND}"
-RDEPEND+=" ${MY_DEPEND}"
+DEPEND="net-wireless/wireless-tools"
+RDEPEND="${DEPEND}"
