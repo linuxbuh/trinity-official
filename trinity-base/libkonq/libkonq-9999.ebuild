@@ -3,11 +3,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_NAME="tdebase"
-
+TRINITY_NEED_ARTS="optional"
 inherit trinity-meta-2
-
-need-arts optional
 
 DESCRIPTION="The embeddable part of konqueror"
 
