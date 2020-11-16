@@ -3,16 +3,14 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_NAME="tdegames"
-
+TRINITY_NEED_ARTS="yes"
 inherit trinity-meta-2
-
-need-arts yes
 
 DESCRIPTION="Trinity Space Game"
 
-MY_DEPEND="~trinity-base/libtdegames-${PV}"
-DEPEND+=" ${MY_DEPEND}"
-RDEPEND+=" ${MY_DEPEND}"
+DEPEND="~trinity-base/libtdegames-${PV}"
+RDEPEND="${DEPEND}"
 
 TSM_EXTRACT_ALSO="libtdegames/"
