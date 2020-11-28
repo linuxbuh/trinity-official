@@ -18,12 +18,10 @@ if [[ ${PV} != *9999* ]] ; then
 fi
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
-IUSE+=" alsa arts aspell cryptsetup cups debug elficons elogind fam +hwlib
-+idn ispell jpeg2k kernel_linux libressl lua lzma malloc networkmanager
-openexr +pcre pcsc-lite pkcs11 +shm spell +ssl sudo +svg systemd tiff
-udevil udisks upower utempter xcomposite +xrandr zeroconf"
-
-REQUIRED_USE="spell? ( || ( aspell ispell ) )"
+IUSE+=" alsa arts cryptsetup cups debug elficons elogind fam +hwlib +idn jpeg2k
+	kernel_linux libressl lua lzma malloc networkmanager openexr +pcre pcsc-lite
+	pkcs11 +shm spell +ssl sudo +svg systemd tiff udevil udisks upower utempter
+	xcomposite +xrandr zeroconf"
 
 DEPEND="
 	app-text/ghostscript-gpl
@@ -48,10 +46,7 @@ DEPEND="
 	openexr? ( media-libs/openexr )
 	pcre? ( dev-libs/libpcre )
 	shm? ( x11-libs/libxshmfence )
-	spell? (
-		aspell? ( app-text/aspell )
-		ispell? ( app-text/ispell )
-	)
+	spell? ( app-text/aspell )
 	ssl? (
 		app-misc/ca-certificates
 		!libressl? ( dev-libs/openssl:= )
@@ -119,7 +114,7 @@ src_configure() {
 		-DWITH_LZMA="$(usex lzma)"
 		-DWITH_OPENEXR="$(usex openexr)"
 		-DWITH_PCSC="$(usex pcsc-lite)"
-		-DWITH_ASPELL="$(usex aspell)"
+		-DWITH_ASPELL="$(usex spell)"
 		-DWITH_GAMIN="$(usex fam)"
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_UTEMPTER="$(usex utempter)"

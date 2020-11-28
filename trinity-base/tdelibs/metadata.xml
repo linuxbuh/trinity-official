@@ -10,7 +10,6 @@
 		<flag name="consolekit">Enable <pkg>sys-auth/consolekit</pkg> as tdehw backend</flag>
 		<flag name="cryptsetup">Enable <pkg>sys-fs/cryptsetup</pkg> support</flag>
 		<flag name="elficons">Enable <pkg>dev-libs/libr</pkg> support</flag>
-		<flag name="ispell">Enable spellchecking using <pkg>app-text/ispell</pkg></flag>
 		<flag name="malloc">Enable TDE's own malloc implementation instead of GLIBC's.</flag>
 		<flag name="old-udisks">Enable <pkg>sys-fs/udisks</pkg>:0 as tdehw backend</flag>
 		<flag name="pcsc-lite">Enable smartcard support with <pkg>sys-apps/pcsc-lite</pkg></flag>
