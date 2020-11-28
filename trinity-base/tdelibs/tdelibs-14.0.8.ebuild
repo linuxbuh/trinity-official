@@ -5,7 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdelibs"
-inherit trinity-base-2
+inherit eapi8-dosym trinity-base-2
 
 set-trinityver
 
@@ -19,10 +19,9 @@ KEYWORDS="~amd64 ~x86"
 SLOT="${TRINITY_VER}"
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
-
-IUSE+=" alsa avahi cups consolekit fam jpeg2k lua lzma +svg +idn +shm elogind
-	networkmanager openexr sudo tiff utempter elficons +ssl kernel_linux
-	upower xcomposite +hwlib libressl +xrandr +malloc systemd old-udisks udisks +pcre debug spell"
+IUSE+=" alsa cups debug elficons elogind fam +hwlib +idn jpeg2k kernel_linux
+	libressl lua lzma malloc networkmanager openexr +pcre +shm spell +ssl sudo
+	+svg systemd tiff udisks upower utempter xcomposite +xrandr zeroconf"
 
 COMMON_DEPEND="
 	app-text/ghostscript-gpl
@@ -63,11 +62,9 @@ DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}
 	hwlib? (
 		acct-group/plugdev
-		!udisks? ( !old-udisks? ( sys-apps/pmount ) )
-		consolekit? ( sys-auth/consolekit )
+		!udisks? ( sys-apps/pmount )
 		elogind? ( sys-auth/elogind )
 		networkmanager? ( net-misc/networkmanager )
-		old-udisks? ( sys-fs/udisks:0 )
 		systemd? ( sys-apps/systemd )
 		udisks? ( sys-fs/udisks:2 )
 		upower? ( sys-power/upower )
@@ -86,7 +83,7 @@ src_configure() {
 		enable_logind="ON"
 	fi
 
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DTDE_MALLOC="$(usex malloc)"
 		-DTDE_MALLOC_FULL="$(usex malloc)"
 		-DTDE_MALLOC_DEBUG="$(usex debug)"
@@ -95,6 +92,7 @@ src_configure() {
 		-DWITH_DEVKITPOWER=OFF
 		-DWITH_OLD_XDG_STD=OFF
 		-DWITH_KDE4_MENU_SUFFIX=OFF
+		-DWITH_UDISKS=OFF
 		-DWITH_LIBIDN="$(usex idn)"
 		-DWITH_MITSHM="$(usex shm)"
 		-DWITH_PCRE="$(usex pcre)"
@@ -104,7 +102,6 @@ src_configure() {
 		-DWITH_ELFICON=OFF
 		-DWITH_TDEHWLIB="$(usex hwlib)"
 		-DWITH_TDEHWLIB_DAEMONS="$(usex hwlib)"
-		-DWITH_UDISKS="$(usex old-udisks)"
 		-DWITH_UDISKS2="$(usex udisks)"
 		-DWITH_ALSA="$(usex alsa)"
 		-DWITH_AVAHI="$(usex zeroconf)"
@@ -120,7 +117,7 @@ src_configure() {
 		-DWITH_UTEMPTER="$(usex utempter)"
 		-DUTEMPTER_HELPER="/usr/sbin/utempter"
 		-DWITH_UPOWER="$(usex upower)"
-		-DWITH_CONSOLEKIT="$(usex consolekit)"
+		-DWITH_CONSOLEKIT=OFF
 		-DWITH_LOGINDPOWER="${enable_logind}"
 		-DWITH_NETWORK_MANAGER_BACKEND="$(usex networkmanager)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
@@ -146,7 +143,7 @@ src_install() {
 	if use ssl; then
 		# Make TDE to use our system certificates
 		rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
-		dosym /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
+		dosym8 -r /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
 	fi
 
 	dodir /etc/env.d
@@ -204,7 +201,7 @@ pkg_postinst () {
 		echo
 	fi
 	if ! use hwlib; then
-		for flag in consolekit networkmanager upower systemd elogind old-udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
+		for flag in networkmanager upower systemd elogind udisks udevil pkcs11 pcsc-lite cryptsetup; do
 			use $flag && \
 				echo
 				ewarn "USE=\"$flag\" is passed, but it doesn't change anything because" && \
