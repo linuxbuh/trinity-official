@@ -8,8 +8,7 @@ TRINITY_MODULE_NAME="tdegames"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity Atomic Entertainment Game"
+KEYWORDS="~amd64 ~x86"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="libtdegames/"
