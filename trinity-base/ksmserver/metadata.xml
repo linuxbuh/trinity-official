@@ -5,7 +5,4 @@
 		<email>fatzer2@gmail.com</email>
 		<name>Alexander Golubev</name>
 	</maintainer>
-	<use>
-		<flag name="upower">Enable support for <pkg>sys-power/upower</pkg></flag>
-	</use>
 </pkgmetadata>
