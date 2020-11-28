@@ -5,7 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdelibs"
-inherit trinity-base-2
+inherit eapi8-dosym trinity-base-2
 
 DESCRIPTION="Trinity libraries needed by all TDE programs"
 HOMEPAGE="https://trinitydesktop.org/"
@@ -144,7 +144,7 @@ src_install() {
 	if use ssl; then
 		# Make TDE to use our system certificates
 		rm -f "${D}"${TDEDIR}/share/apps/kssl/ca-bundle.crt || die
-		dosym /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
+		dosym8 -r /etc/ssl/certs/ca-certificates.crt ${TDEDIR}/share/apps/kssl/ca-bundle.crt
 	fi
 
 	dodir /etc/env.d
