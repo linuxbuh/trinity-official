@@ -54,6 +54,7 @@ trinity-meta-2_src_unpack() {
 		case "${TRINITY_SCM}" in
 			git)
 				git-r3_src_unpack
+				trinity-meta-2_src_delete
 				;;
 			*)   die "TRINITY_SCM: ${TRINITY_SCM} is not supported by ${FUNCNAME}" ;;
 		esac
@@ -162,6 +163,8 @@ trinity-meta-2_create_extractlists() {
 
 	TSM_EXTRACT_LIST+=" ${TSM_EXTRACT} ${TSM_EXTRACT_ALSO} cmake/ CMakeLists.txt"
 	TSM_EXTRACT_LIST+=" config.h.cmake ConfigureChecks.cmake"
+	[[ ${TRINITY_BUILD_ADMIN} == "yes" ]] && TSM_EXTRACT_LIST+=" configure.in.in Makefile.am.in \
+					ChangeLog AUTHORS NEWS README"
 
  	debug-print "line ${LINENO} ${ECLASS} ${FUNCNAME}: TSM_EXTRACT_LIST=\"${TSM_EXTRACT_LIST}\""
 }
@@ -233,10 +236,70 @@ trinity-meta-2_src_compile() {
 trinity-meta-2_src_install() {
 	debug-print-function ${FUNCNAME} "${@}"
 	
+	if [[ ${TRINITY_BUILD_ADMIN} == "yes" ]] ; then
+		for dir in ${TRINITY_SUBMODULE} ${TSM_EXTRACT}; do
+				if [[ -d "${S}"/$dir ]]; then
+					pushd "${S}"/$dir > /dev/null || die
+						emake DESTDIR="${D}" destdir="${D}" install || die "emake install failed."
+					popd > /dev/null || die
+				fi
+		done
+	fi
+
 	TRINITY_BASE_NO_INSTALL_DOC="yes" trinity-base-2_src_install
 
 	trinity-base-2_create_tmp_docfiles ${TSM_EXTRACT}
 	trinity-base-2_install_docfiles
+}
+
+# @FUNCTION: trinity-meta-2_src_delete
+# @DESCRIPTION:
+# Default src_delete function for git.
+# Removes unnecessary files.
+trinity-meta-2_src_delete() {
+	debug-print-function ${FUNCNAME} "${@}"
+	
+	local x i dir newdir array num mod_dir
+	# Directories that do not need to be deleted
+	mod_dir="cmake admin libltdl libtdevnc"
+
+	dir="${WORKDIR}/tmpdir"
+	trinity-meta-2_create_extractlists
+
+	pushd ${S} > /dev/null || die
+	mkdir ${dir} || die
+
+	for x in ${TSM_EXTRACT_LIST}
+	do
+		array=(${x//\// })
+		num=${#array[@]}
+
+		if [[ ${num} -gt 1 ]] ; then
+			for (( i=0; i<$[${num}-1]; i++ ));
+			do
+				newdir+="${array[$i]}/"
+			done
+
+			mkdir -p ${dir}/${newdir} || die
+			cp -af ${x} ${dir}/${newdir} || die
+			unset newdir
+		else
+			cp -af ${x} ${dir}/ || die
+		fi
+	done
+	einfo "Delete directories..."
+	for x in *
+	do
+		if ! has ${x} ${mod_dir} ; then
+			rm -rf ${x} || die
+		else
+			einfo "Skipping ${x}"
+		fi
+	done
+
+	cp -af ${dir}/. . || die
+	rm -rf ${dir} || die
+	popd > /dev/null || die
 }
 
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install src_unpack pkg_setup

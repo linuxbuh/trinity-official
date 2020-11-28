@@ -204,6 +204,7 @@ trinity-admin-prepare() {
         pushd "${PWD}/admin"
         libtoolize -c || die "Error libtoolize"
         cp -Rp /usr/share/aclocal/libtool.m4 "libtool.m4.in" || die "No such file: libtool.m4"
+	cp -Rp /usr/share/libtool/build-aux/config.* . || die
         popd
 }
 

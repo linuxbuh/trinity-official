@@ -8,7 +8,27 @@
 # Purpose: Support ebuilds for the Trinity Desktop (KDE3 fork).
 #
 
-inherit trinity-functions-2 cmake-utils
+inherit trinity-functions-2
+
+# @ECLASS-VARIABLE: TRINITY_BUILD_ADMIN
+# @DESCRIPTION:
+# The value of this variable determines the package build mode.
+# If set to "yes", the module "admin" is used for assembly.The build
+#    is done using the 'trinity-econf' and 'emake' functions.
+# If set to "no", inherit cmake-utils.
+: ${TRINITY_BUILD_ADMIN:=no}
+
+
+case ${TRINITY_BUILD_ADMIN} in
+	yes)
+		;;
+	no)
+		inherit cmake-utils
+		;;
+	*)
+		eerror "Unknown value for \${CHECK_ADMIN}"
+		die "Value ${CHECK_ADMIN} is not supported"
+esac
 
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
@@ -244,7 +264,12 @@ trinity-base-2_src_prepare() {
 		fi
 	fi
 
-    cmake-utils_src_prepare
+	if [[ ${TRINITY_BUILD_ADMIN} == "yes" ]] ; then
+		trinity-gen-configure
+		eapply_user
+	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
+		cmake-utils_src_prepare
+	fi
 }
 
 
@@ -284,7 +309,11 @@ trinity-base-2_src_configure() {
 		"${mycmakeargs[@]}"
 	)
 
-	cmake-utils_src_configure
+	if [[ ${TRINITY_BUILD_ADMIN} == "yes" ]] ; then
+		trinity-econf
+	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
+		cmake-utils_src_configure
+	fi
 }
 
 # @FUNCTION: trinity-base-2_src_compile
@@ -293,7 +322,11 @@ trinity-base-2_src_configure() {
 trinity-base-2_src_compile() {
 	debug-print-function ${FUNCNAME} "${@}"
 	
-	cmake-utils_src_compile
+	if [[ ${TRINITY_BUILD_ADMIN} == "yes" ]] ; then
+		emake
+	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
+		cmake-utils_src_compile
+	fi
 }
 
 # @FUNCTION: trinity-base-2_src_install
@@ -301,7 +334,14 @@ trinity-base-2_src_compile() {
 # Call standard cmake-utils_src_install and installs common documentation. 
 trinity-base-2_src_install() {
 	debug-print-function ${FUNCNAME} "${@}"
-	cmake-utils_src_install
+
+	if [[ ${TRINITY_BUILD_ADMIN} == "yes" ]] ; then
+		if [[ ${TRINITY_MODULE_NAME} == "${PN}" ]] ; then
+			emake install DESTDIR="${D}"
+		fi
+	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
+		cmake-utils_src_install
+	fi
 
 	if [[ -z "${TRINITY_BASE_NO_INSTALL_DOC}" ||
 			"${TRINITY_BASE_NO_INSTALL_DOC}" == "no" ]]; then
