@@ -11,3 +11,6 @@ DESCRIPTION="KSirtet is an adaptation of the well-known Tetris game"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TRINITY_SUBMODULE="ksirtet libksirtet"
+TSM_EXTRACT_ALSO="libtdegames/"

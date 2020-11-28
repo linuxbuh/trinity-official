@@ -14,6 +14,8 @@ RDEPEND="${DEPEND}
 	x11-misc/xkeyboard-config
 	x11-apps/setxkbmap"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XTEST=ON

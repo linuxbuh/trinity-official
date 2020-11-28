@@ -11,3 +11,5 @@ DESCRIPTION="Trinity: Same Game - a little game about balls and how to get rid o
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

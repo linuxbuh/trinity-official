@@ -17,9 +17,13 @@ HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+fi
+
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
-IUSE+=" alsa aspell consolekit cryptsetup cups debug elficons elogind fam +hwlib
-+idn ispell jpeg2k kernel_linux libressl lua lzma +malloc networkmanager
+IUSE+=" alsa aspell cryptsetup cups debug elficons elogind fam +hwlib
++idn ispell jpeg2k kernel_linux libressl lua lzma malloc networkmanager
 old-udisks openexr +pcre pcsc-lite pkcs11 +shm spell +ssl sudo +svg systemd tiff
 udevil udisks upower utempter xcomposite +xrandr zeroconf"
 
@@ -69,7 +73,6 @@ RDEPEND+=" ${COMMON_DEPEND}
 	hwlib? (
 		acct-group/plugdev
 		!udevil? ( !udisks? ( !old-udisks? ( sys-apps/pmount ) ) )
-		consolekit? ( sys-auth/consolekit )
 		cryptsetup? ( sys-fs/cryptsetup )
 		elogind? ( sys-auth/elogind )
 		networkmanager? ( net-misc/networkmanager )
@@ -126,7 +129,7 @@ src_configure() {
 		-DUTEMPTER_HELPER="/usr/sbin/utempter"
 		-DWITH_UPOWER="$(usex upower)"
 		-DWITH_PKCS="$(usex pkcs11)"
-		-DWITH_CONSOLEKIT="$(usex consolekit)"
+		-DWITH_CONSOLEKIT=OFF
 		-DWITH_LOGINDPOWER="${enable_logind}"
 		-DWITH_NETWORK_MANAGER_BACKEND="$(usex networkmanager)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
@@ -202,7 +205,7 @@ pkg_postinst () {
 		echo
 	fi
 	if ! use hwlib; then
-		for flag in consolekit networkmanager upower systemd elogind old-udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
+		for flag in networkmanager upower systemd elogind old-udisks udisks udevil pkcs11 pcsc-lite cryptsetup; do
 			use $flag && \
 				echo
 				ewarn "USE=\"$flag\" is passed, but it doesn't change anything because" && \

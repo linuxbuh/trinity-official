@@ -20,6 +20,8 @@ RDEPEND="${DEPEND}
 	x11-apps/bdftopcf
 	sudo? ( app-admin/sudo )"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure() {
 	local mycmakeargs=(
 		-DWITH_XRENDER=ON

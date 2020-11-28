@@ -20,6 +20,8 @@ DEPEND="~trinity-base/libkonq-${PV}
 RDEPEND="${DEPEND}
 	~trinity-base/kmenuedit-${PV}"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XFIXES="$(usex xcomposite)"

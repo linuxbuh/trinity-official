@@ -20,3 +20,5 @@ src_configure() {
 
 	trinity-meta-2_src_configure
 }
+
+TSM_EXTRACT_ALSO="translations/"

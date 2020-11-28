@@ -25,6 +25,8 @@ RDEPEND="${DEPEND}
 	x11-apps/xinit
 	x11-apps/xmessage"
 
+TSM_EXTRACT_ALSO="translations/"
+
 pkg_setup() {
 	trinity-meta-2_pkg_setup;
 	use sak && TRINITY_SUBMODULE+=" tsak"

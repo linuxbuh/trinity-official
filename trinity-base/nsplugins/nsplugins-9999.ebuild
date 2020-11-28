@@ -12,3 +12,5 @@ DESCRIPTION="Netscape plugins support for Konqueror."
 DEPEND="x11-libs/libXt
 	dev-libs/glib"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="translations/"

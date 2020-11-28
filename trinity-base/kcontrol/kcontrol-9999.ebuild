@@ -30,7 +30,7 @@ RDEPEND="${DEPEND}
 	~trinity-base/khotkeys-${PV}
 	svg? ( media-libs/libart_lgpl )"
 
-TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/"
+TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/ translations/"
 
 src_configure() {
 	local mycmakeargs=(

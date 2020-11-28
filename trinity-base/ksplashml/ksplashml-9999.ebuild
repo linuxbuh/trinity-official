@@ -14,6 +14,8 @@ IUSE="xinerama"
 DEPEND="xinerama? ( x11-base/xorg-proto )"
 RDEPEND="${DEPEND}"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XINERAMA="$(usex xinerama)"

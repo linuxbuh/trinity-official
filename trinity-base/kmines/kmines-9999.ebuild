@@ -11,3 +11,5 @@ DESCRIPTION="KMines is a classic mine sweeper game"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

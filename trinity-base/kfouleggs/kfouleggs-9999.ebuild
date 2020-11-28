@@ -11,3 +11,6 @@ DESCRIPTION="KFoulEggs is an adaptation of the well-known (at least in Japan) Pu
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TRINITY_SUBMODULE="kfouleggs libksirtet"
+TSM_EXTRACT_ALSO="libtdegames/"

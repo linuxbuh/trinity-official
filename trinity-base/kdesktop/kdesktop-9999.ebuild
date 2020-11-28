@@ -27,7 +27,7 @@ RDEPEND="${COMMON_DEPEND}
 	~trinity-base/konqueror-${PV}
 	pam? ( trinity-base/tdebase-pam )"
 
-TSM_EXTRACT_ALSO="kcheckpass/"
+TSM_EXTRACT_ALSO="kcheckpass/ translations/"
 
 src_configure() {
 	mycmakeargs=(

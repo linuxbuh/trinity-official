@@ -11,3 +11,5 @@ DESCRIPTION="Trinity: Kolor Lines - a little game about balls and how to get rid
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

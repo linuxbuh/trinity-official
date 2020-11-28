@@ -8,3 +8,5 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity tip-of-the-day displayer"
+
+TSM_EXTRACT_ALSO="translations/"

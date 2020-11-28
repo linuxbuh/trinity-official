@@ -11,3 +11,5 @@ DESCRIPTION="The japanese warehouse keeper game"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

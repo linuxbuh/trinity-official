@@ -8,3 +8,5 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity tool that generates *.desktop files for well known apps"
+
+TSM_EXTRACT_ALSO="translations/"

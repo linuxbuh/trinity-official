@@ -11,3 +11,5 @@ DESCRIPTION="kicker plugin: rss news ticker"
 
 DEPEND="~trinity-base/librss-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="librss"

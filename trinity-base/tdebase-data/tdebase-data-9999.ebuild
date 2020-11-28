@@ -10,3 +10,5 @@ inherit trinity-meta-2
 TRINITY_SUBMODULE="l10n pics applnk"
 
 DESCRIPTION="Icons, localization data and .desktop files from tdebase."
+
+TSM_EXTRACT_ALSO="translations/"

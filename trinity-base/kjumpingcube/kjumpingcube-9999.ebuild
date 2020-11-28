@@ -11,3 +11,5 @@ DESCRIPTION="Trinity: Tactical one or two player game"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

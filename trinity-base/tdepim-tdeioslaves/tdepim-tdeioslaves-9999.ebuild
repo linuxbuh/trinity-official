@@ -7,7 +7,6 @@ EAPI="7"
 TRINITY_MODULE_NAME="tdepim"
 inherit trinity-meta-2
 
-TSM_EXTRACT="tdeioslave"
 TRINITY_SUBMODULE="tdeioslave"
 
 DESCRIPTION="PIM Trinity TDEIOslaves"
@@ -37,3 +36,5 @@ src_configure() {
 
 	trinity-meta-2_src_configure
 }
+
+TSM_EXTRACT_ALSO="libemailfunctions/ libkmime/"

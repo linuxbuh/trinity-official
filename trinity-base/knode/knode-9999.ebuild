@@ -15,4 +15,4 @@ DEPEND="
 	~trinity-base/libkcal-${PV}"
 RDEPEND="${DEPEND}"
 
-TSM_EXTRACT_ALSO="libtdepim/"
+TSM_EXTRACT_ALSO="libtdepim/ libemailfunctions/ libkpgp/ libkmime/"

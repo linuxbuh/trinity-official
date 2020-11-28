@@ -14,6 +14,8 @@ IUSE="dell-laptop lm-sensors"
 DEPEND="lm-sensors? ( sys-apps/lm-sensors )"
 RDEPEND="${DEPEND}"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure() {
 	mycmakeargs=(
 		-DWITH_I8K="$(usex dell-laptop)"

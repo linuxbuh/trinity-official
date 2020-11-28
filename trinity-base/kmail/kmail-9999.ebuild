@@ -30,7 +30,8 @@ RDEPEND="${COMMON_DEPEND}
 	crypt? ( app-crypt/pinentry )
 	~trinity-base/tdebase-tdeioslaves-${PV}
 	mbox? ( ~trinity-base/tdepim-tdeioslaves-${PV} )
-	imap? ( ~trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )"
+	imap? ( ~trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )
+	sasl? ( ~trinity-base/tdebase-tdeioslaves-${PV}[sasl=] )"
 
 TSM_EXTRACT_ALSO="
 	ktnef/
@@ -39,8 +40,9 @@ TSM_EXTRACT_ALSO="
 	libtdenetwork/
 	certmanager/lib/
 	libtdepim/
-	korganizer/korganizerinterface.h
-	korganizer/kcalendarinterface.h
+	korganizer/kcalendariface.h
+	korganizer/korganizeriface.h
+	libkpimidentities/
 	libkpgp/
 	libkmime/
 	libksieve/

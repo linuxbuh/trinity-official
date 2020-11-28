@@ -20,6 +20,8 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+TRINITY_SUBMODULE="arts mpeglib mpeglib_artsplug"
+
 src_configure() {
 	local mycmakeargs=(
 		-DWITH_ALSA="$(usex alsa)"

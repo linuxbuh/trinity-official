@@ -11,3 +11,5 @@ DESCRIPTION="A Trinity game similiar to Mahjongg"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

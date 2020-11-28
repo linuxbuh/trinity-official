@@ -8,3 +8,5 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Kate is an MDI texteditor."
+
+TSM_EXTRACT_ALSO="translations/"

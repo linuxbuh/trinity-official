@@ -9,4 +9,4 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity user settings wizard."
 
-TSM_EXTRACT_ALSO="libkonq/"
+TSM_EXTRACT_ALSO="libkonq/ translations/"

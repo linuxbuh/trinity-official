@@ -8,3 +8,5 @@ TRINITY_MODULE_NAME="tdegames"
 inherit trinity-meta-2
 
 DESCRIPTION="Base library common to many Trinity games"
+
+TSM_EXTRACT_ALSO="libtdegames/"

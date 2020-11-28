@@ -21,4 +21,4 @@ RDEPEND="${DEPEND}
 	~trinity-base/kfind-${PV}
 	java? ( virtual/jre )"
 
-TSM_EXTRACT_ALSO="kdesktop"
+TSM_EXTRACT_ALSO="kdesktop translations/"

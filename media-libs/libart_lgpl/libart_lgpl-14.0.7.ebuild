@@ -6,7 +6,7 @@ EAPI="7"
 
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="libart-lgpl"
-inherit trinity-base-2
+inherit trinity-base-2 multilib-minimal
 
 DESCRIPTION="LGPL version of libart maintained by TDE"
 HOMEPAGE="https://trinitydesktop.org/"
@@ -15,6 +15,19 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-src_configure() {
+src_prepare() {
+	sed '/ART_SIZEOF_LONG/d' -i ${S}/art_config.h.in || die
+	cmake-utils_src_prepare
+}
+
+multilib_src_configure() {
 	cmake-utils_src_configure
+}
+
+multilib_src_compile() {
+	cmake-utils_src_compile
+}
+
+multilib_src_install() {
+	cmake-utils_src_install
 }

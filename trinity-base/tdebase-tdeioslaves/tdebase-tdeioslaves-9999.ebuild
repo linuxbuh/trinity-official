@@ -8,6 +8,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 TSM_EXTRACT="tdeioslave"
+TSM_EXTRACT_ALSO="translations/"
 
 DESCRIPTION="Generic Trinity TDEIOslaves"
 

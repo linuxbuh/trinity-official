@@ -11,3 +11,5 @@ DESCRIPTION="Trinity GUI for passwd"
 
 DEPEND="~trinity-base/libkonq-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="translations/"

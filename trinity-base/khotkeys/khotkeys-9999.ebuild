@@ -14,6 +14,8 @@ DESCRIPTION="Trinity hotkey daemon"
 DEPEND="x11-libs/libXtst"
 RDEPEND="${DEPEND}"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XTEST=ON

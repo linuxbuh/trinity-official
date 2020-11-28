@@ -12,9 +12,17 @@ DESCRIPTION="Trinity personal information manager"
 COMMON_DEPEND="~trinity-base/libtdepim-${PV}
 	~trinity-base/libkpimidentities-${PV}
 	~trinity-base/libkholidays-${PV}
-	~trinity-base/knotes-${PV}"
+	~trinity-base/knotes-${PV}
+	=trinity-base/korganizer-${PV}"
 
 DEPEND+=" $COMMON_DEPEND"
 RDEPEND+=" $COMMON_DEPEND"
 
-TSM_EXTRACT_ALSO="libtdepim/ libtdenetwork/"
+TSM_EXTRACT_ALSO="libtdepim/ libtdenetwork/ plugins/ korganizer/ kaddressbook/ \
+	kmail/ knotes/ knode/ akregator/ karm/ libemailfunctions/ libkpimidentities/"
+
+src_prepare() {
+	sed -i '/kmail/d' kontact/plugins/CMakeLists.txt || die
+	sed -i '/specialdates/d' kontact/plugins/CMakeLists.txt || die
+	trinity-meta-2_src_prepare
+}

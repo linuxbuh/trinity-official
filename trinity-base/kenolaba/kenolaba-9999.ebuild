@@ -11,3 +11,5 @@ DESCRIPTION="Trinity: Board game inspired by Abalone"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

@@ -11,3 +11,5 @@ DESCRIPTION="The Trinity Battleship clone"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

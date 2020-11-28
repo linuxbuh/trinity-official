@@ -22,6 +22,8 @@ DEPEND="x11-libs/libXext
 	pcre? ( dev-libs/libpcre[jit] )"
 RDEPEND="${DEPEND}"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure() {
 	mycmakeargs=(
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"

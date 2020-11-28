@@ -16,6 +16,8 @@ DEPEND="x11-libs/libXt
 	krootbacking? ( ~trinity-base/krootbacking-${PV} )"
 RDEPEND="${DEPEND}"
 
+TSM_EXTRACT_ALSO="translations/"
+
 src_configure () {
 	mycmakeargs=(
 		-DWITH_OPENGL="$(usex opengl)"

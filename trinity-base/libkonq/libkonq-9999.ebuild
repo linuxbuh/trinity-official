@@ -10,3 +10,5 @@ inherit trinity-meta-2
 need-arts optional
 
 DESCRIPTION="The embeddable part of konqueror"
+
+TSM_EXTRACT_ALSO="translations/"

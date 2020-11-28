@@ -8,3 +8,5 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Makes TQt-only apps use several TDE dialogs."
+
+TSM_EXTRACT_ALSO="translations/"

@@ -11,3 +11,5 @@ DESCRIPTION="Trinity four-in-a-row game"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdegames/"

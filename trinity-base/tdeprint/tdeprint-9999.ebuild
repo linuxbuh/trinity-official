@@ -15,3 +15,5 @@ DEPEND="cups? ( net-print/cups )"
 RDEPEND="${DEPEND}
 	app-text/enscript
 	app-text/psutils"
+
+TSM_EXTRACT_ALSO="translations/"
