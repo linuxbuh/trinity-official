@@ -14,7 +14,7 @@ LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 
 if [[ ${PV} != *9999* ]] ; then
-	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
