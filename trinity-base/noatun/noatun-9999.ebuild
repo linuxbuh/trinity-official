@@ -10,8 +10,6 @@ inherit trinity-meta-2
 DESCRIPTION="Media player featuring audio effects, graphic equalizer and network transparency"
 HOMEPAGE="https://trinitydesktop.org/"
 
-KEYWORDS="~amd64 ~x86"
-
 RDEPEND="~trinity-base/tdemultimedia-arts-${PV}"
 DEPEND="${RDEPEND}
 	x11-libs/libXext
