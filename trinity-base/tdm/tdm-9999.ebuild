@@ -9,17 +9,18 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
 
-IUSE="pam xdmcp xcomposite sak +xrandr +hwlib +svg"
+IUSE="+hwlib pam sak +svg xcomposite xdmcp +xrandr"
 
-DEPEND="pam? ( trinity-base/tdebase-pam )
-	xdmcp? ( x11-libs/libXdmcp )
-	xcomposite? ( x11-libs/libXcomposite )
-	svg? ( media-libs/libart_lgpl )
-	~trinity-base/tdelibs-${PV}[xrandr?]
+DEPEND="
 	sys-apps/dbus
+	~trinity-base/kcontrol-${PV}
+	~trinity-base/tdelibs-${PV}[xrandr?]
 	x11-libs/libXtst
-	~trinity-base/kcontrol-${PV}"
-
+	pam? ( trinity-base/tdebase-pam )
+	svg? ( media-libs/libart_lgpl )
+	xcomposite? ( x11-libs/libXcomposite )
+	xdmcp? ( x11-libs/libXdmcp )
+"
 RDEPEND="${DEPEND}
 	~trinity-base/tdepasswd-${PV}
 	x11-apps/xinit
@@ -28,7 +29,7 @@ RDEPEND="${DEPEND}
 TSM_EXTRACT_ALSO="translations/"
 
 pkg_setup() {
-	trinity-meta-2_pkg_setup;
+	trinity-meta-2_pkg_setup
 	use sak && TRINITY_SUBMODULE+=" tsak"
 }
 
@@ -56,7 +57,7 @@ src_install() {
 		"${D}/${TDEDIR}/share/config/tdm/tdmrc" || die "sed tdmrc failed"
 
 	# Install XSession upstream script seems to be debian-cpecific
-	cp "${FILESDIR}/${P}-xsession.script" "${D}/${TDEDIR}/share/config/tdm/Xsession"
+	cp "${FILESDIR}/${PN}-14.0.8-xsession.script" "${D}/${TDEDIR}/share/config/tdm/Xsession" || die
 	sed -i -e "s!@TRINITY_INSTALL_PATH@!${TDEDIR}!" "${D}/${TDEDIR}/share/config/tdm/Xsession" \
 		|| die "sed tdmrc failed"
 }
@@ -64,15 +65,15 @@ src_install() {
 pkg_postinst() {
 	# Set the default TDM face icon if it's not already set by the system admin
 	# because this is user-overrideable in that way, it's not in src_install
-	if [ ! -e "${ROOT}${TDEDIR}/share/apps/tdm/faces/.default.face.icon" ];	then
-		mkdir -p "${ROOT}${TDEDIR}/share/apps/tdm/faces"
+	if [[ ! -e "${ROOT}${TDEDIR}/share/apps/tdm/faces/.default.face.icon" ]]; then
+		mkdir -p "${ROOT}${TDEDIR}/share/apps/tdm/faces" || die
 		cp "${ROOT}${TDEDIR}/share/apps/tdm/pics/users/default1.png" \
-			"${ROOT}${TDEDIR}/share/apps/tdm/faces/.default.face.icon"
+			"${ROOT}${TDEDIR}/share/apps/tdm/faces/.default.face.icon" || die
 	fi
-	if [ ! -e "${ROOT}${TDEDIR}/share/apps/tdm/faces/root.face.icon" ]; then
-		mkdir -p "${ROOT}${TDEDIR}/share/apps/tdm/faces"
+	if [[ ! -e "${ROOT}${TDEDIR}/share/apps/tdm/faces/root.face.icon" ]]; then
+		mkdir -p "${ROOT}${TDEDIR}/share/apps/tdm/faces" || die
 		cp "${ROOT}${TDEDIR}/share/apps/tdm/pics/users/root1.png" \
-			"${ROOT}${TDEDIR}/share/apps/tdm/faces/root.face.icon"
+			"${ROOT}${TDEDIR}/share/apps/tdm/faces/root.face.icon" || die
 	fi
 
 	if use sak; then
@@ -83,8 +84,8 @@ pkg_postinst() {
 			sak_ok=no
 		else
 			if ! linux_chkconfig_present INPUT_UINPUT; then
-				eerror "You build TDM with SAK feature enabled. "
-				eerror "It requires the INPUT_UINPUT support enabled."
+				eerror "You have built tdm with the Secure Attention Key (SAK) feature enabled."
+				eerror "It requires INPUT_UINPUT support to be enabled in the kernel."
 				eerror "Please enable it:"
 				eerror "    CONFIG_INPUT_UINPUT=y"
 				eerror "in /usr/src/linux/.config or"
@@ -98,7 +99,7 @@ pkg_postinst() {
 		if [[ "$sak_ok" != yes ]]; then
 			sed -i -e 's:#\?\s*UseSAK=\(true\|false\)\?:UseSak=false:' \
 				"${D}${TDEDIR}/share/config/tdm/tdmrc" || die "sed tdmrc failed"
-			ewarn "SAK feature is disabled. You can enable it yourself by setting UseSAK=true "
+			ewarn "SAK feature is disabled. You can enable it yourself by setting UseSAK=true"
 			ewarn "in ${TDEDIR}/share/config/tdm/tdmrc "
 		else
 			ewarn "SAK feature is enabled. You can disable it yourself by setting UseSAK=false"
