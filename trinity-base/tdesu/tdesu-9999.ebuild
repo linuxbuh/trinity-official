@@ -3,8 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity gui for su(1) or sudo"
@@ -14,7 +14,7 @@ DEPEND="sudo? ( app-admin/sudo )"
 RDEPEND="${DEPEND}"
 
 src_configure () {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_SUDO_TDESU_BACKEND="$(usex sudo)"
 		-DWITH_SUDO_KONSOLE_SUPER_USER_COMMAND="$(usex sudo)"
 	)

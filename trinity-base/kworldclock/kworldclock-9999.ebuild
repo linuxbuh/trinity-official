@@ -3,8 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdetoys"
 TRINITY_SUBMODULE="kworldwatch"
+TRINITY_MODULE_NAME="tdetoys"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity program that displays the part of the Earth lit up by the Sun"

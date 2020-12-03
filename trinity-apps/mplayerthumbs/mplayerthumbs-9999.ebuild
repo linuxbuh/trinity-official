@@ -4,24 +4,21 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="de"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="MPlayer based thumbnail generator for TDE"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
-IUSE+=" +strips"
+SLOT="14"
+IUSE="+strips"
 
-RDEPEND+=" media-video/mplayer"
+RDEPEND="media-video/mplayer"
 
 src_configure() {
 	local mycmakeargs=(

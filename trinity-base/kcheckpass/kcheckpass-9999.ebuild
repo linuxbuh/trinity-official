@@ -3,8 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="A simple password checker, used by any software in need of user authentication."
@@ -14,7 +14,7 @@ RDEPEND="pam? ( trinity-base/tdebase-pam )"
 DEPEND="${RDEPEND}"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_SHADOW=ON
 		-DWITH_PAM="$(usex pam)"
 		-DKCHECKPASS_PAM_SERVICE=tde

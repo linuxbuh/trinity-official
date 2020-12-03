@@ -3,14 +3,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdepim"
 
+TRINITY_MODULE_NAME="tdepim"
+TSM_EXTRACT_ALSO="libtdepim/"
 inherit trinity-meta-2
 
-DESCRIPTION="library common to many tdepim apps interacting to network"
+DESCRIPTION="Library common to many tdepim apps interacting to network"
 
-COMMON_DEPEND="app-crypt/gpgme"
-DEPEND+=" ${COMMON_DEPEND}"
-RDEPEND+=" ${COMMON_DEPEND}"
-
-TSM_EXTRACT_ALSO="libtdepim/"
+DEPEND="app-crypt/gpgme"
+RDEPEND="${DEPEND}"

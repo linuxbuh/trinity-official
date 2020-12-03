@@ -3,13 +3,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdegames"
 
+TRINITY_MODULE_NAME="tdegames"
+TSM_EXTRACT_ALSO="libtdegames/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity: Same Game - a little game about balls and how to get rid of them"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="libtdegames/"

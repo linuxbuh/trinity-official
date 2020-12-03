@@ -4,21 +4,18 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="de es fr hu nl pl ru sk zh_CN"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="Tool for managing notes"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
+SLOT="14"
 
 src_configure() {
 	local mycmakeargs=(

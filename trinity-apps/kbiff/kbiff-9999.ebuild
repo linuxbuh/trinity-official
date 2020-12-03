@@ -4,23 +4,20 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="br cs da de el es et fi fr he hr hu is it ja
 	nb nl nn pl pt pt_BR ro ru sk sl sv tr uk zh_TW"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="Email notification utility for TDE"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
-IUSE+=" asus +ssl"
+SLOT="14"
+IUSE="asus +ssl"
 
 # SSL support might need tdelibs build with +ssl USE.
 

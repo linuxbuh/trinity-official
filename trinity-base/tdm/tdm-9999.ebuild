@@ -5,6 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity login manager, similar to XDM and GDM"
@@ -25,8 +26,6 @@ RDEPEND="${DEPEND}
 	~trinity-base/tdepasswd-${PV}
 	x11-apps/xinit
 	x11-apps/xmessage"
-
-TSM_EXTRACT_ALSO="translations/"
 
 pkg_setup() {
 	trinity-meta-2_pkg_setup

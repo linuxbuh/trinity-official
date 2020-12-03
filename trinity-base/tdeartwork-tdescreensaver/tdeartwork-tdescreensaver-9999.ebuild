@@ -4,8 +4,9 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdeartwork"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_NAME="tdeartwork"
+TSM_EXTRACT_ALSO="FindXscreensaver.cmake"
 inherit trinity-meta-2
 
 DESCRIPTION="Extra screensavers for Trinity"
@@ -20,8 +21,6 @@ DEPEND="
 	xscreensaver? ( x11-misc/xscreensaver )
 "
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="FindXscreensaver.cmake"
 
 src_configure() {
 	local mycmakeargs=(

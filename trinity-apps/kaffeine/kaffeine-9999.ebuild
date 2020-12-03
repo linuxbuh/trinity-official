@@ -4,29 +4,26 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="ar bg bn br ca cs da de el es et fi fr ga gl he
 	hu it ja ka km lt mk nb nl nn pa pl pt pt_BR ru se sk sr
 	sr@Latn sv tg tr uk uz zh_CN zh_TW"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="Media player for TDE using Xine and GStreamer backends."
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
-IUSE+=" dpms dvb encode gstreamer vorbis xcb xinerama"
+SLOT="14"
+IUSE="dpms dvb encode gstreamer vorbis xcb xinerama"
 
 # As of April 2020 Kaffeine can be only build with xinerama support.
 # Once that is fixed, the build option will be optional again.
 
-RDEPEND+="
+RDEPEND="
 	dev-libs/libcdio
 	media-libs/xine-lib
 	x11-base/xorg-proto
@@ -40,7 +37,7 @@ RDEPEND+="
 	xcb? ( x11-libs/libxcb )
 	xinerama? ( x11-libs/libXinerama )
 "
-DEPEND+=" ${RDEPEND}
+DEPEND="${RDEPEND}
 	dvb? ( virtual/linuxtv-dvb-headers )
 "
 

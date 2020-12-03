@@ -3,8 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity printer queue/device manager"
@@ -14,6 +15,5 @@ IUSE="cups"
 DEPEND="cups? ( net-print/cups )"
 RDEPEND="${DEPEND}
 	app-text/enscript
-	app-text/psutils"
-
-TSM_EXTRACT_ALSO="translations/"
+	app-text/psutils
+"

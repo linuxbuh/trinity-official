@@ -3,23 +3,22 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdepim"
 
+TRINITY_MODULE_NAME="tdepim"
+TSM_EXTRACT_ALSO="libtdepim/ libtdenetwork/ plugins/ korganizer/ kaddressbook/
+	kmail/ knotes/ knode/ akregator/ karm/ libemailfunctions/ libkpimidentities/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity personal information manager"
 
-COMMON_DEPEND="~trinity-base/libtdepim-${PV}
+DEPEND="
+	~trinity-base/libtdepim-${PV}
 	~trinity-base/libkpimidentities-${PV}
 	~trinity-base/libkholidays-${PV}
 	~trinity-base/knotes-${PV}
-	=trinity-base/korganizer-${PV}"
-
-DEPEND+=" $COMMON_DEPEND"
-RDEPEND+=" $COMMON_DEPEND"
-
-TSM_EXTRACT_ALSO="libtdepim/ libtdenetwork/ plugins/ korganizer/ kaddressbook/ \
-	kmail/ knotes/ knode/ akregator/ karm/ libemailfunctions/ libkpimidentities/"
+	~trinity-base/korganizer-${PV}
+"
+RDEPEND="${DEPEND}"
 
 src_prepare() {
 	sed -i '/kmail/d' kontact/plugins/CMakeLists.txt || die

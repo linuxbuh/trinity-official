@@ -5,10 +5,9 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdemultimedia"
-inherit trinity-meta-2
-
-TSM_EXTRACT="tdeioslave"
 TRINITY_SUBMODULE="tdeioslave"
+TSM_EXTRACT="tdeioslave"
+inherit trinity-meta-2
 
 DESCRIPTION="Multimedia Trinity TDEIOslaves"
 

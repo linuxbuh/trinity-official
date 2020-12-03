@@ -4,8 +4,6 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
@@ -15,15 +13,14 @@ TRINITY_LANGS="af ar az be bg bn br ca cs cy da de el en_GB eo es
 	ss sv ta tg th tr uk uz uz@cyrillic zh_CN zh_TW"
 
 TRINITY_DOC_LANGS="da de es et fr it nl pl pt pt_BR ru sv"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="Advanced music player for TDE"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
+SLOT="14"
 
 # Notes about the ebuild:
 #
@@ -44,7 +41,7 @@ opengl postgres visualization +xine"
 
 REQUIRED_USE="|| ( xine akode )"
 
-DEPEND+="
+DEPEND="
 	dev-db/sqlite
 	dev-lang/ruby:*
 	media-libs/taglib
@@ -63,7 +60,7 @@ DEPEND+="
 	)
 	xine? ( <media-libs/xine-lib-1.2.10 )
 "
-RDEPEND+=" ${DEPEND}"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	local mycmakeargs=(

@@ -5,9 +5,9 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdepim"
-inherit trinity-meta-2
-
 TRINITY_SUBMODULE="tdeioslave"
+TSM_EXTRACT_ALSO="libemailfunctions/ libkmime/"
+inherit trinity-meta-2
 
 DESCRIPTION="PIM Trinity TDEIOslaves"
 
@@ -33,8 +33,5 @@ src_configure() {
 	local mycmakeargs=(
 		-DWITH_SASL=$(usex sieve)
 	)
-
 	trinity-meta-2_src_configure
 }
-
-TSM_EXTRACT_ALSO="libemailfunctions/ libkmime/"

@@ -3,8 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdeutils"
 
+TRINITY_MODULE_NAME="tdeutils"
 inherit trinity-meta-2
 
 DESCRIPTION="KFloppy - formats disks and puts a DOS or ext2fs filesystem on them."

@@ -3,10 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="libkonq/ translations/"
 inherit trinity-meta-2
 
-DESCRIPTION="Trinity user settings wizard."
-
-TSM_EXTRACT_ALSO="libkonq/ translations/"
+DESCRIPTION="Trinity user settings wizard"

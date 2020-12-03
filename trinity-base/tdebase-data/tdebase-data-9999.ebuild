@@ -3,12 +3,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
+TRINITY_SUBMODULE="l10n pics applnk"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
-TRINITY_SUBMODULE="l10n pics applnk"
-
-DESCRIPTION="Icons, localization data and .desktop files from tdebase."
-
-TSM_EXTRACT_ALSO="translations/"
+DESCRIPTION="Icons, localization data and .desktop files from tdebase"

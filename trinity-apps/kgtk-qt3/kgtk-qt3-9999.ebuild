@@ -4,28 +4,25 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="cs de es en_GB fr nl pl pt_BR ru zh_CN"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="TDE dialogs in GTK 2.x applications"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
-IUSE+=" gtk tde tqt"
+SLOT="14"
+IUSE="gtk tde tqt"
 
-DEPEND+="
+DEPEND="
 	gtk? ( x11-libs/gtk+:2 )
 	tqt? ( ~dev-tqt/tqtinterface-${PV} )
 "
-RDEPEND+=" ${DEPEND}"
+RDEPEND="${DEPEND}"
 
 src_configure() {
 	local mycmakeargs=(

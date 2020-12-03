@@ -5,8 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity network wizard"
-
-TSM_EXTRACT_ALSO="translations/"

@@ -5,6 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdemultimedia"
+TRINITY_SUBMODULE="arts mpeglib mpeglib_artsplug"
 inherit trinity-meta-2
 
 DESCRIPTION="The aRts pipeline builder and other tools"
@@ -20,8 +21,6 @@ DEPEND="
 	xine? ( media-libs/xine-lib )
 "
 RDEPEND="${DEPEND}"
-
-TRINITY_SUBMODULE="arts mpeglib mpeglib_artsplug"
 
 src_configure() {
 	local mycmakeargs=(

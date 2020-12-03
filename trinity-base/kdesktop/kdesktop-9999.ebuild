@@ -3,18 +3,20 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="kcheckpass/ translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="The part of TDE UI that handles icons, desktop, screensaver etc"
 IUSE="pam xscreensaver"
 
-COMMON_DEPEND="x11-libs/libXrender
-	x11-libs/libXcursor
+COMMON_DEPEND="
 	~dev-libs/dbus-1-tqt-${PV}
-	~trinity-base/libkonq-${PV}
 	~trinity-base/kcontrol-${PV}
+	~trinity-base/libkonq-${PV}
+	x11-libs/libXrender
+	x11-libs/libXcursor
 	xscreensaver? ( x11-libs/libXScrnSaver )"
 	# Requires the desktop background settings module,
 	# so until we separate the kcontrol modules into separate ebuilds :-),
@@ -27,16 +29,13 @@ RDEPEND="${COMMON_DEPEND}
 	~trinity-base/konqueror-${PV}
 	pam? ( trinity-base/tdebase-pam )"
 
-TSM_EXTRACT_ALSO="kcheckpass/ translations/"
-
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XCURSOR=ON
 		-DWITH_XRENDER=ON
 		-DWITH_PAM="$(usex pam)"
 		-DWITH_XSCREENSAVER="$(usex xscreensaver)"
 		-DTDESCREENSAVER_PAM_SERVICE=tde
 	)
-
 	trinity-meta-2_src_configure
 }

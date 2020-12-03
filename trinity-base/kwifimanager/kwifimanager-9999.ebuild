@@ -4,9 +4,9 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdenetwork"
 TRINITY_SUBMODULE="wifi"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_NAME="tdenetwork"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity wifi (wireless network) gui"

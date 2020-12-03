@@ -3,9 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdenetwork"
 TRINITY_SUBMODULE="lanbrowsing"
 
+TRINITY_MODULE_NAME="tdenetwork"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity Lan Information Server - allows to share information over a network."

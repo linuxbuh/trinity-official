@@ -3,12 +3,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdetoys"
 
+TRINITY_MODULE_NAME="tdetoys"
 inherit trinity-meta-2
 
-DESCRIPTION="Documentaion for tdetoys-derived packages"
+DESCRIPTION="Documentation for tdetoys-derived packages"
 
 RDEPEND="
-	~trinity-base/khelpcenter-${PV}"
-
+	~trinity-base/khelpcenter-${PV}
+"

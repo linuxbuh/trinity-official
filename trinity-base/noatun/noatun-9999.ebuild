@@ -5,6 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdemultimedia"
+TSM_EXTRACT_ALSO="arts mpeglib"
 inherit trinity-meta-2
 
 DESCRIPTION="Media player featuring audio effects, graphic equalizer and network transparency"
@@ -14,8 +15,6 @@ RDEPEND="~trinity-base/tdemultimedia-arts-${PV}"
 DEPEND="${RDEPEND}
 	x11-libs/libXext
 "
-
-TSM_EXTRACT_ALSO="arts mpeglib"
 
 src_configure() {
 	local mycmakeargs=(

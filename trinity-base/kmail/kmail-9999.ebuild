@@ -1,38 +1,10 @@
+# Copyright 2020 Gentoo Authors
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_NAME="tdepim"
-
-inherit trinity-meta-2
-
-DESCRIPTION="The email client for Trinity"
-
-IUSE="crypt imap mbox sasl"
-
-# The magic of KMail, is fully done by individual TDEIOSlaves,
-# so we trigger them to be build, depending on USE flags.
-
-COMMON_DEPEND="
-	~trinity-base/libtdepim-${PV}
-	~trinity-base/mimelib-${PV}
-	~trinity-base/libtdenetwork-${PV}
-	~trinity-base/ktnef-${PV}
-	~trinity-base/libkcal-${PV}
-	~trinity-base/libkmime-${PV}
-	~trinity-base/libkpgp-${PV}
-	~trinity-base/certmanager-${PV}
-	~trinity-base/libkpimidentities-${PV}
-	~trinity-base/libksieve-${PV}"
-
-DEPEND="${COMMON_DEPEND}"
-RDEPEND="${COMMON_DEPEND}
-	crypt? ( app-crypt/pinentry )
-	~trinity-base/tdebase-tdeioslaves-${PV}
-	mbox? ( ~trinity-base/tdepim-tdeioslaves-${PV} )
-	imap? ( ~trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )
-	sasl? ( ~trinity-base/tdebase-tdeioslaves-${PV}[sasl=] )"
-
 TSM_EXTRACT_ALSO="
 	ktnef/
 	libemailfunctions/
@@ -47,6 +19,34 @@ TSM_EXTRACT_ALSO="
 	libkmime/
 	libksieve/
 	kmail/"
+inherit trinity-meta-2
+
+DESCRIPTION="The email client for Trinity"
+
+IUSE="crypt imap mbox sasl"
+
+# The magic of KMail, is fully done by individual TDEIOSlaves,
+# so we trigger them to be build, depending on USE flags.
+
+DEPEND="
+	~trinity-base/certmanager-${PV}
+	~trinity-base/ktnef-${PV}
+	~trinity-base/libkcal-${PV}
+	~trinity-base/libkmime-${PV}
+	~trinity-base/libkpgp-${PV}
+	~trinity-base/libkpimidentities-${PV}
+	~trinity-base/libksieve-${PV}
+	~trinity-base/libtdenetwork-${PV}
+	~trinity-base/libtdepim-${PV}
+	~trinity-base/mimelib-${PV}
+"
+RDEPEND="${DEPEND}
+	~trinity-base/tdebase-tdeioslaves-${PV}
+	crypt? ( app-crypt/pinentry )
+	imap? ( ~trinity-base/tdepim-tdeioslaves-${PV}[sasl=] )
+	mbox? ( ~trinity-base/tdepim-tdeioslaves-${PV} )
+	sasl? ( ~trinity-base/tdebase-tdeioslaves-${PV}[sasl=] )
+"
 
 pkg_postinst () {
 	if use crypt; then

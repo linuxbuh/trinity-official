@@ -4,30 +4,27 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="bg ca da de es fr hu it ja nl pl pt_BR ru sk sv tr zh_CN"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="VPN clients frontend for TDE"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
-IUSE+=" cisco libreswan +openvpn pptpd smartcard strongswan"
+SLOT="14"
+IUSE="cisco libreswan +openvpn pptpd smartcard strongswan"
 
 # Other VPN clients will be added by request, controlled over USE.
 #		 If you miss any, please let us know!
 
-DEPEND+="
+DEPEND="
 	dev-libs/libgcrypt
 	sys-apps/net-tools"
-RDEPEND+=" ${DEPEND}
+RDEPEND="${DEPEND}
 	cisco? ( net-vpn/vpnc )
 	libreswan? ( net-vpn/libreswan )
 	openvpn? ( net-vpn/openvpn )

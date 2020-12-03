@@ -3,9 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdeutils"
 TRINITY_SUBMODULE="kcharselect charselectapplet"
 
+TRINITY_MODULE_NAME="tdeutils"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity character selection utility and panel applet"

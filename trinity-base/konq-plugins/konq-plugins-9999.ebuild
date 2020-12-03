@@ -4,8 +4,8 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdeaddons"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_NAME="tdeaddons"
 inherit trinity-meta-2
 
 DESCRIPTION="Various plugins for Konqueror"

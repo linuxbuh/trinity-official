@@ -4,10 +4,9 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdebase"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="The embeddable part of konqueror"
-
-TSM_EXTRACT_ALSO="translations/"

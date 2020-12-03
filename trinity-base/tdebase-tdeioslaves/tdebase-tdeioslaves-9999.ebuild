@@ -5,10 +5,9 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdebase"
-inherit trinity-meta-2
-
-TSM_EXTRACT="tdeioslave"
 TSM_EXTRACT_ALSO="translations/"
+TSM_EXTRACT="tdeioslave"
+inherit trinity-meta-2
 
 DESCRIPTION="Generic Trinity TDEIOslaves"
 

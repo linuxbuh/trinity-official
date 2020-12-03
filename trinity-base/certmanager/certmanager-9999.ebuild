@@ -3,8 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdepim"
 
+TRINITY_MODULE_NAME="tdepim"
+TSM_EXTRACT_ALSO="libtdepim/ libkpgp/ libtdenetwork/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity certificate manager gui"
@@ -12,10 +13,8 @@ DESCRIPTION="Trinity certificate manager gui"
 COMMON_DEPEND="~trinity-base/libtdenetwork-${PV}
 	app-crypt/gpgme
 	app-crypt/gnupg"
-DEPEND+=" ${COMMON_DEPEND}"
-RDEPEND+=" ${COMMON_DEPEND}"
-
-TSM_EXTRACT_ALSO="libtdepim/ libkpgp/ libtdenetwork/"
+DEPEND="${COMMON_DEPEND}"
+RDEPEND="${COMMON_DEPEND}"
 
 pkg_postinst() {
 	trinity-meta-2_pkg_postinst

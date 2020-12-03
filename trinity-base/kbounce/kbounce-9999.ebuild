@@ -4,8 +4,9 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdegames"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_NAME="tdegames"
+TSM_EXTRACT_ALSO="libtdegames/"
 inherit trinity-meta-2
 
 # Needs some dependency to play "au" sounds.
@@ -14,5 +15,3 @@ DESCRIPTION="Trinity Bounce Ball Game"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="libtdegames/"

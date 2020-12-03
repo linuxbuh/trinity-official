@@ -5,11 +5,10 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdegames"
+TSM_EXTRACT_ALSO="libtdegames/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity Atomic Entertainment Game"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="libtdegames/"

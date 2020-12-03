@@ -3,13 +3,14 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
+
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="dbus-1-tqt"
-
 inherit trinity-base-2
 
 DESCRIPTION="D-BUS TQt bindings"
 HOMEPAGE="https://trinitydesktop.org/"
+
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
 

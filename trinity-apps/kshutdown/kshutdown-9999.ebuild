@@ -4,26 +4,23 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
 TRINITY_LANGS="ar bg cs de es fr hu it nl pl pt_BR ru sk sv tr zh_CN"
 
 TRINITY_DOC_LANGS="de"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="A graphical shutdown utility for TDE"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
-IUSE+=" extras"
+SLOT="14"
+IUSE="extras"
 
-RDEPEND+="
+RDEPEND="
 	~trinity-base/kcontrol-${PV}
 	~trinity-base/kdialog-${PV}
 	~trinity-base/tdesu-${PV}

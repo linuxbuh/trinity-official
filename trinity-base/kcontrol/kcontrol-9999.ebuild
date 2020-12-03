@@ -5,6 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/ translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Control Center"
@@ -29,8 +30,6 @@ RDEPEND="${DEPEND}
 	~trinity-base/khelpcenter-${PV}
 	~trinity-base/khotkeys-${PV}
 	svg? ( media-libs/libart_lgpl )"
-
-TSM_EXTRACT_ALSO="kicker/ twin/ kdesktop/ klipper/ kxkb/ translations/"
 
 src_configure() {
 	local mycmakeargs=(

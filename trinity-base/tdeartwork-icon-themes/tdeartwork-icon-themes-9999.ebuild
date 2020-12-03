@@ -3,10 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdeartwork"
 
+TRINITY_MODULE_NAME="tdeartwork"
+TSM_EXTRACT="IconThemes/"
 inherit trinity-meta-2
 
 DESCRIPTION="Icon themes for Trinity"
-
-TSM_EXTRACT="IconThemes/"

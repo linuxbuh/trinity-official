@@ -11,14 +11,13 @@ DESCRIPTION="Trinity libraries needed by all TDE programs"
 HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
-
+SLOT="14"
 if [[ ${PV} != *9999* ]] ; then
 	KEYWORDS="~amd64 ~x86"
 fi
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
-IUSE+=" alsa arts cryptsetup cups debug elficons elogind fam +hwlib +idn jpeg2k
+IUSE="alsa arts cryptsetup cups debug elficons elogind fam +hwlib +idn jpeg2k
 	kernel_linux libressl lua lzma malloc networkmanager openexr +pcre pcsc-lite
 	pkcs11 +shm spell +ssl sudo +svg systemd tiff udevil udisks upower utempter
 	xcomposite +xrandr zeroconf"

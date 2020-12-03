@@ -5,6 +5,7 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="X terminal for use with Trinity"
@@ -19,8 +20,6 @@ RDEPEND="${DEPEND}
 	~trinity-base/kcontrol-${PV}
 	x11-apps/bdftopcf
 	sudo? ( app-admin/sudo )"
-
-TSM_EXTRACT_ALSO="translations/"
 
 src_configure() {
 	local mycmakeargs=(

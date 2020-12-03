@@ -3,8 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2 eutils
 
 DESCRIPTION="Trinity window manager"
@@ -22,10 +23,8 @@ DEPEND="x11-libs/libXext
 	pcre? ( dev-libs/libpcre[jit] )"
 RDEPEND="${DEPEND}"
 
-TSM_EXTRACT_ALSO="translations/"
-
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"
 		-DWITH_XFIXES="$(usex xcomposite)"
 		-DWITH_XRENDER="$(usex xcomposite)"

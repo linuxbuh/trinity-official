@@ -4,28 +4,24 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
-TRINITY_EXTRAGEAR_PACKAGING="yes"
-inherit trinity-base-2
-
-set-trinityver
-
-DESCRIPTION="Internationalization support for Gwenview [Trinity]"
-HOMEPAGE="https://trinitydesktop.org/"
-
-need-trinity
+TEG_PO_DIR=${S}
 
 TRINITY_LANGS="ar br cy el et fo he is ka ms nl pl ro sk sv th ve zh_CN
 	az ca da en_GB fa fr hi it ko nb nso pt ru sr ta tr vi zh_TW
 	bg cs de es fi gl hu ja lt nds pa pt_BR rw sr@Latn uk xh zu"
 
-LICENSE="FDL-1.2"
-SLOT="${TRINITY_VER}"
+TRINITY_EXTRAGEAR_PACKAGING="yes"
+TRINITY_MODULE_TYPE="applications"
+inherit trinity-base-2
 
+DESCRIPTION="Internationalization support for Gwenview [Trinity]"
+HOMEPAGE="https://trinitydesktop.org/"
+
+LICENSE="FDL-1.2"
+SLOT="14"
 if [[ ${PV} != *9999* ]] ; then
 	KEYWORDS="~amd64 ~x86"
 fi
-
 for X in ${TRINITY_LANGS} ; do
 	IUSE="${IUSE} l10n_${X}"
 done
@@ -34,8 +30,6 @@ DEPEND="
 	~trinity-base/tdelibs-${PV}
 "
 RDEPEND="${DEPEND}"
-
-TEG_PO_DIR=${S}
 
 src_configure() {
 	local mycmakeargs=(

@@ -3,8 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdemultimedia"
 
+TRINITY_MODULE_NAME="tdemultimedia"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity mixer GUI"
@@ -15,7 +15,7 @@ DEPEND="alsa? ( media-libs/alsa-lib )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_ALSA="$(usex alsa)"
 	)
 

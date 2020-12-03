@@ -4,13 +4,12 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdegames"
 TRINITY_NEED_ARTS="yes"
+TRINITY_MODULE_NAME="tdegames"
+TSM_EXTRACT_ALSO="libtdegames/"
 inherit trinity-meta-2
 
 DESCRIPTION="Minigolf Game by Trinity"
 
 DEPEND="~trinity-base/libtdegames-${PV}"
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="libtdegames/"

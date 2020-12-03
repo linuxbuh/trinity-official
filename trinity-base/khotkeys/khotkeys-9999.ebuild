@@ -4,16 +4,15 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdebase"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity hotkey daemon"
 
 DEPEND="x11-libs/libXtst"
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="translations/"
 
 src_configure() {
 	local mycmakeargs=(

@@ -4,15 +4,15 @@
 
 EAPI="7"
 
-TRINITY_MODULE_TYPE="applications"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
 DESCRIPTION="A CD/DVD burning application for Trinity"
 HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
+SLOT="14"
 IUSE="alsa css dvd dvdr emovix encode debug ffmpeg ffmpeg-all-codecs flac
 +handbook mp3 sndfile taglib vcd vorbis"
 

@@ -10,7 +10,5 @@ inherit trinity-base-2
 DESCRIPTION="KSplash engine Moodin"
 HOMEPAGE="https://trinitydesktop.org/"
 
-need-trinity
-
 LICENSE="|| ( GPL-2 GPL-3 )"
-SLOT="${TRINITY_VER}"
+SLOT="14"

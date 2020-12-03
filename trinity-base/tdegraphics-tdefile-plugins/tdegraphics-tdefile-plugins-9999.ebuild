@@ -3,8 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdegraphics"
 
+TRINITY_MODULE_NAME="tdegraphics"
+TSM_EXTRACT_ALSO="kghostview/dscparse/"
 inherit trinity-meta-2
 
 DESCRIPTION="tdefile plugins from tdegraphics"
@@ -17,10 +18,8 @@ DEPEND="
 	pdf? ( app-text/poppler )"
 RDEPEND="${DEPEND}"
 
-TSM_EXTRACT_ALSO="kghostview/dscparse/"
-
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_TIFF="$(usex tiff)"
 		-DWITH_OPENEXR="$(usex openexr)"
 		-DWITH_PDF="$(usex pdf)"

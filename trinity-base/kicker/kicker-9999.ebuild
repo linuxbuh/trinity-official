@@ -3,8 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT_ALSO="translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="The Trinity application starter panel, capable of applets and extensions"
@@ -20,10 +21,8 @@ DEPEND="~trinity-base/libkonq-${PV}
 RDEPEND="${DEPEND}
 	~trinity-base/kmenuedit-${PV}"
 
-TSM_EXTRACT_ALSO="translations/"
-
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_XFIXES="$(usex xcomposite)"
 		-DWITH_XRENDER="$(usex xcomposite)"
 		-DWITH_XCOMPOSITE="$(usex xcomposite)"

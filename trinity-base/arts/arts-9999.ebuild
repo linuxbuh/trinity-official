@@ -6,17 +6,15 @@ EAPI="7"
 
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="arts"
-
 inherit trinity-base-2
-
-set-trinityver
 
 DESCRIPTION="aRts, the Trinity sound (and all-around multimedia) server/output manager"
 HOMEPAGE="https://trinitydesktop.org/"
+
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 IUSE="alsa -artswrappersuid jack mp3 vorbis"
-SLOT="${TRINITY_VER}"
+SLOT="14"
 
 DEPEND="~dev-tqt/tqtinterface-${PV}
 	dev-libs/glib
@@ -28,7 +26,7 @@ DEPEND="~dev-tqt/tqtinterface-${PV}
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	mycmakeargs=(
+	local mycmakeargs=(
 		-DWITH_AUDIOFILE=ON
 		-DWITH_MAD="$(usex mp3)"
 		-DWITH_ALSA="$(usex alsa)"

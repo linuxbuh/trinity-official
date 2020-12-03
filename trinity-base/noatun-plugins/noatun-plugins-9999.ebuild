@@ -4,8 +4,8 @@
 
 EAPI="7"
 
-TRINITY_MODULE_NAME="tdeaddons"
 TRINITY_NEED_ARTS="optional"
+TRINITY_MODULE_NAME="tdeaddons"
 inherit trinity-meta-2 db-use
 
 DESCRIPTION="Various plugins for Noatun"
@@ -29,13 +29,13 @@ src_configure() {
 	)
 
 	if use berkdb; then
-		mycmakeargs+=(
+		local mycmakeargs+=(
 			-DWITH_BERKELEY_DB=ON
 			-DBERKELEY_DB_LIBS="$(db_libname)"
 			-DBERKELEY_DB_INCLUDE_DIRS="${ROOT}$(db_includedir)"
 		)
 	else
-		mycmakeargs+=(
+		local mycmakeargs+=(
 			-DWITH_BERKELEY_DB=OFF
 		)
 	fi

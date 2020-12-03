@@ -3,8 +3,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-TRINITY_MODULE_NAME="tdebase"
 
+TRINITY_MODULE_NAME="tdebase"
+TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm r14-xdg-update migratekde3"
 inherit trinity-meta-2
 
 DESCRIPTION="Starttde script, which starts a complete Trinity session, and associated scripts"
@@ -23,8 +24,6 @@ RDEPEND="x11-apps/xmessage
 	~trinity-base/kreadconfig-${PV}
 	~trinity-base/ksplashml-${PV}
 	~trinity-base/tdeinit-${PV}"
-
-TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm r14-xdg-update migratekde3"
 
 src_prepare() {
 	trinity-base-2_src_prepare
