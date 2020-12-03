@@ -4,54 +4,62 @@
 
 EAPI="7"
 
-inherit eutils git-r3 toolchain-funcs
+SRCTYPE="free" # TODO: what is it doing?
+TQTBASE="/usr/tqt3" # TODO: no eclass var, get rid of prefixing
+inherit eutils toolchain-funcs
+
+if [[ ${PV} == *9999* ]]; then
+	EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
+	inherit git-r3
+else
+	SRC_URI="http://mirror.ppa.trinitydesktop.org/trinity/releases/R${PV}/main/dependencies/tqt3-trinity-${PV}.tar.xz"
+	S="${WORKDIR}/tqt3-trinity-${PV}"
+	KEYWORDS="~amd64 ~x86"
+fi
+
+DESCRIPTION="Trinity's Qt3 fork - a comprehensive C++ application development framework"
+HOMEPAGE="https://trinitydesktop.org/"
+
+LICENSE="|| ( GPL-2 GPL-3 )"
+SLOT="3.5"
+IUSE="cups debug doc examples firebird fontconfig glib +hiddenvisibility imext ipv6
+	mng mysql nas nis +opengl postgres sqlite styles tablet +xinerama +xrandr"
 
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
 
-SRCTYPE="free"
-DESCRIPTION="Trinity's Qt3 fork - a comprehensive C++ application development framework"
-HOMEPAGE="https://trinitydesktop.org/"
-
-EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
-LICENSE="|| ( GPL-2 GPL-3 )"
-
-SLOT="3.5"
-IUSE="cups debug doc examples firebird ipv6 mysql nas nis +opengl postgres styles
-	imext sqlite +xinerama tablet +xrandr glib mng fontconfig +hiddenvisibility"
-
 RDEPEND="
-	virtual/jpeg:=
 	media-libs/freetype
 	media-libs/libpng:=
 	sys-libs/zlib
-	x11-libs/libXft
+	virtual/jpeg:=
+	x11-libs/libICE
+	x11-libs/libSM
+	x11-libs/libX11
 	x11-libs/libXcursor
+	x11-libs/libXext
+	x11-libs/libXft
 	x11-libs/libXi
 	x11-libs/libXmu
-	x11-libs/libICE
-	x11-libs/libXext
-	x11-libs/libXt
-	x11-libs/libX11
 	x11-libs/libXrandr
-	x11-libs/libSM
+	x11-libs/libXt
 	cups? ( net-print/cups )
 	firebird? ( dev-db/firebird )
+	fontconfig? ( media-libs/fontconfig )
+	glib? ( dev-libs/glib )
+	mng? ( media-libs/libmng )
 	mysql? ( virtual/mysql )
 	nas? ( media-libs/nas )
 	nis? ( net-libs/libnsl )
 	opengl? ( virtual/opengl virtual/glu )
 	postgres? ( dev-db/postgresql:= )
 	sqlite? ( dev-db/sqlite:= )
-	mng? ( media-libs/libmng )
-	glib? ( dev-libs/glib )
-	fontconfig? ( media-libs/fontconfig )
 	xinerama? ( x11-libs/libXinerama )
-	xrandr? ( x11-libs/libXrandr )"
+	xrandr? ( x11-libs/libXrandr )
+"
 DEPEND="${RDEPEND}
-	x11-base/xorg-proto"
-
-TQTBASE="/usr/tqt3"
+	x11-base/xorg-proto
+"
 
 pkg_setup() {
 	if use imext; then
@@ -103,7 +111,7 @@ src_prepare() {
 	eapply_user
 
 	# Do not link with -rpath. See Gentoo bug #75181.
-	find "${S}"/mkspecs -name qmake.conf | xargs \
+	find mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_RPATH.*:QMAKE_RPATH =:' || die
 
 	# Make qmake.conf respect our flags and toolchain
@@ -116,10 +124,10 @@ src_prepare() {
 		   -e "s:\<QMAKE_LINK\>.*=.*:QMAKE_LINK=$(tc-getCXX):" \
 		   -e "s:\<QMAKE_LINK_SHLIB\>.*=.*:QMAKE_LINK_SHLIB=$(tc-getCXX):" \
 		   -e "s:\<QMAKE_STRIP\>.*=.*:QMAKE_STRIP=:" \
-		"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
+		"mkspecs/${PLATFORM}/qmake.conf" || die
 
 	# Remove obsolete X11 and OpenGL searchpaths
-	find "${S}"/mkspecs -name qmake.conf | xargs \
+	find mkspecs -name qmake.conf | xargs \
 		sed -i -e 's:QMAKE_INCDIR_X11\t=.*:QMAKE_INCDIR_X11\t=:' \
 			-e 's:QMAKE_LIBDIR_X11\t=.*:QMAKE_LIBDIR_X11\t=:' \
 			-e 's:QMAKE_INCDIR_OPENGL\t=.*:QMAKE_INCDIR_OPENGL\t=:' \
@@ -127,27 +135,27 @@ src_prepare() {
 
 	if use hiddenvisibility; then
 		sed -i -e 's:QMAKE_CFLAGS =:QMAKE_CFLAGS = -fvisibility=hidden -fvisibility-inlines-hidden:' \
-			"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
+			"mkspecs/${PLATFORM}/qmake.conf" || die
 	fi
 
 	if [ $(get_libdir) != "lib" ] ; then
 		sed -i -e "s:/lib$:/$(get_libdir):" \
-			"${S}/mkspecs/${PLATFORM}/qmake.conf" || die
+			"mkspecs/${PLATFORM}/qmake.conf" || die
 		sed -i -e "s:/usr/lib /lib:/usr/$(get_libdir) /$(get_libdir):" \
-			"${S}/config.tests/unix/"*.test || die
+			"config.tests/unix/"*.test || die
 		sed -i -e "s:/usr/lib /lib:/usr/$(get_libdir) /$(get_libdir):" \
-			"${S}/config.tests/x11/"*.test || die
+			"config.tests/x11/"*.test || die
 		sed -i -e "s:/lib /usr/lib:/$(get_libdir) /usr/$(get_libdir):" \
-			"${S}/config.tests/unix/checkavail" || die
+			"config.tests/unix/checkavail" || die
 	fi
 
 	sed -i -e "s:CXXFLAGS.*=:CXXFLAGS=${CXXFLAGS} :" \
-		   -e "s:LFLAGS.*=:LFLAGS=${LDFLAGS} :" \
-		"${S}/qmake/Makefile.unix" || die
+		-e "s:LFLAGS.*=:LFLAGS=${LDFLAGS} :" \
+		"qmake/Makefile.unix" || die
 
 	# Remove docs from install if we don't need them
 	use doc || sed -i -e '/INSTALLS.*=.*htmldocs/d' \
-		"${S}/src/qt_install.pri" || die
+		"src/qt_install.pri" || die
 }
 
 src_configure() {
@@ -229,7 +237,7 @@ src_install() {
 
 	# Fix pkgconfig location
 	dodir /usr/$(get_libdir)
-	mv "${D}${TQTBASE}/$(get_libdir)/pkgconfig" "${D}/usr/$(get_libdir)/"
+	mv "${D}${TQTBASE}/$(get_libdir)/pkgconfig" "${D}/usr/$(get_libdir)/" || die
 
 	# List all the multilib libdirs
 	local libdirs
@@ -267,15 +275,15 @@ EOF
 	# Install example and tutorial sources
 	if use examples; then
 		find "${S}"/examples "${S}"/tutorial -name Makefile | \
-			xargs sed -i -e "s:${S}:${TQTBASE}:g"
+			xargs sed -i -e "s:${S}:${TQTBASE}:g" || die
 
-		cp -r "${S}"/examples "${D}"${TQTBASE}/
-		cp -r "${S}"/tutorial "${D}"${TQTBASE}/
+		cp -r "${S}"/examples "${D}"${TQTBASE}/ || die
+		cp -r "${S}"/tutorial "${D}"${TQTBASE}/ || die
 	fi
 
 	# Misc build requirements
 	sed -e "s:${S}:${TQTBASE}:g" \
-		"${S}"/.qmake.cache > "${D}"${TQTBASE}/.qmake.cache
+		"${S}"/.qmake.cache > "${D}"${TQTBASE}/.qmake.cache || die
 }
 
 pkg_postinst() {
