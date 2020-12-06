@@ -26,7 +26,7 @@ SLOT="${TRINITY_VER}"
 DEPEND+=" x11-libs/libXScrnSaver
 	x11-libs/libXext
 	x11-libs/libXtst
-	=dev-libs/dbus-1-tqt-${PV}"
+	~dev-libs/dbus-1-tqt-${PV}"
 RDEPEND+=" ${DEPEND}"
 
 src_configure() {

@@ -32,6 +32,9 @@ SLOT="${TRINITY_VER}"
 #   Yauap isn't in Portage tree, but could be added later.
 #
 # - Rio Karma support needs libkarma which neeeds to be added to our overlay later.
+#	USE=riokarma 
+# 	DEPEND+="	riokarma? ( media-libs/libkarma )"
+#		-DWITH_RIOKARMA="$(usex riokarma)"
 #
 # - No Support for DAAP because it's not tested if that works with Mongrel2.
 #
@@ -39,7 +42,7 @@ SLOT="${TRINITY_VER}"
 #
 # - Otherwise the ebuild should offer all what can be done with CMake at the moment.
 
-IUSE+=" konqsidebar +xine ipod riokarma ifp njb mtp mp4
+IUSE+=" konqsidebar +xine ipod ifp njb mtp mp4
 	inotify visualization amazon mysql postgres opengl akode"
 
 REQUIRED_USE="|| ( xine akode )"
@@ -49,10 +52,9 @@ DEPEND+="
 	media-libs/taglib
 	dev-db/sqlite
 	xine? ( <media-libs/xine-lib-1.2.10 )
-	akode? ( =media-libs/akode-${PV} )
+	akode? ( ~media-libs/akode-${PV} )
 	mp4? ( media-libs/libmp4v2 )
 	ipod? ( media-libs/libgpod )
-	riokarma? ( media-libs/libkarma )
 	ifp? ( media-libs/libifp )
 	njb? ( media-libs/libnjb )
 	opengl? ( virtual/opengl )
@@ -73,7 +75,6 @@ src_configure() {
 		-DWITH_XINE="$(usex xine)"
 		-DWITH_AKODE="$(usex akode)"
 		-DWITH_IPOD="$(usex ipod)"
-		-DWITH_RIOKARMA="$(usex riokarma)"
 		-DWITH_IFP="$(usex ifp)"
 		-DWITH_NJB="$(usex njb)"
 		-DWITH_MTP="$(usex mtp)"

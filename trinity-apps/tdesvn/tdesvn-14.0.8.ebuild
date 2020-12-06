@@ -22,6 +22,8 @@ SLOT="${TRINITY_VER}"
 
 IUSE+=" test"
 
+RESTRICT="!test? ( test )"
+
 DEPEND+=" dev-vcs/subversion"
 RDEPEND+=" ${DEPEND}"
 

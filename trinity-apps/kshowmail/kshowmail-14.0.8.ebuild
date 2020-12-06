@@ -20,7 +20,7 @@ need-trinity
 
 SLOT="${TRINITY_VER}"
 
-DEPEND+=" =trinity-base/mimelib-${PV}"
+DEPEND+=" ~trinity-base/mimelib-${PV}"
 RDEPEND+=" ${DEPEND}"
 
 src_configure() {

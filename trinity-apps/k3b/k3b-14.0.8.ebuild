@@ -27,7 +27,7 @@ DEPEND+=" media-libs/libsamplerate
 	alsa? ( media-libs/alsa-lib )
 	dvd? ( media-libs/libdvdread )
 	encode? ( media-sound/lame )
-	ffmpeg? ( virtual/ffmpeg )
+	ffmpeg? ( media-video/ffmpeg )
 	flac? ( media-libs/flac[cxx] )
 	mp3? ( media-libs/libmad )
 	sndfile? ( media-libs/libsndfile )

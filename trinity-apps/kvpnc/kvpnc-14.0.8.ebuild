@@ -28,7 +28,7 @@ IUSE+=" cisco smartcard +openvpn strongswan pptpd libreswan"
 DEPEND+=" sys-apps/net-tools
 	dev-libs/libgcrypt"
 RDEPEND+=" ${DEPEND}
-	cisco? ( net-misc/vpnc )
+	cisco? ( net-vpn/vpnc )
 	smartcard? ( dev-libs/openct )
 	openvpn? ( net-vpn/openvpn )
 	strongswan? ( net-vpn/strongswan )

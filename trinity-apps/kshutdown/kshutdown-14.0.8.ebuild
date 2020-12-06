@@ -25,9 +25,9 @@ SLOT="${TRINITY_VER}"
 IUSE+=" extras"
 
 RDEPEND+="
-	=trinity-base/tdesu-${PV}
-	=trinity-base/kcontrol-${PV}
-	=trinity-base/kdialog-${PV}"
+	~trinity-base/tdesu-${PV}
+	~trinity-base/kcontrol-${PV}
+	~trinity-base/kdialog-${PV}"
 
 src_configure() {
 	mycmakeargs=(

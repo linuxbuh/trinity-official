@@ -23,7 +23,7 @@ SLOT="${TRINITY_VER}"
 IUSE+=" tqt tde gtk2"
 
 DEPEND+="
-	tqt? ( =dev-tqt/tqtinterface-${PV} )
+	tqt? ( ~dev-tqt/tqtinterface-${PV} )
 	gtk2? ( x11-libs/gtk+:2 )
 "
 RDEPEND+=" ${DEPEND}"

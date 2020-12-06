@@ -25,8 +25,8 @@ SLOT="${TRINITY_VER}"
 IUSE+=" crypt +svg kontact"
 
 DEPEND+=" crypt? ( app-crypt/gpgme )
-	svg? ( =media-libs/libart_lgpl-${PV} )
-	kontact? ( =trinity-base/kontact-${PV} )"
+	svg? ( ~media-libs/libart_lgpl-${PV} )
+	kontact? ( ~trinity-base/kontact-${PV} )"
 RDEPEND+=" ${DEPEND}"
 
 src_configure() {

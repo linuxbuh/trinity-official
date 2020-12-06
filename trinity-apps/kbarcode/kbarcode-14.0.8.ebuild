@@ -22,6 +22,8 @@ SLOT="${TRINITY_VER}"
 
 # Native GNU Barcode support seems to be broken right now.
 # The GNU Barcode binary is needed anyway.
+# Might be related to the following tidbit from Gentoo user ML:
+#"As of version 0.99, GNU Barcode no longer installs its library."
 
 IUSE+=" javascript native_gnu_barcode"
 
