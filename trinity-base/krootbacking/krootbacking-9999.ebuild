@@ -7,4 +7,4 @@ TRINITY_MODULE_NAME="tdebase"
 
 inherit trinity-meta-2
 
-DESCRIPTION="A program to grab the current TDE desktop backrounds for xscreensaver."
+DESCRIPTION="A program to grab the current TDE desktop background for xscreensaver."

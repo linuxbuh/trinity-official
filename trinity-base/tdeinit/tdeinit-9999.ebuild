@@ -7,4 +7,4 @@ TRINITY_MODULE_NAME="tdebase"
 
 inherit trinity-meta-2
 
-DESCRIPTION="Trinity init binary particulary replacing funcs of the starttde script"
+DESCRIPTION="Trinity init binary replacing some functions of the starttde script"

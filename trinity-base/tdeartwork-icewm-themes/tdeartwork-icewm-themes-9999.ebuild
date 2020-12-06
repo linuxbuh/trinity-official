@@ -13,5 +13,5 @@ RDEPEND="
 	~trinity-base/tdeartwork-twin-styles-${PV}"
 
 pkg_postinst() {
-	elog "More IceWM themes are available installing x11-themes/icewm-themes"
+	elog "For more IceWM themes, install x11-themes/icewm-extra-themes"
 }
