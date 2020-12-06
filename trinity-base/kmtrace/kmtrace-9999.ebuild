@@ -5,7 +5,6 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdesdk"
-
 inherit trinity-meta-2
 
 DESCRIPTION="A Trinity memory leak tracer"
@@ -16,4 +15,3 @@ if [[ ${PV} != *9999* ]] ; then
 	KEYWORDS="~amd64 ~x86"
 fi
 IUSE=""
-
