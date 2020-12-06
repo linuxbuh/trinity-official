@@ -16,15 +16,3 @@ RDEPEND="
 
 TSM_EXTRACT_ALSO="translations/"
 
-pkg_setup() {
-	# Issue some warning if MAKEOPTS -j parameter is higher than 4
-	local makeopts_j
-	makeopts_j="$(echo "$MAKEOPTS" | sed -n 's/\(^\|.*\s\)\(-j\s*[0-9]\+\)\(\s.*\|$\)/\2/p')"
-	if [ -n "$makeopts_j" -a "$makeopts_j" > 4 ]; then
-
-		ewarn "This ebuild needs huge amount of memmory to compile in highly parallel"
-		ewarn "mode so it can chew it all. Please change your MAKEOPTS if building fails."
-	fi
-
-	trinity-meta-2_pkg_setup
-}
