@@ -10,26 +10,28 @@ inherit trinity-meta-2
 
 DESCRIPTION="The Trinity Control Center"
 
-IUSE="samba logitech-mouse ieee1394 +svg +hwlib +xrandr "
+IUSE="+hwlib ieee1394 logitech-mouse samba +svg +xrandr"
 
-DEPEND="x11-libs/libX11
-	x11-libs/libXrender
-	x11-libs/libXcursor
-	samba? ( net-fs/samba )
-	logitech-mouse? ( dev-libs/libusb-compat )
-	ieee1394? ( sys-libs/libraw1394 )
-	~trinity-base/tdelibs-${PV}[xrandr?]
+DEPEND="
+	~trinity-base/kicker-${PV}
 	~trinity-base/libkonq-${PV}
-	~trinity-base/kicker-${PV}"
-
+	~trinity-base/tdelibs-${PV}[xrandr?]
+	x11-libs/libX11
+	x11-libs/libXcursor
+	x11-libs/libXrender
+	ieee1394? ( sys-libs/libraw1394 )
+	logitech-mouse? ( virtual/libusb:0 )
+	samba? ( net-fs/samba )
+"
 RDEPEND="${DEPEND}
 	sys-apps/usbutils
 	~trinity-base/kcminit-${PV}
-	~trinity-base/tdebase-data-${PV}
-	~trinity-base/tdesu-${PV}
 	~trinity-base/khelpcenter-${PV}
 	~trinity-base/khotkeys-${PV}
-	svg? ( media-libs/libart_lgpl )"
+	~trinity-base/tdebase-data-${PV}
+	~trinity-base/tdesu-${PV}
+	svg? ( media-libs/libart_lgpl )
+"
 
 src_configure() {
 	local mycmakeargs=(
