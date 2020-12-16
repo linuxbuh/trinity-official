@@ -195,7 +195,7 @@ if [[ ${BUILD_TYPE} == live ]]; then
 
 	case ${CATEGORY} in
 		trinity-base|trinity-apps)
-			[[ ${PN} != tdelibs ]] &&
+			[[ ${PN} != tdelibs ]] && [[ ${TRINITY_MODULE_TYPE} != "dependencies" ]] &&
 			COMMON_DEPEND+=" ~trinity-base/tdelibs-${PV}"
 			;;
 		*) ;;
