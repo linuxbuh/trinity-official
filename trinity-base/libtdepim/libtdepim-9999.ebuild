@@ -8,10 +8,15 @@ TRINITY_MODULE_NAME="tdepim"
 TSM_EXTRACT_ALSO="libemailfunctions/
 	pixmaps/
 	libkmime/kmime_util.h
-	libkcal/"
+	libkcal/
+	translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="Common library for Trinity PIM applications"
+
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi
 
 DEPEND="
 	~trinity-base/ktnef-${PV}

@@ -3,13 +3,17 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-
 TRINITY_MODULE_NAME="tdepim"
-TSM_EXTRACT_ALSO="libtdepim/"
+
 inherit trinity-meta-2
 
-DESCRIPTION="A Trinity library for drawing and editing gantt-diagramms"
+DESCRIPTION="Personal alarm message, command and email scheduler for TDE [Trinity]"
 
 if [[ ${PV} != *9999* ]] ; then
 	KEYWORDS="~amd64 ~x86"
 fi
+
+DEPEND="~trinity-base/libtdepim-${PV}"
+RDEPEND="${DEPEND}"
+
+TSM_EXTRACT_ALSO="libtdepim/ libkpimidentities/ libemailfunctions/ libkmime/ translations/"

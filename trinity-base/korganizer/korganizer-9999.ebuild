@@ -12,12 +12,16 @@ TSM_EXTRACT_ALSO="certmanager/lib/
 	libtdepim/
 	libkmime/
 	kdgantt/
-	kmail/"
+	kmail/
+	translations/"
 TRINITY_MODULE_NAME="tdepim"
 inherit trinity-meta-2
 
 DESCRIPTION="A Personal Organizer for Trinity"
 
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi
 IUSE="exchange"
 
 DEPEND="

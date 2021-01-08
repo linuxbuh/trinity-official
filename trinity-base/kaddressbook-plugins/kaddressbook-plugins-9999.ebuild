@@ -9,5 +9,9 @@ inherit trinity-meta-2
 
 DESCRIPTION="Plugins for Trinity Addressbook"
 
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi
+
 DEPEND="~trinity-base/kaddressbook-${PV}"
 RDEPEND="${DEPEND}"

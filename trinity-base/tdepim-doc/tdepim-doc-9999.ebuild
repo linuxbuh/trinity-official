@@ -3,13 +3,16 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-
 TRINITY_MODULE_NAME="tdepim"
-TSM_EXTRACT_ALSO="libtdepim/"
+
 inherit trinity-meta-2
 
-DESCRIPTION="A Trinity library for drawing and editing gantt-diagramms"
+DESCRIPTION="Documentaion for tdepim-derived packages"
+HOMEPAGE="https://trinitydesktop.org"
 
 if [[ ${PV} != *9999* ]] ; then
 	KEYWORDS="~amd64 ~x86"
 fi
+
+RDEPEND="
+	~trinity-base/khelpcenter-${PV}"

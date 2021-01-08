@@ -8,3 +8,7 @@ TRINITY_MODULE_NAME="tdepim"
 inherit trinity-meta-2
 
 DESCRIPTION="TDE library to enable support for sieve, used by KMail"
+
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi

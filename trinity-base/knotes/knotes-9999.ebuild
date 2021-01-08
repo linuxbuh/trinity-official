@@ -5,10 +5,14 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdepim"
-TSM_EXTRACT_ALSO="libtdepim/"
+TSM_EXTRACT_ALSO="libtdepim/ translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity Notes application"
+
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi
 
 DEPEND="
 	~trinity-base/libkcal-${PV}

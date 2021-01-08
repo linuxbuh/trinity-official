@@ -5,10 +5,14 @@
 EAPI="7"
 
 TRINITY_MODULE_NAME="tdepim"
-TSM_EXTRACT_ALSO="libemailfunctions/ libtdepim/ libkmime/ ktnef/"
+TSM_EXTRACT_ALSO="libemailfunctions/ libtdepim/ libkmime/ ktnef/ translations/"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity kcal library for KOrganizer etc"
+
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi
 
 DEPEND="
 	dev-libs/libical
