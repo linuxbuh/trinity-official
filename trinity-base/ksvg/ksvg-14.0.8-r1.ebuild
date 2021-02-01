@@ -8,6 +8,7 @@ TRINITY_MODULE_NAME="tdegraphics"
 inherit trinity-meta-2
 
 DESCRIPTION="SVG viewer library and embeddable kpart"
+KEYWORDS="~amd64 ~x86"
 
 DEPEND="
 	dev-libs/fribidi
