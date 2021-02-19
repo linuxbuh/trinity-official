@@ -274,10 +274,14 @@ trinity-meta-2_src_delete() {
 			done
 
 			mkdir -p ${dir}/${newdir} || die
-			cp -af ${x} ${dir}/${newdir} || die
+			if [[ -f "${x}" ]] ||  [[ -d "${x}" ]] ; then
+				cp -af ${x} ${dir}/${newdir}/ || die
+			fi
 			unset newdir
 		else
-			cp -af ${x} ${dir}/ || die
+			if [[ -f "${x}" ]] || [[ -d "${x}" ]] ; then
+				cp -af ${x} ${dir}/ || die
+			fi
 		fi
 	done
 	einfo "Delete directories..."
