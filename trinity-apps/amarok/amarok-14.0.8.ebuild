@@ -58,7 +58,7 @@ DEPEND+="
 	ifp? ( media-libs/libifp )
 	njb? ( media-libs/libnjb )
 	opengl? ( virtual/opengl )
-	postgres? ( dev-db/postgresql )
+	postgres? ( dev-db/postgresql:= )
 	mtp? ( media-libs/libmtp )
 	mysql? ( virtual/mysql )
 	visualization? (

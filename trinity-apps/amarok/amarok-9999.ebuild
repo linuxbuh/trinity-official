@@ -32,8 +32,6 @@ SLOT="14"
 #
 # - No Support for DAAP because it's not tested if that works with Mongrel2.
 #
-# - As of January 2020, building with anything newer than xine-lib-1.2.9 will fail.
-#
 # - Otherwise the ebuild should offer all what can be done with CMake at the moment.
 
 IUSE="akode amazon ifp inotify ipod konqsidebar mp4 mtp mysql njb
@@ -53,12 +51,12 @@ DEPEND="
 	mysql? ( virtual/mysql )
 	njb? ( media-libs/libnjb )
 	opengl? ( virtual/opengl )
-	postgres? ( dev-db/postgresql )
+	postgres? ( dev-db/postgresql:= )
 	visualization? (
 		media-libs/libsdl
 		media-plugins/libvisual-plugins
 	)
-	xine? ( <media-libs/xine-lib-1.2.10 )
+	xine? ( media-libs/xine-lib )
 "
 RDEPEND="${DEPEND}"
 
