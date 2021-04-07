@@ -179,7 +179,7 @@ src_configure() {
 	use nas		&& myconf+=" -system-nas-sound" || myconf+=" -no-nas-sound"
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
 	use xrandr	&& myconf+=" -xrandr" || myconf+=" -no-xrandr"
-	use mng		&& myconf+=" -qt-imgfmt-mng -system-libmng" || myconf+=" -no-imgfmt-mng"
+	use mng		&& myconf+=" -qt-imgfmt-mng -system-libmng -plugin-imgfmt-mng" || myconf+=" -no-imgfmt-mng"
 	use cups	&& myconf+=" -cups" || myconf+=" -no-cups"
 	use opengl	&& myconf+=" -enable-module=opengl -no-dlopen-opengl" || myconf+=" -disable-opengl"
 	use xinerama	&& myconf+=" -xinerama" || myconf+=" -no-xinerama"
@@ -251,6 +251,7 @@ PATH=${TQTBASE}/bin
 ROOTPATH=${TQTBASE}/bin
 LDPATH=${libdirs:1}
 MANPATH=${TQTBASE}/doc/man
+XDG_DATA_DIRS="${TQTBASE}/share"
 EOF
 
 	cat <<EOF > "${T}"/44-tqt3-revdep
