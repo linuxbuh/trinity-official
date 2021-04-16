@@ -1,4 +1,4 @@
-### This is the official Trinity Gentoo overlay from the TDE team. ###
+### This is the NOT official Trinity Gentoo overlay from the TDE team. ###
 
 Currently it only supports the latest master branch, which means live version, which is R14.1.x as of writing (9999 ebuilds), which some TDE team members are using in private life too, so it should be not perfect, but stable for the most part and also Gentoo users are very invited to test and report bugs to TGW and so to be some part of TDE. This choice is also made because of realism that otherwise the maintenance burden would be most likely too hard for this overlay. So it is better to support one version, but that good instead of mutiple versions which are more likely to break here and there.
 
