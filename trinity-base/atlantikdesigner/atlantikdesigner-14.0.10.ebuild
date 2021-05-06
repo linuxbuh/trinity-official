@@ -11,3 +11,4 @@ DESCRIPTION="Atlantik gameboard designer"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="~trinity-base/atlantik-${PV}"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdeaddons-trinity-${PV}.tar.xz"

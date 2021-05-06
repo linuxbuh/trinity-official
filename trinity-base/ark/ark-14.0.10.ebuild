@@ -9,6 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity Archiving tool"
 KEYWORDS="~amd64 ~x86"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdeutils-trinity-${PV}.tar.xz"
 
 pkg_postinst(){
 	elog "You may want to install app-arch/lha, app-arch/p7zip, app-arch/rar,"

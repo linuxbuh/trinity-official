@@ -10,8 +10,11 @@ set-trinityver
 
 DESCRIPTION="tdebase metapackage - merge this to pull in all tdebase-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdebase-trinity-${PV}.tar.xz"
 LICENSE="|| ( GPL-2 GPL-3 )"
 KEYWORDS="~amd64 ~x86"
+
+S="${WORKDIR}"
 
 SLOT="${TRINITY_VER}"
 

@@ -7,15 +7,20 @@ EAPI="7"
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
 
-TRINITY_LANGS="ar bg br bs ca ca@valencia cs cy da de el en_GB eo
-	es et fi fr ga gl hr hu is it ja ka km lt lv ms nb nds nl nn
-	pa pl pt pt_BR ro ru rw sk sv ta tr ug uk zh_CN zh_TW"
+TRINITY_LANGS="de es fi fr it nl pl pt_BR ru sl uk"
 
 TRINITY_MODULE_TYPE="applications"
 inherit trinity-base-2
 
-DESCRIPTION="TDEIO slave for gopher protocol"
+DESCRIPTION="TDE-Menu replacement"
 HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="14"
+
+src_configure() {
+	local mycmakeargs=(
+		-DBUILD_TRANSLATIONS=ON
+	)
+	trinity-base-2_src_configure
+}

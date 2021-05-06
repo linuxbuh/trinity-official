@@ -14,6 +14,7 @@ inherit trinity-base-2
 
 DESCRIPTION="Trinity internationalization package"
 HOMEPAGE="https://trinitydesktop.org/"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tde-i18n-trinity-${PV}.tar.xz"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="14"

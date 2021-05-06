@@ -12,7 +12,7 @@ DESCRIPTION="kdepim - merge this to pull in all kdepim-derived packages"
 KEYWORDS="~amd64 ~x86"
 HOMEPAGE="http://www.trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
-
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdepim-trinity-${PV}.tar.xz"
 SLOT="${TRINITY_VER}"
 
 RDEPEND="

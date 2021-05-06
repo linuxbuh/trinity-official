@@ -9,3 +9,4 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity: Amusing Misuse Of Resources - desktop-dwelling creature"
 KEYWORDS="~amd64 ~x86"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdetoys-trinity-${PV}.tar.xz"

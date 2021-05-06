@@ -9,6 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Documentaion for tdeaddons-derived packages"
 KEYWORDS="~amd64 ~x86"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdeaddons-trinity-${PV}.tar.xz"
 
 RDEPEND="
 	~trinity-base/khelpcenter-${PV}"

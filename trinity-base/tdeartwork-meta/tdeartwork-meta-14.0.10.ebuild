@@ -10,7 +10,7 @@ set-trinityver
 
 DESCRIPTION="tdeartwork meta package - merge this to pull in all tdeartwork-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
-
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdeartwork-trinity-${PV}.tar.xz"
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="${TRINITY_VER}"
 KEYWORDS="~amd64 ~x86"

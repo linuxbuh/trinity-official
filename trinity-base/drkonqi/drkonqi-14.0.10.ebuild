@@ -8,6 +8,7 @@ TRINITY_MODULE_NAME="tdebase"
 inherit trinity-meta-2
 
 DESCRIPTION="Trinity crash handler gives the user feedback if a program crashed"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdebase-trinity-${PV}.tar.xz"
 KEYWORDS="~amd64 ~x86"
 
 IUSE="+hwlib"

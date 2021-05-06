@@ -9,6 +9,7 @@ inherit trinity-meta-2
 
 DESCRIPTION="Trinity digital camera manager"
 KEYWORDS="~amd64 ~x86"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdegraphics-trinity-${PV}.tar.xz"
 
 DEPEND="media-libs/libgphoto2"
 RDEPEND="${DEPEND}"

@@ -11,3 +11,4 @@ TRINITY_SUBMODULE="l10n pics applnk"
 
 DESCRIPTION="Icons, localization data and .desktop files from tdebase."
 KEYWORDS="~amd64 ~x86"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdebase-trinity-${PV}.tar.xz"

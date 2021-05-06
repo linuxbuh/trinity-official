@@ -6,6 +6,7 @@ EAPI="7"
 
 DESCRIPTION="tdegraphics metapackage - merge this to pull in all tdegraphics-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdegraphics-trinity-${PV}.tar.xz"
 
 LICENSE="metapackage"
 SLOT="14"

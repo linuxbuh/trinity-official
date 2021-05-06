@@ -10,7 +10,7 @@ set-trinityver
 
 DESCRIPTION="tdeutils metapackage - merge this to pull in all tdeutils-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
-
+SRC_URI="http://www.mirrorservice.org/sites/trinitydesktop.org/trinity/releases/R${PV}/main/core/tdeutils-trinity-${PV}.tar.xz"
 LICENSE="|| ( GPL-2 GPL-3 )"
 KEYWORDS="~amd64 ~x86"
 SLOT="${TRINITY_VER}"
