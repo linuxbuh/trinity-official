@@ -2,10 +2,11 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_NAME="tdelibs"
-inherit eapi8-dosym trinity-base-2
+TRINITY_MODULE_TYPE="core"
+inherit trinity-base-2
 
 DESCRIPTION="Trinity libraries needed by all TDE programs"
 HOMEPAGE="https://trinitydesktop.org/"
@@ -18,16 +19,18 @@ fi
 
 # NOTE: Building without tdehwlib segfaults, but you can try and report.
 IUSE="alsa arts cryptsetup cups debug elficons elogind fam +hwlib +idn jpeg2k
-	kernel_linux libressl lua lzma malloc networkmanager openexr +pcre pcsc-lite
+	kernel_linux lua lzma malloc networkmanager openexr +pcre pcsc-lite
 	pkcs11 +shm spell +ssl sudo +svg systemd tiff udevil udisks upower utempter
 	xcomposite +xrandr zeroconf"
 
 DEPEND="
 	app-text/ghostscript-gpl
 	~dev-libs/dbus-1-tqt-${PV}
+	dev-libs/glib
 	dev-libs/libxslt
 	dev-libs/libxml2
 	~dev-tqt/tqtinterface-${PV}
+	x11-apps/iceauth
 	media-libs/fontconfig
 	media-libs/freetype
 	x11-libs/libXrender
@@ -48,8 +51,7 @@ DEPEND="
 	spell? ( app-text/aspell )
 	ssl? (
 		app-misc/ca-certificates
-		!libressl? ( dev-libs/openssl:= )
-		libressl? ( dev-libs/libressl:= )
+		dev-libs/openssl:=
 	)
 	sudo? ( app-admin/sudo )
 	svg? ( media-libs/libart_lgpl )

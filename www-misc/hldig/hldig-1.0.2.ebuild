@@ -4,7 +4,7 @@
 
 EAPI="7"
 
-inherit autotools
+inherit autotools flag-o-matic
 
 DESCRIPTION="HTTP/HTML indexing and searching system"
 HOMEPAGE="https://github.com/solbu/hldig"
@@ -13,7 +13,7 @@ SRC_URI="https://github.com/solbu/${PN}/archive/v${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 arm arm64 ppc ppc64 x86"
-IUSE="libressl ssl"
+IUSE="ssl"
 
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
@@ -21,10 +21,7 @@ RESTRICT="mirror"
 DEPEND="
 	app-arch/unzip
 	sys-libs/zlib
-	ssl? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:0= )
-	)
+	ssl? ( dev-libs/openssl:= )
 "
 RDEPEND="${DEPEND}
 	!www-misc/htdig
@@ -41,6 +38,7 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cxxflags "-std=c++11"
 	local myeconfargs=(
 		--disable-static
 		--with-config-dir="${EPREFIX}"/etc/${PN}

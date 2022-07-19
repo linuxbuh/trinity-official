@@ -2,7 +2,7 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="${PN}"
@@ -13,6 +13,9 @@ HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 
 DEPEND="
 	~dev-tqt/tqtinterface-${PV}
@@ -20,5 +23,5 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	cmake-utils_src_configure
+	cmake_src_configure
 }

@@ -1,16 +1,19 @@
 # Copyright 1999-2020 Gentoo Authors
-# Copyright 2020 The Trinity Desktop Project
+# Copyright 2020-2021 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_NEED_ARTS="optional"
 TRINITY_MODULE_NAME="tdeartwork"
-TSM_EXTRACT_ALSO="FindXscreensaver.cmake"
+TRINITY_MODULE_TYPE="core"
+TSM_EXTRACT_ALSO="FindXscreensaver.cmake translations"
 inherit trinity-meta-2
 
 DESCRIPTION="Extra screensavers for Trinity"
-
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 IUSE="kclock opengl xscreensaver"
 
 DEPEND="

@@ -2,7 +2,7 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TEG_PO_DIR=${S}
 
@@ -11,7 +11,7 @@ TRINITY_LANGS="ar br cy el et fo he is ka ms nl pl ro sk sv th ve zh_CN
 	bg cs de es fi gl hu ja lt nds pa pt_BR rw sr@Latn uk xh zu"
 
 TRINITY_EXTRAGEAR_PACKAGING="yes"
-TRINITY_MODULE_TYPE="applications"
+TRINITY_MODULE_TYPE="applications/graphics"
 inherit trinity-base-2
 
 DESCRIPTION="Internationalization support for Gwenview [Trinity]"

@@ -1,0 +1,26 @@
+# Copyright 1999-2022 Gentoo Authors
+# Copyright 2022 The Trinity Desktop Project
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI="8"
+
+DESCRIPTION="tdeartwork meta package - merge this to pull in all tdeartwork-derived packages"
+HOMEPAGE="https://trinitydesktop.org/"
+
+LICENSE="metapackage"
+SLOT="14"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~arm64 ~x86"
+fi
+
+RDEPEND="
+	~trinity-base/tdeartwork-emoticons-${PV}
+	~trinity-base/tdeartwork-icewm-themes-${PV}
+	~trinity-base/tdeartwork-icon-themes-${PV}
+	~trinity-base/tdeartwork-kworldclock-${PV}
+	~trinity-base/tdeartwork-sounds-${PV}
+	~trinity-base/tdeartwork-styles-${PV}
+	~trinity-base/tdeartwork-tdescreensaver-${PV}
+	~trinity-base/tdeartwork-twin-styles-${PV}
+	~trinity-base/tdeartwork-wallpapers-${PV}
+"

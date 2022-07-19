@@ -1,10 +1,11 @@
 # Copyright 1999-2020 Gentoo Authors
-# Copyright 2020 The Trinity Desktop Project
+# Copyright 2020-2022 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 #
 # Original Author: fat-zer
 # Ported to git-r3 eclass and EAPI7 by E. Liddell
+# Ported to cmake eclass and EAPI8 by ormorh
 # Purpose: Support ebuilds for the Trinity Desktop (KDE3 fork).
 #
 
@@ -15,7 +16,7 @@ inherit trinity-functions-2
 # The value of this variable determines the package build mode.
 # If set to "yes", the module "admin" is used for assembly.The build
 #    is done using the 'trinity-econf' and 'emake' functions.
-# If set to "no", inherit cmake-utils.
+# If set to "no", inherit cmake.
 : ${TRINITY_BUILD_ADMIN:=no}
 
 
@@ -23,7 +24,7 @@ case ${TRINITY_BUILD_ADMIN} in
 	yes)
 		;;
 	no)
-		inherit cmake-utils
+		inherit cmake
 		;;
 	*)
 		eerror "Unknown value for \${CHECK_ADMIN}"
@@ -39,7 +40,7 @@ addpredict "/usr/tqt3/etc/settings"
 # ban EAPI 0-6
 case ${EAPI} in
 	0|1|2|3|4|5|6) die "EAPI=${EAPI} is not supported" ;;
-	7) ;;
+	7|8) ;;
 	*) die "Unknown EAPI=${EAPI}"
 esac
 
@@ -195,7 +196,8 @@ if [[ ${BUILD_TYPE} == live ]]; then
 
 	case ${CATEGORY} in
 		trinity-base|trinity-apps)
-			[[ ${PN} != tdelibs ]] && [[ ${TRINITY_MODULE_TYPE} != "dependencies" ]] &&
+			[[ ${PN} != tdelibs ]] && [[ ${TRINITY_MODULE_TYPE} != "dependencies" ]] && [[ ${PN} != "arts" ]] &&
+			[[ ${PN} != "trinity-cmake" ]] &&
 			COMMON_DEPEND+=" ~trinity-base/tdelibs-${PV}"
 			;;
 		*) ;;
@@ -205,8 +207,16 @@ elif [[ ${CATEGORY} = trinity-base ]]; then
 	set-trinityver
 	[[ -z ${SLOT} ]] && SLOT=${TRINITY_VER}
 	# Common dependencies
-	[[ ${PN} != tdelibs ]] && need-trinity
+	[[ ${PN} != tdelibs ]] && [[ ${PN} != "arts" ]] && [[ ${PN} != "trinity-cmake" ]] && need-trinity
+elif [[ ${CATEGORY} = "trinity-apps" ]]; then
+	need-trinity
 fi
+
+# Common dependencies
+[[ ${PV} == "14.0.1"[1-9] ]] || [[ "${BUILD_TYPE}" == "live" ]] &&
+[[ ${PN} != "trinity-cmake" ]] && 
+[[ ${TRINITY_BUILD_ADMIN} != "yes" ]] &&
+BDEPEND+=" ~trinity-base/trinity-cmake-${PV}"
 
 if [[ -n "${TRINITY_EXTRAGEAR_PACKAGING}" ]]; then 
 # @ECLASS-VARIABLE: TEG_PO_DIR
@@ -318,9 +328,9 @@ trinity-base-2_src_prepare() {
 		fi
 
 		# If we removed all translations we should point it
-		if [[ -z $(find ${TEG_PO_DIR} -mindepth 1 -maxdepth 1 -type d) ]]; then
-			TRINITY_NO_TRANSLATIONS="yes"
-		fi
+		#if [[ -z $(find ${TEG_PO_DIR} -mindepth 1 -maxdepth 1 -type d) ]]; then
+		#	TRINITY_NO_TRANSLATIONS="yes"
+		#fi
 		
 		# Remove not selected documentation
 		if [[ -n "${TRINITY_DOC_LANGS}" ]]; then
@@ -347,14 +357,14 @@ trinity-base-2_src_prepare() {
 		trinity-gen-configure
 		eapply_user
 	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
-		cmake-utils_src_prepare
+		cmake_src_prepare
 	fi
 }
 
 
 # @FUNCTION: trinity-base-2_src_configure
 # @DESCRIPTION:
-# Call standard cmake-utils_src_onfigure and add some common arguments.
+# Call standard cmake_src_onfigure and add some common arguments.
 trinity-base-2_src_configure() {
 	debug-print-function ${FUNCNAME} "${@}"
 	local eg_cmakeargs	
@@ -388,29 +398,37 @@ trinity-base-2_src_configure() {
 		"${mycmakeargs[@]}"
 	)
 
+	if ! has "-DBUILD_ALL=ON" ${mycmakeargs[@]} ; then
+		mycmakeargs+=(-DBUILD_ALL=OFF)
+	fi
+
+	if ! has "-DWITH_ALL_OPTIONS=ON" ${mycmakeargs[@]} ; then
+		mycmakeargs+=(-DWITH_ALL_OPTIONS=OFF)
+	fi
+
 	if [[ ${TRINITY_BUILD_ADMIN} == "yes" ]] ; then
 		trinity-econf
 	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
-		cmake-utils_src_configure
+		cmake_src_configure
 	fi
 }
 
 # @FUNCTION: trinity-base-2_src_compile
 # @DESCRIPTION:
-# Just call cmake-utils_src_compile.
+# Just call cmake_src_compile.
 trinity-base-2_src_compile() {
 	debug-print-function ${FUNCNAME} "${@}"
 	
 	if [[ ${TRINITY_BUILD_ADMIN} == "yes" ]] ; then
 		emake
 	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
-		cmake-utils_src_compile
+		cmake_src_compile
 	fi
 }
 
 # @FUNCTION: trinity-base-2_src_install
 # @DESCRIPTION:
-# Call standard cmake-utils_src_install and installs common documentation. 
+# Call standard cmake_src_install and installs common documentation. 
 trinity-base-2_src_install() {
 	debug-print-function ${FUNCNAME} "${@}"
 
@@ -419,7 +437,7 @@ trinity-base-2_src_install() {
 			emake install DESTDIR="${D}"
 		fi
 	elif [[ ${TRINITY_BUILD_ADMIN} == "no" ]] ; then
-		cmake-utils_src_install
+		cmake_src_install
 	fi
 
 	if [[ -z "${TRINITY_BASE_NO_INSTALL_DOC}" ||

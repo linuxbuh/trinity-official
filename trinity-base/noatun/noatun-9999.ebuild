@@ -1,57 +1,30 @@
-# Copyright 1999-2020 Gentoo Authors
-# Copyright 2020 The Trinity Desktop Project
+# Copyright 1999-2022 Gentoo Authors
+# Copyright 2022 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_NAME="tdemultimedia"
+TRINITY_MODULE_TYPE="core"
+TRINITY_HANDBOOK="optional"
 TSM_EXTRACT_ALSO="arts mpeglib"
 inherit trinity-meta-2
 
 DESCRIPTION="Media player featuring audio effects, graphic equalizer and network transparency"
 HOMEPAGE="https://trinitydesktop.org/"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 
-RDEPEND="~trinity-base/tdemultimedia-arts-${PV}"
+RDEPEND="~trinity-base/tdemultimedia-arts-${PV}[mpeg]"
 DEPEND="${RDEPEND}
 	x11-libs/libXext
 "
 
-src_configure() {
-	local mycmakeargs=(
-		-DBUILD_ARTS=ON
-		-DBUILD_MPEGLIB=ON
-	)
-
-	trinity-meta-2_src_configure
-}
-
-src_install() {
-	trinity-meta-2_src_install
-
-	#Junk all the files that overlap with tdemultimedia-arts.
-	#It would be cleaner not to let them install at all, but I wasn't
-	#able to pull that off.
-	rm -r "${D}"/usr/trinity/14/share/apps/artscontrol/ || die
-	rm -r "${D}"/usr/trinity/14/share/apps/artsbuilder/ || die
-	rm -r "${D}"/usr/trinity/14/include/arts/ || die
-	rm -r "${D}"/usr/trinity/14/include/mpeglib/ || die
-	rm -r "${D}"/usr/trinity/14/lib64/libarts* || die
-	rm -r "${D}"/usr/trinity/14/lib64/mcop/arts* || die
-	rm -r "${D}"/usr/trinity/14/lib64/mcop/Arts/ || die
-	rm -r "${D}"/usr/trinity/14/lib64/libmpeg* || die
-	rm -r "${D}"/usr/trinity/14/lib64/libyaf* || die
-	rm -r "${D}"/usr/trinity/14/share/icons/*/*/apps/artscontrol.png || die
-	rm -r "${D}"/usr/trinity/14/share/icons/*/*/apps/artsbuilder.png || die
-	rm -r "${D}"/usr/trinity/14/share/icons/hicolor/scalable/ || die
-	rm -r "${D}"/usr/trinity/14/share/icons/crystalsvg/*/actions/arts* || die
-	rm -r "${D}"/usr/trinity/14/share/applications/tde/artscontrol.desktop || die
-	rm -r "${D}"/usr/trinity/14/share/applications/tde/artsbuilder.desktop || die
-	rm -r "${D}"/usr/trinity/14/bin/artscontrol || die
-	rm -r "${D}"/usr/trinity/14/bin/artsbuilder || die
-	rm -r "${D}"/usr/trinity/14/bin/yaf* || die
-	rm -r "${D}"/usr/trinity/14/bin/midisend || die
-	rm -r "${D}"/usr/trinity/14/share/mimelnk/application/x-artsbuilder.desktop || die
-	rm -r "${D}"/usr/trinity/14/share/apps/kicker/ || die
+src_prepare() {
+	sed -i 's/mpeg-shared/mpeg/' "${S}/${PN}/CMakeLists.txt" || die
+	sed -i 's/mpeg-shared/mpeg Xext/' "${S}/${PN}/library/noatunarts/CMakeLists.txt"
+	trinity-meta-2_src_prepare
 }
 
 #KMCOMPILEONLY="arts"

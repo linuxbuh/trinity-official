@@ -2,7 +2,7 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="arts"
@@ -14,6 +14,9 @@ HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 IUSE="alsa -artswrappersuid jack mp3 vorbis"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 SLOT="14"
 
 DEPEND="~dev-tqt/tqtinterface-${PV}
@@ -22,7 +25,7 @@ DEPEND="~dev-tqt/tqtinterface-${PV}
 	mp3? ( media-libs/libmad )
 	alsa? ( media-libs/alsa-lib )
 	vorbis? ( media-libs/libogg media-libs/libvorbis )
-	jack? ( media-sound/jack-audio-connection-kit )"
+	jack? ( virtual/jack )"
 RDEPEND="${DEPEND}"
 
 src_configure() {

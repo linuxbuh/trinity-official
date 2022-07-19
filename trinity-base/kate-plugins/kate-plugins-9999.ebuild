@@ -2,13 +2,18 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 TSM_EXTRACT="kate"
 
 TRINITY_MODULE_NAME="tdeaddons"
+TRINITY_MODULE_TYPE="core"
+TRINITY_HANDBOOK="optional"
 inherit trinity-meta-2
 
 DESCRIPTION="Kate plugins and docs"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 
 DEPEND="~trinity-base/kate-${PV}"
 RDEPEND="${DEPEND}"

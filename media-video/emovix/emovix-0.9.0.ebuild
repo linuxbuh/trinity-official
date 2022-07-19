@@ -15,7 +15,7 @@ KEYWORDS="amd64 ppc ppc64 x86"
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
 
-RDEPEND="virtual/cdrtools"
+RDEPEND="app-cdr/cdrtools"
 DEPEND="dev-lang/perl
 	virtual/awk"
 

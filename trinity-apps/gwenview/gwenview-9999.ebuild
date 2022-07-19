@@ -2,10 +2,10 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_BUILD_ADMIN="yes"
-TRINITY_MODULE_TYPE="applications"
+TRINITY_MODULE_TYPE="applications/graphics"
 inherit trinity-base-2
 
 DESCRIPTION="Image viewer for TDE"

@@ -2,11 +2,11 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 SRCTYPE="free" # TODO: what is it doing?
 TQTBASE="/usr/tqt3" # TODO: no eclass var, get rid of prefixing
-inherit eutils toolchain-funcs
+inherit toolchain-funcs
 
 if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://mirror.git.trinitydesktop.org/gitea/TDE/tqt3"
@@ -23,7 +23,9 @@ HOMEPAGE="https://trinitydesktop.org/"
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="3.5"
 IUSE="cups debug doc examples firebird fontconfig glib +hiddenvisibility imext ipv6
-	mng mysql nas nis +opengl postgres sqlite styles tablet +xinerama +xrandr"
+	mariadb mng mysql nas nis +opengl postgres sqlite styles tablet +xinerama +xrandr"
+
+REQUIRED_USE="mysql? ( !mariadb )"
 
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
@@ -48,7 +50,8 @@ RDEPEND="
 	fontconfig? ( media-libs/fontconfig )
 	glib? ( dev-libs/glib )
 	mng? ( media-libs/libmng )
-	mysql? ( virtual/mysql )
+	mysql? ( dev-db/mysql-connector-c )
+	mariadb? ( dev-db/mariadb-connector-c )
 	nas? ( media-libs/nas )
 	nis? ( net-libs/libnsl )
 	opengl? ( virtual/opengl virtual/glu )
@@ -156,6 +159,14 @@ src_prepare() {
 	# Remove docs from install if we don't need them
 	use doc || sed -i -e '/INSTALLS.*=.*htmldocs/d' \
 		"src/qt_install.pri" || die
+
+	# Ensuring tqt build with mariadb flag
+	if use mariadb ; then
+		sed -i 's/-lmysqlclient/-lmariadb/' "${S}/configure" || die
+		sed -i 's/-lmysqlclient/-lmariadb/' "${S}/config.tests/unix/checkavail" || die
+		sed -i 's/-lmysqlclient/-lmariadb/' "${S}/src/sql/qt_sql.pri" || die
+		sed -i 's/-lmysqlclient/-lmariadb/' "${S}/plugins/src/sqldrivers/mysql/mysql.pro" || die
+	fi
 }
 
 src_configure() {
@@ -179,7 +190,7 @@ src_configure() {
 	use nas		&& myconf+=" -system-nas-sound" || myconf+=" -no-nas-sound"
 	use nis		&& myconf+=" -nis" || myconf+=" -no-nis"
 	use xrandr	&& myconf+=" -xrandr" || myconf+=" -no-xrandr"
-	use mng		&& myconf+=" -qt-imgfmt-mng -system-libmng" || myconf+=" -no-imgfmt-mng"
+	use mng		&& myconf+=" -qt-imgfmt-mng -system-libmng -plugin-imgfmt-mng" || myconf+=" -no-imgfmt-mng"
 	use cups	&& myconf+=" -cups" || myconf+=" -no-cups"
 	use opengl	&& myconf+=" -enable-module=opengl -no-dlopen-opengl" || myconf+=" -disable-opengl"
 	use xinerama	&& myconf+=" -xinerama" || myconf+=" -no-xinerama"
@@ -189,7 +200,13 @@ src_configure() {
 
 	use debug	&& myconf+=" -debug" || myconf+=" -release -no-g++-exceptions -no-exceptions"
 
-	use mysql	&& myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql" || myconf+=" -no-sql-mysql"
+	if use mysql ; then 
+		myconf+=" -plugin-sql-mysql -I/usr/include/mysql -L/usr/$(get_libdir)/mysql"
+	elif use mariadb ; then
+		myconf+=" -plugin-sql-mysql -I/usr/include/mariadb -L/usr/$(get_libdir)/mariadb"
+	else
+		myconf+=" -no-sql-mysql"
+	fi
 	use postgres	&& myconf+=" -plugin-sql-psql -I/usr/include/postgresql/server -I/usr/include/postgresql/pgsql -I/usr/include/postgresql/pgsql/server" || myconf+=" -no-sql-psql"
 	use firebird    && myconf+=" -plugin-sql-ibase -I/opt/firebird/include" || myconf+=" -no-sql-ibase"
 	use sqlite	&& myconf+=" -plugin-sql-sqlite -plugin-sql-sqlite3" || myconf+=" -no-sql-sqlite -no-sql-sqlite3"
@@ -234,6 +251,12 @@ src_install() {
 	# Fix qmake.conf files
 	find "${D}${TQTBASE}/mkspecs" -name qmake.conf | xargs \
 		sed -i -e "s:\$(TQTDIR):${TQTBASE}:" || die
+	find "${D}${TQTBASE}/mkspecs" -name qmake.conf | while read file
+	do
+		if ! grep CONFIG  "${file}" | grep -q thread ; then
+			sed "s/link_prl/link_prl thread/" -i "${file}" || die
+		fi
+	done
 
 	# Fix pkgconfig location
 	dodir /usr/$(get_libdir)
@@ -251,6 +274,7 @@ PATH=${TQTBASE}/bin
 ROOTPATH=${TQTBASE}/bin
 LDPATH=${libdirs:1}
 MANPATH=${TQTBASE}/doc/man
+XDG_DATA_DIRS="${TQTBASE}/share"
 EOF
 
 	cat <<EOF > "${T}"/44-tqt3-revdep

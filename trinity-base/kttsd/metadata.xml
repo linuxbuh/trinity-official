@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="project">
+    <email>team-gentoo@trinitydesktop.org</email>
+    <name>Trinity Gentoo ebuilds project</name>
+  </maintainer>
+  <use>
+    <flag name="freetts">Add support freetts speech synthesis</flag>
+    <flag name="festival">Add support festival speech synthesis</flag>
+    <flag name="epos">Add support epos speech synthesis</flag>
+    <flag name="flite">Add support flite speech synthesis</flag>
+  </use>
+</pkgmetadata>

@@ -1,8 +1,8 @@
 # Copyright 1999-2020 Gentoo Authors
-# Copyright 2020 The Trinity Desktop Project
+# Copyright 2020-2021 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_TYPE="dependencies"
 TRINITY_MODULE_NAME="akode"
@@ -13,28 +13,29 @@ HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
-IUSE="alsa flac jack +libsamplerate mp3 mpc oss pulseaudio sndfile speex vorbis"
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi
+IUSE="alsa flac ffmpeg jack +libsamplerate mp3 mpc oss pulseaudio sndfile vorbis"
 
 DEPEND="
 	alsa? ( media-libs/alsa-lib )
 	flac? ( media-libs/flac )
+	ffmpeg? ( media-video/ffmpeg )
 	jack? ( virtual/jack )
 	libsamplerate? ( media-libs/libsamplerate )
 	mp3? ( media-libs/libmad )
 	mpc? ( dev-libs/mpc )
 	pulseaudio? ( media-sound/pulseaudio )
 	sndfile? ( media-libs/libsndfile )
-	speex? ( media-libs/speex )
-	vorbis? ( media-libs/libvorbis )
+	vorbis? ( media-libs/libvorbis
+		media-libs/speex )
 "
 RDEPEND="${DEPEND}"
 
-# The FFMPEG plugin needs some porting, 
-# to work with recent FFMPEG. So it is disabled for now.
-
 src_configure() {
 	local mycmakeargs=(
-		-DWITH_FFMPEG_DECODER=OFF
+		-DWITH_FFMPEG_DECODER=$(usex ffmpeg)
 		-DWITH_SUN_SINK=OFF
 		-DWITH_LIBLTDL=OFF
 		-DWITH_ALSA_SINK=$(usex alsa)
@@ -47,5 +48,5 @@ src_configure() {
 		-DWITH_SRC_RESAMPLER=$(usex libsamplerate)
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }

@@ -1,10 +1,11 @@
 # Copyright 1999-2020 Gentoo Authors
-# Copyright 2020 The Trinity Desktop Project
+# Copyright 2020-2022 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 #
 # Original Author: Alexander Golubev (Fat-Zer)
 # Ported to git-r3 eclass and EAPI7 by E. Liddell
+# Ported to cmake eclass and EAPI8 by ormorh
 # Purpose: Basic Trinity eclass functions and variables
 #
 

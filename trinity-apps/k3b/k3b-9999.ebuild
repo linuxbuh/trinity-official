@@ -2,10 +2,10 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_NEED_ARTS="optional"
-TRINITY_MODULE_TYPE="applications"
+TRINITY_MODULE_TYPE="applications/multimedia"
 inherit trinity-base-2
 
 DESCRIPTION="A CD/DVD burning application for Trinity"
@@ -13,7 +13,10 @@ HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="14"
-IUSE="alsa css dvd dvdr emovix encode debug ffmpeg ffmpeg-all-codecs flac
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
+IUSE="alsa css dvd dvdr emovix encode debug ffmpeg ffmpeg_all_codecs flac
 +handbook mp3 sndfile taglib vcd vorbis"
 
 DEPEND="
@@ -32,7 +35,7 @@ DEPEND="
 RDEPEND="${DEPEND}
 	app-cdr/cdrdao
 	media-sound/normalize
-	virtual/cdrtools
+	app-cdr/cdrtools
 	css? ( media-libs/libdvdcss )
 	dvdr? ( app-cdr/dvd+rw-tools )
 	emovix? ( media-video/emovix )

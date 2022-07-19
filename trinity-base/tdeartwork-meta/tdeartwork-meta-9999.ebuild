@@ -2,13 +2,16 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 DESCRIPTION="tdeartwork meta package - merge this to pull in all tdeartwork-derived packages"
 HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="metapackage"
 SLOT="14"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 
 RDEPEND="
 	~trinity-base/tdeartwork-emoticons-${PV}

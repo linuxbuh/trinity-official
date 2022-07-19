@@ -2,13 +2,17 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_NAME="tdebase"
+TRINITY_MODULE_TYPE="core"
 TSM_EXTRACT="starttde README.pam INSTALL AUTHORS COPYING COPYING-DOCS tdm r14-xdg-update migratekde3"
 inherit trinity-meta-2
 
 DESCRIPTION="Starttde script, which starts a complete Trinity session, and associated scripts"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 
 RDEPEND="x11-apps/xmessage
 	x11-apps/xsetroot

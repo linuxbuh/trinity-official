@@ -2,9 +2,11 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_NAME="tdewebdev"
+TRINITY_MODULE_TYPE="core"
+TSM_EXTRACT_ALSO="lib translations"
 
 inherit flag-o-matic trinity-meta-2
 
@@ -17,7 +19,6 @@ SRC_URI+="
 	http://download.sourceforge.net/quanta/javascript.tar.bz2
 	http://download.sourceforge.net/quanta/php_manual_en_20030401.tar.bz2"
 
-SLOT="${TRINITY_VER}"
 if [[ ${PV} != *9999* ]] ; then
 	KEYWORDS="~amd64 ~x86"
 fi
@@ -33,8 +34,6 @@ DEPEND="
 "
 
 RDEPEND="${DEPEND}"
-
-TSM_EXTRACT_ALSO="lib/"
 
 src_unpack() {
 	trinity-meta-2_src_unpack

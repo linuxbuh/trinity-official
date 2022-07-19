@@ -13,16 +13,13 @@ SRC_URI="https://mirror.amdmi3.ru/distfiles/${P}.tar.gz"
 LICENSE="LGPL-2.1+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 sparc x86"
-IUSE="ssl libressl"
+IUSE="ssl"
 
 # Don't use Gentoo mirrors
 RESTRICT="mirror"
 
 DEPEND="
-	ssl? (
-		!libressl? ( dev-libs/openssl:= )
-		libressl? ( dev-libs/libressl:= )
-	)"
+	ssl? ( dev-libs/openssl:= )"
 RDEPEND="${DEPEND}"
 
 PATCHES=(

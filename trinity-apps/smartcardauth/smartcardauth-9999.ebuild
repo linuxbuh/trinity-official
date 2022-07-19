@@ -2,9 +2,9 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
-TRINITY_MODULE_TYPE="applications"
+TRINITY_MODULE_TYPE="applications/system"
 inherit trinity-base-2
 
 DESCRIPTION="SmartCard login and LUKS decrypt"
@@ -12,12 +12,13 @@ HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="14"
-IUSE="libressl"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 
 DEPEND="
 	dev-libs/pkcs11-helper
 	net-libs/gnutls
-	!libressl? ( dev-libs/openssl:= )
-	libressl? ( dev-libs/libressl:= )
+	dev-libs/openssl:=
 "
 RDEPEND="${DEPEND}"

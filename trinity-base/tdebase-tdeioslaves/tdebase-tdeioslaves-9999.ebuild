@@ -2,15 +2,18 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_NAME="tdebase"
+TRINITY_MODULE_TYPE="core"
 TSM_EXTRACT_ALSO="translations/"
 TSM_EXTRACT="tdeioslave"
 inherit trinity-meta-2
 
 DESCRIPTION="Generic Trinity TDEIOslaves"
-
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
 IUSE="+hwlib ldap openexr samba sasl"
 
 DEPEND="

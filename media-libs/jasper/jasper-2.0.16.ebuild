@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/mdadams/jasper.git"
 else
 	SRC_URI="https://github.com/mdadams/${PN}/archive/version-${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris ~x86-solaris"
 	S="${WORKDIR}/${PN}-version-${PV}"
 fi
 
@@ -62,5 +62,12 @@ multilib_src_configure() {
 		# Doxygen
 		-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=$(multilib_native_usex doc OFF ON)
 	)
+
+	if use opengl ; then
+		mycmakeargs+=(
+			-DGLUT_glut_LIBRARY="-lglut"
+		)
+	fi
+
 	cmake-utils_src_configure
 }

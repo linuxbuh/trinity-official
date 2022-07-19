@@ -2,7 +2,7 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_EXTRAGEAR_PACKAGING="yes"
 TRINITY_HANDBOOK="optional"
@@ -13,7 +13,7 @@ TRINITY_LANGS="af ar az be bg bn br ca cs cy da de el en_GB eo es
 	ss sv ta tg th tr uk uz uz@cyrillic zh_CN zh_TW"
 
 TRINITY_DOC_LANGS="da de es et fr it nl pl pt pt_BR ru sv"
-TRINITY_MODULE_TYPE="applications"
+TRINITY_MODULE_TYPE="applications/multimedia"
 inherit trinity-base-2
 
 DESCRIPTION="Advanced music player for TDE"
@@ -21,6 +21,9 @@ HOMEPAGE="https://trinitydesktop.org/"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="14"
+if [[ ${PV} != *9999* ]] ; then
+	KEYWORDS="~amd64 ~x86"
+fi
 
 # Notes about the ebuild:
 #
@@ -32,14 +35,12 @@ SLOT="14"
 #
 # - No Support for DAAP because it's not tested if that works with Mongrel2.
 #
-# - As of January 2020, building with anything newer than xine-lib-1.2.9 will fail.
-#
 # - Otherwise the ebuild should offer all what can be done with CMake at the moment.
 
-IUSE="akode amazon ifp inotify ipod konqsidebar mp4 mtp mysql njb
+IUSE="akode amazon ifp inotify ipod konqsidebar mariadb mp4 mtp mysql njb
 opengl postgres visualization +xine"
 
-REQUIRED_USE="|| ( xine akode )"
+REQUIRED_USE="|| ( xine akode ) mysql? ( !mariadb )"
 
 DEPEND="
 	dev-db/sqlite
@@ -50,17 +51,27 @@ DEPEND="
 	ipod? ( media-libs/libgpod )
 	mp4? ( media-libs/libmp4v2 )
 	mtp? ( media-libs/libmtp )
-	mysql? ( virtual/mysql )
+	mysql? ( dev-db/mysql-connector-c )
+	mariadb? ( dev-db/mariadb-connector-c )
 	njb? ( media-libs/libnjb )
 	opengl? ( virtual/opengl )
-	postgres? ( dev-db/postgresql )
+	postgres? ( dev-db/postgresql:= )
 	visualization? (
 		media-libs/libsdl
 		media-plugins/libvisual-plugins
 	)
-	xine? ( <media-libs/xine-lib-1.2.10 )
+	xine? ( media-libs/xine-lib )
 "
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	if use mysql ; then
+		sed -i 's/mariadb_config mysql_config/mysql_config/' "${S}/ConfigureChecks.cmake"
+	elif use mariadb ; then
+		sed -i 's/mariadb_config mysql_config/mariadb_config/' "${S}/ConfigureChecks.cmake"
+	fi
+	trinity-base-2_src_prepare
+}
 
 src_configure() {
 	local mycmakeargs=(
@@ -76,13 +87,17 @@ src_configure() {
 		-DWITH_KONQSIDEBAR="$(usex konqsidebar)"
 		-DWITH_MP4V2="$(usex mp4)"
 		-DWITH_MTP="$(usex mtp)"
-		-DWITH_MYSQL="$(usex mysql)"
 		-DWITH_NJB="$(usex njb)"
 		-DWITH_OPENGL="$(usex opengl)"
 		-DWITH_POSTGRESQL="$(usex postgres)"
 		-DWITH_LIBVISUAL="$(usex visualization)"
 		-DWITH_XINE="$(usex xine)"
 	)
+	if use mysql ; then
+		mycmakeargs+=( -DWITH_MYSQL=ON )
+	elif use mariadb ; then
+		mycmakeargs+=( -DWITH_MYSQL=ON )
+	fi
 
 	trinity-base-2_src_configure
 }

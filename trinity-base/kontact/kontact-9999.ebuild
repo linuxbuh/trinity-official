@@ -2,9 +2,10 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_NAME="tdepim"
+TRINITY_MODULE_TYPE="core"
 TSM_EXTRACT_ALSO="libtdepim/ libtdenetwork/ plugins/ korganizer/ kaddressbook/
 	kmail/ knotes/ knode/ akregator/ karm/ libemailfunctions/ libkpimidentities/
 	libkholidays/ translations/"
@@ -34,5 +35,7 @@ src_prepare() {
 		sed -i '/kmail/d' kontact/plugins/CMakeLists.txt || die
 		sed -i '/specialdates/d' kontact/plugins/CMakeLists.txt || die
 	fi
+	# Removing an unnecessary dependency
+	sed -i '/DEPENDENCIES kmail_settings_base/d' "${S}/${PN}/plugins/kmail/CMakeLists.txt" || die
 	trinity-meta-2_src_prepare
 }

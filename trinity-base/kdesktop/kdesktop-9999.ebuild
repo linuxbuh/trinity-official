@@ -2,14 +2,18 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 TRINITY_MODULE_NAME="tdebase"
+TRINITY_MODULE_TYPE="core"
 TSM_EXTRACT_ALSO="kcheckpass/ translations/ FindXscreensaver.cmake"
 inherit trinity-meta-2
 
 DESCRIPTION="The part of TDE UI that handles icons, desktop, screensaver etc"
-IUSE="pam xscreensaver"
+if [[ ${PV} != *9999* ]] ; then
+    KEYWORDS="~amd64 ~x86"
+fi
+IUSE="pam xscreensaver hwlib"
 
 COMMON_DEPEND="
 	~dev-libs/dbus-1-tqt-${PV}
@@ -36,6 +40,7 @@ src_configure() {
 		-DWITH_PAM="$(usex pam)"
 		-DWITH_XSCREENSAVER="$(usex xscreensaver)"
 		-DTDESCREENSAVER_PAM_SERVICE=tde
+		-DWITH_TDEHWLIB="$(usex hwlib)"
 	)
 	trinity-meta-2_src_configure
 }

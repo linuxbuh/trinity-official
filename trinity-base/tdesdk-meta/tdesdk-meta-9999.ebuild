@@ -2,7 +2,7 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
 DESCRIPTION="Metapackage Trinity Software Development Kit (SDK)"
 HOMEPAGE="http://www.trinitydesktop.org/"
@@ -27,5 +27,4 @@ RDEPEND="
 	~trinity-base/kuiviewer-${PV}
 	~trinity-base/poxml-${PV}
 	~trinity-base/umbrello-${PV}
-	~trinity-base/tdeunittest-${PV}
-	~trinity-base/tdesdk-doc-${PV}"
+	~trinity-base/tdeunittest-${PV}"

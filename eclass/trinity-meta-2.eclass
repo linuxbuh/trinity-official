@@ -1,10 +1,11 @@
 # Copyright 1999-2020 Gentoo Authors
-# Copyright 2020 The Trinity Desktop Project
+# Copyright 2020-2022 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
 #
 # Original Author: fat-zer
 # Ported to git-r3 eclass and EAPI7 by E. Liddell
+# Ported to cmake eclass and EAPI8 by ormorh
 # Purpose: Make it easy to install Trinity ebuilds.
 #
 
@@ -12,6 +13,16 @@ inherit trinity-base-2
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 HOMEPAGE="http://www.trinitydesktop.org/"
+
+#
+# The TRINITY_HANDBOOK variable is described in trinity-base-2.eclass
+# This ECLASS does not use the yes value of this variable.
+# Required dependency to view the documentation.
+#
+if [[ "${TRINITY_HANDBOOK}" == "optional" ]] ; then
+	IUSE+=" +handbook"
+	RDEPEND+=" handbook? ( ~trinity-base/khelpcenter-${PV} )"
+fi
 
 # @FUNCTION: trinity-meta-2_set_trinity_submodule
 # @DESCRIPTION:
@@ -154,9 +165,12 @@ trinity-meta-2_create_extractlists() {
 		*) ;; # nothing special for other modules
 	esac
 
+	#Adding documentation
+	[[ "${TRINITY_HANDBOOK}" == "optional" ]] && TSM_EXTRACT_LIST+=" doc"
+
 	TSM_EXTRACT_LIST+=" ${TSM_EXTRACT} ${TSM_EXTRACT_ALSO} cmake/ CMakeLists.txt"
 	TSM_EXTRACT_LIST+=" config.h.cmake ConfigureChecks.cmake"
-	[[ ${TRINITY_BUILD_ADMIN} == "yes" ]] && TSM_EXTRACT_LIST+=" configure.in.in Makefile.am.in \
+	[[ ${TRINITY_BUILD_ADMIN} == "yes" ]] && TSM_EXTRACT_LIST+=" admin configure.in.in Makefile.am.in \
 					ChangeLog AUTHORS NEWS README"
 
  	debug-print "line ${LINENO} ${ECLASS} ${FUNCNAME}: TSM_EXTRACT_LIST=\"${TSM_EXTRACT_LIST}\""
@@ -205,6 +219,10 @@ trinity-meta-2_src_configure() {
 		mod="${mod//-/_}"
 		tsmargs+=" -DBUILD_${mod}=ON"
 	done
+
+	if [[ "${TRINITY_HANDBOOK}" == "optional" ]] ; then
+		mycmakeargs+=( "-DBUILD_DOC=$(usex handbook ON OFF)" )
+	fi
 
 	mycmakeargs=(
 		"${mycmakeargs[@]}"
@@ -274,10 +292,14 @@ trinity-meta-2_src_delete() {
 			done
 
 			mkdir -p ${dir}/${newdir} || die
-			cp -af ${x} ${dir}/${newdir} || die
+			if [[ -f "${x}" ]] ||  [[ -d "${x}" ]] ; then
+				cp -af ${x} ${dir}/${newdir}/ || die
+			fi
 			unset newdir
 		else
-			cp -af ${x} ${dir}/ || die
+			if [[ -f "${x}" ]] || [[ -d "${x}" ]] ; then
+				cp -af ${x} ${dir}/ || die
+			fi
 		fi
 	done
 	einfo "Delete directories..."

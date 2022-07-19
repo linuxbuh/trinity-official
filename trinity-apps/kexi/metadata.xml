@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<!-- maintainer-needed -->
+	<use>
+		<flag name="mariadb">Build with support for <pkg>dev-db/mariadb-connector-c</pkg></flag>
+		<flag name="mysql">Build with support for <pkg>dev-db/mysql-connector-c</pkg></flag>
+		<flag name="postgres">Build with support for <pkg>dev-libs/libpqxx</pkg></flag>
+	</use>
+</pkgmetadata>
