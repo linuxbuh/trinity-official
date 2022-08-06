@@ -4,7 +4,7 @@
 
 EAPI="7"
 
-inherit cmake
+inherit cmake multilib
 
 DESCRIPTION="Implementation of the codec specified in the JPEG-2000 Part-1 standard"
 HOMEPAGE="https://www.ece.uvic.ca/~mdadams/jasper/"
