@@ -62,5 +62,5 @@ multilib_src_configure() {
 		# Doxygen
 		-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=$(multilib_native_usex doc OFF ON)
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }

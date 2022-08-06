@@ -69,5 +69,5 @@ multilib_src_configure() {
 		)
 	fi
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
