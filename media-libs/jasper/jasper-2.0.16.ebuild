@@ -2,9 +2,10 @@
 # Copyright 2020 The Trinity Desktop Project
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI="8"
 
-inherit cmake multilib
+CMAKE_ECLASS="cmake"
+inherit cmake-multilib
 
 DESCRIPTION="Implementation of the codec specified in the JPEG-2000 Part-1 standard"
 HOMEPAGE="https://www.ece.uvic.ca/~mdadams/jasper/"
