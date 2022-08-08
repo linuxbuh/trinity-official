@@ -27,13 +27,13 @@ SLOT="0/4"
 IUSE="doc jpeg opengl"
 
 RDEPEND="
-	jpeg? ( >=virtual/jpeg-0-r2:0[${MULTILIB_USEDEP}] )
+	jpeg? ( >=virtual/jpeg-0-r2:0 )
 	opengl? (
-		>=virtual/opengl-7.0-r1:0[${MULTILIB_USEDEP}]
-		>=media-libs/freeglut-2.8.1:0[${MULTILIB_USEDEP}]
-		virtual/glu[${MULTILIB_USEDEP}]
-		x11-libs/libXi[${MULTILIB_USEDEP}]
-		x11-libs/libXmu[${MULTILIB_USEDEP}]
+		>=virtual/opengl-7.0-r1:0
+		>=media-libs/freeglut-2.8.1:0
+		virtual/glu
+		x11-libs/libXi
+		x11-libs/libXmu
 	)"
 DEPEND="${RDEPEND}"
 BDEPEND="
